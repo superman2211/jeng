@@ -1,0 +1,15 @@
+{
+  "description": "fast mini 2d engine",
+  "repository": "https://github.com/AntonovSergey2211/bibi.git",
+  "author": "Sergey Antonov",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "test": "yarn workspaces run test",
+    "lint": "yarn workspaces run lint",
+    "build": "yarn workspaces run build"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
