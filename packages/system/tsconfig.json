@@ -1,0 +1,29 @@
+{
+	"compilerOptions": {
+		"moduleResolution": "node",
+		"module": "umd",
+		"esModuleInterop": true,
+		"noImplicitAny": true,
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"target": "esnext",
+		"declaration": true,
+		"declarationMap": true,
+		"declarationDir": "dist",
+		"outDir": "dist",
+		"inlineSourceMap": true,
+		"strict": true,
+		"lib": [
+			"dom",
+			"esnext"
+		]
+	},
+	"include": [
+		"src/**/*"
+	],
+	"exclude": [
+		"dist",
+		"node_modules",
+		"**/*.spec.ts"
+	]
+}
