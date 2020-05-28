@@ -34,7 +34,6 @@ export default class PointerEvent extends Event {
 	}
 
 	get localPoint(): Point {
-		const p = new Point(1,2);
 		return new Point(this.localX, this.localY);
 	}
 
