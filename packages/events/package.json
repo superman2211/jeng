@@ -1,5 +1,5 @@
 {
-  "name": "@bibiota/events",
+  "name": "@e2d/events",
   "version": "0.1.0",
   "description": "events library",
   "main": "dist/index.js",
@@ -31,14 +31,14 @@
   ],
   "repository": {
   	"type": "git",
-  	"url": "git+https://github.com/AntonovSergey2211/bibiota.git"
+  	"url": "git+https://github.com/AntonovSergey2211/e2d.git"
   },
   "bugs": {
-  	"url": "https://github.com/AntonovSergey2211/bibiota/issues"
+  	"url": "https://github.com/AntonovSergey2211/e2d/issues"
   },
-  "homepage": "https://github.com/AntonovSergey2211/bibiota#readme",
+  "homepage": "https://github.com/AntonovSergey2211/e2d#readme",
   "dependencies": {
-	  "@bibiota/geom": "0.1.0"
+	  "@e2d/geom": "0.1.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.8.3",

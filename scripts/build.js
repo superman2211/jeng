@@ -5,7 +5,7 @@ const shelljs = require('shelljs');
 
 const PACKAGES = 'packages';
 const PACKAGE_JSON = 'package.json';
-const SCOPE = '@bibiota/';
+const SCOPE = '@e2d/';
 
 function readPackage(directory, projects) {
 	const projectFile = path.resolve(PACKAGES, directory, PACKAGE_JSON);

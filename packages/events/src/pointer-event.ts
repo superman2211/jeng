@@ -1,4 +1,4 @@
-import { Point } from '@bibiota/geom';
+import { Point } from '@e2d/geom';
 import Event from './event';
 
 export default class PointerEvent extends Event {
@@ -34,6 +34,7 @@ export default class PointerEvent extends Event {
 	}
 
 	get localPoint(): Point {
+		const p = new Point(1,2);
 		return new Point(this.localX, this.localY);
 	}
 
