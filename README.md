@@ -1,2 +1,1 @@
-# bibi
-Fast mini 2d engine
+# Fast mini 2d engine
