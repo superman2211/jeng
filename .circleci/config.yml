@@ -10,8 +10,8 @@ jobs:
       - node/with-cache:
           steps:
             - run: yarn
-            - run: yarn lint
             - run: yarn build
+            - run: yarn lint
             - run: yarn test
 workflows:
     build-and-test:
