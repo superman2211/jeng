@@ -1,0 +1,57 @@
+{
+  "name": "@e2d/graphics",
+  "version": "0.1.0",
+  "description": "graphics library",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "moduleResolution": "node",
+  "author": "Sergey Antonov",
+  "license": "MIT",
+  "keywords": [
+  	"javascript",
+  	"typescript",
+  	"graphics",
+  	"2d",
+  	"game",
+  	"fast",
+  	"easy",
+  	"canvas",
+  	"vector"
+  ],
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "lint": "eslint './src/**' --fix",
+	"test": "echo skip",
+	"clean": "rimraf dist && rimraf coverage && rimraf node_modules"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "repository": {
+  	"type": "git",
+  	"url": "git+https://github.com/AntonovSergey2211/e2d.git"
+  },
+  "bugs": {
+  	"url": "https://github.com/AntonovSergey2211/e2d/issues"
+  },
+  "homepage": "https://github.com/AntonovSergey2211/e2d#readme",
+  "dependencies": {
+	  "@e2d/geom": "0.1.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-typescript": "^7.9.0",
+    "@types/jest": "^25.1.4",
+    "@typescript-eslint/eslint-plugin": "^2.24.0",
+    "@typescript-eslint/parser": "^2.24.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "jest": "^25.1.0",
+	"typescript": "^3.8.3",
+	"rimraf": "^3.0.2"
+  }
+}
