@@ -1,5 +1,5 @@
-import EventDispatcher from './event-dispatcher';
-import Event from './event';
+import EventDispatcher from '../src/event-dispatcher';
+import Event from '../src/event';
 
 describe('EventDispatcher toString', () => {
 	it('should get string from event dispatcher', () => {

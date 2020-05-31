@@ -10,7 +10,6 @@ export default class Mouse {
 	}
 
 	static updateCursor(element: HTMLElement, pointer: boolean) {
-		// eslint-disable-next-line no-nested-ternary
 		const cursor = this.visible ? (pointer ? 'pointer' : 'default') : 'none';
 		element.style.cursor = cursor;
 	}

@@ -7,7 +7,11 @@ export default class PointerEvent extends Event {
 	private _localX: number;
 	private _localY: number;
 
-	constructor(type: string, cancelable: boolean, stageX: number, stageY: number, localX: number, localY: number) {
+	constructor(
+		type: string, cancelable: boolean,
+		stageX: number, stageY: number,
+		localX: number, localY: number,
+	) {
 		super(type, cancelable);
 
 		this._stageX = stageX;
@@ -50,6 +54,6 @@ export default class PointerEvent extends Event {
 	}
 
 	toString(): string {
-		return `PointerEvent, type: ${this.type}, stageX: ${this._stageX}, stageY: ${this._stageY}, localX: ${this._localX}, localY: ${this._localY}`;
+		return `PointerEvent: { type: ${this.type}, cancelable: ${this.cancelable}, stageX: ${this._stageX}, stageY: ${this._stageY}, localX: ${this._localX}, localY: ${this._localY} }`;
 	}
 }
