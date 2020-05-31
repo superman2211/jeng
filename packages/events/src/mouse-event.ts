@@ -7,7 +7,13 @@ export default class MouseEvent extends PointerEvent {
 	private _deltaX: number;
 	private _deltaY: number;
 
-	constructor(type: string, cancelable: boolean, stageX: number = 0, stageY: number = 0, localX: number = 0, localY: number = 0, deltaX: number = 0, deltaY: number = 0, buttonDown: boolean = false) {
+	constructor(
+		type: string, cancelable: boolean,
+		stageX: number = 0, stageY: number = 0,
+		localX: number = 0, localY: number = 0,
+		deltaX: number = 0, deltaY: number = 0,
+		buttonDown: boolean = false,
+	) {
 		super(type, cancelable, stageX, stageY, localX, localY);
 
 		this._deltaX = deltaX;
@@ -36,6 +42,6 @@ export default class MouseEvent extends PointerEvent {
 	}
 
 	toString(): string {
-		return `MouseEvent, type: ${this.type}, stageX: ${this.stageX}, stageY: ${this.stageY}, localX: ${this.localX}, localY: ${this.localY}, deltaX: ${this._deltaX}, deltaY: ${this._deltaY}, buttonDown: ${this._buttonDown}`;
+		return `MouseEvent: { type: ${this.type}, cancelable: ${this.cancelable}, stageX: ${this.stageX}, stageY: ${this.stageY}, localX: ${this.localX}, localY: ${this.localY}, deltaX: ${this._deltaX}, deltaY: ${this._deltaY}, buttonDown: ${this._buttonDown} }`;
 	}
 }

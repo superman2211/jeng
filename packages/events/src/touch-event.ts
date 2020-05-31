@@ -5,7 +5,12 @@ import Event from './event';
 export default class TouchEvent extends PointerEvent {
 	private _id: number;
 
-	constructor(type: string, cancelable: boolean, stageX: number, stageY: number, localX: number, localY: number, id: number) {
+	constructor(
+		type: string, cancelable: boolean,
+		stageX: number, stageY: number,
+		localX: number, localY: number,
+		id: number,
+	) {
 		super(type, cancelable, stageX, stageY, localX, localY);
 
 		this._id = id;
@@ -24,6 +29,6 @@ export default class TouchEvent extends PointerEvent {
 	}
 
 	toString(): string {
-		return `TouchEvent, type: ${this.type}, stageX: ${this.stageX}, stageY: ${this.stageY}, localX: ${this.localX}, localY: ${this.localY}, id: ${this.id}`;
+		return `TouchEvent: { type: ${this.type}, cancelable: ${this.cancelable}, stageX: ${this.stageX}, stageY: ${this.stageY}, localX: ${this.localX}, localY: ${this.localY}, id: ${this.id} }`;
 	}
 }

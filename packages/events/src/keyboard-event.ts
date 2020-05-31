@@ -18,6 +18,6 @@ export default class KeyboardEvent extends Event {
 	}
 
 	toString(): string {
-		return `KeyboardEvent, type: ${this.type}, code: ${this._keyCode}`;
+		return `KeyboardEvent: { type: ${this.type}, cancelable: ${this.cancelable}, keyCode: ${this._keyCode} }`;
 	}
 }

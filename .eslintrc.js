@@ -27,6 +27,7 @@ module.exports = {
 	'no-underscore-dangle': 'off',
 	'no-case-declarations': 'off',
     'lines-between-class-members': 'off',
+    'no-nested-ternary': 'off',
     'import/extensions': 'off',
 	'indent': ['error', 'tab', { 'SwitchCase': 1 }],
 	'@typescript-eslint/type-annotation-spacing': ['error', { 'before': false, 'after': true, overrides: { arrow: { before: true, after: true } } }],
