@@ -1,5 +1,5 @@
-import Rectangle from './rectangle';
-import Point from './point';
+import Rectangle from '../src/rectangle';
+import Point from '../src/point';
 
 describe('rectangle left', () => {
 	it('should get left of empty rectangle', () => {
