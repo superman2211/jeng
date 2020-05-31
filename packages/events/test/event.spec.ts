@@ -1,5 +1,5 @@
-import Event from './event';
-import EventDispatcher from './event-dispatcher';
+import Event from '../src/event';
+import EventDispatcher from '../src/event-dispatcher';
 
 describe('event constructor', () => {
 	it('should create event with empty type', () => {
