@@ -15,7 +15,7 @@ import {
 	// eslint-disable-next-line no-unused-vars
 	GraphicsStroke,
 	// eslint-disable-next-line no-unused-vars
-	GraphicsData,
+	IGraphicsData,
 	GraphicsType,
 	GraphicsPathCommand,
 	SpreadMethod,
@@ -23,32 +23,14 @@ import {
 } from './types';
 
 export default class Graphics {
-	private _bounds: Rectangle | null = null;
-	private _makeGraphicsDirty: () => void;
-	private _data: GraphicsData[] = [];
+	private _data: IGraphicsData[] = [];
 	private _path: GraphicsPath | null = null;
-	private _stroke: number = 0;
-	private _hasFill: boolean = false;
 
-	constructor(makeGraphicsDirty: () => void) {
-		this._makeGraphicsDirty = makeGraphicsDirty;
-	}
-
-	get bounds(): Rectangle | null {
-		return this._bounds;
-	}
-
-	get data(): GraphicsData[] {
+	readGraphicsData(): IGraphicsData[] {
 		return this._data;
 	}
 
-	get hasFill(): boolean {
-		return this._hasFill;
-	}
-
 	addFill(data: any) {
-		this._hasFill = true;
-
 		const index = this._path ? this._data.indexOf(this._path) : -1;
 
 		if (index !== -1) {
@@ -56,8 +38,6 @@ export default class Graphics {
 		} else {
 			this._data.push(data);
 		}
-
-		this._makeGraphicsDirty();
 	}
 
 	beginFill(color: number = 0, alpha: number = 1) {
@@ -103,8 +83,6 @@ export default class Graphics {
 		this._data.push(data);
 
 		this.closePath();
-
-		this._makeGraphicsDirty();
 	}
 
 	lineStyle(
@@ -116,12 +94,6 @@ export default class Graphics {
 		joints: CanvasLineJoin = 'round',
 		miterLimit: number = 3,
 	) {
-		if (thickness && this._stroke < thickness) {
-			this._stroke = thickness;
-		} else {
-			this._stroke = 0;
-		}
-
 		const data: GraphicsStroke = {
 			type: GraphicsType.STROKE,
 			thickness,
@@ -134,8 +106,6 @@ export default class Graphics {
 		};
 
 		this._data.push(data);
-
-		this._makeGraphicsDirty();
 	}
 
 	moveTo(x: number, y: number) {
@@ -146,10 +116,6 @@ export default class Graphics {
 		path.commands.push(GraphicsPathCommand.MOVE_TO);
 		path.data.push(x);
 		path.data.push(y);
-
-		this.inflateBounds(x, y);
-
-		this._makeGraphicsDirty();
 	}
 
 	lineTo(x: number, y: number) {
@@ -160,10 +126,6 @@ export default class Graphics {
 		path.commands.push(GraphicsPathCommand.LINE_TO);
 		path.data.push(x);
 		path.data.push(y);
-
-		this.inflateBounds(x, y);
-
-		this._makeGraphicsDirty();
 	}
 
 	curveTo(
@@ -179,11 +141,6 @@ export default class Graphics {
 		path.data.push(controlY);
 		path.data.push(anchorX);
 		path.data.push(anchorY);
-
-		this.inflateBounds(controlX, controlY);
-		this.inflateBounds(anchorX, anchorY);
-
-		this._makeGraphicsDirty();
 	}
 
 	cubicCurveTo(
@@ -202,12 +159,6 @@ export default class Graphics {
 		path.data.push(controlY2);
 		path.data.push(anchorX);
 		path.data.push(anchorY);
-
-		this.inflateBounds(controlX1, controlY1);
-		this.inflateBounds(controlX2, controlY2);
-		this.inflateBounds(anchorX, anchorY);
-
-		this._makeGraphicsDirty();
 	}
 
 	drawRoundRect(
@@ -285,11 +236,6 @@ export default class Graphics {
 		path.data.push(ym + dy);
 
 		this.closePath();
-
-		this.inflateBounds(x, y);
-		this.inflateBounds(x + width, y + height);
-
-		this._makeGraphicsDirty();
 	}
 
 	drawRect(x: number, y: number, width: number, height: number) {
@@ -318,22 +264,12 @@ export default class Graphics {
 		path.data.push(y);
 
 		this.closePath();
-
-		this.inflateBounds(x, y);
-		this.inflateBounds(x + width, y + height);
-
-		this._makeGraphicsDirty();
 	}
 
 	drawCircle(x: number, y: number, radius: number) {
 		const size: number = radius * 2;
 
 		this.drawEllipse(x - radius, y - radius, size, size);
-
-		this.inflateBounds(x - radius, y - radius);
-		this.inflateBounds(x + radius, y + radius);
-
-		this._makeGraphicsDirty();
 	}
 
 	drawEllipse(x: number, y: number, width: number, height: number) {
@@ -386,40 +322,14 @@ export default class Graphics {
 		path.data.push(ym);
 
 		this.closePath();
-
-		this.inflateBounds(x, y);
-		this.inflateBounds(x + width, y + height);
-
-		this._makeGraphicsDirty();
 	}
 
 	clear() {
-		this._stroke = 0;
-		this._hasFill = false;
-
-		Rectangle.dispose(this._bounds);
-
-		this._bounds = null;
-
 		this.closePath();
-
 		this._data = [];
-
-		this._makeGraphicsDirty();
 	}
 
-	inflateBounds(x: number, y: number) {
-		if (this._bounds == null) {
-			this._bounds = Rectangle.create();
-			this._bounds.setTo(x + this._stroke, y + this._stroke);
-		} else {
-			this._bounds.extend(x + this._stroke, y + this._stroke);
-		}
-
-		this._bounds.extend(x - this._stroke, y - this._stroke);
-	}
-
-	beginPath(clear: boolean = false) {
+	private beginPath(clear: boolean = false) {
 		if (clear || !this._path) {
 			this._path = {
 				type: GraphicsType.PATH,
@@ -432,7 +342,7 @@ export default class Graphics {
 		}
 	}
 
-	closePath() {
+	private closePath() {
 		this._path = {
 			type: GraphicsType.PATH,
 			commands: [],

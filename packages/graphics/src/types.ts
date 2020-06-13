@@ -34,16 +34,16 @@ export enum SpreadMethod {
 	REPEAT,
 }
 
-export interface GraphicsData {
+export interface IGraphicsData {
 	type: GraphicsType,
 }
 
-export interface GraphicsSolidFill extends GraphicsData {
+export interface GraphicsSolidFill extends IGraphicsData {
 	color: number,
 	alpha: number,
 }
 
-export interface GraphicsGradientFill extends GraphicsData {
+export interface GraphicsGradientFill extends IGraphicsData {
 	gradient: GradientType,
 	colors: number[],
 	alphas: number[],
@@ -54,10 +54,10 @@ export interface GraphicsGradientFill extends GraphicsData {
 	focalPointRatio: number
 }
 
-export interface GraphicsEndFill extends GraphicsData {
+export interface GraphicsEndFill extends IGraphicsData {
 }
 
-export interface GraphicsStroke extends GraphicsData {
+export interface GraphicsStroke extends IGraphicsData {
 	thickness: number,
 	color: number,
 	alpha: number,
@@ -67,7 +67,7 @@ export interface GraphicsStroke extends GraphicsData {
 	miterLimit: number,
 }
 
-export interface GraphicsPath extends GraphicsData {
+export interface GraphicsPath extends IGraphicsData {
 	commands: GraphicsPathCommand[],
 	data: number[],
 	winding: CanvasFillRule

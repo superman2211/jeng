@@ -123,34 +123,4 @@ export default class ColorTransform {
 			&& this.blueOffset === 0
 			&& this.alphaOffset === 0;
 	}
-
-	private static _pool: ColorTransform[] = [];
-
-	static get poolSize(): number {
-		return this._pool.length;
-	}
-
-	static set poolSize(value: number) {
-		if (this._pool.length > value) {
-			this._pool.length = value;
-		} else {
-			while (this._pool.length < value) {
-				this._pool.push(new ColorTransform());
-			}
-		}
-	}
-
-	static create(): ColorTransform {
-		if (this._pool.length > 0) {
-			return <ColorTransform> this._pool.pop();
-		}
-		return new ColorTransform();
-	}
-
-	static dispose(value: ColorTransform | null) {
-		if (value) {
-			value.identity();
-			this._pool.push(value);
-		}
-	}
 }

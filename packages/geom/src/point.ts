@@ -13,6 +13,10 @@ export default class Point {
 		return Math.sqrt(dx + dy);
 	}
 
+	get angle(): number {
+		return Math.atan2(this.y, this.x);
+	}
+
 	toString(): string {
 		return `{ x: ${this.x}, y: ${this.y} }`;
 	}
@@ -81,35 +85,5 @@ export default class Point {
 			length * Math.cos(angle),
 			length * Math.sin(angle),
 		);
-	}
-
-	private static _pool: Point[] = [];
-
-	static get poolSize(): number {
-		return this._pool.length;
-	}
-
-	static set poolSize(value: number) {
-		if (this._pool.length > value) {
-			this._pool.length = value;
-		} else {
-			while (this._pool.length < value) {
-				this._pool.push(new Point());
-			}
-		}
-	}
-
-	static create(): Point {
-		if (this._pool.length > 0) {
-			return <Point> this._pool.pop();
-		}
-		return new Point();
-	}
-
-	static dispose(value: Point | null) {
-		if (value) {
-			value.setEmpty();
-			this._pool.push(value);
-		}
 	}
 }

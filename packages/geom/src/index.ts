@@ -3,6 +3,7 @@ import Rectangle from './rectangle';
 import Matrix from './matrix';
 import ColorTransform from './color-transform';
 import Color from './color';
+import Transform from './transform';
 
 export const TO_RADIAN = Math.PI / 180;
 export const TO_DEGREE = 180 / Math.PI;
@@ -13,4 +14,5 @@ export {
 	Matrix,
 	ColorTransform,
 	Color,
+	Transform,
 };
