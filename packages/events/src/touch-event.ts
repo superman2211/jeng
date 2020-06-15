@@ -1,5 +1,4 @@
 import PointerEvent from './pointer-event';
-// eslint-disable-next-line no-unused-vars
 import Event from './event';
 
 export default class TouchEvent extends PointerEvent {

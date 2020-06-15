@@ -11,6 +11,15 @@ describe('point length', () => {
 	});
 });
 
+describe('point angle', () => {
+	it('should calculate empty point angle', () => {
+		expect(new Point().angle).toBe(0);
+	});
+	it('should calculate not empty point angle', () => {
+		expect(new Point(3, 4).angle).toBeCloseTo(0.9272952180016122, PRECISION);
+	});
+});
+
 describe('point clone', () => {
 	it('should clone point', () => {
 		expect(new Point(1, 2).clone()).toEqual(new Point(1, 2));
@@ -201,35 +210,5 @@ describe('point polar', () => {
 		const p: Point = Point.polar(2.345, 1.347);
 		expect(p.x).toBeCloseTo(0.5204325736928448, PRECISION);
 		expect(p.y).toBeCloseTo(2.286520268057872, PRECISION);
-	});
-});
-
-describe('point pool', () => {
-	it('should create point from empty pool', () => {
-		Point.poolSize = 0;
-		expect(Point.create()).toEqual(new Point());
-		expect(Point.poolSize).toBe(0);
-	});
-	it('should dispose point to pool', () => {
-		Point.poolSize = 0;
-		const point = new Point(1, 2);
-		Point.dispose(point);
-		expect(Point.poolSize).toBe(1);
-		expect(Point.create()).toEqual(new Point());
-	});
-	it('should dispose empty point to pool', () => {
-		Point.poolSize = 0;
-		Point.dispose(null);
-		expect(Point.poolSize).toBe(0);
-	});
-	it('should create point from pool', () => {
-		Point.poolSize = 3;
-		expect(Point.create()).toEqual(new Point());
-		expect(Point.poolSize).toBe(2);
-	});
-	it('should change point pool size', () => {
-		Point.poolSize = 5;
-		Point.poolSize = 3;
-		expect(Point.poolSize).toBe(3);
 	});
 });

@@ -1,5 +1,4 @@
-import Matrix from './matrix';
-import ColorTransform from './color-transform';
+import { Matrix, ColorTransform } from '@e2d/geom';
 
 export default class Transform {
 	private _getParent: () => Transform | null;

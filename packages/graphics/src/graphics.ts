@@ -1,20 +1,11 @@
-/* eslint-disable no-mixed-operators */
-// eslint-disable-next-line no-unused-vars
-import { Rectangle, Matrix } from '@e2d/geom';
+import { Matrix } from '@e2d/geom';
 import {
-	// eslint-disable-next-line no-unused-vars
 	GraphicsPath,
-	// eslint-disable-next-line no-unused-vars
 	GraphicsEndFill,
-	// eslint-disable-next-line no-unused-vars
 	GraphicsSolidFill,
-	// eslint-disable-next-line no-unused-vars
 	GradientType,
-	// eslint-disable-next-line no-unused-vars
 	GraphicsGradientFill,
-	// eslint-disable-next-line no-unused-vars
 	GraphicsStroke,
-	// eslint-disable-next-line no-unused-vars
 	IGraphicsData,
 	GraphicsType,
 	GraphicsPathCommand,

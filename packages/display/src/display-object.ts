@@ -1,14 +1,13 @@
 import { EventDispatcher } from '@e2d/events';
 import {
-	Transform,
 	Rectangle,
 	TO_DEGREE,
 	TO_RADIAN,
 	Matrix,
 } from '@e2d/geom';
-// eslint-disable-next-line no-unused-vars
 import DisplayObjectContainer from './display-object-container';
 import Stage from './stage';
+import Transform from './transform';
 
 let globalId: number = 0;
 
@@ -238,12 +237,12 @@ export default class DisplayObject extends EventDispatcher {
 		return this._parent;
 	}
 
-	get root(): DisplayObject | null {
-		let parent: DisplayObject = this;
-		while (parent._parent) {
-			parent = parent._parent;
+	get root(): DisplayObject {
+		let value: DisplayObject = this;
+		while (value._parent) {
+			value = value._parent;
 		}
-		return parent;
+		return value;
 	}
 
 	get stage(): Stage | null {
@@ -256,7 +255,7 @@ export default class DisplayObject extends EventDispatcher {
 		return null;
 	}
 
-	// eslint-disable-next-line class-methods-use-this, no-unused-vars
+	// eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
 	private calculateBounds(bounds: Rectangle, matrix: Matrix) {
 	}
 

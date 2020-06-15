@@ -408,34 +408,3 @@ describe('rectangle extend', () => {
 		expect(rect).toEqual(new Rectangle(0, 0, 100, 200));
 	});
 });
-
-
-describe('rectangle pool', () => {
-	it('should create rectangle from empty pool', () => {
-		Rectangle.poolSize = 0;
-		expect(Rectangle.create()).toEqual(new Rectangle());
-		expect(Rectangle.poolSize).toBe(0);
-	});
-	it('should dispose rectangle to pool', () => {
-		Rectangle.poolSize = 0;
-		const rectangle = new Rectangle(1, 2);
-		Rectangle.dispose(rectangle);
-		expect(Rectangle.poolSize).toBe(1);
-		expect(Rectangle.create()).toEqual(new Rectangle());
-	});
-	it('should dispose empty rectangle to pool', () => {
-		Rectangle.poolSize = 0;
-		Rectangle.dispose(null);
-		expect(Rectangle.poolSize).toBe(0);
-	});
-	it('should create rectangle from pool', () => {
-		Rectangle.poolSize = 3;
-		expect(Rectangle.create()).toEqual(new Rectangle());
-		expect(Rectangle.poolSize).toBe(2);
-	});
-	it('should change rectangle pool size', () => {
-		Rectangle.poolSize = 5;
-		Rectangle.poolSize = 3;
-		expect(Rectangle.poolSize).toBe(3);
-	});
-});

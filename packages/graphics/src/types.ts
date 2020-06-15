@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Matrix } from '@e2d/geom';
 
 export enum GraphicsPathCommand {

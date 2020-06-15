@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import EventDispatcher from './event-dispatcher';
 
 export default class Event {

@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "build": "tsc --project tsconfig.json",
-    "lint": "eslint './src/**' --fix",
+    "lint": "eslint './src/**' './test/**' --fix",
 	"test": "jest --coverage",
 	"clean": "rimraf dist && rimraf coverage && rimraf node_modules"
   },

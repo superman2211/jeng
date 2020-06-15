@@ -1,5 +1,3 @@
-/* eslint-disable no-mixed-operators */
-// eslint-disable-next-line no-unused-vars
 import { ColorTransform } from '.';
 
 export default class Color {
