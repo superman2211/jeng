@@ -8,10 +8,11 @@ import {
 import DisplayObjectContainer from './display-object-container';
 import Stage from './stage';
 import Transform from './transform';
+import { IBitmapDrawable, IRenderSupport, BlendMode } from './types';
 
 let globalId: number = 0;
 
-export default class DisplayObject extends EventDispatcher {
+export default class DisplayObject extends EventDispatcher implements IBitmapDrawable {
 	private _id: number = globalId++;
 	private _transform: Transform;
 	private _parent: DisplayObjectContainer | null = null;
@@ -22,6 +23,7 @@ export default class DisplayObject extends EventDispatcher {
 	name = `instance${this._id}`;
 	visible = true;
 	cacheAsBitmap = false;
+	blendMode = BlendMode.NORMAL;
 
 	constructor() {
 		super();
@@ -264,5 +266,10 @@ export default class DisplayObject extends EventDispatcher {
 			return this._parent._transform;
 		}
 		return null;
+	}
+
+	// eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
+	render(support: IRenderSupport) {
+		// TODO implement it
 	}
 }

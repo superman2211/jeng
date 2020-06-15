@@ -5,6 +5,8 @@ import Shape from './shape';
 import Sprite from './sprite';
 import Stage from './stage';
 
+export * from './types';
+
 export {
 	DisplayObject,
 	InteractiveObject,

@@ -1,7 +1,7 @@
 {
-  "name": "@e2d/display",
+  "name": "@e2d/utils",
   "version": "0.1.0",
-  "description": "display library",
+  "description": "utils library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "moduleResolution": "node",
@@ -10,13 +10,9 @@
   "keywords": [
   	"javascript",
   	"typescript",
-  	"display",
-  	"2d",
-  	"game",
-  	"fast",
-  	"easy",
-  	"canvas",
-  	"vector"
+  	"bytes",
+  	"bytearray",
+  	"utils"
   ],
   "scripts": {
     "build": "tsc --project tsconfig.json",
@@ -37,13 +33,6 @@
   	"url": "https://github.com/AntonovSergey2211/e2d/issues"
   },
   "homepage": "https://github.com/AntonovSergey2211/e2d#readme",
-  "dependencies": {
-	  "@e2d/geom": "0.1.0",
-	  "@e2d/graphics": "0.1.0",
-	  "@e2d/events": "0.1.0",
-	  "@e2d/utils": "0.1.0",
-	  "@e2d/filters": "0.1.0"
-  },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.8.3",
     "@babel/preset-env": "^7.9.0",
