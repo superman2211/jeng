@@ -4,6 +4,8 @@ import DisplayObjectContainer from './display-object-container';
 import Shape from './shape';
 import Sprite from './sprite';
 import Stage from './stage';
+import Transform from './transform';
+import Bitmap from './bitmap';
 
 export * from './types';
 
@@ -14,4 +16,6 @@ export {
 	Shape,
 	Sprite,
 	Stage,
+	Transform,
+	Bitmap,
 };

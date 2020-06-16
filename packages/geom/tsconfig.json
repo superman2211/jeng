@@ -19,7 +19,7 @@
 		]
 	},
 	"include": [
-		"src/**/*", "../display/src/transform.ts",
+		"src/**/*"
 	],
 	"exclude": [
 		"dist",
