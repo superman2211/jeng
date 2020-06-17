@@ -1,12 +1,12 @@
 {
 	"compilerOptions": {
 		"moduleResolution": "node",
-		"module": "umd",
+		"module": "esnext",
+		"target": "esnext",
 		"esModuleInterop": true,
 		"noImplicitAny": true,
 		"removeComments": true,
 		"preserveConstEnums": true,
-		"target": "esnext",
 		"declaration": true,
 		"declarationMap": true,
 		"declarationDir": "dist",

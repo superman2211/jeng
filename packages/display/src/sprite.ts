@@ -14,6 +14,10 @@ export default class Sprite extends DisplayObjectContainer {
 	buttonMode = false;
 	useHandCursor = false;
 
+	constructor() {
+		super();
+	}
+
 	get graphics(): Graphics {
 		return this._graphics;
 	}

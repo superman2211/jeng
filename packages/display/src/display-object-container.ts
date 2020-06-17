@@ -5,6 +5,10 @@ export default class DisplayObjectContainer extends InteractiveObject {
 	private _children: DisplayObject[] = [];
 	mouseChildren = true;
 
+	constructor() {
+		super();
+	}
+
 	get numChildren(): number {
 		return this._children.length;
 	}
