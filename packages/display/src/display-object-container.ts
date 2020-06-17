@@ -1,6 +1,10 @@
 import InteractiveObject from './interactive-object';
 import DisplayObject from './display-object';
 
+interface IParent {
+	_parent: DisplayObject;
+}
+
 export default class DisplayObjectContainer extends InteractiveObject {
 	private _children: DisplayObject[] = [];
 	mouseChildren = true;
@@ -43,10 +47,11 @@ export default class DisplayObjectContainer extends InteractiveObject {
 	addChild(child: DisplayObject): DisplayObject {
 		if (!this.contains(child)) {
 			if (child.parent) {
-				child.parent.removeChild(child);
+				const parent = <DisplayObjectContainer> child.parent;
+				parent.removeChild(child);
 			}
 
-			(child as any)._parent = this;
+			DisplayObject.setParent(child, this);
 
 			this._children.push(child);
 		}
@@ -57,10 +62,11 @@ export default class DisplayObjectContainer extends InteractiveObject {
 	addChildAt(child: DisplayObject, index: number): DisplayObject {
 		if (!this.contains(child)) {
 			if (child.parent != null) {
-				child.parent.removeChild(child);
+				const parent = <DisplayObjectContainer>child.parent;
+				parent.removeChild(child);
 			}
 
-			(child as any)._parent = this;
+			DisplayObject.setParent(child, this);
 
 			if (index >= this._children.length) {
 				this._children.push(child);

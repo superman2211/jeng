@@ -5,8 +5,6 @@ import {
 	TO_RADIAN,
 	Matrix,
 } from '@e2d/geom';
-import DisplayObjectContainer from './display-object-container';
-import Stage from './stage';
 import Transform from './transform';
 import { IBitmapDrawable, IRenderSupport, BlendMode } from './types';
 
@@ -15,7 +13,7 @@ let globalId: number = 0;
 export default class DisplayObject extends EventDispatcher implements IBitmapDrawable {
 	private _id: number = globalId++;
 	private _transform: Transform;
-	private _parent: DisplayObjectContainer | null = null;
+	private _parent: DisplayObject | null = null;
 	private _mask: DisplayObject | null = null;
 	private _isMask: boolean = false;
 	private _scrollRect: Rectangle | null = null;
@@ -28,6 +26,10 @@ export default class DisplayObject extends EventDispatcher implements IBitmapDra
 	constructor() {
 		super();
 		this._transform = new Transform(this.getParentTransform);
+	}
+
+	static setParent(child: DisplayObject, parent: DisplayObject) {
+		child._parent = parent;
 	}
 
 	get id(): number {
@@ -235,7 +237,7 @@ export default class DisplayObject extends EventDispatcher implements IBitmapDra
 		}
 	}
 
-	get parent(): DisplayObjectContainer | null {
+	get parent(): DisplayObject | null {
 		return this._parent;
 	}
 
@@ -247,10 +249,10 @@ export default class DisplayObject extends EventDispatcher implements IBitmapDra
 		return value;
 	}
 
-	get stage(): Stage | null {
+	get stage(): DisplayObject | null {
 		const { root } = this;
 
-		if (root instanceof Stage) {
+		if ('stageWidth' in root) {
 			return root;
 		}
 

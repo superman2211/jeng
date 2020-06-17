@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 import { Point } from '@e2d/geom';
-import { Stage, Sprite, Shape } from '@e2d/display';
+import {
+	Stage, Sprite, Shape, DisplayObjectContainer,
+} from '@e2d/display';
 
 class Main {
 	static main() {
@@ -25,7 +27,16 @@ class Main {
 		shape.y = 100;
 		sprite.addChild(shape);
 
+		const parentObject = <DisplayObjectContainer>shape.parent;
+		const stageObject = <Stage>parentObject.parent;
+
+		console.log(sprite.numChildren);
 		console.log(stage.numChildren);
+		console.log(shape.x);
+		console.log(shape.parent);
+		console.log(shape.stage);
+		console.log(parentObject);
+		console.log(stageObject);
 	}
 }
 

@@ -1,10 +1,11 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
+const isProduction = process.argv.indexOf('--mode=production') !== -1;
+
 module.exports = {
-	mode: 'development',
 	entry: './src/index.ts',
-	devtool: 'inline-sourcemaps',
+	devtool: isProduction ? false : 'inline-sourcemaps',
 	module: {
 		rules: [
 			{
