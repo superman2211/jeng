@@ -7,17 +7,17 @@ import {
 } from '@e2d/geom';
 import Transform from './transform';
 import { IBitmapDrawable, IRenderSupport, BlendMode } from './types';
-import Internal from './internal';
 
 let globalId: number = 0;
 
 export default class DisplayObject extends EventDispatcher implements IBitmapDrawable {
 	private _id: number = globalId++;
 	private _transform: Transform;
-	private _parent: DisplayObject | null = null;
 	private _mask: DisplayObject | null = null;
 	private _isMask: boolean = false;
 	private _scrollRect: Rectangle | null = null;
+
+	/* @internal */_parent: DisplayObject | null = null;
 
 	name = `instance${this._id}`;
 	visible = true;
@@ -236,14 +236,6 @@ export default class DisplayObject extends EventDispatcher implements IBitmapDra
 
 	get parent(): DisplayObject | null {
 		return this._parent;
-	}
-
-	set parent(value: DisplayObject | null) {
-		if (Internal.enabled) {
-			this._parent = value;
-		} else {
-			throw Internal.errorMessage('parent');
-		}
 	}
 
 	get root(): DisplayObject {

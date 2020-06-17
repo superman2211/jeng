@@ -97,7 +97,7 @@ export default class EventDispatcher {
 			throw '"type" can not be null';
 		}
 
-		(event as any)._target = this;
+		event._target = this;
 
 		if (!this._listeners) {
 			return false;

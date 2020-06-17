@@ -1,10 +1,5 @@
 import InteractiveObject from './interactive-object';
 import DisplayObject from './display-object';
-import Internal from './internal';
-
-interface IParent {
-	_parent: DisplayObject;
-}
 
 export default class DisplayObjectContainer extends InteractiveObject {
 	private _children: DisplayObject[] = [];
@@ -52,9 +47,7 @@ export default class DisplayObjectContainer extends InteractiveObject {
 				parent.removeChild(child);
 			}
 
-			Internal.change(() => {
-				child.parent = this;
-			});
+			child._parent = this;
 
 			this._children.push(child);
 		}
@@ -69,9 +62,7 @@ export default class DisplayObjectContainer extends InteractiveObject {
 				parent.removeChild(child);
 			}
 
-			Internal.change(() => {
-				child.parent = this;
-			});
+			child._parent = this;
 
 			if (index >= this._children.length) {
 				this._children.push(child);
@@ -97,7 +88,7 @@ export default class DisplayObjectContainer extends InteractiveObject {
 		const child = this._children[index];
 
 		if (child) {
-			(child as any)._parent = null;
+			child._parent = null;
 
 			this._children.splice(index, 1);
 		}
@@ -107,7 +98,7 @@ export default class DisplayObjectContainer extends InteractiveObject {
 
 	removeChildren() {
 		this._children.forEach((child) => {
-			(child as any)._parent = null;
+			child._parent = null;
 		});
 
 		this._children = [];

@@ -13,6 +13,7 @@
 		"outDir": "dist",
 		"inlineSourceMap": true,
 		"strict": true,
+		"stripInternal": true,
 		"lib": [
 			"dom",
 			"esnext"

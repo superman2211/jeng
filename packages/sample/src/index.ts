@@ -37,8 +37,6 @@ class Main {
 		console.log(shape.stage);
 		console.log(parentObject);
 		console.log(stageObject);
-
-		shape.parent = stage;
 	}
 }
 
