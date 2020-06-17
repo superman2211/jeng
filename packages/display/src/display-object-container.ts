@@ -1,5 +1,6 @@
 import InteractiveObject from './interactive-object';
 import DisplayObject from './display-object';
+import Internal from './internal';
 
 interface IParent {
 	_parent: DisplayObject;
@@ -51,7 +52,9 @@ export default class DisplayObjectContainer extends InteractiveObject {
 				parent.removeChild(child);
 			}
 
-			DisplayObject.setParent(child, this);
+			Internal.change(() => {
+				child.parent = this;
+			});
 
 			this._children.push(child);
 		}
@@ -66,7 +69,9 @@ export default class DisplayObjectContainer extends InteractiveObject {
 				parent.removeChild(child);
 			}
 
-			DisplayObject.setParent(child, this);
+			Internal.change(() => {
+				child.parent = this;
+			});
 
 			if (index >= this._children.length) {
 				this._children.push(child);

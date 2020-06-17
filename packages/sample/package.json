@@ -1,5 +1,5 @@
 {
-  "name": "sample",
+  "name": "@e2d/sample",
   "version": "0.1.0",
   "description": "sample",
   "main": "src/index.ts",

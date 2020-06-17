@@ -3,7 +3,7 @@ import {
 	Stage, Sprite, Shape, DisplayObjectContainer,
 } from '../src';
 
-describe('point length', () => {
+describe('display object', () => {
 	it('should calculate empty point length', () => {
 		expect(new Point().length).toBe(0);
 	});
@@ -36,5 +36,12 @@ describe('point length', () => {
 		expect(shape.stage).toBe(stage);
 		expect(parentObject).toBe(sprite);
 		expect(stageObject).toBe(stage);
+	});
+	it('should throw when try to chage parent externally', () => {
+		expect(() => {
+			const child = new Sprite();
+			const parent = new Sprite();
+			child.parent = parent;
+		}).toThrow();
 	});
 });

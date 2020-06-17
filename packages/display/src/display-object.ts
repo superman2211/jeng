@@ -7,6 +7,7 @@ import {
 } from '@e2d/geom';
 import Transform from './transform';
 import { IBitmapDrawable, IRenderSupport, BlendMode } from './types';
+import Internal from './internal';
 
 let globalId: number = 0;
 
@@ -26,10 +27,6 @@ export default class DisplayObject extends EventDispatcher implements IBitmapDra
 	constructor() {
 		super();
 		this._transform = new Transform(this.getParentTransform);
-	}
-
-	static setParent(child: DisplayObject, parent: DisplayObject) {
-		child._parent = parent;
 	}
 
 	get id(): number {
@@ -239,6 +236,14 @@ export default class DisplayObject extends EventDispatcher implements IBitmapDra
 
 	get parent(): DisplayObject | null {
 		return this._parent;
+	}
+
+	set parent(value: DisplayObject | null) {
+		if (Internal.enabled) {
+			this._parent = value;
+		} else {
+			throw Internal.errorMessage('parent');
+		}
 	}
 
 	get root(): DisplayObject {
