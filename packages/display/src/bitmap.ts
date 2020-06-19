@@ -1,13 +1,14 @@
+import { IGraphicsBitmapData } from '@e2d/graphics';
 import DisplayObject from './display-object';
-import { PixelSnapping, BitmapData } from './types';
+import { PixelSnapping } from './types';
 
 export default class Bitmap extends DisplayObject {
-	bitmapData: BitmapData | null;
+	bitmapData: IGraphicsBitmapData | null;
 	pixelSnapping: PixelSnapping;
 	smoothing: boolean;
 
 	constructor(
-		bitmapData: BitmapData | null = null,
+		bitmapData: IGraphicsBitmapData | null,
 		pixelSnapping: PixelSnapping = PixelSnapping.AUTO,
 		smoothing: boolean = false,
 	) {
