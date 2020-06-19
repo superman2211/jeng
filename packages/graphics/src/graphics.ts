@@ -13,7 +13,10 @@ import {
 	CapsStyle,
 	JointStyle,
 	LineScaleMode,
+	GraphicsPathWinding,
+	TriangleCulling,
 } from './enums';
+import { GraphicsTrianglePath } from '.';
 
 export default class Graphics {
 	private _data: IGraphicsData[];
@@ -129,6 +132,27 @@ export default class Graphics {
 		}
 	}
 
+	drawPath(
+		commands: number[],
+		data: number[],
+		winding: GraphicsPathWinding = GraphicsPathWinding.EVEN_ODD,
+	) {
+		const path = new GraphicsPath(commands, data, winding);
+		this._data.push(path);
+		this.beginPath();
+	}
+
+	drawTriangles(
+		vertices: number[],
+		indices?: number[],
+		uvtData?: number[],
+		culling: TriangleCulling = TriangleCulling.NONE,
+	) {
+		const path = new GraphicsTrianglePath(vertices, indices, uvtData, culling);
+		this._data.push(path);
+		this.beginPath();
+	}
+
 	drawRoundRect(
 		x: number, y: number,
 		width: number, height: number,
@@ -208,6 +232,11 @@ export default class Graphics {
 		this.beginPath();
 	}
 
+	drawGraphicsData(graphicsData: IGraphicsData[]) {
+		this._data.push(...graphicsData);
+		this.beginPath();
+	}
+
 	endFill() {
 		const data = new GraphicsEndFill();
 		this._data.push(data);
@@ -220,6 +249,12 @@ export default class Graphics {
 		this._path = new GraphicsPath();
 		this._data = [this._path];
 		this._stroke = undefined;
+	}
+
+	copyFrom(sourceGraphics: Graphics) {
+		this._data = sourceGraphics.readGraphicsData();
+		this._stroke = undefined;
+		this.beginPath();
 	}
 
 	readGraphicsData(): IGraphicsData[] {

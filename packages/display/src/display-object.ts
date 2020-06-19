@@ -1,4 +1,5 @@
 import { EventDispatcher } from '@e2d/events';
+import { IBitmapDrawable, IRenderSupport } from '@e2d/bitmap';
 import {
 	Rectangle,
 	TO_DEGREE,
@@ -6,7 +7,7 @@ import {
 	Matrix,
 } from '@e2d/geom';
 import Transform from './transform';
-import { IBitmapDrawable, IRenderSupport, BlendMode } from './types';
+import { BlendMode } from './types';
 
 let globalId: number = 0;
 

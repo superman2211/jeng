@@ -21,4 +21,21 @@ export default class Color {
 
 		return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 	}
+
+	static formatRGB(color: number): string {
+		const r = color >> 16 & 0xff;
+		const g = color >> 8 & 0xff;
+		const b = color & 0xff;
+
+		return `rgb(${r}, ${g}, ${b})`;
+	}
+
+	static formatARGB(color: number): string {
+		const a = color >> 24 & 0xff;
+		const r = color >> 16 & 0xff;
+		const g = color >> 8 & 0xff;
+		const b = color & 0xff;
+
+		return `rgba(${r}, ${g}, ${b}, ${a})`;
+	}
 }

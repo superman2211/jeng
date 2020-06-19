@@ -1,12 +1,3 @@
-export type BitmapData = HTMLCanvasElement;
-
-export enum BitmapDataChannel {
-	RED = 1,
-	GREEN = 2,
-	BLUE = 4,
-	ALPHA = 8,
-}
-
 export enum BlendMode {
 	ADD = 'add',
 	ALPHA = 'alpha',
@@ -40,11 +31,4 @@ export enum PixelSnapping {
 	AUTO = 'auto',
 	ALWAYS = 'always',
 	NEVER = 'never',
-}
-
-export interface IRenderSupport {
-}
-
-export interface IBitmapDrawable {
-	render(support: IRenderSupport): void;
 }

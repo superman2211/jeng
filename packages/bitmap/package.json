@@ -1,7 +1,7 @@
 {
-  "name": "@e2d/display",
+  "name": "@e2d/bitmap",
   "version": "0.1.0",
-  "description": "display library",
+  "description": "bitmap library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "moduleResolution": "node",
@@ -10,18 +10,14 @@
   "keywords": [
   	"javascript",
   	"typescript",
-  	"display",
-  	"2d",
-  	"game",
-  	"fast",
-  	"easy",
-  	"canvas",
-  	"vector"
+  	"bitmap",
+  	"bytearray",
+  	"utils"
   ],
   "scripts": {
     "build": "tsc --project tsconfig.json",
-    "lint": "eslint './src/**' './test/**' --fix",
-	"test": "jest --coverage",
+    "lint": "eslint './src/**' --fix",
+	"test": "echo skip",
 	"clean": "rimraf dist && rimraf coverage && rimraf node_modules"
   },
   "files": [
@@ -38,12 +34,10 @@
   },
   "homepage": "https://github.com/AntonovSergey2211/e2d#readme",
   "dependencies": {
-	  "@e2d/geom": "0.1.0",
 	  "@e2d/graphics": "0.1.0",
-	  "@e2d/events": "0.1.0",
-	  "@e2d/utils": "0.1.0",
+	  "@e2d/geom": "0.1.0",
 	  "@e2d/filters": "0.1.0",
-	  "@e2d/bitmap": "0.1.0"
+	  "@e2d/utils": "0.1.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.8.3",
