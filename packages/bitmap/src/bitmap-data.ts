@@ -46,16 +46,61 @@ export default class BitmapData implements IBitmapDrawable {
 		);
 	}
 
-	applyFilter(sourceBitmapData: BitmapData, sourceRect: Rectangle, destPoint: Point, filter: BitmapFilter) {
-		throw 'Not implemented';
+	applyFilter(sourceBitmapData: BitmapData, sourceRect: Rectangle, targetPoint: Point, filter: BitmapFilter) {
+		const targetRect = sourceRect.clone();
+		targetRect.topLeft = targetPoint;
+
+		const sourceImageData = sourceBitmapData._context.getImageData(sourceRect.x, sourceRect.y, sourceRect.width, sourceRect.height);
+		const targetImageData = this._context.getImageData(targetRect.x, targetRect.y, targetRect.width, targetRect.height);
+
+		const sourcePixels = <number[]><any> sourceImageData.data;
+		const targetPixels = <number[]><any> targetImageData.data;
+
+		filter.apply(sourceRect.width, sourceRect.height, sourcePixels, targetPixels);
+
+		this._context.putImageData(targetImageData, targetRect.x, targetRect.y);
 	}
 
 	clone(): BitmapData {
-		throw 'Not implemented';
+		const { width, height } = this;
+		const imageData = this._context.getImageData(0, 0, width, height);
+
+		const target = new BitmapData(this.width, this.height, this.transparent, 0);
+		target._context.putImageData(imageData, 0, 0);
+		return target;
 	}
 
 	colorTransform(rect: Rectangle, colorTransform: ColorTransform) {
-		throw 'Not implemented';
+		const {
+			redMultiplier,
+			greenMultiplier,
+			blueMultiplier,
+			alphaMultiplier,
+
+			redOffset,
+			greenOffset,
+			blueOffset,
+			alphaOffset,
+		} = colorTransform;
+
+		const imageData = this._context.getImageData(rect.x, rect.y, rect.width, rect.height);
+		const { data } = imageData;
+		const { length } = data;
+
+		let r = 0;
+		while (r < length) {
+			const g = r + 1;
+			const b = r + 2;
+			const a = r + 3;
+
+			data[r] = data[r] * redMultiplier + redOffset;
+			data[g] = data[g] * blueMultiplier + blueOffset;
+			data[b] = data[b] * greenMultiplier + greenOffset;
+			data[a] = data[a] * alphaMultiplier + alphaOffset;
+
+			r += 4;
+		}
+		this._context.putImageData(imageData, rect.x, rect.y);
 	}
 
 	compare(otherBitmapData: BitmapData): BitmapDataCompare | BitmapData {
