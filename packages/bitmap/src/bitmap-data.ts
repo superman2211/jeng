@@ -5,10 +5,11 @@ import {
 } from '@e2d/geom';
 import { BitmapFilter } from '@e2d/filters';
 import { ByteArray } from '@e2d/utils';
-import { IBitmapDrawable, IRenderSupport, IBitmapCompressor } from './interfaces';
+import { IBitmapDrawable, IRenderSupport } from '@e2d/render';
+import { IBitmapCompressor } from './interfaces';
 import { BitmapDataCompare } from './enums';
 
-export default class BitmapData implements IBitmapDrawable {
+export default class BitmapData {
 	private _canvas: HTMLCanvasElement;
 	private _context: CanvasRenderingContext2D;
 	private _transparent: boolean;
@@ -170,7 +171,7 @@ export default class BitmapData implements IBitmapDrawable {
 		throw 'Not implemented';
 	}
 
-	histogram(hRect: Rectangle = null): number[][] {
+	histogram(hRect?: Rectangle): number[][] {
 		throw 'Not implemented';
 	}
 
@@ -190,11 +191,11 @@ export default class BitmapData implements IBitmapDrawable {
 		throw 'Not implemented';
 	}
 
-	paletteMap(sourceBitmapData: BitmapData, sourceRect: Rectangle, destPoint: Point, redArray: Array = null, greenArray: Array = null, blueArray: Array = null, alphaArray: Array = null) {
+	paletteMap(sourceBitmapData: BitmapData, sourceRect: Rectangle, destPoint: Point, redArray?: number[], greenArray?: number[], blueArray?: number[], alphaArray?: number[]) {
 		throw 'Not implemented';
 	}
 
-	perlinNoise(baseX: Number, baseY: Number, numOctaves: number, randomSeed: number, stitch: Boolean, fractalNoise: Boolean, channelOptions: number = 7, grayScale: Boolean = false, offsets: Array = null) {
+	perlinNoise(baseX: Number, baseY: Number, numOctaves: number, randomSeed: number, stitch: Boolean, fractalNoise: Boolean, channelOptions: number = 7, grayScale: Boolean = false, offsets: number[]) {
 		throw 'Not implemented';
 	}
 
