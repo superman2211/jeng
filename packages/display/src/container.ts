@@ -1,10 +1,8 @@
-import { Graphics } from '@e2d/graphics';
 import { Rectangle, Point } from '@e2d/geom';
 import { Event, MOUSE_MOVE } from '@e2d/events';
 import DisplayObjectContainer from './display-object-container';
 
 export default class Sprite extends DisplayObjectContainer {
-	private _graphics = new Graphics();
 	private _dragBounds: Rectangle | null = null;
 	private _dragX = 0;
 	private _dragY = 0;
@@ -16,10 +14,6 @@ export default class Sprite extends DisplayObjectContainer {
 
 	constructor() {
 		super();
-	}
-
-	get graphics(): Graphics {
-		return this._graphics;
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars

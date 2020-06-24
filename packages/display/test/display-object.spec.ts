@@ -1,6 +1,6 @@
 import { Point } from '@e2d/geom';
 import {
-	Stage, Sprite, Shape, DisplayObjectContainer,
+	Stage, Container, DisplayObjectContainer,
 } from '../src';
 
 describe('display object', () => {
@@ -13,21 +13,16 @@ describe('display object', () => {
 	it('should create display object', () => {
 		const stage = new Stage();
 
-		const sprite = new Sprite();
-		sprite.graphics.lineStyle(1, 0);
-		sprite.graphics.beginFill(0x00ff00, 0.5);
-		sprite.graphics.drawCircle(100, 100, 50);
+		const sprite = new Container();
 		stage.addChild(sprite);
 
-		const shape = new Shape();
-		shape.graphics.beginFill(0xff0000, 0.5);
-		shape.graphics.drawRect(0, 0, 100, 100);
+		const shape = new Container();
 		shape.x = 100;
 		shape.y = 100;
 		sprite.addChild(shape);
 
-		const parentObject = <DisplayObjectContainer> shape.parent;
-		const stageObject = <Stage> parentObject.parent;
+		const parentObject = shape.parent as DisplayObjectContainer;
+		const stageObject = parentObject.parent as Stage;
 
 		expect(sprite.numChildren).toBe(1);
 		expect(stage.numChildren).toBe(1);
@@ -36,12 +31,5 @@ describe('display object', () => {
 		expect(shape.stage).toBe(stage);
 		expect(parentObject).toBe(sprite);
 		expect(stageObject).toBe(stage);
-	});
-	it('should throw when try to chage parent externally', () => {
-		expect(() => {
-			const child = new Sprite();
-			const parent = new Sprite();
-			child.parent = parent;
-		}).toThrow();
 	});
 });

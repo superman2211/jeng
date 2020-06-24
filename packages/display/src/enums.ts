@@ -26,9 +26,3 @@ export enum StageQuality {
 	LOW = 'low',
 	MEDIUM = 'medium',
 }
-
-export enum PixelSnapping {
-	AUTO = 'auto',
-	ALWAYS = 'always',
-	NEVER = 'never',
-}

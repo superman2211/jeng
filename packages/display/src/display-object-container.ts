@@ -1,7 +1,7 @@
 import InteractiveObject from './interactive-object';
 import DisplayObject from './display-object';
 
-export default class DisplayObjectContainer extends InteractiveObject {
+export default abstract class DisplayObjectContainer extends InteractiveObject {
 	private _children: DisplayObject[] = [];
 	mouseChildren = true;
 

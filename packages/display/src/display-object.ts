@@ -1,5 +1,5 @@
 import { EventDispatcher } from '@e2d/events';
-import { IBitmapDrawable, IRenderSupport } from '@e2d/bitmap';
+import { IBitmapDrawable, IRenderSupport } from '@e2d/render';
 import {
 	Rectangle,
 	TO_DEGREE,
@@ -7,12 +7,11 @@ import {
 	Matrix,
 } from '@e2d/geom';
 import Transform from './transform';
-import { BlendMode } from './types';
+import { BlendMode } from './enums';
 
 let globalId: number = 0;
 
-export default class DisplayObject extends EventDispatcher implements IBitmapDrawable {
-	private _id: number = globalId++;
+export default abstract class DisplayObject extends EventDispatcher implements IBitmapDrawable {
 	private _transform: Transform;
 	private _mask: DisplayObject | null = null;
 	private _isMask: boolean = false;
@@ -20,7 +19,8 @@ export default class DisplayObject extends EventDispatcher implements IBitmapDra
 
 	/* @internal */_parent: DisplayObject | null = null;
 
-	name = `instance${this._id}`;
+	readonly id = globalId++;
+	name = `instance${this.id}`;
 	visible = true;
 	cacheAsBitmap = false;
 	blendMode = BlendMode.NORMAL;
@@ -28,10 +28,6 @@ export default class DisplayObject extends EventDispatcher implements IBitmapDra
 	constructor() {
 		super();
 		this._transform = new Transform(this.getParentTransform);
-	}
-
-	get id(): number {
-		return this._id;
 	}
 
 	get transform(): Transform {
