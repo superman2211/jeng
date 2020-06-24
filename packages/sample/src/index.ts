@@ -1,8 +1,7 @@
 /* eslint-disable no-console */
 import { Point } from '@e2d/geom';
-import {
-	Stage, Sprite, Shape, DisplayObjectContainer,
-} from '@e2d/display';
+import { Stage, DisplayObjectContainer } from '@e2d/display';
+import { Sprite, Shape } from '@e2d/shape';
 
 class Main {
 	static main() {
