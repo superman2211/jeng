@@ -11,8 +11,8 @@ export default class GraphicsPath implements IGraphicsData, IGraphicsPath {
 		data?: number[],
 		winding: GraphicsPathWinding = GraphicsPathWinding.EVEN_ODD,
 	) {
-		this.commands = commands || [];
-		this.data = data || [];
+		this.commands = commands ?? [];
+		this.data = data ?? [];
 		this.winding = winding;
 	}
 

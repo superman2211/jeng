@@ -2,13 +2,13 @@ import { Rectangle, Point } from '@e2d/geom';
 import { Event, MOUSE_MOVE } from '@e2d/events';
 import DisplayObjectContainer from './display-object-container';
 
-export default class Sprite extends DisplayObjectContainer {
+export default class Container extends DisplayObjectContainer {
 	private _dragBounds: Rectangle | null = null;
 	private _dragX = 0;
 	private _dragY = 0;
 	private _dragListener: ((e: Event) => void) | null = null;
 
-	hitArea: Sprite | undefined;
+	hitArea: Container | undefined;
 	buttonMode = false;
 	useHandCursor = false;
 

@@ -23,10 +23,10 @@ export default class GraphicsGradientFill implements IGraphicsData, IGraphicsFil
 		focalPointRatio: number = 0,
 	) {
 		this.type = type;
-		this.colors = colors || [];
-		this.alphas = alphas || [];
-		this.ratios = ratios || [];
-		this.matrix = matrix || new Matrix();
+		this.colors = colors ?? [];
+		this.alphas = alphas ?? [];
+		this.ratios = ratios ?? [];
+		this.matrix = matrix ?? new Matrix();
 		this.spreadMethod = spreadMethod;
 		this.interpolationMethod = interpolationMethod;
 		this.focalPointRatio = focalPointRatio;

@@ -264,8 +264,66 @@ export default abstract class DisplayObject extends EventDispatcher implements I
 		return null;
 	}
 
-	// eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
 	render(support: IRenderSupport) {
-		// TODO implement it
+		const alpha = this._transform.concatenatedColorTransform.alphaMultiplier;
+
+		if (!this.visible || this._isMask || alpha <= 0) {
+			return;
+		}
+
+		const { context } = support;
+
+		if (this._scrollRect) {
+			const scrollRect = this._scrollRect;
+			const matrix = this._transform.concatenatedMatrix;
+
+			context.save();
+
+			context.setTransform(
+				matrix.a,
+				matrix.b,
+				matrix.c,
+				matrix.d,
+				matrix.tx,
+				matrix.ty,
+			);
+
+			context.beginPath();
+
+			context.rect(
+				scrollRect.x,
+				scrollRect.y,
+				scrollRect.width,
+				scrollRect.height,
+			);
+
+			context.clip();
+		}
+
+		if (this._mask) {
+			const mask = this._mask;
+
+			context.save();
+
+			context.beginPath();
+
+			mask.renderContent(support);
+
+			context.clip('evenodd');
+		}
+
+		this.renderContent(support);
+
+		if (this._mask) {
+			context.restore();
+		}
+
+		if (this._scrollRect) {
+			context.restore();
+		}
+	}
+
+	// eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
+	renderContent(support: IRenderSupport) {
 	}
 }

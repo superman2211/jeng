@@ -13,9 +13,9 @@ export default class GraphicsTrianglePath implements IGraphicsData, IGraphicsPat
 		uvtData?: number[],
 		culling: TriangleCulling = TriangleCulling.NONE,
 	) {
-		this.indices = indices || [];
-		this.uvtData = uvtData || [];
-		this.vertices = vertices || [];
+		this.indices = indices ?? [];
+		this.uvtData = uvtData ?? [];
+		this.vertices = vertices ?? [];
 		this.culling = culling;
 	}
 }

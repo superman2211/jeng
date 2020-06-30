@@ -14,7 +14,7 @@ export default class GraphicsBitmapFill implements IGraphicsData, IGraphicsFill 
 		smooth: boolean = false,
 	) {
 		this.bitmapData = bitmapData;
-		this.matrix = matrix || new Matrix();
+		this.matrix = matrix ?? new Matrix();
 		this.repeat = repeat;
 		this.smooth = smooth;
 	}

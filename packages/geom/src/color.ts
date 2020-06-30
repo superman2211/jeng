@@ -1,8 +1,8 @@
 import { ColorTransform } from '.';
 
 export default class Color {
-	static format(color: number, alpha: number = 1, ct: ColorTransform | null = null): string {
-		if (ct != null && !ct.isDefault()) {
+	static format(color: number, alpha: number = 1, ct?: ColorTransform): string {
+		if (ct && !ct.isDefault()) {
 			const r = Math.floor((color >> 16 & 0xff) * ct.redMultiplier + ct.redOffset);
 			const g = Math.floor((color >> 8 & 0xff) * ct.greenMultiplier + ct.greenOffset);
 			const b = Math.floor((color & 0xff) * ct.blueMultiplier + ct.blueOffset);
