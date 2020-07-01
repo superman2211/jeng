@@ -1,5 +1,5 @@
 import { Matrix } from '@e2d/geom';
-import { IGraphicsData, IGraphicsBitmapData, IGraphicsFill } from './interfaces';
+import { IGraphicsData, IGraphicsFill } from './interfaces';
 import GraphicsPath from './graphics-path';
 import GraphicsSolidFill from './graphics-solid-fill';
 import GraphicsBitmapFill from './graphics-bitmap-fill';
@@ -34,7 +34,7 @@ export default class Graphics {
 	}
 
 	beginBitmapFill(
-		bitmap: IGraphicsBitmapData,
+		bitmap: CanvasImageSource,
 		matrix?: Matrix,
 		repeat: boolean = true,
 		smooth: boolean = false,
@@ -120,7 +120,7 @@ export default class Graphics {
 	}
 
 	lineBitmapStyle(
-		bitmap: IGraphicsBitmapData,
+		bitmap: CanvasImageSource,
 		matrix?: Matrix,
 		repeat: boolean = true,
 		smooth: boolean = false,

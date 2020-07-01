@@ -3,11 +3,18 @@
 		"moduleResolution": "node",
 		"module": "esnext",
 		"target": "esnext",
-		"outDir": "./dist",
-		"noImplicitAny": true,
-		"sourceMap": true,
 		"esModuleInterop": true,
-		"allowSyntheticDefaultImports": true
+		"noImplicitAny": true,
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"outDir": "./dist",
+		"sourceMap": true,
+		"strict": true,
+		"allowSyntheticDefaultImports": true,
+		"lib": [
+			"dom",
+			"esnext"
+		]
 	},
 	"include": [
 		"src/**/*",

@@ -4,7 +4,7 @@ import {
 	ColorTransform,
 	Color,
 } from '@e2d/geom';
-import { IRenderingContext, IRenderSupport } from '@e2d/render';
+import { IRenderingPattern, IRenderingContext } from '@e2d/render';
 import GraphicsGradientFill from './graphics-gradient-fill';
 import { GradientType, GraphicsPathCommand } from './enums';
 import Graphics from './graphics';
@@ -12,15 +12,14 @@ import GraphicsStroke from './graphics-stroke';
 import GraphicsSolidFill from './graphics-solid-fill';
 import GraphicsBitmapFill from './graphics-bitmap-fill';
 import { GraphicsPath, GraphicsEndFill, IGraphicsFill } from '.';
-import { IGraphicsBitmapData } from './interfaces';
 
 export default class GraphicsRenderer {
 	private static tempMatrix = new Matrix();
 	private static tempPoint1 = new Point();
 	private static tempPoint2 = new Point();
 
-	private static createGradientPattern(context: IRenderingContext, fill: GraphicsGradientFill, colorTransform: ColorTransform): CanvasGradient | '' {
-		let pattern: CanvasGradient | '' = '';
+	private static createGradientPattern(context: IRenderingContext, fill: GraphicsGradientFill, colorTransform: ColorTransform): IRenderingPattern | string {
+		let pattern: IRenderingPattern | null = null;
 
 		let { matrix } = fill;
 
@@ -57,11 +56,7 @@ export default class GraphicsRenderer {
 				);
 				break;
 			default:
-				break;
-		}
-
-		if (!pattern) {
-			return '';
+				return '';
 		}
 
 		let rgb = 0;
@@ -85,13 +80,24 @@ export default class GraphicsRenderer {
 		return pattern;
 	}
 
-	static createFillPattern(context: IRenderingContext, fill: IGraphicsFill, colorTransform: ColorTransform): any {
+	static createFillPattern(context: IRenderingContext, fill: IGraphicsFill, colorTransform: ColorTransform): IRenderingPattern | string {
 		if (fill instanceof GraphicsSolidFill) {
 			if (fill.alpha > 0) {
 				return Color.format(fill.color, fill.alpha, colorTransform);
 			}
 		} else if (fill instanceof GraphicsGradientFill) {
 			return this.createGradientPattern(context, fill, colorTransform);
+		} else if (fill instanceof GraphicsBitmapFill) {
+			if (fill.bitmapData) {
+				const {
+					bitmapData, matrix, repeat, smooth,
+				} = fill;
+				const {
+					a, b, c, d, tx, ty,
+				} = matrix;
+				const repetition = repeat ? 'repeat' : 'no-repeat';
+				return context.createPattern(bitmapData, a, b, c, d, tx, ty, repetition, smooth);
+			}
 		}
 
 		return '';

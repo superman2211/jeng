@@ -1,14 +1,14 @@
 import { Matrix } from '@e2d/geom';
-import { IGraphicsData, IGraphicsFill, IGraphicsBitmapData } from './interfaces';
+import { IGraphicsData, IGraphicsFill } from './interfaces';
 
 export default class GraphicsBitmapFill implements IGraphicsData, IGraphicsFill {
-	bitmapData: IGraphicsBitmapData | undefined;
+	bitmapData: CanvasImageSource | undefined;
 	matrix: Matrix;
 	repeat: boolean;
 	smooth: boolean;
 
 	constructor(
-		bitmapData?: IGraphicsBitmapData,
+		bitmapData?: CanvasImageSource,
 		matrix?: Matrix,
 		repeat: boolean = true,
 		smooth: boolean = false,

@@ -2,9 +2,9 @@ import { IGraphicsData, IGraphicsFill, IGraphicsStroke } from './interfaces';
 import { JointStyle, CapsStyle, LineScaleMode } from './enums';
 
 export default class GraphicsStroke implements IGraphicsData, IGraphicsStroke {
-	caps: string;
+	caps: CapsStyle;
 	fill: IGraphicsFill | undefined;
-	joints: string;
+	joints: JointStyle;
 	miterLimit: number;
 	pixelHinting: boolean;
 	scaleMode: string;
@@ -14,7 +14,7 @@ export default class GraphicsStroke implements IGraphicsData, IGraphicsStroke {
 		thickness: number = 0,
 		pixelHinting: boolean = false,
 		scaleMode: LineScaleMode = LineScaleMode.NONE,
-		caps: CapsStyle = CapsStyle.NONE,
+		caps: CapsStyle = CapsStyle.BUTT,
 		joints: JointStyle = JointStyle.ROUND,
 		miterLimit: number = 3,
 		fill?: IGraphicsFill,

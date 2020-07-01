@@ -9,6 +9,3 @@ export interface IGraphicsFill {
 
 export interface IGraphicsStroke {
 }
-
-export interface IGraphicsBitmapData {
-}

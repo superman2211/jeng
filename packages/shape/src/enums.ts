@@ -1,5 +1,5 @@
 export enum CapsStyle {
-	NONE = 'none',
+	BUTT = 'butt',
 	ROUND = 'round',
 	SQUARE = 'square'
 }
