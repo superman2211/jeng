@@ -2,6 +2,7 @@
 import { Point } from '@e2d/geom';
 import { Stage, DisplayObjectContainer } from '@e2d/display';
 import { Sprite, Shape } from '@e2d/shape';
+import { CanvasRenderingContext } from '@e2d/render-canvas';
 
 class Main {
 	static main() {
@@ -9,7 +10,13 @@ class Main {
 		console.log(point.length);
 		console.log(Point.polar(1, 2));
 
-		const stage = new Stage();
+		const canvas = new HTMLCanvasElement();
+		canvas.width = 1024;
+		canvas.width = 768;
+
+		const context = new CanvasRenderingContext(canvas);
+
+		const stage = new Stage(context);
 
 		const sprite = new Sprite();
 		sprite.graphics.lineStyle(1, 0);

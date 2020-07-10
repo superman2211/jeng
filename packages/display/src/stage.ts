@@ -1,23 +1,27 @@
-import { IRenderSupport } from '@e2d/render';
+import { IRenderingContext } from '@e2d/render';
 import DisplayObjectContainer from './display-object-container';
 
 export default class Stage extends DisplayObjectContainer {
-	private _support: IRenderSupport;
+	private _context: IRenderingContext;
 
-	constructor(support: IRenderSupport) {
+	constructor(context: IRenderingContext) {
 		super();
-		this._support = support;
+		this._context = context;
 	}
 
-	get support(): IRenderSupport {
-		return this._support;
+	get context(): IRenderingContext {
+		return this._context;
 	}
 
 	get stageWidth(): number {
-		return this._support.width;
+		return this._context.getWidth();
 	}
 
 	get stageHeight(): number {
-		return this._support.height;
+		return this._context.getHeight();
+	}
+
+	render() {
+		super.render(this._context);
 	}
 }

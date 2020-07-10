@@ -1,12 +1,13 @@
 import {
 	IRenderingContext,
-	RenderingPattern,
+	IRenderingPattern,
 	FillStyle,
 	StrokeStyle,
 	ColorPattern,
 	LinearGradientPattern,
 	RadialGradientPattern,
 	ImagePattern,
+	GradientPattern,
 } from '@e2d/render';
 
 export default class CanvasRenderingContext implements IRenderingContext {
@@ -24,6 +25,14 @@ export default class CanvasRenderingContext implements IRenderingContext {
 
 	getHeight(): number {
 		return this._canvas.height;
+	}
+
+	beginPath(): void {
+		this._context.beginPath();
+	}
+
+	closePath(): void {
+		this._context.closePath();
 	}
 
 	save(): void {
@@ -46,6 +55,10 @@ export default class CanvasRenderingContext implements IRenderingContext {
 		this._context.lineTo(x, y);
 	}
 
+	rect(x: number, y: number, width: number, height: number): void {
+		this._context.rect(x, y, width, height);
+	}
+
 	bezierCurveTo(cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number): void {
 		this._context.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
 	}
@@ -54,13 +67,13 @@ export default class CanvasRenderingContext implements IRenderingContext {
 		this._context.quadraticCurveTo(cpx, cpy, x, y);
 	}
 
-	fill(pattern: RenderingPattern, style: FillStyle): void {
+	fill(pattern: IRenderingPattern, style: FillStyle): void {
 		this._context.fillStyle = this.formatPattern(pattern);
 		this._context.globalAlpha = style.alpha;
 		this._context.fill();
 	}
 
-	stroke(pattern: RenderingPattern, style: StrokeStyle): void {
+	stroke(pattern: IRenderingPattern, style: StrokeStyle): void {
 		this._context.strokeStyle = this.formatPattern(pattern);
 		this._context.lineWidth = style.thikness;
 		this._context.lineCap = style.cap;
@@ -70,19 +83,74 @@ export default class CanvasRenderingContext implements IRenderingContext {
 		this._context.stroke();
 	}
 
-	private formatPattern(pattern: RenderingPattern): string | CanvasGradient | CanvasPattern {
-		if (pattern instanceof ColorPattern) {
-			if (pattern.a < 1) {
-				return `rgba(${pattern.r}, ${pattern.g}, ${pattern.b}, ${pattern.a})`;
-			} else {
-				return `rgb(${pattern.r}, ${pattern.g}, ${pattern.b})`;
-			}
-		} else if (pattern instanceof LinearGradientPattern) {
-			const gradient = this._context.createLinearGradient(
-				pattern.
-			);
-			return gradient;
+	private static formatColor(pattern: ColorPattern): string {
+		const {
+			r, g, b, a,
+		} = pattern;
+
+		if (pattern.a <= 0) {
+			return '';
 		}
+
+		if (pattern.a < 1) {
+			return `rgba(${r}, ${g}, ${b}, ${a / 0xff})`;
+		}
+
+		return `rgb(${r}, ${g}, ${b})`;
+	}
+
+	private formatPattern(pattern: IRenderingPattern): string | CanvasGradient | CanvasPattern {
+		if (pattern instanceof ColorPattern) {
+			return CanvasRenderingContext.formatColor(pattern);
+		}
+
+		if (pattern instanceof GradientPattern) {
+			let gradient: CanvasGradient | undefined;
+
+			if (pattern instanceof LinearGradientPattern) {
+				const {
+					x0, y0, x1, y1,
+				} = pattern;
+
+				gradient = this._context.createLinearGradient(x0, y0, x1, y1);
+			}
+
+			if (pattern instanceof RadialGradientPattern) {
+				const {
+					x0, y0, r0, x1, y1, r1,
+				} = pattern;
+
+				gradient = this._context.createRadialGradient(x0, y0, r0, x1, y1, r1);
+			}
+
+			if (gradient) {
+				const {
+					colors, offsets,
+				} = pattern;
+
+				for (let i = 0; i < colors.length; i++) {
+					gradient.addColorStop(offsets[i], CanvasRenderingContext.formatColor(colors[i]));
+				}
+
+				return gradient;
+			}
+		} else if (pattern instanceof ImagePattern) {
+			const {
+				image, repeat,
+			} = pattern;
+
+			if (image) {
+				const repetition = repeat ? 'repeat' : 'no-repeat';
+
+				const canvasPattern = this._context.createPattern(image, repetition);
+
+				if (canvasPattern) {
+					return canvasPattern;
+				}
+			}
+		}
+
+		return '';
 	}
 
 	clip(): void {

@@ -1,5 +1,5 @@
 import { EventDispatcher } from '@e2d/events';
-import { IBitmapDrawable, IRenderSupport } from '@e2d/render';
+import { IBitmapDrawable, IRenderingContext } from '@e2d/render';
 import {
 	Rectangle,
 	TO_DEGREE,
@@ -264,14 +264,12 @@ export default abstract class DisplayObject extends EventDispatcher implements I
 		return null;
 	}
 
-	render(support: IRenderSupport) {
+	render(context: IRenderingContext) {
 		const alpha = this._transform.concatenatedColorTransform.alphaMultiplier;
 
 		if (!this.visible || this._isMask || alpha <= 0) {
 			return;
 		}
-
-		const { context } = support;
 
 		if (this._scrollRect) {
 			const scrollRect = this._scrollRect;
@@ -307,12 +305,12 @@ export default abstract class DisplayObject extends EventDispatcher implements I
 
 			context.beginPath();
 
-			mask.renderContent(support);
+			mask.renderContent(context);
 
-			context.clip('evenodd');
+			context.clip();
 		}
 
-		this.renderContent(support);
+		this.renderContent(context);
 
 		if (this._mask) {
 			context.restore();
@@ -324,6 +322,6 @@ export default abstract class DisplayObject extends EventDispatcher implements I
 	}
 
 	// eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
-	renderContent(support: IRenderSupport) {
+	renderContent(context: IRenderingContext) {
 	}
 }

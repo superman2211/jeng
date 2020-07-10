@@ -1,6 +1,7 @@
 import { IRenderingPattern } from './interfaces';
+import ColorPattern from './color-pattern';
 
 export default class GradientPattern implements IRenderingPattern {
-	colors: number[] = [];
+	colors: ColorPattern[] = [];
 	offsets: number[] = [];
 }

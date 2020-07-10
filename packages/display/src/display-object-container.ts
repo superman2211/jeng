@@ -1,4 +1,4 @@
-import { IRenderSupport } from '@e2d/render';
+import { IRenderingContext } from '@e2d/render';
 import InteractiveObject from './interactive-object';
 import DisplayObject from './display-object';
 
@@ -105,9 +105,9 @@ export default abstract class DisplayObjectContainer extends InteractiveObject {
 		this._children = [];
 	}
 
-	renderContent(support: IRenderSupport) {
+	renderContent(context: IRenderingContext) {
 		this._children.forEach((child) => {
-			child.render(support);
+			child.render(context);
 		});
 	}
 }

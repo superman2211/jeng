@@ -24,7 +24,8 @@
   "dependencies": {
     "@e2d/display": "^0.1.0",
     "@e2d/geom": "^0.1.0",
-    "@e2d/shape": "0.1.0"
+    "@e2d/shape": "0.1.0",
+    "@e2d/render-canvas": "0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",

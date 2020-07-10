@@ -5,7 +5,7 @@ import {
 } from '@e2d/geom';
 import { BitmapFilter } from '@e2d/filters';
 import { ByteArray } from '@e2d/utils';
-import { IBitmapDrawable, IRenderSupport } from '@e2d/render';
+import { IBitmapDrawable, IRenderingContext, IRenderingPattern } from '@e2d/render';
 import { IBitmapCompressor } from './interfaces';
 import { BitmapDataCompare } from './enums';
 
@@ -24,6 +24,10 @@ export default class BitmapData {
 		this._transparent = transparent;
 
 		this.fillRect(this.rect, fillColor);
+	}
+
+	get canvas() {
+		return this._canvas;
 	}
 
 	get transparent() {
@@ -229,10 +233,5 @@ export default class BitmapData {
 
 	unlock(changeRect?: Rectangle) {
 		throw 'Not implemented';
-	}
-
-	// eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
-	render(support: IRenderSupport) {
-		// TODO implement it
 	}
 }
