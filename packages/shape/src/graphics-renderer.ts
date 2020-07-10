@@ -88,16 +88,24 @@ export default class GraphicsRenderer {
 		} else if (fill instanceof GraphicsGradientFill) {
 			return this.createGradientPattern(context, fill, colorTransform);
 		} else if (fill instanceof GraphicsBitmapFill) {
-			if (fill.bitmapData) {
-				const {
-					bitmapData, matrix, repeat, smooth,
-				} = fill;
-				const {
-					a, b, c, d, tx, ty,
-				} = matrix;
-				const repetition = repeat ? 'repeat' : 'no-repeat';
-				return context.createPattern(bitmapData, a, b, c, d, tx, ty, repetition, smooth);
-			}
+			return this.createImagePattern(context, fill);
+		}
+
+		return '';
+	}
+
+	static createImagePattern(context: IRenderingContext, fill: GraphicsBitmapFill): string | IRenderingPattern {
+		if (fill.bitmapData) {
+			const {
+				bitmapData, matrix, repeat, smooth,
+			} = fill;
+			const {
+				a, b, c, d, tx, ty,
+			} = matrix;
+			const repetition = repeat ? 'repeat' : 'no-repeat';
+			const pattern = context.createPattern(bitmapData, repetition, smooth);
+			pattern.setTransform(a, b, c, d, tx, ty);
+			return pattern;
 		}
 
 		return '';
