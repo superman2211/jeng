@@ -273,34 +273,4 @@ export default class Rectangle {
 			this.height = py - this.y;
 		}
 	}
-
-	private static _pool: Rectangle[] = [];
-
-	static get poolSize(): number {
-		return this._pool.length;
-	}
-
-	static set poolSize(value: number) {
-		if (this._pool.length > value) {
-			this._pool.length = value;
-		} else {
-			while (this._pool.length < value) {
-				this._pool.push(new Rectangle());
-			}
-		}
-	}
-
-	static create(): Rectangle {
-		if (this._pool.length) {
-			return <Rectangle> this._pool.pop();
-		}
-		return new Rectangle();
-	}
-
-	static dispose(value: Rectangle | null) {
-		if (value) {
-			value.setEmpty();
-			this._pool.push(value);
-		}
-	}
 }

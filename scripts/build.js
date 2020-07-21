@@ -60,7 +60,11 @@ function buildProjects(queue) {
 	console.log('BUILD PROJECTS');
 	queue.forEach((name) => {
 		console.log(`- ${name}`);
-		shelljs.exec(`yarn workspace ${name} build`);
+		const result = shelljs.exec(`yarn workspace ${name} build`);
+		if (result.code !== 0) {
+			console.error(result.stderr);
+			process.exit(result.code);
+		}
 	});
 }
 

@@ -453,33 +453,3 @@ describe('matrix transformRectTo', () => {
 		}).toThrow();
 	});
 });
-
-describe('matrix pool', () => {
-	it('should create matrix from empty pool', () => {
-		Matrix.poolSize = 0;
-		expect(Matrix.create()).toEqual(new Matrix());
-		expect(Matrix.poolSize).toBe(0);
-	});
-	it('should dispose matrix to pool', () => {
-		Matrix.poolSize = 0;
-		const matrix = new Matrix(1, 2, 3, 4, 5, 6);
-		Matrix.dispose(matrix);
-		expect(Matrix.poolSize).toBe(1);
-		expect(Matrix.create()).toEqual(new Matrix());
-	});
-	it('should dispose empty matrix to pool', () => {
-		Matrix.poolSize = 0;
-		Matrix.dispose(null);
-		expect(Matrix.poolSize).toBe(0);
-	});
-	it('should create matrix from pool', () => {
-		Matrix.poolSize = 3;
-		expect(Matrix.create()).toEqual(new Matrix());
-		expect(Matrix.poolSize).toBe(2);
-	});
-	it('should change matrix pool size', () => {
-		Matrix.poolSize = 5;
-		Matrix.poolSize = 3;
-		expect(Matrix.poolSize).toBe(3);
-	});
-});

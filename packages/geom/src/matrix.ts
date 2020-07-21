@@ -339,34 +339,4 @@ export default class Matrix {
 		target.width = maxX - minX;
 		target.height = maxY - minY;
 	}
-
-	private static _pool: Matrix[] = [];
-
-	static get poolSize(): number {
-		return this._pool.length;
-	}
-
-	static set poolSize(value: number) {
-		if (this._pool.length > value) {
-			this._pool.length = value;
-		} else {
-			while (this._pool.length < value) {
-				this._pool.push(new Matrix());
-			}
-		}
-	}
-
-	static create(): Matrix {
-		if (this._pool.length > 0) {
-			return <Matrix> this._pool.pop();
-		}
-		return new Matrix();
-	}
-
-	static dispose(value: Matrix | null) {
-		if (value) {
-			value.identity();
-			this._pool.push(value);
-		}
-	}
 }

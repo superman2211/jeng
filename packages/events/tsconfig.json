@@ -1,18 +1,19 @@
 {
 	"compilerOptions": {
 		"moduleResolution": "node",
-		"module": "umd",
+		"module": "esnext",
+		"target": "esnext",
 		"esModuleInterop": true,
 		"noImplicitAny": true,
 		"removeComments": true,
 		"preserveConstEnums": true,
-		"target": "esnext",
 		"declaration": true,
 		"declarationMap": true,
 		"declarationDir": "dist",
 		"outDir": "dist",
 		"inlineSourceMap": true,
 		"strict": true,
+		"stripInternal": true,
 		"lib": [
 			"dom",
 			"esnext"

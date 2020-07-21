@@ -1,13 +1,13 @@
-// eslint-disable-next-line no-unused-vars
 import EventDispatcher from './event-dispatcher';
 
 export default class Event {
 	private _type: string;
 	private _cancelable: boolean;
-	private _target: EventDispatcher | undefined;
 	private _isCanceled: boolean = false;
 	private _isCanceledNow: boolean = false;
 	private _isDefaultPrevented: boolean = false;
+
+	/* @internal */_target: EventDispatcher | undefined;
 
 	constructor(type: string, cancelable: boolean = false) {
 		if (!type) {

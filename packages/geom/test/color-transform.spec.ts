@@ -107,33 +107,3 @@ describe('color transform isDefault', () => {
 		expect(new ColorTransform(1, 2, 3, 4, 5, 6, 7, 8).isDefault()).toBeFalsy();
 	});
 });
-
-describe('color transform pool', () => {
-	it('should create color tranform from empty pool', () => {
-		ColorTransform.poolSize = 0;
-		expect(ColorTransform.create()).toEqual(new ColorTransform());
-		expect(ColorTransform.poolSize).toBe(0);
-	});
-	it('should dispose color transform to pool', () => {
-		ColorTransform.poolSize = 0;
-		const matrix = new ColorTransform(1, 2, 3, 4, 5, 6);
-		ColorTransform.dispose(matrix);
-		expect(ColorTransform.poolSize).toBe(1);
-		expect(ColorTransform.create()).toEqual(new ColorTransform());
-	});
-	it('should dispose empty color tranform to pool', () => {
-		ColorTransform.poolSize = 0;
-		ColorTransform.dispose(null);
-		expect(ColorTransform.poolSize).toBe(0);
-	});
-	it('should create color tranform from pool', () => {
-		ColorTransform.poolSize = 3;
-		expect(ColorTransform.create()).toEqual(new ColorTransform());
-		expect(ColorTransform.poolSize).toBe(2);
-	});
-	it('should change color tranform pool size', () => {
-		ColorTransform.poolSize = 5;
-		ColorTransform.poolSize = 3;
-		expect(ColorTransform.poolSize).toBe(3);
-	});
-});

@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import Event from './event';
 
 interface IListener {
@@ -98,7 +97,7 @@ export default class EventDispatcher {
 			throw '"type" can not be null';
 		}
 
-		(event as any)._target = this;
+		event._target = this;
 
 		if (!this._listeners) {
 			return false;
