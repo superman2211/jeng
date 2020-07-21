@@ -17,5 +17,7 @@ export default class Sprite extends Container {
 			this.transform.concatenatedColorTransform,
 			this.graphics,
 		);
+
+		super.renderContent(context);
 	}
 }

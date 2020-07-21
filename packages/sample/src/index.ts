@@ -10,11 +10,10 @@ class Main {
 		console.log(point.length);
 		console.log(Point.polar(1, 2));
 
-		const canvas = new HTMLCanvasElement();
-		canvas.width = 1024;
-		canvas.width = 768;
-
-		const context = new CanvasRenderingContext(canvas);
+		const context = new CanvasRenderingContext();
+		context.width = 400;
+		context.height = 300;
+		document.body.appendChild(context.element);
 
 		const stage = new Stage(context);
 
@@ -41,6 +40,8 @@ class Main {
 		console.log(shape.stage);
 		console.log(parentObject);
 		console.log(stageObject);
+
+		stage.render();
 	}
 }
 

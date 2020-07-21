@@ -33,7 +33,8 @@
   },
   "homepage": "https://github.com/AntonovSergey2211/e2d#readme",
   "dependencies": {
-	  "@e2d/render": "0.1.0"
+	  "@e2d/render": "0.1.0",
+	  "@e2d/system": "0.1.0"
   },
   "devDependencies": {
 	"@babel/core": "^7.10.3",

@@ -1,5 +1,5 @@
 import { Matrix } from '@e2d/geom';
-import { IGraphicsData, IGraphicsFill } from './interfaces';
+import { IGraphicsData } from './interfaces';
 import GraphicsPath from './graphics-path';
 import GraphicsSolidFill from './graphics-solid-fill';
 import GraphicsBitmapFill from './graphics-bitmap-fill';
@@ -30,7 +30,7 @@ export default class Graphics {
 
 	beginFill(color: number = 0, alpha: number = 1) {
 		const data = new GraphicsSolidFill(color, alpha);
-		this.addFill(data);
+		this.addGraphicsStyle(data);
 	}
 
 	beginBitmapFill(
@@ -40,7 +40,7 @@ export default class Graphics {
 		smooth: boolean = false,
 	) {
 		const data = new GraphicsBitmapFill(bitmap, matrix, repeat, smooth);
-		this.addFill(data);
+		this.addGraphicsStyle(data);
 	}
 
 	beginGradientFill(
@@ -64,7 +64,7 @@ export default class Graphics {
 			focalPointRatio,
 		);
 
-		this.addFill(data);
+		this.addGraphicsStyle(data);
 	}
 
 	lineStyle(
@@ -89,7 +89,7 @@ export default class Graphics {
 			fill,
 		);
 
-		this._data.push(data);
+		this.addGraphicsStyle(data);
 		this._stroke = data;
 	}
 
@@ -261,8 +261,8 @@ export default class Graphics {
 		return this._data;
 	}
 
-	private addFill(data: IGraphicsFill) {
-		if (this._path.commands.length) {
+	private addGraphicsStyle(data: IGraphicsData) {
+		if (!this._path.commands.length) {
 			const index = this._data.indexOf(this._path);
 			this._data.splice(index, 0, data);
 		} else {

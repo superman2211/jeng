@@ -9,22 +9,48 @@ import {
 	ImagePattern,
 	GradientPattern,
 } from '@e2d/render';
+import { Screen } from '@e2d/system';
+
+const { pixelRatio } = Screen;
 
 export default class CanvasRenderingContext implements IRenderingContext {
 	private _context: CanvasRenderingContext2D;
 	private _canvas: HTMLCanvasElement;
 
-	constructor(canvas: HTMLCanvasElement) {
-		this._canvas = canvas;
-		this._context = canvas.getContext('2d') as CanvasRenderingContext2D;
+	constructor() {
+		this._canvas = document.createElement('canvas');
+		this._context = this._canvas.getContext('2d') as CanvasRenderingContext2D;
+
+		this.width = 400;
+		this.height = 300;
 	}
 
-	getWidth(): number {
-		return this._canvas.width;
+	get element(): HTMLElement {
+		return this._canvas;
 	}
 
-	getHeight(): number {
-		return this._canvas.height;
+	get width(): number {
+		return this._canvas.width / pixelRatio;
+	}
+
+	set width(value: number) {
+		const canvasValue = value * pixelRatio;
+		if (this._canvas.width !== canvasValue) {
+			this._canvas.width = canvasValue;
+			this._canvas.style.width = `${value}px`;
+		}
+	}
+
+	get height(): number {
+		return this._canvas.height / pixelRatio;
+	}
+
+	set height(value: number) {
+		const canvasValue = value * pixelRatio;
+		if (this._canvas.height !== canvasValue) {
+			this._canvas.height = canvasValue;
+			this._canvas.style.height = `${value}px`;
+		}
 	}
 
 	beginPath(): void {
@@ -44,7 +70,14 @@ export default class CanvasRenderingContext implements IRenderingContext {
 	}
 
 	setTransform(a: number, b: number, c: number, d: number, tx: number, ty: number): void {
-		this._context.setTransform(a, b, c, d, tx, ty);
+		this._context.setTransform(
+			a * pixelRatio,
+			b * pixelRatio,
+			c * pixelRatio,
+			d * pixelRatio,
+			tx * pixelRatio,
+			ty * pixelRatio,
+		);
 	}
 
 	moveTo(x: number, y: number): void {
@@ -92,7 +125,7 @@ export default class CanvasRenderingContext implements IRenderingContext {
 			return '';
 		}
 
-		if (pattern.a < 1) {
+		if (pattern.a < 0xff) {
 			return `rgba(${r}, ${g}, ${b}, ${a / 0xff})`;
 		}
 

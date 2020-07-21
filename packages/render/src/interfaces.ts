@@ -1,8 +1,9 @@
 import { StrokeStyle, FillStyle } from './types';
 
 export interface IRenderingContext {
-	getWidth(): number;
-	getHeight(): number;
+	width: number;
+	height: number;
+	readonly element: HTMLElement;
 	setTransform(a: number, b: number, c: number, d: number, tx: number, ty: number): void;
 	moveTo(x: number, y: number): void;
 	lineTo(x: number, y: number): void;

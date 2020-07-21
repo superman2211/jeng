@@ -5,7 +5,7 @@ const isProduction = process.argv.indexOf('--mode=production') !== -1;
 
 module.exports = {
 	entry: './src/index.ts',
-	devtool: isProduction ? false : 'inline-sourcemaps',
+	devtool: isProduction ? false : 'inline-source-map',
 	module: {
 		rules: [
 			{

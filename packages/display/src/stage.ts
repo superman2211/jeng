@@ -14,11 +14,11 @@ export default class Stage extends DisplayObjectContainer {
 	}
 
 	get stageWidth(): number {
-		return this._context.getWidth();
+		return this._context.width;
 	}
 
 	get stageHeight(): number {
-		return this._context.getHeight();
+		return this._context.height;
 	}
 
 	render() {
