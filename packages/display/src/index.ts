@@ -1,9 +1,9 @@
-import DisplayObject from './display-object';
-import InteractiveObject from './interactive-object';
-import DisplayObjectContainer from './display-object-container';
-import Container from './container';
-import Stage from './stage';
-import Transform from './transform';
+import DisplayObject from './DisplayObject';
+import InteractiveObject from './InteractiveObject';
+import DisplayObjectContainer from './DisplayObjectContainer';
+import Container from './Container';
+import Stage from './Stage';
+import Transform from './Transform';
 
 export * from './enums';
 

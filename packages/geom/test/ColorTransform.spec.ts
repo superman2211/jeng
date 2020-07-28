@@ -1,4 +1,4 @@
-import ColorTransform from '../src/color-transform';
+import ColorTransform from '../src/ColorTransform';
 
 describe('color transform color', () => {
 	it('should get color from color tranform', () => {

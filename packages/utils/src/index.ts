@@ -1,4 +1,4 @@
-import ByteArray from './byte-array';
+import ByteArray from './ByteArray';
 
 export {
 	// eslint-disable-next-line import/prefer-default-export

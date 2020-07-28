@@ -1,7 +1,7 @@
 import { Container } from '@e2d/display';
 import { IRenderingContext } from '@e2d/render';
-import Graphics from './graphics';
-import GraphicsRenderer from './graphics-renderer';
+import Graphics from './Graphics';
+import GraphicsRenderer from './GraphicsRenderer';
 
 export default class Sprite extends Container {
 	readonly graphics = new Graphics();

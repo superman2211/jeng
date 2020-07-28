@@ -6,7 +6,7 @@ import {
 	TO_RADIAN,
 	Matrix,
 } from '@e2d/geom';
-import Transform from './transform';
+import Transform from './Transform';
 import { BlendMode } from './enums';
 
 let globalId: number = 0;

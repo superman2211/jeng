@@ -1,4 +1,4 @@
-import Point from '../src/point';
+import Point from '../src/Point';
 
 const PRECISION = 5;
 

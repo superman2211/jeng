@@ -1,4 +1,4 @@
-import GradientPattern from './gradient-pattern';
+import GradientPattern from './GradientPattern';
 
 export default class LinearGradientPattern extends GradientPattern {
 	x0: number = 0;

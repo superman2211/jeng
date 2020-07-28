@@ -1,5 +1,5 @@
-import PointerEvent from './pointer-event';
-import Event from './event';
+import PointerEvent from './PointerEvent';
+import Event from './Event';
 
 export default class MouseEvent extends PointerEvent {
 	private _buttonDown: boolean;

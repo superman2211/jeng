@@ -1,5 +1,5 @@
-import Point from './point';
-import Rectangle from './rectangle';
+import Point from './Point';
+import Rectangle from './Rectangle';
 
 const lt = new Point();
 const lb = new Point();

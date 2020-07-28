@@ -15,13 +15,13 @@ import {
 } from '@e2d/render';
 import { IGraphicsFill } from './interfaces';
 import { GradientType, GraphicsPathCommand } from './enums';
-import Graphics from './graphics';
-import GraphicsGradientFill from './graphics-gradient-fill';
-import GraphicsStroke from './graphics-stroke';
-import GraphicsSolidFill from './graphics-solid-fill';
-import GraphicsBitmapFill from './graphics-bitmap-fill';
-import GraphicsPath from './graphics-path';
-import GraphicsEndFill from './graphics-end-fill';
+import Graphics from './Graphics';
+import GraphicsGradientFill from './GraphicsGradientFill';
+import GraphicsStroke from './GraphicsStroke';
+import GraphicsSolidFill from './GraphicsSolidFill';
+import GraphicsBitmapFill from './GraphicsBitmapFill';
+import GraphicsPath from './GraphicsPath';
+import GraphicsEndFill from './GraphicsEndFill';
 
 export default class GraphicsRenderer {
 	private static tempMatrix = new Matrix();

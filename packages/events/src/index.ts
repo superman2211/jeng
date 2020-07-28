@@ -1,9 +1,9 @@
-import Event from './event';
-import PointerEvent from './pointer-event';
-import MouseEvent from './mouse-event';
-import TouchEvent from './touch-event';
-import KeyboardEvent from './keyboard-event';
-import EventDispatcher from './event-dispatcher';
+import Event from './Event';
+import PointerEvent from './PointerEvent';
+import MouseEvent from './MouseEvent';
+import TouchEvent from './TouchEvent';
+import KeyboardEvent from './KeyboardEvent';
+import EventDispatcher from './EventDispatcher';
 
 export const RENDER = 'render';
 export const RESIZE = 'resize';

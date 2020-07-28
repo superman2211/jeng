@@ -1,6 +1,6 @@
-import Matrix from '../src/matrix';
-import Point from '../src/point';
-import Rectangle from '../src/rectangle';
+import Matrix from '../src/Matrix';
+import Point from '../src/Point';
+import Rectangle from '../src/Rectangle';
 
 const PRECISION = 5;
 

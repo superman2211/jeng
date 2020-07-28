@@ -1,5 +1,5 @@
 import { DisplayObject } from '@e2d/display';
-import BitmapData from './bitmap-data';
+import BitmapData from './BitmapData';
 import { PixelSnapping } from './enums';
 
 export default class Bitmap extends DisplayObject {

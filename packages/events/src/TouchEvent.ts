@@ -1,5 +1,5 @@
-import PointerEvent from './pointer-event';
-import Event from './event';
+import PointerEvent from './PointerEvent';
+import Event from './Event';
 
 export default class TouchEvent extends PointerEvent {
 	private _id: number;

@@ -1,6 +1,6 @@
 import { Rectangle, Point } from '@e2d/geom';
 import { Event, MOUSE_MOVE } from '@e2d/events';
-import DisplayObjectContainer from './display-object-container';
+import DisplayObjectContainer from './DisplayObjectContainer';
 
 export default class Container extends DisplayObjectContainer {
 	private _dragBounds: Rectangle | null = null;

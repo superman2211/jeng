@@ -1,5 +1,5 @@
-import BitmapData from './bitmap-data';
-import Bitmap from './bitmap';
+import BitmapData from './BitmapData';
+import Bitmap from './Bitmap';
 
 export * from './enums';
 export * from './interfaces';

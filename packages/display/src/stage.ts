@@ -1,5 +1,5 @@
 import { IRenderingContext } from '@e2d/render';
-import DisplayObjectContainer from './display-object-container';
+import DisplayObjectContainer from './DisplayObjectContainer';
 
 export default class Stage extends DisplayObjectContainer {
 	private _context: IRenderingContext;

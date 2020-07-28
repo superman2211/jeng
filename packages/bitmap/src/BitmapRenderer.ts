@@ -1,6 +1,6 @@
 import { Matrix, ColorTransform } from '@e2d/geom';
 import { IRenderingContext, ImagePattern, FillStyle } from '@e2d/render';
-import Bitmap from './bitmap';
+import Bitmap from './Bitmap';
 
 export default class BitmapRenderer {
 	static render(context: IRenderingContext, matrix: Matrix, colorTransform: ColorTransform, bitmap: Bitmap) {

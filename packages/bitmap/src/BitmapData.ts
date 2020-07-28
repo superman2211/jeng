@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
-	Rectangle, Point, Matrix, Color, ColorTransform,
+	Rectangle, Point, Matrix, ColorTransform,
 } from '@e2d/geom';
 import { BitmapFilter } from '@e2d/filters';
 import { ByteArray } from '@e2d/utils';
@@ -142,8 +142,13 @@ export default class BitmapData {
 	}
 
 	fillRect(rect: Rectangle, color: number) {
+		const a = color >> 24 & 0xff;
+		const r = color >> 16 & 0xff;
+		const g = color >> 8 & 0xff;
+		const b = color & 0xff;
+
 		this._context.strokeStyle = '';
-		this._context.fillStyle = Color.formatARGB(color);
+		this._context.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
 		this._context.fillRect(rect.x, rect.y, rect.width, rect.height);
 	}
 

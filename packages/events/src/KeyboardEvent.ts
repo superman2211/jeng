@@ -1,4 +1,4 @@
-import Event from './event';
+import Event from './Event';
 
 export default class KeyboardEvent extends Event {
 	private _keyCode: number;

@@ -1,4 +1,4 @@
-import TouchEvent from '../src/touch-event';
+import TouchEvent from '../src/TouchEvent';
 
 describe('event id', () => {
 	it('should get event id', () => {

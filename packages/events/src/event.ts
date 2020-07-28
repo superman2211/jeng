@@ -1,4 +1,4 @@
-import EventDispatcher from './event-dispatcher';
+import EventDispatcher from './EventDispatcher';
 
 export default class Event {
 	private _type: string;

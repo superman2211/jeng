@@ -1,11 +1,11 @@
 import { Matrix } from '@e2d/geom';
 import { IGraphicsData } from './interfaces';
-import GraphicsPath from './graphics-path';
-import GraphicsSolidFill from './graphics-solid-fill';
-import GraphicsBitmapFill from './graphics-bitmap-fill';
-import GraphicsGradientFill from './graphics-gradient-fill';
-import GraphicsEndFill from './graphics-end-fill';
-import GraphicsStroke from './graphics-stroke';
+import GraphicsPath from './GraphicsPath';
+import GraphicsSolidFill from './GraphicsSolidFill';
+import GraphicsBitmapFill from './GraphicsBitmapFill';
+import GraphicsGradientFill from './GraphicsGradientFill';
+import GraphicsEndFill from './GraphicsEndFill';
+import GraphicsStroke from './GraphicsStroke';
 import {
 	GradientType,
 	SpreadMethod,

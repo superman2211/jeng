@@ -1,6 +1,6 @@
 import { IRenderingContext } from '@e2d/render';
-import InteractiveObject from './interactive-object';
-import DisplayObject from './display-object';
+import InteractiveObject from './InteractiveObject';
+import DisplayObject from './DisplayObject';
 
 export default abstract class DisplayObjectContainer extends InteractiveObject {
 	private _children: DisplayObject[] = [];
