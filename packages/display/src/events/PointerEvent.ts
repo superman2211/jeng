@@ -1,5 +1,5 @@
 import { Point } from '@e2d/geom';
-import Event from './Event';
+import { Event } from '@e2d/events';
 
 export default class PointerEvent extends Event {
     private _stageX: number;

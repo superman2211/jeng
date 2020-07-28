@@ -1,5 +1,5 @@
 import { Point } from '@e2d/geom';
-import PointerEvent from '../src/PointerEvent';
+import PointerEvent from '../../src/events/PointerEvent';
 
 describe('event stageX', () => {
 	it('should get event stageX', () => {

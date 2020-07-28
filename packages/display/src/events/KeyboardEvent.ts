@@ -1,4 +1,4 @@
-import Event from './Event';
+import { Event } from '@e2d/events';
 
 export default class KeyboardEvent extends Event {
 	private _keyCode: number;

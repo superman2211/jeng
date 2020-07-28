@@ -1,4 +1,4 @@
-import KeyboardEvent from '../src/KeyboardEvent';
+import KeyboardEvent from '../../src/events/KeyboardEvent';
 
 describe('event keyCode', () => {
 	it('should get event keyCode', () => {

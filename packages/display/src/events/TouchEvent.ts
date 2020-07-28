@@ -1,5 +1,5 @@
+import { Event } from '@e2d/events';
 import PointerEvent from './PointerEvent';
-import Event from './Event';
 
 export default class TouchEvent extends PointerEvent {
 	private _id: number;

@@ -1,4 +1,4 @@
-import MouseEvent from '../src/MouseEvent';
+import MouseEvent from '../../src/events/MouseEvent';
 
 describe('event constructor', () => {
 	it('should create event', () => {

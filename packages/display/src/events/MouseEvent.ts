@@ -1,5 +1,5 @@
+import { Event } from '@e2d/events';
 import PointerEvent from './PointerEvent';
-import Event from './Event';
 
 export default class MouseEvent extends PointerEvent {
 	private _buttonDown: boolean;
