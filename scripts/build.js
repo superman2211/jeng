@@ -30,28 +30,34 @@ function getProjects() {
 	return projects;
 }
 
-function resolveProject(name, projects, queue) {
+function resolveProject(name, projects, queue, filters) {
 	if (name.indexOf(SCOPE) !== 0) {
 		return;
 	}
 	if (queue.includes(name)) {
 		return;
 	}
+	if (filters.length) {
+		const isFiltered = filters.some((filter) => name.indexOf(filter) !== -1);
+		if (!isFiltered) {
+			return;
+		}
+	}
 	const project = projects[name];
 	if (project.dependencies) {
 		Object.keys(project.dependencies).forEach((dependency) => {
-			resolveProject(dependency, projects, queue);
+			resolveProject(dependency, projects, queue, filters);
 		});
 	}
 	queue.push(name);
 	console.log(`- ${name}`);
 }
 
-function resolveProjects(projects) {
+function resolveProjects(projects, filters) {
 	console.log('RESOLVE PROJECTS');
 	const queue = [];
 	Object.keys(projects).forEach((name) => {
-		resolveProject(name, projects, queue);
+		resolveProject(name, projects, queue, filters);
 	});
 	return queue;
 }
@@ -68,10 +74,15 @@ function buildProjects(queue) {
 	});
 }
 
+function getFilters() {
+	return process.argv.slice(2);
+}
+
 function main() {
+	const filters = getFilters();
 	const projects = getProjects();
-	const queue = resolveProjects(projects);
-	buildProjects(queue, projects);
+	const queue = resolveProjects(projects, filters);
+	buildProjects(queue);
 }
 
 main();
