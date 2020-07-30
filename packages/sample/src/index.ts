@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
-import { Point } from '@e2d/geom';
+import { Point, Rectangle } from '@e2d/geom';
 import { Stage, DisplayObjectContainer } from '@e2d/display';
 import { Sprite, Shape } from '@e2d/shape';
+import { Bitmap, BitmapData } from '@e2d/bitmap';
 import { CanvasRenderingContext } from '@e2d/render-canvas';
 
 class Main {
@@ -21,6 +22,9 @@ class Main {
 		sprite.graphics.lineStyle(1, 0);
 		sprite.graphics.beginFill(0x00ff00, 0.5);
 		sprite.graphics.drawCircle(100, 100, 50);
+		sprite.graphics.beginFill(0x00ff00, 0.5);
+		sprite.graphics.drawRect(100, 100, 50, 20);
+		sprite.rotation = 10;
 		stage.addChild(sprite);
 
 		const shape = new Shape();
@@ -30,8 +34,17 @@ class Main {
 		shape.y = 100;
 		sprite.addChild(shape);
 
-		const parentObject = <DisplayObjectContainer>shape.parent;
-		const stageObject = <Stage>parentObject.parent;
+		const bitmapData = new BitmapData(50, 40, true, 0xffff00ff);
+		bitmapData.fillRect(new Rectangle(10, 10, 10, 10), 0x00ffff);
+
+		const bitmap = new Bitmap(bitmapData);
+		bitmap.rotation = -30;
+		bitmap.x = 200;
+		bitmap.y = 150;
+		sprite.addChild(bitmap);
+
+		const parentObject = shape.parent as DisplayObjectContainer;
+		const stageObject = parentObject.parent as Stage;
 
 		console.log(sprite.numChildren);
 		console.log(stage.numChildren);

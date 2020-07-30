@@ -27,7 +27,7 @@ export default abstract class DisplayObject extends EventDispatcher implements I
 
 	constructor() {
 		super();
-		this._transform = new Transform(this.getParentTransform);
+		this._transform = new Transform(this.getParentTransform.bind(this));
 	}
 
 	get transform(): Transform {
@@ -111,7 +111,7 @@ export default abstract class DisplayObject extends EventDispatcher implements I
 
 		const { rotation } = this;
 		if (rotation !== value) {
-			const delta = (rotation - value) * TO_RADIAN;
+			const delta = (value - rotation) * TO_RADIAN;
 			const { matrix } = this._transform;
 			matrix.rotate(delta);
 			this._transform.matrix = matrix;
