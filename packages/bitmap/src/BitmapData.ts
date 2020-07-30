@@ -15,7 +15,7 @@ export default class BitmapData {
 	private _transparent: boolean;
 
 	constructor(width: number, height: number, transparent: boolean = true, fillColor: number = 0xffffffff) {
-		this._canvas = new HTMLCanvasElement();
+		this._canvas = document.createElement('canvas');
 		this._canvas.width = width;
 		this._canvas.height = height;
 
