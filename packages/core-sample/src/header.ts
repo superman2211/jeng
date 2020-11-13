@@ -3,7 +3,7 @@ import {
 } from '@e2d/core';
 
 interface Header extends Container, Transform {
-
+	update(): void;
 }
 
 interface HeaderProperties {
@@ -12,7 +12,7 @@ interface HeaderProperties {
 }
 
 export default function header(props: HeaderProperties): Header {
-	return {
+	const component: Header = {
 		type: 'container',
 		x: 100,
 		y: 50,
@@ -33,5 +33,14 @@ export default function header(props: HeaderProperties): Header {
 				rotation: 0.1,
 			} as Image,
 		],
+		update() {
+			if (this.children) {
+				const image = this.children[1] as Image;
+				if (image && image.rotation) {
+					image.rotation += 0.01;
+				}
+			}
+		},
 	};
+	return component;
 }

@@ -13,6 +13,8 @@ const engine = new Engine2d(canvas);
 engine.root = app;
 
 function update(time: number = 0): void {
+	app.update();
+
 	engine.update(time);
 
 	requestAnimationFrame(update);

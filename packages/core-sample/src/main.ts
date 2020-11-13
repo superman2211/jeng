@@ -3,6 +3,7 @@ import header from './header';
 
 interface Main extends Container {
 	start(): void;
+	update(): void;
 }
 
 export default function main(): Main {
@@ -15,9 +16,13 @@ export default function main(): Main {
 		children: [
 			header({ title: 'test', onClick: onHeaderClick }),
 		],
-		start: () => {
+		start() {
 			// eslint-disable-next-line no-console
 			console.log('start');
+		},
+		update() {
+			const temp = (this.children as any)[0] as any;
+			temp.update();
 		},
 	};
 }
