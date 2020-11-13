@@ -1,7 +1,6 @@
-import { Text } from '../src/extensions/Text';
-import { Image } from '../src/extensions/Image';
-import { Container } from '../src/core/Container';
-import { Transform } from '../src/enigne2d/Transform';
+import {
+	Text, Image, Container, Transform,
+} from '@e2d/core';
 
 interface Header extends Container, Transform {
 
@@ -16,7 +15,7 @@ export default function header(props: HeaderProperties): Header {
 	return {
 		type: 'container',
 		x: 100,
-		y: 200,
+		y: 50,
 		children: [
 			{
 				type: 'text',

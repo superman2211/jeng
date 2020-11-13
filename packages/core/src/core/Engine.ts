@@ -13,7 +13,7 @@ export default class Engine {
 		this.context.updateHandlers.set(CONTAINER, updateContainer);
 	}
 
-	update(time: number) {
+	update(time: number = 0) {
 		this.context.time = time;
 		if (this.root) {
 			this.context.update(this.root);

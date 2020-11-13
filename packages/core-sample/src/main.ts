@@ -1,4 +1,4 @@
-import { Container } from '../src/core/Container';
+import { Container } from '@e2d/core';
 import header from './header';
 
 interface Main extends Container {

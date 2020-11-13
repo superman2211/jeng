@@ -9,6 +9,23 @@ export interface ContextState2d extends ContextState {
 }
 
 export class Context2d extends Context {
+	private canvas: HTMLCanvasElement;
+	readonly context: CanvasRenderingContext2D;
+
+	get width(): number {
+		return this.canvas.width;
+	}
+
+	get height(): number {
+		return this.canvas.height;
+	}
+
+	constructor(canvas: HTMLCanvasElement) {
+		super();
+		this.canvas = canvas;
+		this.context = this.canvas.getContext('2d') as CanvasRenderingContext2D;
+	}
+
 	// eslint-disable-next-line class-methods-use-this
 	createState(entity: Entity): ContextState {
 		return {
