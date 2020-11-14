@@ -11,7 +11,7 @@ interface HeaderProperties {
 	onClick: () => void;
 }
 
-export default function header(props: HeaderProperties): Header {
+export default function unit(props: HeaderProperties): Header {
 	const component: Header = {
 		type: 'container',
 		x: 100,
@@ -33,6 +33,20 @@ export default function header(props: HeaderProperties): Header {
 				scaleX: 2,
 				rotation: 0.1,
 			} as Image,
+			{
+				type: 'container',
+				children: [
+					{
+						type: 'image',
+						src: 'logo.png',
+						x: 10,
+						y: 20,
+						scaleX: 0.5,
+						scaleY: 0.5,
+						rotation: 0,
+					} as Image,
+				],
+			} as Container,
 		],
 		update() {
 			if (this.children) {

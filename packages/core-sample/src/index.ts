@@ -4,20 +4,11 @@ import main from './main';
 const app = main();
 app.start();
 
-const canvas = document.createElement('canvas');
-canvas.width = 400;
-canvas.height = 300;
-document.body.appendChild(canvas);
-
-const engine = new Engine2d(canvas);
+const engine = new Engine2d();
 engine.root = app;
+engine.fullscreen = true;
+engine.play();
 
-function update(time: number = 0): void {
-	app.update();
-
-	engine.update(time);
-
-	requestAnimationFrame(update);
-}
-
-update();
+document.body.appendChild(engine.view);
+document.body.style.margin = '0';
+document.body.style.padding = '0';

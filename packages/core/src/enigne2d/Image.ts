@@ -15,8 +15,6 @@ export function updateImage(image: Image, context: Context): void {
 		const context2d = context as Context2d;
 		const renderingContext = context2d.context;
 		const matrix = context2d.getTransformMatrix(image);
-		// eslint-disable-next-line no-console
-		// console.log(matrix, image.src);
 
 		renderingContext.setTransform(
 			matrix.a,
