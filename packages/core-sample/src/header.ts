@@ -30,6 +30,7 @@ export default function header(props: HeaderProperties): Header {
 				src: 'logo.png',
 				x: 1,
 				y: 2,
+				scaleX: 2,
 				rotation: 0.1,
 			} as Image,
 		],

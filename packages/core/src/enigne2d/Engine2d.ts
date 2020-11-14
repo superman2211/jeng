@@ -11,9 +11,14 @@ export default class Engine2d extends Engine {
 		this.context.updateHandlers.set(TEXT, updateText);
 	}
 
-	update(time: number = 0) {
+	clear() {
 		const context2d = this.context as Context2d;
-		context2d.context.fillRect(0, 0, context2d.width, context2d.height);
+		context2d.context.setTransform();
+		context2d.context.clearRect(0, 0, context2d.width, context2d.height);
+	}
+
+	update(time: number = 0) {
+		this.clear();
 		super.update(time);
 	}
 }
