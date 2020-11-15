@@ -3,7 +3,6 @@ import {
 } from '@e2d/core';
 
 interface Header extends Container, Transform {
-	update(): void;
 }
 
 interface HeaderProperties {
@@ -12,26 +11,27 @@ interface HeaderProperties {
 }
 
 export default function unit(props: HeaderProperties): Header {
-	const component: Header = {
+	return {
 		type: 'container',
 		x: 100,
 		y: 50,
+		rotation: 0.2,
 		children: [
 			{
 				type: 'text',
 				text: props.title,
 				onClick: props.onClick,
-				x: 10,
-				y: 20,
+				x: 0,
+				y: 0,
 				scaleX: 2,
 			} as Text,
 			{
 				type: 'image',
 				src: 'logo.png',
-				x: 1,
-				y: 2,
+				x: 0,
+				y: 0,
 				scaleX: 2,
-				rotation: 0.1,
+				alpha: 0.5,
 			} as Image,
 			{
 				type: 'container',
@@ -39,23 +39,14 @@ export default function unit(props: HeaderProperties): Header {
 					{
 						type: 'image',
 						src: 'logo.png',
-						x: 10,
-						y: 20,
+						x: 20,
+						y: 30,
 						scaleX: 0.5,
 						scaleY: 0.5,
-						rotation: 0,
+						rotation: 0.3,
 					} as Image,
 				],
 			} as Container,
 		],
-		update() {
-			if (this.children) {
-				const image = this.children[1] as Image;
-				if (image && image.rotation) {
-					image.rotation += 0.01;
-				}
-			}
-		},
 	};
-	return component;
 }

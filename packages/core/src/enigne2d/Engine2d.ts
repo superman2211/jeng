@@ -1,8 +1,9 @@
 import Engine from '../core/Engine';
 import { IMAGE, updateImage } from './Image';
 import { TEXT, updateText } from './Text';
-import { Context2d } from './Context2d';
-import { Matrix } from './Transform';
+import { Context2d, ContextState2d } from './Context2d';
+import { ColorTransform } from './ColorTransform';
+import { Matrix } from './Matrix';
 
 export default class Engine2d extends Engine {
 	width = 400;
@@ -17,6 +18,18 @@ export default class Engine2d extends Engine {
 
 	private matrix: Matrix = {
 		a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0,
+	};
+
+	private colorTranssform: ColorTransform = {
+		alphaMultiplier: 1,
+		redMultiplier: 1,
+		greenMultiplier: 1,
+		blueMultiplier: 1,
+
+		alphaOffset: 0,
+		redOffset: 0,
+		greenOffset: 0,
+		blueOffset: 0,
 	};
 
 	private get context2d(): Context2d {
@@ -59,14 +72,18 @@ export default class Engine2d extends Engine {
 		this.matrix.d = pixelRatio;
 	}
 
+	getState(): ContextState2d {
+		return {
+			matrix: this.matrix,
+			colorTransform: this.colorTranssform,
+		};
+	}
+
 	update(time: number = 0) {
 		this.updateSize();
 		this.clear();
-
-		this.context.states.push({ matrix: this.matrix });
+		this.context2d.state = this.getState();
 		super.update(time);
-		this.context.states.pop();
-
 		this.updateNextFrame();
 	}
 
