@@ -53,8 +53,8 @@ export default class Engine2d extends Engine {
 			view, width, height, fullscreen,
 		} = this;
 
-		let targetWidth = width;
-		let targetHeight = height;
+		let targetWidth = Math.floor(width);
+		let targetHeight = Math.floor(height);
 
 		if (fullscreen) {
 			targetWidth = window.innerWidth;
@@ -63,13 +63,18 @@ export default class Engine2d extends Engine {
 
 		const pixelRatio = window.devicePixelRatio;
 
-		view.width = targetWidth * pixelRatio;
-		view.height = targetHeight * pixelRatio;
-		view.style.width = `${targetWidth}px`;
-		view.style.height = `${targetHeight}px`;
+		const viewWidth = Math.floor(targetWidth * pixelRatio);
+		const viewHeight = Math.floor(targetHeight * pixelRatio);
 
-		this.matrix.a = pixelRatio;
-		this.matrix.d = pixelRatio;
+		if (view.width !== viewWidth || view.height !== viewHeight) {
+			view.width = viewWidth;
+			view.height = viewHeight;
+			view.style.width = `${targetWidth}px`;
+			view.style.height = `${targetHeight}px`;
+
+			this.matrix.a = pixelRatio;
+			this.matrix.d = pixelRatio;
+		}
 	}
 
 	getState(): ContextState2d {
