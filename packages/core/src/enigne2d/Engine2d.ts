@@ -15,6 +15,7 @@ export default class Engine2d extends Engine {
 	}
 
 	private paused = true;
+	private time = -1;
 
 	private matrix: Matrix = {
 		a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0,
@@ -92,7 +93,11 @@ export default class Engine2d extends Engine {
 		this.updateNextFrame();
 	}
 
-	private internalUpdate = (time: number) => this.update(time);
+	private internalUpdate = (time: number) => {
+		const deltaTime = this.time === -1 ? 0 : time - this.time;
+		this.time = time;
+		this.update(deltaTime / 1000);
+	}
 
 	private updateNextFrame() {
 		requestAnimationFrame(this.internalUpdate);

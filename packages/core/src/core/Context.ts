@@ -16,6 +16,9 @@ export abstract class Context {
 		if (isEnabled(entity)) {
 			const updateHandler = this.updateHandlers.get(entity.type);
 			if (updateHandler) {
+				if (entity.onUpdate) {
+					entity.onUpdate(this.time);
+				}
 				updateHandler(entity, this);
 			}
 		}

@@ -1,16 +1,16 @@
 import {
-	Text, Image, Container, Transform,
+	Container, Transform,
 } from '@e2d/core';
 
-interface Header extends Container, Transform {
+interface Unit extends Container, Transform {
 }
 
-interface HeaderProperties {
+interface UnitProperties {
 	title: string,
 	onClick: () => void;
 }
 
-export default function unit(props: HeaderProperties): Header {
+export default function unit(props: UnitProperties): Unit {
 	return {
 		type: 'container',
 		x: 100,
@@ -26,7 +26,7 @@ export default function unit(props: HeaderProperties): Header {
 				x: 0,
 				y: 0,
 				scaleX: 2,
-			} as Text,
+			},
 			{
 				type: 'image',
 				src: 'logo.png',
@@ -34,9 +34,17 @@ export default function unit(props: HeaderProperties): Header {
 				y: 0,
 				scaleX: 2,
 				alpha: 0.5,
-			} as Image,
+				rotation: 0,
+				onUpdate(time: number) {
+					this.rotation += time;
+				},
+			},
 			{
 				type: 'container',
+				x: 0,
+				onUpdate(time: number) {
+					this.x += time * 10;
+				},
 				children: [
 					{
 						type: 'image',
@@ -46,9 +54,9 @@ export default function unit(props: HeaderProperties): Header {
 						scaleX: 0.5,
 						scaleY: 0.5,
 						rotation: 0.3,
-					} as Image,
+					},
 				],
-			} as Container,
+			},
 		],
 	};
 }
