@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 const isProduction = process.argv.indexOf('--mode=production') !== -1;
@@ -30,6 +31,11 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin(),
+		new CopyPlugin({
+			patterns: [
+				{ from: 'assets', to: './' },
+			],
+		}),
 	],
 	output: {
 		filename: 'bundle.js',

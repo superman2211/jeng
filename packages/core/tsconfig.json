@@ -11,7 +11,6 @@
 		"declarationMap": true,
 		"declarationDir": "dist",
 		"outDir": "dist",
-		"inlineSourceMap": true,
 		"strict": true,
 		"lib": [
 			"dom",

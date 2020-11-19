@@ -44,6 +44,7 @@ export default function unit(props: UnitProperties): Unit {
 				x: 0,
 				onUpdate(time: number) {
 					this.x += time * 10;
+					this.children[0].y += 0.1;
 				},
 				children: [
 					{
