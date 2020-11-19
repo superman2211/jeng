@@ -5,6 +5,7 @@
   "main": "src/index.ts",
   "license": "MIT",
   "private": true,
+  "sideEffects": false,
   "author": "Sergey Antonov",
   "scripts": {
     "build": "webpack --config webpack.config.js --mode=development",
