@@ -20,6 +20,9 @@ export abstract class Context {
 					entity.onUpdate(this.time);
 				}
 				updateHandler(entity, this);
+			} else {
+				// eslint-disable-next-line no-console
+				console.warn(`Type not found: ${entity.type}`);
 			}
 		}
 	}

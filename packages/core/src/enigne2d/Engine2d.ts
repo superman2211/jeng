@@ -4,6 +4,7 @@ import { TEXT, updateText } from './Text';
 import { Context2d, ContextState2d } from './Context2d';
 import { ColorTransform } from './ColorTransform';
 import { Matrix } from './Matrix';
+import { CONTAINER_ALIGNED, updateContainerAligned } from './ContainerAligned';
 
 export default class Engine2d extends Engine {
 	width = 400;
@@ -42,6 +43,7 @@ export default class Engine2d extends Engine {
 
 		this.context.updateHandlers.set(IMAGE, updateImage);
 		this.context.updateHandlers.set(TEXT, updateText);
+		this.context.updateHandlers.set(CONTAINER_ALIGNED, updateContainerAligned);
 	}
 
 	clear() {

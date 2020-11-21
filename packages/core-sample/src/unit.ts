@@ -1,4 +1,5 @@
 import {
+	CONTAINER, TEXT, IMAGE,
 	Container, Transform,
 } from '@e2d/core';
 
@@ -12,13 +13,13 @@ interface UnitProperties {
 
 export default function unit(props: UnitProperties): Unit {
 	return {
-		type: 'container',
+		type: CONTAINER,
 		x: 100,
 		y: 50,
 		rotation: 0.2,
 		children: [
 			{
-				type: 'text',
+				type: TEXT,
 				text: props.title,
 				fontSize: 50,
 				color: 0xff0000,
@@ -28,7 +29,7 @@ export default function unit(props: UnitProperties): Unit {
 				scaleX: 2,
 			},
 			{
-				type: 'image',
+				type: IMAGE,
 				src: 'logo.png',
 				x: 0,
 				y: 0,
@@ -40,7 +41,7 @@ export default function unit(props: UnitProperties): Unit {
 				},
 			},
 			{
-				type: 'container',
+				type: CONTAINER,
 				x: 0,
 				onUpdate(time: number) {
 					this.x += time * 10;
@@ -48,7 +49,7 @@ export default function unit(props: UnitProperties): Unit {
 				},
 				children: [
 					{
-						type: 'image',
+						type: IMAGE,
 						src: 'logo.png',
 						x: 20,
 						y: 30,
