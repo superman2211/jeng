@@ -2,7 +2,7 @@
 
 ## Sample
 - [Sample code](https://github.com/AntonovSergey2211/e2d/blob/master/packages/sample/src/index.ts) 
-- [Sample page](https://antonovsergey2211.github.io/e2d/packages/sample/build/)
+- [Sample build](https://antonovsergey2211.github.io/e2d/packages/sample/build/)
 
 ## Scripts
 
