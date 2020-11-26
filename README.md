@@ -6,7 +6,7 @@
 
 ## Scripts
 
-### [build] <package1> <package2> ...
+### [build]
 Build all <br/>
 `yarn build`
 
