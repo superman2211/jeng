@@ -11,7 +11,7 @@
     "release": "webpack --config webpack.config.js --mode=production",
     "lint": "eslint './src/**' --fix",
     "test": "echo skip",
-    "clean": "rimraf dist && rimraf coverage && rimraf node_modules"
+    "clean": "rimraf coverage && rimraf node_modules"
   },
   "repository": {
     "type": "git",
