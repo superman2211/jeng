@@ -8,6 +8,7 @@ export interface ContextState {
 export abstract class Context {
 	time = 0;
 	updateDepth = 0;
+	updateEventEnabled = true;
 
 	readonly updateHandlers = new Map<string, UpdateHandler>();
 	readonly propertyHandlers = new Map<string, UpdateHandler>();
@@ -22,7 +23,7 @@ export abstract class Context {
 		if (isEnabled(entity)) {
 			const updateHandler = this.updateHandlers.get(entity.type);
 			if (updateHandler) {
-				if (entity.onUpdate) {
+				if (this.updateEventEnabled && entity.onUpdate) {
 					entity.onUpdate(this.time);
 				}
 				updateHandler(entity, this);
