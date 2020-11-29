@@ -1,9 +1,10 @@
 import {
 	CONTAINER, TEXT, IMAGE,
-	Container, Transform,
 } from '@e2d/core';
+import { LOGO } from './assets';
 
-interface Unit extends Container, Transform {
+interface Unit {
+	[key: string]: any;
 }
 
 interface UnitProperties {
@@ -30,7 +31,7 @@ export default function unit(props: UnitProperties): Unit {
 			},
 			{
 				type: IMAGE,
-				src: 'logo.png',
+				src: LOGO,
 				x: 0,
 				y: 0,
 				scaleX: 2,
@@ -50,7 +51,7 @@ export default function unit(props: UnitProperties): Unit {
 				children: [
 					{
 						type: IMAGE,
-						src: 'logo.png',
+						src: LOGO,
 						x: 20,
 						y: 30,
 						scaleX: 0.5,

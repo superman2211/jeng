@@ -88,6 +88,10 @@ export default class Engine2d extends Engine {
 	}
 
 	update(time: number = 0) {
+		if (this.paused) {
+			return;
+		}
+
 		this.updateSize();
 		this.clear();
 		this.context2d.state = this.getState();
@@ -106,6 +110,7 @@ export default class Engine2d extends Engine {
 	}
 
 	play() {
+		console.log('play');
 		if (this.paused) {
 			this.paused = false;
 			this.updateNextFrame();
@@ -113,6 +118,7 @@ export default class Engine2d extends Engine {
 	}
 
 	pause() {
+		console.log('pause');
 		this.paused = true;
 	}
 }

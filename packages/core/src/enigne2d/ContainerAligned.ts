@@ -7,6 +7,7 @@ export const CONTAINER_ALIGNED = 'container-aligned';
 export interface ContainerAligned extends Container, Transform {
 	stepX?: number;
 	stepY?: number;
+	stepRotation?: number;
 }
 
 export function updateContainerAligned(container: ContainerAligned, context: Context): void {
@@ -18,7 +19,7 @@ export function updateContainerAligned(container: ContainerAligned, context: Con
 
 		if (stepX || stepY) {
 			for (let i = 0; i < children.length; i++) {
-				const child = children[i];
+				const child = children[i] as Transform;
 				child.x = stepX * i;
 				child.y = stepY * i;
 				child.rotation = stepRotation * i;

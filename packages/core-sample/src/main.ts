@@ -2,23 +2,32 @@ import {
 	CONTAINER, CONTAINER_ALIGNED, IMAGE,
 	Container, Image,
 } from '@e2d/core';
+import { LOGO } from './assets';
+import recursive from './recursive';
 import unit from './unit';
 
-interface Main extends Container {
+interface Main {
 	start(): void;
+	[key: string]: any;
+}
+
+function getImages(count: number): Container[] {
+	const image: Image = {
+		type: IMAGE,
+		src: LOGO,
+		scaleX: 0.2,
+		scaleY: 0.3,
+	};
+
+	return new Array<Image>(count)
+		.fill(image, 0, count)
+		.map(() => ({ type: CONTAINER, children: [image] }));
 }
 
 export default function main(): Main {
 	function onHeaderClick() {
 
 	}
-
-	const image: Image = {
-		type: IMAGE,
-		src: 'logo.png',
-		scaleX: 0.2,
-		scaleY: 0.3,
-	};
 
 	return {
 		type: CONTAINER,
@@ -31,7 +40,13 @@ export default function main(): Main {
 				stepX: 20,
 				stepY: 30,
 				stepRotation: 0.1,
-				children: Array<Image>(10).fill(image, 0, 10).map(() => ({ type: CONTAINER, children: [image] })),
+				children: getImages(10),
+			},
+			{
+				type: CONTAINER,
+				x: 200,
+				y: 200,
+				children: [recursive()],
 			},
 		],
 		start() {
