@@ -110,14 +110,17 @@ export default class Engine2d extends Engine {
 	}
 
 	play() {
+		// eslint-disable-next-line no-console
 		console.log('play');
 		if (this.paused) {
+			this.time = -1;
 			this.paused = false;
 			this.updateNextFrame();
 		}
 	}
 
 	pause() {
+		// eslint-disable-next-line no-console
 		console.log('pause');
 		this.paused = true;
 	}

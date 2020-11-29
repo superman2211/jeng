@@ -13,4 +13,5 @@ document.body.appendChild(engine.view);
 document.body.style.margin = '0';
 document.body.style.padding = '0';
 
-setTimeout(() => engine.pause(), 3000);
+setTimeout(() => engine.pause(), 5000);
+setTimeout(() => engine.play(), 10000);
