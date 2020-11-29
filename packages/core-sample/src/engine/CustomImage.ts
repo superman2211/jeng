@@ -22,6 +22,7 @@ export default function updateImage(image: Image, context: Context): void {
 
 		const resource: HTMLImageElement = Resources.get(image.src);
 		if (resource && resource.width && resource.height) {
+			renderingContext.fillStyle = '';
 			renderingContext.strokeStyle = 'gray';
 			renderingContext.strokeRect(0, 0, resource.width, resource.height);
 		}
