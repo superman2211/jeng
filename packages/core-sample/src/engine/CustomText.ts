@@ -5,10 +5,13 @@ import {
 export default function updateText(text: Text, context: Context): void {
 	if (text.text) {
 		const context2d = context as Context2d;
-		const renderingContext = context2d.context;
 		const state = context2d.getState(text) as ContextState2d;
 		const { matrix } = state;
 
+		const fontSize = text.fontSize ?? 10;
+		const fontName = text.fontName ?? 'arial';
+
+		const renderingContext = context2d.context;
 		renderingContext.setTransform(
 			matrix.a,
 			matrix.b,
@@ -17,10 +20,6 @@ export default function updateText(text: Text, context: Context): void {
 			matrix.tx,
 			matrix.ty,
 		);
-
-		const fontSize = text.fontSize ?? 10;
-		const fontName = text.fontName ?? 'arial';
-
 		renderingContext.globalAlpha = 1;
 		renderingContext.font = `${fontSize}px ${fontName}`;
 		renderingContext.textBaseline = 'alphabetic';

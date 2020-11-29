@@ -36,10 +36,14 @@ function createColorPattern(color: number, alpha: number, ct: ColorTransform): s
 export function updateText(text: Text, context: Context): void {
 	if (text.text) {
 		const context2d = context as Context2d;
-		const renderingContext = context2d.context;
 		const state = context2d.getState(text) as ContextState2d;
 		const { matrix, colorTransform } = state;
 
+		const fontSize = text.fontSize ?? 10;
+		const fontName = text.fontName ?? 'arial';
+		const fontColor = text.color ?? 0;
+
+		const renderingContext = context2d.context;
 		renderingContext.setTransform(
 			matrix.a,
 			matrix.b,
@@ -48,16 +52,11 @@ export function updateText(text: Text, context: Context): void {
 			matrix.tx,
 			matrix.ty,
 		);
-
-		const fontSize = text.fontSize ?? 10;
-		const fontName = text.fontName ?? 'arial';
-		const color = text.color ?? 0;
-
 		renderingContext.globalAlpha = 1;
 		renderingContext.font = `${fontSize}px ${fontName}`;
 		renderingContext.textBaseline = 'alphabetic';
 		renderingContext.strokeStyle = '';
-		renderingContext.fillStyle = createColorPattern(color, 1, colorTransform);
+		renderingContext.fillStyle = createColorPattern(fontColor, 1, colorTransform);
 		renderingContext.fillText(text.text, 0, fontSize);
 	}
 }
