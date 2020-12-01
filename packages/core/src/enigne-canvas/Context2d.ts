@@ -1,10 +1,10 @@
 import { Context, ContextState } from '../core/Context';
-import { Entity } from '../core/Entity';
-import { ColorTransform, concat as concatColorTransform } from './ColorTransform';
-import { Matrix, concat as concatMatrix } from './Matrix';
+import { Entity } from '../core/components/Entity';
+import { ColorTransform, concat as concatColorTransform } from '../geom/ColorTransform';
+import { Matrix, concat as concatMatrix } from '../geom/Matrix';
 import {
 	Transform, getMatrix, getColorTransform,
-} from './Transform';
+} from '../geom/Transform';
 
 export interface ContextState2d extends ContextState {
 	matrix: Matrix;

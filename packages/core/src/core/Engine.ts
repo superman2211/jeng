@@ -1,6 +1,6 @@
-import { Entity } from './Entity';
+import { Entity } from './components/Entity';
 import { Context } from './Context';
-import { CONTAINER, updateContainer } from './Container';
+import { CONTAINER, updateContainer } from './components/Container';
 
 export default class Engine {
 	readonly context: Context;

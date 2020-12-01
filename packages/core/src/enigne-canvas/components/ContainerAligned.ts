@@ -1,6 +1,6 @@
-import { Container, updateContainer } from '../core/Container';
-import { Context } from '../core/Context';
-import { Transform } from './Transform';
+import { Container, updateContainer } from '../../core/components/Container';
+import { Context } from '../../core/Context';
+import { Transform } from '../../geom/Transform';
 
 export const CONTAINER_ALIGNED = 'container-aligned';
 

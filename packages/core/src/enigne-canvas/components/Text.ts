@@ -1,8 +1,8 @@
-import { Context } from '../core/Context';
-import { Entity } from '../core/Entity';
-import { ColorTransform, isDefault } from './ColorTransform';
-import { Context2d, ContextState2d } from './Context2d';
-import { Transform } from './Transform';
+import { Context } from '../../core/Context';
+import { Entity } from '../../core/components/Entity';
+import { ColorTransform, isDefault } from '../../geom/ColorTransform';
+import { Context2d, ContextState2d } from '../Context2d';
+import { Transform } from '../../geom/Transform';
 
 export const TEXT = 'text';
 

@@ -1,5 +1,5 @@
 import {
-	Image, Context, Context2d, ContextState2d, Resources,
+	Image, Context, Context2d, ContextState2d, ImageResource,
 } from '@e2d/core';
 
 export default function updateImage(image: Image, context: Context): void {
@@ -7,9 +7,10 @@ export default function updateImage(image: Image, context: Context): void {
 		const context2d = context as Context2d;
 		const state = context2d.getState(image) as ContextState2d;
 		const { matrix } = state;
-		const resource: HTMLImageElement = Resources.get(image.src);
+		const resource: ImageResource = context.resources.get(image.src) as ImageResource;
 
-		if (resource && resource.width && resource.height) {
+		if (resource?.image) {
+			const { width, height } = resource.image;
 			const renderingContext: CanvasRenderingContext2D = context2d.context;
 			renderingContext.setTransform(
 				matrix.a,
@@ -22,7 +23,7 @@ export default function updateImage(image: Image, context: Context): void {
 			renderingContext.globalAlpha = 1;
 			renderingContext.fillStyle = '';
 			renderingContext.strokeStyle = 'gray';
-			renderingContext.strokeRect(0, 0, resource.width, resource.height);
+			renderingContext.strokeRect(0, 0, width, height);
 		}
 	}
 }

@@ -1,8 +1,8 @@
-import { Context } from '../core/Context';
-import { Entity } from '../core/Entity';
-import { Context2d, ContextState2d } from './Context2d';
-import { Transform } from './Transform';
-import Resources from './Resources';
+import { Context } from '../../core/Context';
+import { Entity } from '../../core/components/Entity';
+import { Context2d, ContextState2d } from '../Context2d';
+import { Transform } from '../../geom/Transform';
+import { ImageResource } from '../resources/ImageResource';
 
 export const IMAGE = 'image';
 
@@ -15,9 +15,9 @@ export function updateImage(image: Image, context: Context): void {
 		const context2d = context as Context2d;
 		const state = context2d.getState(image) as ContextState2d;
 		const { matrix, colorTransform } = state;
-		const resource: HTMLImageElement = Resources.get(image.src);
+		const resource: ImageResource = context.resources.get(image.src) as ImageResource;
 
-		if (resource && resource.width && resource.height) {
+		if (resource?.image) {
 			const renderingContext = context2d.context;
 			renderingContext.setTransform(
 				matrix.a,
@@ -28,7 +28,7 @@ export function updateImage(image: Image, context: Context): void {
 				matrix.ty,
 			);
 			renderingContext.globalAlpha = colorTransform.alphaMultiplier;
-			renderingContext.drawImage(resource, 0, 0);
+			renderingContext.drawImage(resource.image, 0, 0);
 		}
 	}
 }

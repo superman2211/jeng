@@ -1,4 +1,5 @@
-import { Entity, isEnabled } from './Entity';
+import { Entity, isEnabled } from './components/Entity';
+import { Resouces } from './Resources';
 
 type UpdateHandler = (entity: Entity, context: Context) => void;
 
@@ -12,6 +13,7 @@ export abstract class Context {
 
 	readonly updateHandlers = new Map<string, UpdateHandler>();
 	readonly propertyHandlers = new Map<string, UpdateHandler>();
+	readonly resources = new Resouces();
 
 	state: ContextState = {};
 
