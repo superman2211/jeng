@@ -48,6 +48,13 @@ export default function main(): Main {
 				y: 200,
 				children: [recursive()],
 			},
+			{
+				type: IMAGE,
+				y: 400,
+				scaleX: 0.2,
+				scaleY: 0.2,
+				src: 'test.canvas',
+			},
 		],
 		start() {
 			// eslint-disable-next-line no-console

@@ -1,5 +1,5 @@
 import {
-	Container, Engine2d,
+	Container, Engine2d, ImageResource,
 } from '@e2d/core';
 import CustomEngine2d from './engine/CustomEngine2d';
 import main from './main';
@@ -34,3 +34,20 @@ document.body.style.padding = '0';
 // test pause
 setTimeout(() => engine.pause(), 5000);
 setTimeout(() => engine.play(), 10000);
+
+// custom resource
+const customAsset = 'test.canvas';
+engine.context.resources.add(
+	customAsset,
+	{
+		asset: customAsset,
+		image: customEngine.view,
+	} as ImageResource,
+);
+customEngine.context.resources.add(
+	customAsset,
+	{
+		asset: customAsset,
+		image: engine.view,
+	} as ImageResource,
+);

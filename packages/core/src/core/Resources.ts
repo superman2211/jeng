@@ -23,6 +23,10 @@ export class Resouces {
 		return resource;
 	}
 
+	add(asset: any, resource: Resource) {
+		this._cache.set(asset, resource);
+	}
+
 	private resolve(asset: any): Resource | null {
 		// eslint-disable-next-line no-restricted-syntax
 		for (const resolver of this.resolvers) {
