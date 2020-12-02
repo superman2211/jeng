@@ -55,6 +55,15 @@ export default function main(): Main {
 				scaleY: 0.2,
 				src: 'test.canvas',
 			},
+			{
+				type: IMAGE,
+				x: 100,
+				y: 400,
+				rotation: -0.1,
+				scaleX: 0.2,
+				scaleY: 0.2,
+				src: 'id:cat',
+			},
 		],
 		start() {
 			// eslint-disable-next-line no-console
