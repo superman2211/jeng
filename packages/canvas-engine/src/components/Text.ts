@@ -38,15 +38,15 @@ function createColorPattern(color: number, alpha: number, ct: ColorTransform): s
 
 export function updateText(text: Text, context: Context): void {
 	if (text.text) {
-		const context2d = context as CanvasContext;
-		const state = context2d.getState(text) as CanvasContextState;
+		const canvasContext = context as CanvasContext;
+		const state = canvasContext.getState(text) as CanvasContextState;
 		const { matrix, colorTransform } = state;
 
 		const fontSize = text.fontSize ?? 10;
 		const fontName = text.fontName ?? 'arial';
 		const fontColor = text.color ?? 0;
 
-		const renderingContext = context2d.context;
+		const renderingContext = canvasContext.context;
 		renderingContext.setTransform(
 			matrix.a,
 			matrix.b,

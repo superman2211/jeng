@@ -10,7 +10,7 @@ export interface ColorTransform {
 	blueOffset: number;
 }
 
-export function concatColorTransform(ct0: ColorTransform, ct1: ColorTransform): ColorTransform {
+export function concatColorTransform(ct1: ColorTransform, ct0: ColorTransform): ColorTransform {
 	return {
 		alphaMultiplier: ct1.alphaMultiplier * ct0.alphaMultiplier,
 		redMultiplier: ct1.redMultiplier * ct0.redMultiplier,

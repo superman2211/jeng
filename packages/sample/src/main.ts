@@ -33,9 +33,26 @@ export default function main(): Main {
 				type: 'image',
 				x: 100,
 				y: 400,
-				rotation: -0.1,
 				scaleX: 0.2,
 				scaleY: 0.2,
+				src: SAMPLE,
+			},
+			{
+				type: 'image',
+				x: 200,
+				y: 400,
+				scaleX: 0.2,
+				scaleY: 0.2,
+				tint: {
+					color: 0xff0000,
+					value: 1,
+				},
+				onUpdate(time: number) {
+					this.tint.value += time;
+					if (this.tint.value >= 1) {
+						this.tint.value = 0;
+					}
+				},
 				src: SAMPLE,
 			},
 		],

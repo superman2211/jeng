@@ -1,6 +1,11 @@
 import { ColorTransform } from './ColorTransform';
 import { Matrix } from './Matrix';
 
+export interface TintColor {
+	color?: number;
+	value?: number;
+}
+
 export interface Transform {
 	x?: number;
 	y?: number;
@@ -9,6 +14,7 @@ export interface Transform {
 	rotation?: number;
 	matrix?: Matrix;
 	alpha?: number;
+	tint?: TintColor,
 	colorTransform?: ColorTransform;
 }
 
@@ -65,6 +71,29 @@ export function getColorTransform(transform: Transform): ColorTransform {
 			redOffset: colorTransform.redOffset ?? 0,
 			greenOffset: colorTransform.greenOffset ?? 0,
 			blueOffset: colorTransform.blueOffset ?? 0,
+		};
+	}
+
+	const { tint } = transform;
+	if (tint) {
+		const { color = 0, value = 1 } = tint;
+
+		const valueInverted = 1 - value;
+
+		const r = (color >> 16) & 0xff;
+		const g = (color >> 8) & 0xff;
+		const b = color & 0xff;
+
+		return {
+			alphaMultiplier: transform.alpha ?? 1,
+			redMultiplier: valueInverted,
+			greenMultiplier: valueInverted,
+			blueMultiplier: valueInverted,
+
+			alphaOffset: 0,
+			redOffset: r * value,
+			greenOffset: g * value,
+			blueOffset: b * value,
 		};
 	}
 
