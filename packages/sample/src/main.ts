@@ -14,22 +14,22 @@ export default function main(): Main {
 
 	return {
 		type: 'container',
-		children: [
-			unit({ title: 'test', onClick: onHeaderClick }),
-			{
+		children: {
+			unit: unit({ title: 'test', onClick: onHeaderClick }),
+			recursiveObject: {
 				type: 'container',
 				x: 200,
 				y: 200,
 				children: [recursive()],
 			},
-			{
+			displayCanvas: {
 				type: 'image',
 				y: 400,
 				scaleX: 0.2,
 				scaleY: 0.2,
 				src: 'test.canvas',
 			},
-			{
+			pngSample: {
 				type: 'image',
 				x: 100,
 				y: 400,
@@ -37,7 +37,7 @@ export default function main(): Main {
 				scaleY: 0.2,
 				src: SAMPLE,
 			},
-			{
+			tintSample: {
 				type: 'image',
 				x: 200,
 				y: 400,
@@ -55,7 +55,7 @@ export default function main(): Main {
 				},
 				src: SAMPLE,
 			},
-		],
+		},
 		start() {
 			// eslint-disable-next-line no-console
 			console.log('start');

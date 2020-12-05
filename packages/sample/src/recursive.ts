@@ -3,7 +3,7 @@ import { LOGO } from './assets';
 export default function recursive() {
 	const container = {
 		type: 'container',
-		children: [{
+		child: {
 			type: 'container',
 			x: 30,
 			y: 30,
@@ -17,10 +17,10 @@ export default function recursive() {
 					src: LOGO,
 				},
 			],
-		}],
+		},
 	};
 
-	container.children[0].children.push(container as never);
+	container.child.children.push(container as never);
 
 	return container;
 }

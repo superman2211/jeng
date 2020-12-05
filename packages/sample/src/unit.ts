@@ -43,19 +43,17 @@ export default function unit(props: UnitProperties): Unit {
 				x: 0,
 				onUpdate(time: number) {
 					this.x += time * 10;
-					this.children[0].y += 0.1;
+					this.child.y += 0.1;
 				},
-				children: [
-					{
-						type: 'image',
-						src: LOGO,
-						x: 20,
-						y: 30,
-						scaleX: 0.5,
-						scaleY: 0.5,
-						rotation: 0.3,
-					},
-				],
+				child: {
+					type: 'image',
+					src: LOGO,
+					x: 20,
+					y: 30,
+					scaleX: 0.5,
+					scaleY: 0.5,
+					rotation: 0.3,
+				},
 			},
 		],
 	};
