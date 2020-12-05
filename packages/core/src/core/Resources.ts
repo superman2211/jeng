@@ -1,15 +1,15 @@
 export interface Resource {
-	asset: any;
+	asset: string;
 }
 
-export type ResourceResolver = (asset: any) => Resource | null;
+export type ResourceResolver = (asset: string) => Resource | null;
 
 export class Resouces {
 	private _cache = new Map<any, any>();
 
 	readonly resolvers = new Set<ResourceResolver>();
 
-	get(asset: any): Resource | null {
+	get(asset: string): Resource | null {
 		if (!asset) {
 			return null;
 		}
@@ -23,11 +23,11 @@ export class Resouces {
 		return resource;
 	}
 
-	add(asset: any, resource: Resource) {
+	add(asset: string, resource: Resource) {
 		this._cache.set(asset, resource);
 	}
 
-	private resolve(asset: any): Resource | null {
+	private resolve(asset: string): Resource | null {
 		// eslint-disable-next-line no-restricted-syntax
 		for (const resolver of this.resolvers) {
 			const resource = resolver(asset);

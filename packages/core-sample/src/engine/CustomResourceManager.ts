@@ -7,17 +7,15 @@ export default class CustomResourceManager {
 		this.resources.set(id, url);
 	}
 
-	resolve = (asset: any): ImageResource | null => {
-		if (typeof asset === 'string') {
-			if (asset.indexOf('id:') === 0) {
-				const id = asset.slice(3);
-				const url = this.resources.get(id);
-				if (url) {
-					return resolveImage(url);
-				}
-				// eslint-disable-next-line no-console
-				console.warn(`Resource with id: ${asset} not found`);
+	resolve = (asset: string): ImageResource | null => {
+		if (asset.indexOf('id:') === 0) {
+			const id = asset.slice(3);
+			const url = this.resources.get(id);
+			if (url) {
+				return resolveImage(url);
 			}
+			// eslint-disable-next-line no-console
+			console.warn(`Resource with id: ${asset} not found`);
 		}
 		return null;
 	}
