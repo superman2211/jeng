@@ -1,6 +1,10 @@
 import {
 	Context,
 	ContextState,
+	Entity,
+} from '@e2d/core';
+
+import {
 	Matrix,
 	ColorTransform,
 	Transform,
@@ -8,8 +12,7 @@ import {
 	concatMatrix,
 	getColorTransform,
 	concatColorTransform,
-	Entity,
-} from '@e2d/core';
+} from '@e2d/geom';
 
 export interface CanvasContextState extends ContextState {
 	matrix: Matrix;

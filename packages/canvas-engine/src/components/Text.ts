@@ -1,10 +1,5 @@
-import {
-	ColorTransform,
-	Context,
-	Entity,
-	isDefault,
-	Transform,
-} from '@e2d/core';
+import { Context, Entity } from '@e2d/core';
+import { ColorTransform, isDefault, Transform } from '@e2d/geom';
 import { CanvasContext, CanvasContextState } from '../engine/CanvasContext';
 
 export const TEXT = 'text';

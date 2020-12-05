@@ -1,4 +1,5 @@
-import { Engine, Matrix, ColorTransform } from '@e2d/core';
+import { Engine } from '@e2d/core';
+import { Matrix, ColorTransform } from '@e2d/geom';
 import { CanvasContext, CanvasContextState } from './CanvasContext';
 import { resolveImage } from '../resources/ImageResource';
 import { IMAGE, updateImage } from '../components/Image';

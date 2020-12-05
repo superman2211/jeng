@@ -1,7 +1,7 @@
 {
-  "name": "@e2d/canvas-engine",
+  "name": "@e2d/geom",
   "version": "0.1.0",
-  "description": "canvas engine",
+  "description": "geom library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "moduleResolution": "node",
@@ -32,10 +32,6 @@
   	"url": "https://github.com/AntonovSergey2211/e2d/issues"
   },
   "homepage": "https://github.com/AntonovSergey2211/e2d#readme",
-  "dependencies": {
-	  "@e2d/core": "0.1.0",
-	  "@e2d/geom": "0.1.0"
-  },
   "devDependencies": {
 	"@babel/core": "^7.10.3",
     "@babel/plugin-proposal-decorators": "^7.10.3",

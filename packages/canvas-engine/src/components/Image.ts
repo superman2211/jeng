@@ -1,6 +1,9 @@
 import {
-	ColorTransform, Context, Entity, Transform, transformBounds,
+	Context, Entity,
 } from '@e2d/core';
+import {
+	ColorTransform, Transform, transformBounds,
+} from '@e2d/geom';
 import { CanvasContext, CanvasContextState } from '../engine/CanvasContext';
 import { ImageResource } from '../resources/ImageResource';
 
