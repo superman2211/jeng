@@ -40,8 +40,8 @@ export default class Engine2d extends Engine {
 	constructor() {
 		super(new CanvasContext());
 
-		this.context.updateHandlers.set(IMAGE, updateImage);
-		this.context.updateHandlers.set(TEXT, updateText);
+		this.context.components.set(IMAGE, updateImage);
+		this.context.components.set(TEXT, updateText);
 
 		this.context.resources.resolvers.add(resolveImage);
 	}

@@ -12,7 +12,7 @@ export default class Engine {
 	constructor(context: Context) {
 		this.context = context;
 
-		this.context.updateHandlers.set(CONTAINER, updateContainer);
+		this.context.components.set(CONTAINER, updateContainer);
 	}
 
 	update(time: number = 0) {

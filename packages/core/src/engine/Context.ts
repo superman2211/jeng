@@ -11,8 +11,8 @@ export abstract class Context {
 	updateDepth = 0;
 	updateEventEnabled = true;
 
-	readonly updateHandlers = new Map<string, UpdateHandler>();
-	readonly propertyHandlers = new Map<string, UpdateHandler>();
+	readonly components = new Map<string, UpdateHandler>();
+	readonly extensions = new Map<string, UpdateHandler>();
 	readonly resources = new Resouces();
 
 	state: ContextState = {};
@@ -23,12 +23,12 @@ export abstract class Context {
 		}
 
 		if (isEnabled(entity)) {
-			const updateHandler = this.updateHandlers.get(entity.type);
-			if (updateHandler) {
+			const componentHandler = this.components.get(entity.type);
+			if (componentHandler) {
 				if (this.updateEventEnabled && entity.onUpdate) {
 					entity.onUpdate(this.time);
 				}
-				updateHandler(entity, this);
+				componentHandler(entity, this);
 			} else {
 				// eslint-disable-next-line no-console
 				console.warn(`Type not found: ${entity.type}`);
