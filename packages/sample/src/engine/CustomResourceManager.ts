@@ -1,4 +1,4 @@
-import { ImageResource, resolveImage } from '@e2d/core';
+import { ImageResource, resolveImage } from '@e2d/canvas-engine';
 
 export default class CustomResourceManager {
 	private resources = new Map<string, string>();

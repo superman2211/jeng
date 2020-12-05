@@ -1,7 +1,6 @@
-import {
-	Container, Engine2d, ImageResource,
-} from '@e2d/core';
-import CustomEngine2d from './engine/CustomEngine2d';
+import { Container } from '@e2d/core';
+import { CanvasEngine, ImageResource } from '@e2d/canvas-engine';
+import CustomEngine2d from './engine/CustomEngine';
 import CustomResourceManager from './engine/CustomResourceManager';
 import main from './main';
 
@@ -10,7 +9,7 @@ const app = main();
 app.start();
 
 // basic engine
-const engine = new Engine2d();
+const engine = new CanvasEngine();
 engine.root = app as any as Container;
 engine.play();
 
@@ -54,7 +53,7 @@ customEngine.context.resources.add(
 
 // custom resource resolver
 const resourceManager = new CustomResourceManager();
-resourceManager.addResource('cat', 'sample.png');
+resourceManager.addResource('sample', 'sample.png');
 
 engine.context.resources.resolvers.add(resourceManager.resolve);
 customEngine.context.resources.resolvers.add(resourceManager.resolve);

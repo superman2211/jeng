@@ -1,13 +1,17 @@
+import { Context } from '@e2d/core';
 import {
-	Image, Context, Context2d, ContextState2d, ImageResource,
-} from '@e2d/core';
+	CanvasContext,
+	CanvasContextState,
+	Image,
+	ImageResource,
+} from '@e2d/canvas-engine';
 
 export default function updateImage(image: Image, context: Context): void {
 	if (image.src) {
-		const context2d = context as Context2d;
-		const state = context2d.getState(image) as ContextState2d;
+		const context2d = context as CanvasContext;
+		const state = context2d.getState(image) as CanvasContextState;
 		const { matrix } = state;
-		const resource: ImageResource = context.resources.get(image.src) as ImageResource;
+		const resource = context.resources.get(image.src) as ImageResource;
 
 		if (resource?.image) {
 			const { width, height } = resource.image;

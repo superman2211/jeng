@@ -1,11 +1,14 @@
+import { Context } from '@e2d/core';
 import {
-	Text, Context, Context2d, ContextState2d,
-} from '@e2d/core';
+	CanvasContext,
+	CanvasContextState,
+	Text,
+} from '@e2d/canvas-engine';
 
 export default function updateText(text: Text, context: Context): void {
 	if (text.text) {
-		const context2d = context as Context2d;
-		const state = context2d.getState(text) as ContextState2d;
+		const context2d = context as CanvasContext;
+		const state = context2d.getState(text) as CanvasContextState;
 		const { matrix } = state;
 
 		const fontSize = text.fontSize ?? 10;

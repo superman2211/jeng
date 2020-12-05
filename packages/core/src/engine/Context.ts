@@ -1,5 +1,5 @@
-import { Entity, isEnabled } from './components/Entity';
-import { Resouces } from './Resources';
+import { Entity, isEnabled } from '../components/Entity';
+import { Resouces } from '../resources/Resources';
 
 type UpdateHandler = (entity: Entity, context: Context) => void;
 

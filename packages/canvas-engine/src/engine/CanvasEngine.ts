@@ -1,11 +1,8 @@
-import Engine from '../core/Engine';
-import { IMAGE, updateImage } from './components/Image';
-import { TEXT, updateText } from './components/Text';
-import { Context2d, ContextState2d } from './Context2d';
-import { ColorTransform } from '../geom/ColorTransform';
-import { Matrix } from '../geom/Matrix';
-import { CONTAINER_ALIGNED, updateContainerAligned } from './components/ContainerAligned';
-import { resolveImage } from './resources/ImageResource';
+import { Engine, Matrix, ColorTransform } from '@e2d/core';
+import { CanvasContext, CanvasContextState } from './CanvasContext';
+import { resolveImage } from '../resources/ImageResource';
+import { IMAGE, updateImage } from '../components/Image';
+import { TEXT, updateText } from '../components/Text';
 
 export default class Engine2d extends Engine {
 	width = 400;
@@ -35,16 +32,15 @@ export default class Engine2d extends Engine {
 		blueOffset: 0,
 	};
 
-	private get context2d(): Context2d {
-		return this.context as Context2d;
+	private get context2d(): CanvasContext {
+		return this.context as CanvasContext;
 	}
 
 	constructor() {
-		super(new Context2d());
+		super(new CanvasContext());
 
 		this.context.updateHandlers.set(IMAGE, updateImage);
 		this.context.updateHandlers.set(TEXT, updateText);
-		this.context.updateHandlers.set(CONTAINER_ALIGNED, updateContainerAligned);
 
 		this.context.resources.resolvers.add(resolveImage);
 	}
@@ -83,7 +79,7 @@ export default class Engine2d extends Engine {
 		}
 	}
 
-	getState(): ContextState2d {
+	getState(): CanvasContextState {
 		return {
 			matrix: this.matrix,
 			colorTransform: this.colorTranssform,

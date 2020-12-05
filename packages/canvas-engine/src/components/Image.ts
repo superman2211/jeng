@@ -1,7 +1,5 @@
-import { Context } from '../../core/Context';
-import { Entity } from '../../core/components/Entity';
-import { Context2d, ContextState2d } from '../Context2d';
-import { Transform } from '../../geom/Transform';
+import { Context, Entity, Transform } from '@e2d/core';
+import { CanvasContext, CanvasContextState } from '../engine/CanvasContext';
 import { ImageResource } from '../resources/ImageResource';
 
 export const IMAGE = 'image';
@@ -12,8 +10,8 @@ export interface Image extends Entity, Transform {
 
 export function updateImage(image: Image, context: Context): void {
 	if (image.src) {
-		const context2d = context as Context2d;
-		const state = context2d.getState(image) as ContextState2d;
+		const context2d = context as CanvasContext;
+		const state = context2d.getState(image) as CanvasContextState;
 		const { matrix, colorTransform } = state;
 		const resource: ImageResource = context.resources.get(image.src) as ImageResource;
 

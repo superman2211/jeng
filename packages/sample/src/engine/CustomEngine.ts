@@ -1,10 +1,10 @@
 import {
-	Context2d, Engine2d, IMAGE, TEXT,
-} from '@e2d/core';
+	CanvasContext, CanvasEngine, IMAGE, TEXT,
+} from '@e2d/canvas-engine';
 import updateText from './CustomText';
 import updateImage from './CustomImage';
 
-export default class CustomEngine2d extends Engine2d {
+export default class CustomEngine2d extends CanvasEngine {
 	constructor() {
 		super();
 
@@ -14,7 +14,7 @@ export default class CustomEngine2d extends Engine2d {
 	}
 
 	clear() {
-		const context2d = this.context as Context2d;
+		const context2d = this.context as CanvasContext;
 		context2d.context.fillStyle = 'black';
 		context2d.context.setTransform();
 		context2d.context.fillRect(0, 0, context2d.canvas.width, context2d.canvas.height);

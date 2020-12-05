@@ -1,6 +1,3 @@
-import {
-	CONTAINER, TEXT, IMAGE,
-} from '@e2d/core';
 import { LOGO } from './assets';
 
 interface Unit {
@@ -14,13 +11,13 @@ interface UnitProperties {
 
 export default function unit(props: UnitProperties): Unit {
 	return {
-		type: CONTAINER,
+		type: 'container',
 		x: 100,
 		y: 50,
 		rotation: 0.2,
 		children: [
 			{
-				type: TEXT,
+				type: 'text',
 				text: props.title,
 				fontSize: 50,
 				color: 0xff0000,
@@ -30,7 +27,7 @@ export default function unit(props: UnitProperties): Unit {
 				scaleX: 2,
 			},
 			{
-				type: IMAGE,
+				type: 'image',
 				src: LOGO,
 				x: 0,
 				y: 0,
@@ -42,7 +39,7 @@ export default function unit(props: UnitProperties): Unit {
 				},
 			},
 			{
-				type: CONTAINER,
+				type: 'container',
 				x: 0,
 				onUpdate(time: number) {
 					this.x += time * 10;
@@ -50,7 +47,7 @@ export default function unit(props: UnitProperties): Unit {
 				},
 				children: [
 					{
-						type: IMAGE,
+						type: 'image',
 						src: LOGO,
 						x: 20,
 						y: 30,

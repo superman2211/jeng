@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { Resource } from '../../core/Resources';
+import { Resource } from '@e2d/core';
 
 export interface ImageResource extends Resource {
 	image: HTMLImageElement | HTMLCanvasElement | null;

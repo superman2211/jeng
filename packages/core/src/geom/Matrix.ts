@@ -7,7 +7,7 @@ export interface Matrix {
 	ty: number;
 }
 
-export function concat(matrix0: Matrix, matrix1: Matrix) {
+export function concatMatrix(matrix0: Matrix, matrix1: Matrix) {
 	return {
 		a: matrix1.a * matrix0.a + matrix1.b * matrix0.c,
 		b: matrix1.a * matrix0.b + matrix1.b * matrix0.d,

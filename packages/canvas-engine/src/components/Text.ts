@@ -1,8 +1,11 @@
-import { Context } from '../../core/Context';
-import { Entity } from '../../core/components/Entity';
-import { ColorTransform, isDefault } from '../../geom/ColorTransform';
-import { Context2d, ContextState2d } from '../Context2d';
-import { Transform } from '../../geom/Transform';
+import {
+	ColorTransform,
+	Context,
+	Entity,
+	isDefault,
+	Transform,
+} from '@e2d/core';
+import { CanvasContext, CanvasContextState } from '../engine/CanvasContext';
 
 export const TEXT = 'text';
 
@@ -35,8 +38,8 @@ function createColorPattern(color: number, alpha: number, ct: ColorTransform): s
 
 export function updateText(text: Text, context: Context): void {
 	if (text.text) {
-		const context2d = context as Context2d;
-		const state = context2d.getState(text) as ContextState2d;
+		const context2d = context as CanvasContext;
+		const state = context2d.getState(text) as CanvasContextState;
 		const { matrix, colorTransform } = state;
 
 		const fontSize = text.fontSize ?? 10;

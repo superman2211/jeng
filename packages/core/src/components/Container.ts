@@ -1,4 +1,4 @@
-import { Context } from '../Context';
+import { Context } from '../engine/Context';
 import { Entity } from './Entity';
 
 export const CONTAINER = 'container';

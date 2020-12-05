@@ -1,7 +1,7 @@
 {
-  "name": "@e2d/core-sample",
+  "name": "@e2d/sample",
   "version": "0.1.0",
-  "description": "core-sample",
+  "description": "sample",
   "main": "src/index.ts",
   "license": "MIT",
   "private": true,
@@ -23,7 +23,8 @@
   },
   "homepage": "https://github.com/AntonovSergey2211/e2d#readme",
   "dependencies": {
-    "@e2d/core": "^0.1.0"
+    "@e2d/core": "^0.1.0",
+    "@e2d/canvas-engine": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",

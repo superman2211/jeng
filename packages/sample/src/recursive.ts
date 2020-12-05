@@ -1,11 +1,10 @@
-import { CONTAINER, IMAGE } from '@e2d/core';
 import { LOGO } from './assets';
 
 export default function recursive() {
 	const container = {
-		type: CONTAINER,
+		type: 'container',
 		children: [{
-			type: CONTAINER,
+			type: 'container',
 			x: 30,
 			y: 30,
 			scaleX: 0.9,
@@ -14,7 +13,7 @@ export default function recursive() {
 			alpha: 0.9,
 			children: [
 				{
-					type: IMAGE,
+					type: 'image',
 					src: LOGO,
 				},
 			],
