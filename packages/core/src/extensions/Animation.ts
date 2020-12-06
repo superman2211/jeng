@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+/* eslint-disable no-continue */
+import { Entity } from '../components/Entity';
 import { Context } from '../engine/Context';
 
 export const ANIMATION = 'animation';
@@ -7,7 +10,7 @@ export const QUADRATIC = 'quadratic';
 export const QUADRATIC_IN = 'quadraticIn';
 export const QUADRATIC_OUT = 'quadraticOut';
 
-const easing = {
+const easingTable: any = {
 	[LINEAR]: (value: number): number => value,
 	[QUADRATIC]: (value: number): number => {
 		// eslint-disable-next-line no-cond-assign
@@ -20,25 +23,31 @@ const easing = {
 	[QUADRATIC_OUT]: (value: number): number => (value * (2 - value)),
 };
 
+export interface AnimationState {
+	[key: string]: number | string;
+}
+
 export interface AnimationPart {
 	offset?: number;
 	time: number;
-	easing?: LINEAR | QUADRATIC;
-	from?: { [key: string]: number | string };
-	to: { [key: string]: number | string };
+	easing?: typeof LINEAR | typeof QUADRATIC;
+	from?: AnimationState;
+	to: AnimationState;
+	values?: number[] | string[];
 	onStart?: () => void;
 	onFinish?: () => void;
 }
 
 export interface Animation {
-	animation: {
+	[ANIMATION]: {
 		time?: number;
+		loop?: boolean;
 		parts: AnimationPart[];
 	}
 }
 
-export function updateAnimation(entity: Animation, context: Context) {
-	const { animation } = entity;
+export function updateAnimation(entity: Entity, context: Context) {
+	const { animation } = entity as any as Animation;
 	const { parts } = animation;
 
 	if (!parts?.length) {
@@ -56,6 +65,54 @@ export function updateAnimation(entity: Animation, context: Context) {
 
 	for (let i = 0; i < parts.length; i++) {
 		const part = parts[i];
+
+		if (!part.time) {
+			console.warn('Animation time not set');
+			continue;
+		}
+
+		if (part.offset !== undefined) {
+			offset = part.offset;
+		}
+
+		const easing = part.easing ?? LINEAR;
+		const easingMethod = easingTable[easing];
+		if (!easingMethod) {
+			console.warn(`Unknown easing type: ${easing}`);
+			continue;
+		}
+
+		const value = (animation.time - offset) / part.time;
+		if (value < 0 || value > 1) {
+			continue;
+		}
+		const easingValue = easingMethod(value);
+
+		if (!part.to) {
+			console.warn('Animation "to" state not found');
+			continue;
+		}
+
+		if (!part.from) {
+			part.from = {};
+		}
+
+		const { to, from } = part;
+		const state = entity as any as AnimationState;
+
+		const keys = Object.keys(to);
+		for (let j = 0; j < keys.length; j++) {
+			const key = keys[i];
+			if (from[key] === undefined) {
+				from[key] = state[key] ?? 0;
+			}
+			const fromValue = from[key];
+			const toValue = to[key];
+			if (typeof fromValue === 'number' && typeof toValue === 'number') {
+				const stateValue = fromValue + easingValue * (toValue - fromValue);
+				state[key] = stateValue;
+			}
+		}
 
 		offset += part.time;
 	}

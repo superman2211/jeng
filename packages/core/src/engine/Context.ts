@@ -10,6 +10,7 @@ export abstract class Context {
 	time = 0;
 	updateDepth = 0;
 	updateEventEnabled = true;
+	updateExtensionsEnabled = true;
 
 	readonly components = new Map<string, UpdateHandler>();
 	readonly extensions = new Map<string, UpdateHandler>();
@@ -23,6 +24,14 @@ export abstract class Context {
 		}
 
 		if (isEnabled(entity)) {
+			if (this.updateExtensionsEnabled) {
+				this.extensions.forEach((handler, property) => {
+					if ((entity as any)[property]) {
+						handler(entity, this);
+					}
+				});
+			}
+
 			const componentHandler = this.components.get(entity.type);
 			if (componentHandler) {
 				if (this.updateEventEnabled && entity.onUpdate) {

@@ -40,11 +40,34 @@ export default function unit(props: UnitProperties): Unit {
 			},
 			{
 				type: 'container',
-				x: 0,
-				onUpdate(time: number) {
-					this.x += time * 10;
-					this.child.y += 0.1;
+				animation: {
+					parts: [
+						{
+							easing: 'linear',
+							time: 1,
+							to: { x: 100 },
+						},
+						{
+							easing: 'quadratic',
+							time: 1,
+							to: { y: 100 },
+						},
+						{
+							easing: 'quadraticIn',
+							time: 1,
+							to: { x: 0 },
+						},
+						{
+							easing: 'quadraticOut',
+							time: 1,
+							to: { y: 0 },
+						},
+					],
 				},
+				// onUpdate(time: number) {
+				// 	this.x += time * 10;
+				// 	// this.child.y += 0.1;
+				// },
 				child: {
 					type: 'image',
 					src: LOGO,

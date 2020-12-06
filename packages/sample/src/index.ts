@@ -18,6 +18,7 @@ const customEngine = new CustomEngine2d();
 customEngine.fullscreen = false;
 customEngine.height = 600;
 customEngine.context.updateEventEnabled = false;
+customEngine.context.updateExtensionsEnabled = false;
 customEngine.root = app as any as Container;
 customEngine.play();
 customEngine.view.style.position = 'absolute';
