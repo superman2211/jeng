@@ -41,14 +41,14 @@ export default function unit(props: UnitProperties): Unit {
 			{
 				type: 'container',
 				animation: {
+					loop: true,
 					parts: [
 						{
-							easing: 'linear',
 							time: 1,
 							to: { x: 100 },
 						},
 						{
-							easing: 'quadratic',
+							easing: 'cubicout',
 							time: 1,
 							to: { y: 100 },
 						},
@@ -64,10 +64,6 @@ export default function unit(props: UnitProperties): Unit {
 						},
 					],
 				},
-				// onUpdate(time: number) {
-				// 	this.x += time * 10;
-				// 	// this.child.y += 0.1;
-				// },
 				child: {
 					type: 'image',
 					src: LOGO,

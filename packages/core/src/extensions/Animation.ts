@@ -1,5 +1,6 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable no-cond-assign */
 /* eslint-disable no-console */
-/* eslint-disable no-continue */
 import { Entity } from '../components/Entity';
 import { Context } from '../engine/Context';
 
@@ -7,13 +8,22 @@ export const ANIMATION = 'animation';
 
 export const LINEAR = 'linear';
 export const QUADRATIC = 'quadratic';
-export const QUADRATIC_IN = 'quadraticIn';
-export const QUADRATIC_OUT = 'quadraticOut';
+export const QUADRATIC_IN = 'quadraticin';
+export const QUADRATIC_OUT = 'quadraticout';
+export const CUBIC = 'cubic';
+export const CUBIC_IN = 'cubicin';
+export const CUBIC_OUT = 'cubicout';
+export const QUARTIC = 'quartic';
+export const QUARTIC_IN = 'quarticIn';
+export const QUARTIC_OUT = 'quarticOut';
+export const QUINTIC = 'quintic';
+export const QUINTIC_IN = 'quinticIn';
+export const QUINTIC_OUT = 'quinticOut';
 
 const easingTable: any = {
 	[LINEAR]: (value: number): number => value,
+
 	[QUADRATIC]: (value: number): number => {
-		// eslint-disable-next-line no-cond-assign
 		if ((value *= 2) < 1) {
 			return 0.5 * value * value;
 		}
@@ -21,6 +31,33 @@ const easingTable: any = {
 	},
 	[QUADRATIC_IN]: (value: number): number => (value * value),
 	[QUADRATIC_OUT]: (value: number): number => (value * (2 - value)),
+
+	[CUBIC]: (value: number): number => {
+		if ((value *= 2) < 1) {
+			return 0.5 * value * value * value;
+		}
+		return 0.5 * ((value -= 2) * value * value + 2);
+	},
+	[CUBIC_IN]: (value: number): number => (value * value * value),
+	[CUBIC_OUT]: (value: number): number => (--value * value * value + 1),
+
+	[QUARTIC]: (value: number): number => {
+		if ((value *= 2) < 1) {
+			return 0.5 * value * value * value * value;
+		}
+		return -0.5 * ((value -= 2) * value * value * value - 2);
+	},
+	[QUARTIC_IN]: (value: number): number => (value * value * value * value),
+	[QUARTIC_OUT]: (value: number): number => (1 - --value * value * value * value),
+
+	[QUINTIC]: (amount: number): number => {
+		if ((amount *= 2) < 1) {
+			return 0.5 * amount * amount * amount * amount * amount;
+		}
+		return 0.5 * ((amount -= 2) * amount * amount * amount * amount + 2);
+	},
+	[QUINTIC_IN]: (amount: number): number => (amount * amount * amount * amount * amount),
+	[QUINTIC_OUT]: (amount: number): number => (--amount * amount * amount * amount * amount + 1),
 };
 
 export interface AnimationState {
@@ -51,8 +88,7 @@ export function updateAnimation(entity: Entity, context: Context) {
 	const { parts } = animation;
 
 	if (!parts?.length) {
-		// eslint-disable-next-line no-console
-		console.warn('Animation keys not found');
+		console.warn('Animation parts not found');
 		return;
 	}
 
@@ -60,37 +96,39 @@ export function updateAnimation(entity: Entity, context: Context) {
 		animation.time = 0;
 	}
 	animation.time += context.time;
+	const { time } = animation;
 
 	let offset: number = 0;
 
-	for (let i = 0; i < parts.length; i++) {
-		const part = parts[i];
-
+	parts.forEach((part) => {
 		if (!part.time) {
 			console.warn('Animation time not set');
-			continue;
+			return;
 		}
 
 		if (part.offset !== undefined) {
 			offset = part.offset;
 		}
 
-		const easing = part.easing ?? LINEAR;
+		const easing = part?.easing?.toLowerCase() ?? LINEAR;
 		const easingMethod = easingTable[easing];
 		if (!easingMethod) {
 			console.warn(`Unknown easing type: ${easing}`);
-			continue;
+			return;
 		}
 
-		const value = (animation.time - offset) / part.time;
+		const value = (time - offset) / part.time;
+
+		offset += part.time;
+
 		if (value < 0 || value > 1) {
-			continue;
+			return;
 		}
 		const easingValue = easingMethod(value);
 
 		if (!part.to) {
 			console.warn('Animation "to" state not found');
-			continue;
+			return;
 		}
 
 		if (!part.from) {
@@ -100,9 +138,7 @@ export function updateAnimation(entity: Entity, context: Context) {
 		const { to, from } = part;
 		const state = entity as any as AnimationState;
 
-		const keys = Object.keys(to);
-		for (let j = 0; j < keys.length; j++) {
-			const key = keys[i];
+		Object.keys(to).forEach((key) => {
 			if (from[key] === undefined) {
 				from[key] = state[key] ?? 0;
 			}
@@ -112,8 +148,10 @@ export function updateAnimation(entity: Entity, context: Context) {
 				const stateValue = fromValue + easingValue * (toValue - fromValue);
 				state[key] = stateValue;
 			}
-		}
+		});
+	});
 
-		offset += part.time;
+	if (animation.loop && animation.time > offset) {
+		animation.time = 0;
 	}
 }
