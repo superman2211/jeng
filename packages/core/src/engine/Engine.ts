@@ -6,7 +6,7 @@ import { ANIMATION, updateAnimation } from '../extensions/Animation';
 export default class Engine {
 	readonly context: Context;
 
-	updateDepth = 256;
+	updateDepth = 64;
 
 	root?: Entity;
 
