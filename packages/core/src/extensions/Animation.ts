@@ -182,7 +182,7 @@ export interface AnimationState {
 export interface AnimationPart {
 	offset?: number;
 	time: number;
-	easing?: typeof LINEAR | typeof QUADRATIC;
+	easing?: string;
 	from?: AnimationState;
 	to: AnimationState;
 	values?: number[] | string[];

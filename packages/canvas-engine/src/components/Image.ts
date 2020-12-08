@@ -1,9 +1,5 @@
-import {
-	Context, Entity,
-} from '@e2d/core';
-import {
-	ColorTransform, Transform, transformBounds,
-} from '@e2d/geom';
+import { Context, Entity } from '@e2d/core';
+import { ColorTransform, Transform, Matrix } from '@e2d/geom';
 import { CanvasContext, CanvasContextState } from '../engine/CanvasContext';
 import { ImageResource } from '../resources/ImageResource';
 
@@ -59,7 +55,7 @@ export function updateImage(image: Image, context: Context): void {
 				return;
 			}
 
-			const bounds = transformBounds(matrix, {
+			const bounds = Matrix.transformBounds(matrix, {
 				x: 0,
 				y: 0,
 				width: resource.image.width,

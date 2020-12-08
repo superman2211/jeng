@@ -1,9 +1,5 @@
 import { Context } from '@e2d/core';
-import {
-	CanvasContext,
-	CanvasContextState,
-	Text,
-} from '@e2d/canvas-engine';
+import { CanvasContext, CanvasContextState, Text } from '@e2d/canvas-engine';
 
 export default function updateText(text: Text, context: Context): void {
 	if (text.text) {

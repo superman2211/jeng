@@ -1,18 +1,5 @@
-import {
-	Context,
-	ContextState,
-	Entity,
-} from '@e2d/core';
-
-import {
-	Matrix,
-	ColorTransform,
-	Transform,
-	getMatrix,
-	concatMatrix,
-	getColorTransform,
-	concatColorTransform,
-} from '@e2d/geom';
+import { Context, ContextState, Entity } from '@e2d/core';
+import { Matrix, ColorTransform, Transform } from '@e2d/geom';
 
 export interface CanvasContextState extends ContextState {
 	matrix: Matrix;
@@ -31,14 +18,14 @@ export class CanvasContext extends Context {
 
 	private getConcatenatedMatrix(transform: Transform): Matrix {
 		const state = this.state as CanvasContextState;
-		const matrix = getMatrix(transform);
-		return concatMatrix(state.matrix, matrix);
+		const matrix = Transform.getMatrix(transform);
+		return Matrix.concat(state.matrix, matrix);
 	}
 
 	private getConcatenatedColorTransform(transform: Transform): ColorTransform {
 		const state = this.state as CanvasContextState;
-		const colorTransform = getColorTransform(transform);
-		return concatColorTransform(state.colorTransform, colorTransform);
+		const colorTransform = Transform.getColorTransform(transform);
+		return ColorTransform.concat(state.colorTransform, colorTransform);
 	}
 
 	getState(entity: Entity): ContextState {

@@ -1,5 +1,5 @@
 import { Context, Entity } from '@e2d/core';
-import { ColorTransform, isDefault, Transform } from '@e2d/geom';
+import { ColorTransform, Transform } from '@e2d/geom';
 import { CanvasContext, CanvasContextState } from '../engine/CanvasContext';
 
 export const TEXT = 'text';
@@ -17,7 +17,7 @@ function createColorPattern(color: number, alpha: number, ct: ColorTransform): s
 	let b = color & 0xff;
 	let a = alpha * 0xff;
 
-	if (!isDefault(ct)) {
+	if (!ColorTransform.isDefault(ct)) {
 		r = (r * ct.redMultiplier + ct.redOffset) & 0xff;
 		g = (g * ct.greenMultiplier + ct.greenOffset) & 0xff;
 		b = (b * ct.blueMultiplier + ct.blueOffset) & 0xff;
