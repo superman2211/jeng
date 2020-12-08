@@ -1,4 +1,4 @@
-import { Entity, isEnabled } from '../components/Entity';
+import { Entity } from '../components/Entity';
 import { Resouces } from '../resources/Resources';
 
 type UpdateHandler = (entity: Entity, context: Context) => void;
@@ -23,7 +23,7 @@ export abstract class Context {
 			return;
 		}
 
-		if (isEnabled(entity)) {
+		if (Entity.isEnabled(entity)) {
 			if (this.updateExtensionsEnabled) {
 				this.extensions.forEach((handler, property) => {
 					if ((entity as any)[property]) {

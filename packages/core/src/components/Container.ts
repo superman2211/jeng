@@ -10,6 +10,25 @@ export interface Container extends Entity {
 	children?: Entity[] | EntitiesMap;
 }
 
+export namespace Container {
+	export function numChildren(container: Container): number {
+		const { child, children } = container;
+		let count = 0;
+		if (child) {
+			count++;
+		}
+		if (children) {
+			if (Array.isArray(children)) {
+				count += children.length;
+			} else {
+				const keys = Object.keys(children);
+				count += keys.length;
+			}
+		}
+		return count;
+	}
+}
+
 export function updateContainer(container: Container, context: Context): void {
 	const { child, children } = container;
 

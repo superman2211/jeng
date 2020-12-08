@@ -4,6 +4,8 @@ export interface Entity {
 	onUpdate?: (time: number) => void;
 }
 
-export function isEnabled(entity: Entity) {
-	return entity.enabled ?? true;
+export namespace Entity {
+	export function isEnabled(entity: Entity) {
+		return entity.enabled ?? true;
+	}
 }
