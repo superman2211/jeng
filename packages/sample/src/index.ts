@@ -1,4 +1,5 @@
 import { Container } from '@e2d/core';
+import { TWEEN, updateTween } from '@e2d/tween';
 import { CanvasEngine, ImageResource } from '@e2d/canvas-engine';
 import CustomEngine2d from './engine/CustomEngine';
 import CustomResourceManager from './engine/CustomResourceManager';
@@ -10,6 +11,7 @@ app.start();
 
 // basic engine
 const engine = new CanvasEngine();
+engine.context.extensions.set(TWEEN, updateTween);
 engine.root = app as any as Container;
 engine.play();
 

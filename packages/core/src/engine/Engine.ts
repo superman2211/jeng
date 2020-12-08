@@ -1,7 +1,6 @@
 import { Entity } from '../components/Entity';
 import { CONTAINER, updateContainer } from '../components/Container';
 import { Context } from './Context';
-import { ANIMATION, updateAnimation } from '../extensions/Animation';
 
 export default class Engine {
 	readonly context: Context;
@@ -14,7 +13,6 @@ export default class Engine {
 		this.context = context;
 
 		this.context.components.set(CONTAINER, updateContainer);
-		this.context.extensions.set(ANIMATION, updateAnimation);
 	}
 
 	update(time: number = 0) {

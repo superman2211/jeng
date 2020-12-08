@@ -40,9 +40,9 @@ export default function unit(props: UnitProperties): Unit {
 			},
 			{
 				type: 'container',
-				animation: {
+				tween: {
 					loop: true,
-					parts: [
+					phases: [
 						{
 							time: 1,
 							to: { x: 100 },
