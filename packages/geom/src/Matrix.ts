@@ -1,3 +1,4 @@
+import { Point } from './Point';
 import { Rectangle } from './Rectangle';
 
 export interface Matrix {
@@ -10,6 +11,17 @@ export interface Matrix {
 }
 
 export namespace Matrix {
+	export function empty(): Matrix {
+		return {
+			a: 1,
+			b: 0,
+			c: 0,
+			d: 0,
+			tx: 0,
+			ty: 0,
+		};
+	}
+
 	export function concat(matrix0: Matrix, matrix1: Matrix): Matrix {
 		return {
 			a: matrix1.a * matrix0.a + matrix1.b * matrix0.c,
@@ -18,6 +30,68 @@ export namespace Matrix {
 			d: matrix1.c * matrix0.b + matrix1.d * matrix0.d,
 			tx: matrix1.tx * matrix0.a + matrix1.ty * matrix0.c + matrix0.tx,
 			ty: matrix1.tx * matrix0.b + matrix1.ty * matrix0.d + matrix0.ty,
+		};
+	}
+
+	export function getDeterminant(matrix: Matrix): number {
+		return matrix.a * matrix.d - matrix.b * matrix.c;
+	}
+
+	export function invert(matrix: Matrix) {
+		let determinant = getDeterminant(matrix);
+
+		if (determinant === 0) {
+			matrix.a = 0;
+			matrix.b = 0;
+			matrix.c = 0;
+			matrix.d = 0;
+			matrix.tx = -matrix.tx;
+			matrix.ty = -matrix.ty;
+		} else {
+			determinant = 1.0 / determinant;
+
+			const d = matrix.d * determinant;
+			const a = matrix.a * determinant;
+
+			matrix.a = d;
+			matrix.b *= -determinant;
+			matrix.c *= -determinant;
+			matrix.d = a;
+
+			const tx = -matrix.a * matrix.tx - matrix.c * matrix.ty;
+			const ty = -matrix.b * matrix.tx - matrix.d * matrix.ty;
+
+			matrix.tx = tx;
+			matrix.ty = ty;
+		}
+	}
+
+	export function transformPoint(matrix: Matrix, point: Point): Point {
+		const { x, y } = point;
+
+		return {
+			x: x * matrix.a + y * matrix.c + matrix.tx,
+			y: x * matrix.b + y * matrix.d + matrix.ty,
+		};
+	}
+
+	export function transformInversePoint(matrix: Matrix, point: Point): Point {
+		let determinant = getDeterminant(matrix);
+
+		if (determinant === 0) {
+			return {
+				x: -matrix.tx,
+				y: -matrix.ty,
+			};
+		}
+
+		determinant = 1 / determinant;
+
+		const { x, y } = point;
+
+		return {
+			x: determinant * (matrix.c * (matrix.ty - y) + matrix.d * (x - matrix.tx)),
+			y: determinant * (matrix.a * (y - matrix.ty) + matrix.b * (matrix.tx - x)),
 		};
 	}
 

@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { Entity, Context } from '@e2d/core';
+import { Component, UpdateContext } from '@e2d/engine';
 import { easing, LINEAR } from './Easing';
 
 export const TWEEN = 'tween';
@@ -27,7 +27,7 @@ export interface Tween {
 	}
 }
 
-export function updateTween(entity: Entity, context: Context) {
+export function updateTween(entity: Component, context: UpdateContext) {
 	const { tween } = entity as any as Tween;
 	const { phases } = tween;
 

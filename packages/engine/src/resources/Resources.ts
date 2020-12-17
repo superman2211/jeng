@@ -5,7 +5,7 @@ export interface Resource {
 export type ResourceResolver = (asset: string) => Resource | null;
 
 export class Resouces {
-	private _cache = new Map<any, any>();
+	private resources = new Map<any, any>();
 
 	readonly resolvers = new Set<ResourceResolver>();
 
@@ -14,17 +14,25 @@ export class Resouces {
 			return null;
 		}
 
-		let resource = this._cache.get(asset);
+		let resource = this.resources.get(asset);
 		if (!resource) {
 			resource = this.resolve(asset);
-			this._cache.set(asset, resource);
+			this.resources.set(asset, resource);
 		}
 
 		return resource;
 	}
 
 	add(asset: string, resource: Resource) {
-		this._cache.set(asset, resource);
+		this.resources.set(asset, resource);
+	}
+
+	remove(asset: string) {
+		this.resources.delete(asset);
+	}
+
+	clear() {
+		this.resources.clear();
 	}
 
 	private resolve(asset: string): Resource | null {

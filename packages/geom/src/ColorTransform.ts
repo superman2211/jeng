@@ -11,6 +11,20 @@ export interface ColorTransform {
 }
 
 export namespace ColorTransform {
+	export function empty(): ColorTransform {
+		return {
+			alphaMultiplier: 1,
+			redMultiplier: 1,
+			greenMultiplier: 1,
+			blueMultiplier: 1,
+
+			alphaOffset: 0,
+			redOffset: 0,
+			greenOffset: 0,
+			blueOffset: 0,
+		};
+	}
+
 	export function concat(ct1: ColorTransform, ct0: ColorTransform): ColorTransform {
 		return {
 			alphaMultiplier: ct1.alphaMultiplier * ct0.alphaMultiplier,
