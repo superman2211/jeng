@@ -1,5 +1,5 @@
 {
-  "name": "@e2d/support-canvas",
+  "name": "@e2d/canvas-support",
   "version": "0.1.0",
   "description": "canvas engine",
   "main": "dist/index.js",

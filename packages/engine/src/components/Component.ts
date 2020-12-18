@@ -1,6 +1,7 @@
-import { Rectangle, Transform } from '@e2d/geom';
+import { Rectangle } from '@e2d/geom';
 import { UpdateContext, PointerContext } from '../engine/Context';
-import { Pointer } from '../pointer/Pointer';
+import { Pointer } from '../extensions/Pointer';
+import { Transform } from '../extensions/Transform';
 
 export interface Component extends Transform, Pointer {
 	type: string;

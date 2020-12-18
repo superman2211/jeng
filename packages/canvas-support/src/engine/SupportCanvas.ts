@@ -1,6 +1,6 @@
 import { Support } from '@e2d/engine';
 
-export default class SupportCanvas extends Support {
+export default class CanvasSupport extends Support {
 	readonly canvas: HTMLCanvasElement;
 	readonly context: CanvasRenderingContext2D;
 

@@ -1,6 +1,7 @@
-import { ColorTransform, Matrix, Transform } from '@e2d/geom';
+import { ColorTransform, Matrix } from '@e2d/geom';
 import { Component, ComponentExtension } from '../components/Component';
-import { Pointer } from '../pointer/Pointer';
+import { Pointer } from '../extensions/Pointer';
+import { Transform } from '../extensions/Transform';
 import { PropertyExtension } from '../properties/Property';
 import { Resouces } from '../resources/Resources';
 import { UpdateContext, PointerContext } from './Context';
