@@ -1,5 +1,6 @@
 export interface Resource {
 	asset: string;
+	loaded: boolean;
 }
 
 export type ResourceResolver = (asset: string) => Resource | null;
