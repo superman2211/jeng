@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable class-methods-use-this */
-import {
-	ComponentExtension,
-	PointerContext,
-	UpdateContext,
-} from '@e2d/engine';
+import { UpdateContext } from '@e2d/engine';
 import { CanvasSupport } from '@e2d/canvas-support';
 import { ImageResource } from '../resources/ImageResource';
 import { Image } from './Image';

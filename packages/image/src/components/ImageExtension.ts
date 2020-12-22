@@ -1,8 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import {
-	ComponentExtension,
-	PointerContext,
-} from '@e2d/engine';
+import { ComponentExtension, PointerContext } from '@e2d/engine';
 import { Rectangle } from '@e2d/geom';
 import { Image } from './Image';
 import { ImageResource } from '../resources/ImageResource';
