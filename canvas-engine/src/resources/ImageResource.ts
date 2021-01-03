@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { Resource } from '@e2d/core';
 
 export interface ImageResource extends Resource {
@@ -18,10 +17,10 @@ export function resolveImage(asset: string): ImageResource | null {
 			const image = document.createElement('img') as HTMLImageElement;
 			image.src = asset;
 			image.onload = () => {
-				console.log(`image loaded: ${asset}`);
+				Debug.log(`image loaded: ${asset}`);
 				resource.image = image;
 			};
-			image.onerror = (e) => console.warn(`image load error: ${e}`);
+			image.onerror = (e) => Debug.warning(`image load error: ${e}`);
 
 			return resource;
 		default:

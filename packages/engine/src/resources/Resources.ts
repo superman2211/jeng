@@ -1,3 +1,5 @@
+import Debug from '../utils/Debug';
+
 export interface Resource {
 	asset: string;
 	loaded: boolean;
@@ -44,8 +46,7 @@ export class Resouces {
 				return resource;
 			}
 		}
-		// eslint-disable-next-line no-console
-		console.warn(`Resource not resolved: ${asset}`);
+		Debug.warning(`Resource not resolved: ${asset}`);
 		return null;
 	}
 }

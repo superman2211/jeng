@@ -72,6 +72,7 @@ function buildProjects(queue) {
 			process.exit(result.code);
 		}
 	});
+	console.log('BUILD PROJECTS COMPLETED');
 }
 
 function getFilters() {

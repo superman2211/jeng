@@ -1,35 +1,42 @@
-import { Container } from '@e2d/core';
-import { TWEEN, updateTween } from '@e2d/tween';
-import { CanvasEngine, ImageResource } from '@e2d/canvas-engine';
-import CustomEngine2d from './engine/CustomEngine';
+import { Container, Engine } from '@e2d/engine';
+import { TWEEN, TweenExtension } from '@e2d/tween';
+import { CanvasTextExtension, TEXT } from '@e2d/text';
+import { CanvasSupport } from '@e2d/canvas-support';
+import {
+	CanvasImageExtension, IMAGE, ImageResource, resolveImage,
+} from '@e2d/image';
 import CustomResourceManager from './engine/CustomResourceManager';
 import main from './main';
+import CustomSupport from './engine/CustomSupport';
 
 // application
 const app = main();
 app.start();
 
 // basic engine
-const engine = new CanvasEngine();
-engine.context.extensions.set(TWEEN, updateTween);
+const engine = new Engine(new CanvasSupport());
+engine.support.components.set(IMAGE, new CanvasImageExtension());
+engine.support.components.set(TEXT, new CanvasTextExtension());
+engine.support.extensions.set(TWEEN, new TweenExtension());
+engine.support.resources.resolvers.add(resolveImage);
 engine.root = app as any as Container;
 engine.play();
 
 // custom engine
-const customEngine = new CustomEngine2d();
+const customEngine = new Engine(new CustomSupport());
 customEngine.fullscreen = false;
 customEngine.height = 600;
-customEngine.context.updateEventEnabled = false;
-customEngine.context.updateExtensionsEnabled = false;
+customEngine.support.updateEventEnabled = false;
+customEngine.support.updateExtensionsEnabled = false;
 customEngine.root = app as any as Container;
 customEngine.play();
-customEngine.view.style.position = 'absolute';
-customEngine.view.style.top = '0px';
-customEngine.view.style.left = '400px';
+customEngine.support.view.style.position = 'absolute';
+customEngine.support.view.style.top = '0px';
+customEngine.support.view.style.left = '400px';
 
 // page
-document.body.appendChild(engine.view);
-document.body.appendChild(customEngine.view);
+document.body.appendChild(engine.support.view);
+document.body.appendChild(customEngine.support.view);
 document.body.style.margin = '0';
 document.body.style.padding = '0';
 
@@ -39,18 +46,20 @@ setTimeout(() => engine.play(), 10000);
 
 // set custom resource
 const customAsset = 'test.canvas';
-engine.context.resources.add(
+engine.support.resources.add(
 	customAsset,
 	{
 		asset: customAsset,
-		image: customEngine.view,
+		image: customEngine.support.view,
+		loaded: true,
 	} as ImageResource,
 );
-customEngine.context.resources.add(
+customEngine.support.resources.add(
 	customAsset,
 	{
 		asset: customAsset,
-		image: engine.view,
+		image: engine.support.view,
+		loaded: true,
 	} as ImageResource,
 );
 
@@ -58,5 +67,5 @@ customEngine.context.resources.add(
 const resourceManager = new CustomResourceManager();
 resourceManager.addResource('sample', 'sample.png');
 
-engine.context.resources.resolvers.add(resourceManager.resolve);
-customEngine.context.resources.resolvers.add(resourceManager.resolve);
+engine.support.resources.resolvers.add(resourceManager.resolve);
+customEngine.support.resources.resolvers.add(resourceManager.resolve);

@@ -19,8 +19,10 @@ export default function unit(props: UnitProperties): Unit {
 			{
 				type: 'text',
 				text: props.title,
-				fontSize: 50,
-				color: 0xff0000,
+				textFormat: {
+					size: 50,
+					color: 0xff0000,
+				},
 				onClick: props.onClick,
 				x: 0,
 				y: 0,

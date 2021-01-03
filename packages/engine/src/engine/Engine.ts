@@ -1,6 +1,7 @@
 import { ColorTransform, Matrix } from '@e2d/geom';
 import { Component } from '../components/Component';
 import { CONTAINER, ContainerExtension } from '../components/Container';
+import Debug from '../utils/Debug';
 import { UpdateContext } from './Context';
 import Support from './Support';
 
@@ -80,8 +81,7 @@ export default class Engine {
 	}
 
 	play() {
-		// eslint-disable-next-line no-console
-		console.log('play');
+		Debug.log('play');
 		if (this.paused) {
 			this.time = -1;
 			this.paused = false;
@@ -90,8 +90,7 @@ export default class Engine {
 	}
 
 	pause() {
-		// eslint-disable-next-line no-console
-		console.log('pause');
+		Debug.log('pause');
 		this.paused = true;
 	}
 }

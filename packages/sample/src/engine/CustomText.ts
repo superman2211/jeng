@@ -1,17 +1,30 @@
-import { Context } from '@e2d/core';
-import { CanvasContext, CanvasContextState, Text } from '@e2d/canvas-engine';
+/* eslint-disable class-methods-use-this */
+import { CanvasSupport } from '@e2d/canvas-support';
+import { UpdateContext } from '@e2d/engine';
+import { CanvasTextExtension, Text, defaultFormat } from '@e2d/text';
 
-export default function updateText(text: Text, context: Context): void {
-	if (text.text) {
-		const context2d = context as CanvasContext;
-		const state = context2d.getState(text) as CanvasContextState;
-		const { matrix } = state;
+export default class CustomText extends CanvasTextExtension {
+	update(component: Text, context: UpdateContext): void {
+		const { text } = component;
+		if (!text) {
+			return;
+		}
 
-		const fontSize = text.fontSize ?? 10;
-		const fontName = text.fontName ?? 'arial';
+		const { matrix, colorTransform } = context;
 
-		const renderingContext = context2d.context;
-		renderingContext.setTransform(
+		if (colorTransform.alphaMultiplier <= 0) {
+			return;
+		}
+
+		const { textFormat } = component;
+
+		const font = textFormat?.font ?? defaultFormat.font!;
+		const size = textFormat?.size ?? defaultFormat.size!;
+
+		const { support } = context;
+		const { context2d } = support as CanvasSupport;
+
+		context2d.setTransform(
 			matrix.a,
 			matrix.b,
 			matrix.c,
@@ -19,11 +32,12 @@ export default function updateText(text: Text, context: Context): void {
 			matrix.tx,
 			matrix.ty,
 		);
-		renderingContext.globalAlpha = 1;
-		renderingContext.font = `${fontSize}px ${fontName}`;
-		renderingContext.textBaseline = 'alphabetic';
-		renderingContext.strokeStyle = 'red';
-		renderingContext.fillStyle = '';
-		renderingContext.strokeText(text.text, 0, fontSize);
+
+		context2d.globalAlpha = 1;
+		context2d.font = `${size}px ${font}`;
+		context2d.textBaseline = 'alphabetic';
+		context2d.strokeStyle = 'red';
+		context2d.fillStyle = '';
+		context2d.strokeText(text, 0, size);
 	}
 }

@@ -4,6 +4,7 @@ import { Pointer } from '../extensions/Pointer';
 import { Transform } from '../extensions/Transform';
 import { PropertyExtension } from '../properties/Property';
 import { Resouces } from '../resources/Resources';
+import Debug from '../utils/Debug';
 import { UpdateContext, PointerContext } from './Context';
 
 export default abstract class Support {
@@ -43,8 +44,7 @@ export default abstract class Support {
 			}
 			extension.update(component, context);
 		} else {
-			// eslint-disable-next-line no-console
-			console.warn(`Type not found: ${component.type}`);
+			Debug.warning(`Type not found: ${component.type}`);
 		}
 	}
 
@@ -70,8 +70,7 @@ export default abstract class Support {
 				}
 			}
 		} else {
-			// eslint-disable-next-line no-console
-			console.warn(`Type not found: ${component.type}`);
+			Debug.warning(`Type not found: ${component.type}`);
 		}
 
 		return false;

@@ -1,6 +1,6 @@
 import { Component } from '../components/Component';
-import { Context } from '../engine/Context';
+import { UpdateContext } from '../engine/Context';
 
 export interface PropertyExtension {
-	update(component: Component, context: Context): void;
+	update(component: Component, context: UpdateContext): void;
 }
