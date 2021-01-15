@@ -1,15 +1,14 @@
-import Support from './engine/Support';
-import Engine from './engine/Engine';
-import Debug from './utils/Debug';
+import Support from './engine/support';
+import Engine from './engine/engine';
+import Debug from './utils/debug';
 
-export * from './engine/Context';
-export * from './extensions/Pointer';
-export * from './extensions/Transform';
-export * from './extensions/Loader';
-export * from './components/Component';
-export * from './components/Container';
-export * from './properties/Property';
-export * from './resources/Resources';
+export * from './engine/context';
+export * from './extensions/pointer';
+export * from './extensions/transform';
+export * from './extensions/source';
+export * from './components/component';
+export * from './components/container';
+export * from './resources/resources';
 
 export {
 	Support,

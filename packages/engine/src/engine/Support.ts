@@ -1,20 +1,24 @@
 import { ColorTransform, Matrix } from '@e2d/geom';
-import { Component, ComponentExtension } from '../components/Component';
-import { Pointer } from '../extensions/Pointer';
-import { Transform } from '../extensions/Transform';
-import { PropertyExtension } from '../properties/Property';
-import { Resouces } from '../resources/Resources';
-import Debug from '../utils/Debug';
-import { UpdateContext, PointerContext } from './Context';
+import { Component } from '../components/component';
+import { Pointer } from '../extensions/pointer';
+import { Transform } from '../extensions/transform';
+import { Resources } from '../resources/resources';
+import { UpdateContext, PointerContext, RenderContext } from './context';
+
+type UpdateHandler = (component: Component, context: UpdateContext) => void;
+type RenderHandler = (component: Component, context: RenderContext) => void;
+type HitTestHandler = (component: Component, context: PointerContext) => boolean;
+type PropertyHandler = (component: Component, context: UpdateContext) => void;
 
 export default abstract class Support {
 	updateDepth = 64;
-	updateEventEnabled = true;
-	updateExtensionsEnabled = true;
 
-	readonly components = new Map<string, ComponentExtension>();
-	readonly extensions = new Map<string, PropertyExtension>();
-	readonly resources = new Resouces();
+	readonly updateHandlers = new Map<string, UpdateHandler>();
+	readonly renderHandlers = new Map<string, RenderHandler>();
+	readonly hitTestHandlers = new Map<string, HitTestHandler>();
+	readonly propertyHandlers = new Map<string, PropertyHandler>();
+
+	readonly resources = new Resources();
 
 	abstract get view(): HTMLElement;
 	abstract clear(): void;
@@ -29,31 +33,43 @@ export default abstract class Support {
 			return;
 		}
 
-		if (this.updateExtensionsEnabled) {
-			this.extensions.forEach((extension, property) => {
-				if ((component as any)[property]) {
-					extension.update(component, context);
-				}
-			});
+		this.propertyHandlers.forEach((handler, property) => {
+			if ((component as any)[property]) {
+				handler(component, context);
+			}
+		});
+
+		if (component.onUpdate) {
+			component.onUpdate(context.time);
 		}
 
-		const extension = this.components.get(component.type);
-		if (extension) {
-			if (this.updateEventEnabled && component.onUpdate) {
-				component.onUpdate(context.time);
-			}
-			extension.update(component, context);
-		} else {
-			Debug.warning(`Type not found: ${component.type}`);
+		const handler = this.updateHandlers.get(component.type);
+		if (handler) {
+			handler(component, context);
 		}
 	}
 
-	updatePointer(component: Component, context: PointerContext): boolean {
+	render(component: Component, context: RenderContext) {
+		if (context.depth > this.updateDepth) {
+			return;
+		}
+
+		if (!Component.isVisible(component)) {
+			return;
+		}
+
+		const handler = this.renderHandlers.get(component.type);
+		if (handler) {
+			handler(component, context);
+		}
+	}
+
+	hitTest(component: Component, context: PointerContext): boolean {
 		if (context.depth > this.updateDepth) {
 			return false;
 		}
 
-		if (!Component.isEnabled(component)) {
+		if (!Component.isVisible(component)) {
 			return false;
 		}
 
@@ -61,16 +77,15 @@ export default abstract class Support {
 			return false;
 		}
 
-		const extension: ComponentExtension = this.components.get(component.type) as ComponentExtension;
-		if (extension) {
-			const result = extension.hitTest(component, context);
+		const handler = this.hitTestHandlers.get(component.type);
+		if (handler) {
+			const result = handler(component, context);
 			if (result) {
 				if (component.onPointerDown) {
 					component.onPointerDown(context.point.x, context.point.y);
 				}
+				return true;
 			}
-		} else {
-			Debug.warning(`Type not found: ${component.type}`);
 		}
 
 		return false;
@@ -78,11 +93,19 @@ export default abstract class Support {
 
 	// eslint-disable-next-line class-methods-use-this
 	getUpdateContext(component: Component, parent: UpdateContext): UpdateContext {
+		return {
+			time: parent.time,
+			depth: parent.depth + 1,
+			support: parent.support,
+		};
+	}
+
+	// eslint-disable-next-line class-methods-use-this
+	getRenderContext(component: Component, parent: RenderContext): RenderContext {
 		const matrix = Transform.getMatrix(component);
 		const colorTransform = Transform.getColorTransform(component);
 
 		return {
-			time: parent.time,
 			depth: parent.depth + 1,
 			support: parent.support,
 			matrix: Matrix.concat(parent.matrix, matrix),

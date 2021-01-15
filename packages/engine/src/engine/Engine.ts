@@ -1,9 +1,9 @@
+/* eslint-disable no-console */
 import { ColorTransform, Matrix } from '@e2d/geom';
-import { Component } from '../components/Component';
-import { CONTAINER, ContainerExtension } from '../components/Container';
-import Debug from '../utils/Debug';
-import { UpdateContext } from './Context';
-import Support from './Support';
+import { Component } from '../components/component';
+import { applyContainerExtension } from '../components/container';
+import { RenderContext, UpdateContext } from './context';
+import Support from './support';
 
 export default class Engine {
 	readonly support: Support;
@@ -14,30 +14,51 @@ export default class Engine {
 	height = 300;
 	fullscreen = true;
 
+	updateEnabled = true;
+	renderEnabled = true;
+	pointerEnabled = true;
+
 	private paused = true;
 	private time = -1;
-	private updateContext: UpdateContext;
+	private matrix = Matrix.empty();
 
 	constructor(support: Support) {
 		this.support = support;
 
-		this.updateContext = {
-			support: this.support,
-			time: 0,
-			depth: 0,
-			matrix: Matrix.empty(),
-			colorTransform: ColorTransform.empty(),
-		};
-
-		this.support.components.set(CONTAINER, new ContainerExtension());
+		applyContainerExtension(this.support);
 	}
 
 	update(time: number = 0) {
-		if (this.root) {
-			this.updateContext.time = time;
-			const context = this.support.getUpdateContext(this.root, this.updateContext);
-			this.support.update(this.root, context);
+		if (!this.root) {
+			return;
 		}
+
+		const base: UpdateContext = {
+			support: this.support,
+			time,
+			depth: 0,
+		};
+
+		const context = this.support.getUpdateContext(this.root, base);
+		this.support.update(this.root, context);
+	}
+
+	render() {
+		if (!this.root) {
+			return;
+		}
+
+		this.support.clear();
+
+		const base: RenderContext = {
+			support: this.support,
+			depth: 0,
+			matrix: this.matrix,
+			colorTransform: ColorTransform.empty(),
+		};
+
+		const context = this.support.getRenderContext(this.root, base);
+		this.support.render(this.root, context);
 	}
 
 	updateSize() {
@@ -53,8 +74,8 @@ export default class Engine {
 			targetHeight = window.innerHeight;
 		}
 
-		this.updateContext.matrix.a = pixelRatio;
-		this.updateContext.matrix.d = pixelRatio;
+		this.matrix.a = pixelRatio;
+		this.matrix.d = pixelRatio;
 
 		this.support.setSize(targetWidth, targetHeight, pixelRatio);
 	}
@@ -65,8 +86,15 @@ export default class Engine {
 		}
 
 		this.updateSize();
-		this.support.clear();
-		this.update(time);
+
+		if (this.updateEnabled) {
+			this.update(time);
+		}
+
+		if (this.renderEnabled) {
+			this.render();
+		}
+
 		this.updateNextFrame();
 	}
 
@@ -81,7 +109,7 @@ export default class Engine {
 	}
 
 	play() {
-		Debug.log('play');
+		console.log('play');
 		if (this.paused) {
 			this.time = -1;
 			this.paused = false;
@@ -90,7 +118,7 @@ export default class Engine {
 	}
 
 	pause() {
-		Debug.log('pause');
+		console.log('pause');
 		this.paused = true;
 	}
 }

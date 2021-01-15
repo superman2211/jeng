@@ -1,8 +1,3 @@
-import CanvasImageExtension from './components/CanvasImageExtension';
-
-export * from './components/Image';
-export * from './resources/ImageResource';
-
-export {
-	CanvasImageExtension,
-};
+export * from './image';
+export * from './resources';
+export * from './canvas';

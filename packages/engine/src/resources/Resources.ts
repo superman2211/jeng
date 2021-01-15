@@ -1,4 +1,4 @@
-import Debug from '../utils/Debug';
+import Debug from '../utils/debug';
 
 export interface Resource {
 	asset: string;
@@ -7,7 +7,7 @@ export interface Resource {
 
 export type ResourceResolver = (asset: string) => Resource | null;
 
-export class Resouces {
+export class Resources {
 	private resources = new Map<any, any>();
 
 	readonly resolvers = new Set<ResourceResolver>();

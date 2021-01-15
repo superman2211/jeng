@@ -1,5 +1,5 @@
 import { ColorTransform, Matrix, Point } from '@e2d/geom';
-import Support from './Support';
+import Support from './support';
 
 export interface Context {
 	support: Support;
@@ -8,6 +8,9 @@ export interface Context {
 
 export interface UpdateContext extends Context {
 	time: number;
+}
+
+export interface RenderContext extends Context {
 	matrix: Matrix;
 	colorTransform: ColorTransform;
 }

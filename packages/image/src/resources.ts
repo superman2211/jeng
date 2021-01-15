@@ -2,7 +2,7 @@
 import { Resource } from '@e2d/engine';
 
 export interface ImageResource extends Resource {
-	image: HTMLImageElement | HTMLCanvasElement | null;
+	image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | null;
 }
 
 export function resolveImage(asset: string): ImageResource | null {
