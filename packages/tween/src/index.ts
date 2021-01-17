@@ -1,2 +1,2 @@
-export * from './Tween';
-export * from './Easing';
+export * from './tween';
+export * from './easing';

@@ -3,7 +3,7 @@ import { CanvasSupport } from '@e2d/canvas-support';
 import { ImageResource } from './resources';
 import { applyImageExtension, IMAGE, Image } from './image';
 
-export function render(image: Image, context: RenderContext): void {
+export function renderCanvas(image: Image, context: RenderContext): void {
 	if (!image.src) {
 		return;
 	}
@@ -39,5 +39,5 @@ export function render(image: Image, context: RenderContext): void {
 
 export function applyCanvasImageExtension(support: Support) {
 	applyImageExtension(support);
-	support.renderHandlers.set(IMAGE, render);
+	support.renderHandlers.set(IMAGE, renderCanvas);
 }
