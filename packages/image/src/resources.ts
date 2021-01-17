@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { Resource } from '@e2d/engine';
+import { Resource, Debug } from '@e2d/engine';
 
 export interface ImageResource extends Resource {
 	image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | null;
@@ -23,7 +23,7 @@ export function resolveImage(asset: string): ImageResource | null {
 				resource.image = image;
 				resource.loaded = true;
 			};
-			image.onerror = (e) => console.warn(`image load error: ${e}`);
+			image.onerror = (e) => Debug.warning('image load error', e);
 
 			return resource;
 		default:
