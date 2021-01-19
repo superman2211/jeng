@@ -15,7 +15,7 @@ export default function main(): Main {
 	return {
 		type: 'container',
 		children: {
-			unit: unit({ title: 'test', onClick: onHeaderClick }),
+			unit: unit({ title: 'First line!\nSecond line?', onClick: onHeaderClick }),
 			recursiveObject: {
 				type: 'container',
 				x: 200,

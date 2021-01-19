@@ -22,11 +22,13 @@ export default function unit(props: UnitProperties): Unit {
 				textFormat: {
 					size: 50,
 					color: 0xff0000,
+					align: 'center',
 				},
 				onClick: props.onClick,
 				x: 0,
 				y: 0,
-				scaleX: 2,
+				scaleY: 0.5,
+				scaleX: 0.5,
 			},
 			{
 				type: 'image',
