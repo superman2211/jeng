@@ -49,7 +49,7 @@ export function getAdvance(font: Font, first: string, second?: string): number {
 		return width;
 	}
 	const kerning = getKerning(font, first, second);
-	return kerning + width;
+	return kerning;
 }
 
 export function getFont(name: string): Font {

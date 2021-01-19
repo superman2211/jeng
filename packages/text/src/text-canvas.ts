@@ -2,6 +2,7 @@
 import { RenderContext, Support } from '@e2d/engine';
 import { CanvasSupport, createColorPattern } from '@e2d/canvas-support';
 import {
+	EM,
 	getAdvance,
 	getFont, getLineWidth, getStyleFont, getTextHeight, getTextWidth,
 } from './font';
@@ -72,7 +73,7 @@ export function renderCanvas(component: Text, context: RenderContext): void {
 		for (let j = 0; j < line.length; j++) {
 			const first = line.charAt(j);
 			const second = line.charAt(j + 1);
-			const advance = getAdvance(font, first, second);
+			const advance = getAdvance(font, first, second) / EM * formatSize;
 			context2d.fillText(first, x, y + formatSize);
 			x += advance + formatLetterSpacing;
 		}
