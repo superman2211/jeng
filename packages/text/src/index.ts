@@ -1,4 +1,4 @@
 export * from './text';
 export * from './format';
 export * from './font';
-export * from './canvas';
+export * from './text-canvas';

@@ -2,7 +2,7 @@ import {
 	Source, Component, Context, Support, PointerContext,
 } from '@e2d/engine';
 import { Rectangle } from '@e2d/geom';
-import { ImageResource } from './resources';
+import { ImageResource, resolveImage } from './resources';
 
 export const IMAGE = 'image';
 
@@ -40,4 +40,5 @@ export function hitTest(image: Image, context: PointerContext): boolean {
 
 export function applyImageExtension(support: Support) {
 	support.hitTestHandlers.set(IMAGE, hitTest);
+	support.resources.resolvers.add(resolveImage);
 }

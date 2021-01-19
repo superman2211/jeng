@@ -1,4 +1,4 @@
-import { Point } from './Point';
+import { Point } from './point';
 
 export interface Rectangle {
 	x: number;
@@ -13,5 +13,9 @@ export namespace Rectangle {
 			&& rectangle.x + rectangle.width > point.x
 			&& rectangle.y < point.y
 			&& rectangle.y + rectangle.height > point.y;
+	}
+
+	export function isEmpty(rectangle: Rectangle): boolean {
+		return !rectangle.width || !rectangle.height;
 	}
 }

@@ -1,5 +1,5 @@
-import { Point } from './Point';
-import { Rectangle } from './Rectangle';
+import { Point } from './point';
+import { Rectangle } from './rectangle';
 
 export interface Matrix {
 	a: number;
