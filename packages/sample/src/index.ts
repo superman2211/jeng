@@ -61,6 +61,6 @@ customEngine.support.resources.add(
 
 // custom resource resolver
 const resourceManager = new CustomResourceManager();
-resourceManager.addResource('sample', 'sample.png');
+resourceManager.aliases.set('sample', 'sample.png');
 engine.support.resources.resolvers.add(resourceManager.resolve);
 customEngine.support.resources.resolvers.add(resourceManager.resolve);

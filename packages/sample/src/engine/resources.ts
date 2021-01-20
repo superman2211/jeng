@@ -1,21 +1,24 @@
+/* eslint-disable no-console */
 import { ImageResource, resolveImage } from '@e2d/image';
 
 export default class CustomResourceManager {
-	private resources = new Map<string, string>();
-
-	addResource(id: string, url: string) {
-		this.resources.set(id, url);
-	}
+	readonly aliases = new Map<string, string>();
+	readonly resources = new Map<string, ImageResource>();
 
 	resolve = (asset: string): ImageResource | null => {
 		if (asset.indexOf('id:') === 0) {
 			const id = asset.slice(3);
-			const url = this.resources.get(id);
-			if (url) {
-				return resolveImage(url);
+			let resource = this.resources.get(id) as ImageResource;
+			if (!resource) {
+				const url = this.aliases.get(id);
+				if (url) {
+					resource = resolveImage(url) as ImageResource;
+					this.resources.set(id, resource);
+				} else {
+					console.warn(`Resource with id: ${asset} not found`);
+				}
 			}
-			// eslint-disable-next-line no-console
-			console.warn(`Resource with id: ${asset} not found`);
+			return resource;
 		}
 		return null;
 	}
