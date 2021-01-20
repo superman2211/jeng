@@ -9,7 +9,7 @@ import {
 import { applyTextExtension, TEXT, Text } from './text';
 import { getAlingValue, getVerticalAlingValue, getValidTextFormat } from './format';
 
-export function renderCanvas(component: Text, context: RenderContext): void {
+export function renderCanvasText(component: Text, context: RenderContext): void {
 	const { text } = component;
 	if (!text) {
 		return;
@@ -22,7 +22,9 @@ export function renderCanvas(component: Text, context: RenderContext): void {
 	}
 
 	const lines = text.split('\n');
-	const { width, height, textFormat } = component;
+	const {
+		width, height, textFormat, border, background,
+	} = component;
 
 	const format = getValidTextFormat(textFormat);
 	const formatSize = format.size!;
@@ -35,7 +37,8 @@ export function renderCanvas(component: Text, context: RenderContext): void {
 
 	const textWidth = getTextWidth(font, format, lines);
 	const textHeight = getTextHeight(format, lines);
-	const maxWidth = width ?? textWidth;
+	const realWidth = width ?? textWidth;
+	const realHeight = height ?? textHeight;
 
 	let y = 0;
 
@@ -57,6 +60,23 @@ export function renderCanvas(component: Text, context: RenderContext): void {
 	);
 
 	context2d.globalAlpha = 1;
+
+	if (background !== undefined) {
+		context2d.strokeStyle = '';
+		context2d.fillStyle = createColorPattern(background!, 1, colorTransform);
+		context2d.beginPath();
+		context2d.rect(0, 0, realWidth, realHeight);
+		context2d.fill();
+	}
+
+	if (border !== undefined) {
+		context2d.strokeStyle = createColorPattern(border!, 1, colorTransform);
+		context2d.fillStyle = '';
+		context2d.beginPath();
+		context2d.rect(0, 0, realWidth, realHeight);
+		context2d.stroke();
+	}
+
 	context2d.font = getStyleFont(format.font!, formatSize);
 	context2d.textBaseline = 'alphabetic';
 	context2d.strokeStyle = '';
@@ -66,7 +86,7 @@ export function renderCanvas(component: Text, context: RenderContext): void {
 		const line = lines[i];
 		const lineWidth = getLineWidth(font, format, line);
 		const alignValue = getAlingValue(format.align!);
-		let x = (maxWidth - lineWidth) * alignValue;
+		let x = (realWidth - lineWidth) * alignValue;
 		if (x < 0) {
 			x = 0;
 		}
@@ -83,5 +103,5 @@ export function renderCanvas(component: Text, context: RenderContext): void {
 
 export function applyCanvasTextExtension(support: Support) {
 	applyTextExtension(support);
-	support.renderHandlers.set(TEXT, renderCanvas);
+	support.renderHandlers.set(TEXT, renderCanvasText);
 }

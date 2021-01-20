@@ -10,6 +10,8 @@ export interface Text extends Component {
 	textFormat?: TextFromat;
 	width?: number;
 	height?: number;
+	border?: number;
+	background?: number;
 }
 
 export namespace Text {
