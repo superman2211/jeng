@@ -1,84 +1,52 @@
-import { LOGO } from './assets';
+const SPEED = 100;
 
 interface Unit {
 	[key: string]: any;
 }
 
-interface UnitProperties {
+export interface UnitProperties {
 	title: string,
-	onClick: () => void;
+	image: string,
+	onClick: (data: UnitProperties) => void;
 }
 
-export default function unit(props: UnitProperties): Unit {
+export function unit(props: UnitProperties): Unit {
 	return {
 		type: 'container',
-		x: 100,
-		y: 50,
-		rotation: 0.2,
-		children: [
-			{
+		x: 50 + Math.random() * 400,
+		y: 200,
+		rotation: 0,
+		onUpdate(time: number) {
+			this.x += this.children.image.scaleX * time * SPEED;
+			if (this.x < 50) {
+				this.children.image.scaleX = 1;
+			} else if (this.x > 400) {
+				this.children.image.scaleX = -1;
+			}
+		},
+		children: {
+			text: {
 				type: 'text',
 				text: props.title,
 				textFormat: {
-					size: 25,
-					color: 0xff0000,
+					size: 15,
+					color: 0xffdddd,
 					align: 'center',
 					verticalAlign: 'middle',
 				},
 				border: 0x00ff00,
-				background: 0xeeffee,
-				onClick: props.onClick,
-				width: 300,
-				height: 200,
+				y: -30,
+				height: 35,
+				pivotX: 0.5,
+				onClick: () => props.onClick(props),
 			},
-			{
+			image: {
 				type: 'image',
-				src: LOGO,
-				x: 0,
-				y: 0,
-				scaleX: 2,
-				alpha: 0.5,
-				rotation: 0,
-				onUpdate(time: number) {
-					this.rotation += time;
-				},
+				src: props.image,
+				scaleX: Math.random() > 0.5 ? 1 : -1,
+				pivotX: 0.5,
+				onClick: () => props.onClick(props),
 			},
-			{
-				type: 'container',
-				tween: {
-					loop: true,
-					phases: [
-						{
-							time: 1,
-							to: { x: 100 },
-						},
-						{
-							easing: 'cubicout',
-							time: 1,
-							to: { y: 100 },
-						},
-						{
-							easing: 'quadraticIn',
-							time: 1,
-							to: { x: 0 },
-						},
-						{
-							easing: 'quadraticOut',
-							time: 1,
-							to: { y: 0 },
-						},
-					],
-				},
-				child: {
-					type: 'image',
-					src: LOGO,
-					x: 20,
-					y: 30,
-					scaleX: 0.5,
-					scaleY: 0.5,
-					rotation: 0.3,
-				},
-			},
-		],
+		},
 	};
 }

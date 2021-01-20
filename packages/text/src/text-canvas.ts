@@ -1,10 +1,8 @@
 /* eslint-disable class-methods-use-this */
-import { RenderContext, Support } from '@e2d/engine';
+import { Pivot, RenderContext, Support } from '@e2d/engine';
 import { CanvasSupport, createColorPattern } from '@e2d/canvas-support';
 import {
-	EM,
-	getAdvance,
-	getFont, getLineWidth, getStyleFont, getTextHeight, getTextWidth,
+	getAdvance, getFont, getLineWidth, getStyleFont, getTextHeight, getTextWidth,
 } from './font';
 import { applyTextExtension, TEXT, Text } from './text';
 import { getAlingValue, getVerticalAlingValue, getValidTextFormat } from './format';
@@ -40,6 +38,9 @@ export function renderCanvasText(component: Text, context: RenderContext): void 
 	const realWidth = width ?? textWidth;
 	const realHeight = height ?? textHeight;
 
+	const offsetX = Pivot.getX(component, realWidth);
+	const offsetY = Pivot.getY(component, realHeight);
+
 	let y = 0;
 
 	if (height) {
@@ -65,7 +66,7 @@ export function renderCanvasText(component: Text, context: RenderContext): void 
 		context2d.strokeStyle = '';
 		context2d.fillStyle = createColorPattern(background!, 1, colorTransform);
 		context2d.beginPath();
-		context2d.rect(0, 0, realWidth, realHeight);
+		context2d.rect(offsetX, offsetY, realWidth, realHeight);
 		context2d.fill();
 	}
 
@@ -73,7 +74,7 @@ export function renderCanvasText(component: Text, context: RenderContext): void 
 		context2d.strokeStyle = createColorPattern(border!, 1, colorTransform);
 		context2d.fillStyle = '';
 		context2d.beginPath();
-		context2d.rect(0, 0, realWidth, realHeight);
+		context2d.rect(offsetX, offsetY, realWidth, realHeight);
 		context2d.stroke();
 	}
 
@@ -81,6 +82,8 @@ export function renderCanvasText(component: Text, context: RenderContext): void 
 	context2d.textBaseline = 'alphabetic';
 	context2d.strokeStyle = '';
 	context2d.fillStyle = createColorPattern(format.color!, format.alpha!, colorTransform);
+
+	y += offsetY;
 
 	for (let i = 0; i < lines.length; i++) {
 		const line = lines[i];
@@ -90,10 +93,11 @@ export function renderCanvasText(component: Text, context: RenderContext): void 
 		if (x < 0) {
 			x = 0;
 		}
+		x += offsetX;
 		for (let j = 0; j < line.length; j++) {
 			const first = line.charAt(j);
 			const second = line.charAt(j + 1);
-			const advance = getAdvance(font, first, second) / EM * formatSize;
+			const advance = getAdvance(font, formatSize, first, second);
 			context2d.fillText(first, x, y + formatSize);
 			x += advance + formatLetterSpacing;
 		}

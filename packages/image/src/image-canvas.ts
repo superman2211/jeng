@@ -1,4 +1,6 @@
-import { RenderContext, Source, Support } from '@e2d/engine';
+import {
+	Pivot, RenderContext, Source, Support,
+} from '@e2d/engine';
 import { CanvasSupport } from '@e2d/canvas-support';
 import { ColorTransform, Matrix, Rectangle } from '@e2d/geom';
 import { ImageResource } from './resources';
@@ -30,8 +32,12 @@ export function renderCanvas(image: Image, context: RenderContext): void {
 		matrix.ty,
 	);
 
+	const { width, height } = resource.image;
+	const x = Pivot.getX(image, width);
+	const y = Pivot.getY(image, height);
+
 	context2d.globalAlpha = colorTransform.alphaMultiplier;
-	context2d.drawImage(resource.image, 0, 0);
+	context2d.drawImage(resource.image, x, y);
 }
 
 function isDefaultColorTransform(ct: ColorTransform): boolean {
@@ -73,6 +79,10 @@ export function renderCanvasWithColorTransform(image: Image, context: RenderCont
 	const { support, matrix } = context;
 	const { context2d } = support as CanvasSupport;
 
+	const { width, height } = resource.image;
+	const x = Pivot.getX(image, width);
+	const y = Pivot.getY(image, height);
+
 	if (isDefaultColorTransform(colorTransform)) {
 		context2d.setTransform(
 			matrix.a,
@@ -84,15 +94,12 @@ export function renderCanvasWithColorTransform(image: Image, context: RenderCont
 		);
 
 		context2d.globalAlpha = colorTransform.alphaMultiplier;
-		context2d.drawImage(resource.image, 0, 0);
+		context2d.drawImage(resource.image, x, y);
 	} else {
 		updateTempContext(context2d);
 
 		const bounds = Matrix.transformBounds(matrix, {
-			x: 0,
-			y: 0,
-			width: resource.image.width,
-			height: resource.image.height,
+			x, y, width, height,
 		});
 
 		if (Rectangle.isEmpty(bounds)) {
@@ -108,7 +115,7 @@ export function renderCanvasWithColorTransform(image: Image, context: RenderCont
 			matrix.tx,
 			matrix.ty,
 		);
-		tempContext.drawImage(resource.image, 0, 0);
+		tempContext.drawImage(resource.image, x, y);
 
 		const imageData = tempContext.getImageData(bounds.x, bounds.y, bounds.width, bounds.height);
 
@@ -136,7 +143,11 @@ export function renderCanvasWithColorTransform(image: Image, context: RenderCont
 
 		context2d.setTransform();
 		context2d.globalAlpha = 1;
-		context2d.drawImage(tempContext.canvas, bounds.x, bounds.y);
+		context2d.drawImage(
+			tempContext.canvas,
+			bounds.x, bounds.y, bounds.width, bounds.height,
+			bounds.x, bounds.y, bounds.width, bounds.height,
+		);
 	}
 }
 

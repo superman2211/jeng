@@ -1,4 +1,4 @@
-import { LOGO } from './assets';
+import { ABILITY_WOLF } from './assets';
 
 export default function recursive() {
 	const container = {
@@ -9,14 +9,16 @@ export default function recursive() {
 			y: 30,
 			scaleX: 0.9,
 			scaleY: 0.9,
-			rotation: 0.1,
+			rotation: 0.2,
 			alpha: 0.9,
-			children: [
-				{
-					type: 'image',
-					src: LOGO,
-				},
-			],
+			children: [{
+				type: 'image',
+				src: ABILITY_WOLF,
+				scale: 0.3,
+			}],
+			onUpdate(time: number) {
+				this.rotation += time * 0.05;
+			},
 		},
 	};
 

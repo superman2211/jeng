@@ -1,12 +1,12 @@
 import {
-	Source, Component, Context, Support, PointerContext,
+	Source, Component, Context, Support, PointerContext, Pivot,
 } from '@e2d/engine';
 import { Rectangle } from '@e2d/geom';
 import { ImageResource, resolveImage } from './resources';
 
 export const IMAGE = 'image';
 
-export interface Image extends Component, Source {
+export interface Image extends Component, Source, Pivot {
 }
 
 export namespace Image {
@@ -25,9 +25,11 @@ export namespace Image {
 		}
 
 		const { width, height } = resource.image;
+		const x = Pivot.getX(image, width);
+		const y = Pivot.getY(image, height);
 
 		return {
-			x: 0, y: 0, width, height,
+			x, y, width, height,
 		};
 	}
 }

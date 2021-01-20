@@ -6,6 +6,9 @@ import { CanvasSupport } from '@e2d/canvas-support';
 import CustomResourceManager from './engine/resources';
 import main from './main';
 import CustomSupport from './engine/support';
+import {
+	ANIMALIST, ANIMALIST_IMAGE, ARCHER, ARCHER_IMAGE, TEST_CANVAS,
+} from './assets';
 
 // application
 const app = main();
@@ -13,7 +16,7 @@ app.start();
 
 // basic engine
 const engine = new Engine(new CanvasSupport());
-applyCanvasImageExtension(engine.support);
+applyCanvasImageExtension(engine.support, { colorTransform: true });
 applyCanvasTextExtension(engine.support);
 applyTweenExtension(engine.support);
 engine.root = app as any as Component;
@@ -29,7 +32,7 @@ customEngine.root = engine.root;
 customEngine.play();
 customEngine.support.view.style.position = 'absolute';
 customEngine.support.view.style.top = '0px';
-customEngine.support.view.style.left = '400px';
+customEngine.support.view.style.left = '600px';
 document.body.appendChild(customEngine.support.view);
 
 // page
@@ -41,19 +44,18 @@ setTimeout(() => engine.pause(), 5000);
 setTimeout(() => engine.play(), 10000);
 
 // set custom resource
-const customAsset = 'test.canvas';
 engine.support.resources.add(
-	customAsset,
+	TEST_CANVAS,
 	{
-		asset: customAsset,
+		asset: TEST_CANVAS,
 		image: customEngine.support.view,
 		loaded: true,
 	} as ImageResource,
 );
 customEngine.support.resources.add(
-	customAsset,
+	TEST_CANVAS,
 	{
-		asset: customAsset,
+		asset: TEST_CANVAS,
 		image: engine.support.view,
 		loaded: true,
 	} as ImageResource,
@@ -61,6 +63,7 @@ customEngine.support.resources.add(
 
 // custom resource resolver
 const resourceManager = new CustomResourceManager();
-resourceManager.aliases.set('sample', 'sample.png');
+resourceManager.aliases.set(ARCHER.replace('id:', ''), ARCHER_IMAGE);
+resourceManager.aliases.set(ANIMALIST.replace('id:', ''), ANIMALIST_IMAGE);
 engine.support.resources.resolvers.add(resourceManager.resolve);
 customEngine.support.resources.resolvers.add(resourceManager.resolve);

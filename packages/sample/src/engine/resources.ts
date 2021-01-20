@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import { Debug } from '@e2d/engine';
 import { ImageResource, resolveImage } from '@e2d/image';
 
 export default class CustomResourceManager {
@@ -15,7 +16,7 @@ export default class CustomResourceManager {
 					resource = resolveImage(url) as ImageResource;
 					this.resources.set(id, resource);
 				} else {
-					console.warn(`Resource with id: ${asset} not found`);
+					Debug.warning(`Resource with id: ${asset} not found`);
 				}
 			}
 			return resource;

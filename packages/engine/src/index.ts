@@ -6,6 +6,7 @@ export * from './engine/context';
 export * from './extensions/pointer';
 export * from './extensions/transform';
 export * from './extensions/source';
+export * from './extensions/pivot';
 export * from './components/component';
 export * from './components/container';
 export * from './resources/resources';

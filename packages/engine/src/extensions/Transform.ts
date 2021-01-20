@@ -8,6 +8,7 @@ export interface TintColor {
 export interface Transform {
 	x?: number;
 	y?: number;
+	scale?: number;
 	scaleX?: number;
 	scaleY?: number;
 	rotation?: number;
@@ -32,29 +33,32 @@ export namespace Transform {
 		}
 
 		const { rotation } = transform;
+		const scaleX = transform.scaleX ?? transform.scale ?? 1;
+		const scaleY = transform.scaleY ?? transform.scale ?? 1;
+		const tx = transform.x ?? 0;
+		const ty = transform.y ?? 0;
+
 		if (rotation) {
 			const cos = Math.cos(rotation);
 			const sin = Math.sin(rotation);
-			const scaleX = transform.scaleX ?? 1;
-			const scaleY = transform.scaleY ?? 1;
 
 			return {
 				a: cos * scaleX,
 				b: sin * scaleX,
 				c: -sin * scaleY,
 				d: cos * scaleY,
-				tx: transform.x ?? 0,
-				ty: transform.y ?? 0,
+				tx,
+				ty,
 			};
 		}
 
 		return {
-			a: transform.scaleX ?? 1,
+			a: scaleX,
 			b: 0,
 			c: 0,
-			d: transform.scaleY ?? 1,
-			tx: transform.x ?? 0,
-			ty: transform.y ?? 0,
+			d: scaleY,
+			tx,
+			ty,
 		};
 	}
 

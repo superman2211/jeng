@@ -43,13 +43,14 @@ export function getKerning(font: Font, first: string, second: string): number {
 	return kerning;
 }
 
-export function getAdvance(font: Font, first: string, second?: string): number {
+export function getAdvance(font: Font, size: number, first: string, second?: string): number {
+	const scale = size / EM;
 	const width = getCharWidth(font, first);
 	if (!second) {
-		return width;
+		return width * scale;
 	}
 	const kerning = getKerning(font, first, second);
-	return kerning;
+	return kerning * scale;
 }
 
 export function getFont(name: string): Font {
@@ -70,10 +71,9 @@ export function getLineWidth(font: Font, format: TextFromat, line: string): numb
 	for (let i = 0; i < line.length; i++) {
 		const first = line.charAt(i);
 		const second = line.charAt(i + 1);
-		const advance = getAdvance(font, first, second);
+		const advance = getAdvance(font, format.size!, first, second);
 		width += advance;
 	}
-	width *= format.size! / EM;
 	if (format.letterSpacing && line.length > 1) {
 		width += format.letterSpacing * (line.length - 1);
 	}

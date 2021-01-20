@@ -1,11 +1,13 @@
-import { Component, PointerContext, Support } from '@e2d/engine';
+import {
+	Component, Pivot, PointerContext, Support,
+} from '@e2d/engine';
 import { Rectangle } from '@e2d/geom';
 import { TextFromat, getValidTextFormat } from './format';
 import { getFont, getTextWidth, getTextHeight } from './font';
 
 export const TEXT = 'text';
 
-export interface Text extends Component {
+export interface Text extends Component, Pivot {
 	text?: string;
 	textFormat?: TextFromat;
 	width?: number;
@@ -35,8 +37,11 @@ export namespace Text {
 			height = getTextHeight(format, lines);
 		}
 
+		const x = Pivot.getX(component, width);
+		const y = Pivot.getY(component, height);
+
 		return {
-			x: 0, y: 0, width, height,
+			x, y, width, height,
 		};
 	}
 }
