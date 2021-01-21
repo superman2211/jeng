@@ -1,12 +1,11 @@
 import { CanvasSupport } from '@e2d/canvas-support';
-import { applyCustomTextExtension } from './text';
+import { applyCanvasTextExtension } from '@e2d/text';
 import { applyCustomImageExtension } from './image';
 
 export default class CustomSupport extends CanvasSupport {
 	constructor() {
 		super();
-
-		applyCustomTextExtension(this);
+		applyCanvasTextExtension(this);
 		applyCustomImageExtension(this);
 	}
 

@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { CanvasSupport } from '@e2d/canvas-support';
-import { RenderContext, Support } from '@e2d/engine';
+import { Pivot, RenderContext, Support } from '@e2d/engine';
 import {
 	applyImageExtension, IMAGE, Image, ImageResource,
 } from '@e2d/image';
@@ -36,11 +36,13 @@ function renderImage(image: Image, context: RenderContext): void {
 	);
 
 	const { width, height } = resource.image;
+	const x = Pivot.getX(image, width);
+	const y = Pivot.getY(image, height);
 
 	context2d.globalAlpha = 1;
 	context2d.fillStyle = '';
 	context2d.strokeStyle = 'gray';
-	context2d.strokeRect(0, 0, width, height);
+	context2d.strokeRect(x, y, width, height);
 }
 
 export function applyCustomImageExtension(support: Support) {
