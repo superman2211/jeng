@@ -47,9 +47,9 @@ export namespace Text {
 }
 
 export function hitTest(text: Text, context: PointerContext): boolean {
-	const { point } = context;
+	const { local } = context;
 	const bounds = Text.getBounds(text);
-	return !!bounds && Rectangle.contains(bounds, point);
+	return !!bounds && Rectangle.contains(bounds, local);
 }
 
 export function applyTextExtension(support: Support) {

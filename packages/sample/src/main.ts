@@ -20,9 +20,9 @@ export default function main(): Main {
 		children: {
 			background: {
 				type: 'image',
+				src: BACKGROUND,
 				scaleX: 1,
 				scaleY: 1,
-				src: BACKGROUND,
 			},
 			units: {
 				type: 'container',
@@ -47,6 +47,7 @@ export default function main(): Main {
 			},
 			abilityFox: {
 				type: 'image',
+				src: ABILITY_FOX,
 				x: 450,
 				y: 500,
 				scale: 0.5,
@@ -60,7 +61,9 @@ export default function main(): Main {
 						this.tint.value = 0;
 					}
 				},
-				src: ABILITY_FOX,
+				onPointerDown(e: any) {
+					console.log('fox', e);
+				},
 			},
 			abilityWolf: {
 				type: 'container',
@@ -68,8 +71,8 @@ export default function main(): Main {
 				y: 400,
 				child: {
 					type: 'image',
-					scale: 0.5,
 					src: ABILITY_WOLF,
+					scale: 0.5,
 					alpha: 1,
 					tween: {
 						loop: true,

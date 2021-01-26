@@ -1,4 +1,4 @@
-import { Component, Engine } from '@e2d/engine';
+import { Component, Engine, applyMouseSupportExtension } from '@e2d/engine';
 import { applyTweenExtension } from '@e2d/tween';
 import { applyCanvasTextExtension } from '@e2d/text';
 import { applyCanvasImageExtension, ImageResource } from '@e2d/image';
@@ -19,9 +19,10 @@ const engine = new Engine(new CanvasSupport());
 applyCanvasImageExtension(engine.support, { colorTransform: true });
 applyCanvasTextExtension(engine.support);
 applyTweenExtension(engine.support);
+applyMouseSupportExtension(engine);
 engine.root = app as any as Component;
 engine.play();
-document.body.appendChild(engine.support.view);
+document.body.appendChild(engine.support.element);
 
 // custom engine
 const customEngine = new Engine(new CustomSupport());
@@ -30,10 +31,10 @@ customEngine.height = 600;
 customEngine.updateEnabled = false;
 customEngine.root = engine.root;
 customEngine.play();
-customEngine.support.view.style.position = 'absolute';
-customEngine.support.view.style.top = '0px';
-customEngine.support.view.style.left = '600px';
-document.body.appendChild(customEngine.support.view);
+customEngine.support.element.style.position = 'absolute';
+customEngine.support.element.style.top = '0px';
+customEngine.support.element.style.left = '600px';
+document.body.appendChild(customEngine.support.element);
 
 // page
 document.body.style.margin = '0';
@@ -48,7 +49,7 @@ engine.support.resources.add(
 	TEST_CANVAS,
 	{
 		asset: TEST_CANVAS,
-		image: customEngine.support.view,
+		image: customEngine.support.element,
 		loaded: true,
 	} as ImageResource,
 );
@@ -56,7 +57,7 @@ customEngine.support.resources.add(
 	TEST_CANVAS,
 	{
 		asset: TEST_CANVAS,
-		image: engine.support.view,
+		image: engine.support.element,
 		loaded: true,
 	} as ImageResource,
 );

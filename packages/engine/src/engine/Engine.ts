@@ -2,8 +2,11 @@
 import { ColorTransform, Matrix } from '@e2d/geom';
 import { Component } from '../components/component';
 import { applyContainerExtension } from '../components/container';
-import { RenderContext, UpdateContext } from './context';
+import { PointerEvent } from '../extensions/pointer';
+import { PointerContext, RenderContext, UpdateContext } from './context';
 import Support from './support';
+
+const EMPTY_MATRIX = Matrix.empty();
 
 export default class Engine {
 	readonly support: Support;
@@ -106,6 +109,37 @@ export default class Engine {
 
 	private updateNextFrame() {
 		requestAnimationFrame(this.internalUpdate);
+	}
+
+	dispatchPointerEvent(event: PointerEvent) {
+		if (this.paused) {
+			return;
+		}
+
+		if (!this.pointerEnabled) {
+			return;
+		}
+
+		if (!this.root) {
+			return;
+		}
+
+		const {
+			type, id, x, y,
+		} = event;
+
+		const base: PointerContext = {
+			support: this.support,
+			depth: 0,
+			matrix: EMPTY_MATRIX,
+			local: { x, y },
+			global: { x, y },
+			type,
+			id,
+		};
+
+		const context = this.support.getPointerContext(this.root, base);
+		this.support.hitTest(this.root, context);
 	}
 
 	play() {

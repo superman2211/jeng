@@ -38,14 +38,18 @@ export function unit(props: UnitProperties): Unit {
 				y: -30,
 				height: 35,
 				pivotX: 0.5,
-				onClick: () => props.onClick(props),
+				onPointerDown: () => {
+					props.onClick(props);
+				},
 			},
 			image: {
 				type: 'image',
 				src: props.image,
 				scaleX: Math.random() > 0.5 ? 1 : -1,
 				pivotX: 0.5,
-				onClick: () => props.onClick(props),
+				onPointerDown: () => {
+					props.onClick(props);
+				},
 			},
 		},
 	};

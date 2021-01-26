@@ -1,4 +1,5 @@
 import { ColorTransform, Matrix, Point } from '@e2d/geom';
+import { PointerEventType } from '../extensions/pointer';
 import Support from './support';
 
 export interface Context {
@@ -17,5 +18,8 @@ export interface RenderContext extends Context {
 
 export interface PointerContext extends Context {
 	matrix: Matrix;
-	point: Point;
+	local: Point;
+	global: Point;
+	type: PointerEventType;
+	id?: number,
 }

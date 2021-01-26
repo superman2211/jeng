@@ -1,6 +1,7 @@
+/* eslint-disable class-methods-use-this */
 import { ColorTransform, Matrix } from '@e2d/geom';
 import { Component } from '../components/component';
-import { Pointer } from '../extensions/pointer';
+import { Pointer, PointerEvent } from '../extensions/pointer';
 import { Transform } from '../extensions/transform';
 import { Resources } from '../resources/resources';
 import { UpdateContext, PointerContext, RenderContext } from './context';
@@ -20,7 +21,7 @@ export default abstract class Support {
 
 	readonly resources = new Resources();
 
-	abstract get view(): HTMLElement;
+	abstract get element(): HTMLElement;
 	abstract clear(): void;
 	abstract setSize(width: number, height: number, pixelRatio: number): void;
 
@@ -81,9 +82,12 @@ export default abstract class Support {
 		if (handler) {
 			const result = handler(component, context);
 			if (result) {
-				if (component.onPointerDown) {
-					component.onPointerDown(context.point.x, context.point.y);
-				}
+				const event: PointerEvent = {
+					type: context.type,
+					x: context.local.x,
+					y: context.local.y,
+				};
+				Pointer.runEvent(component, event);
 				return true;
 			}
 		}
@@ -91,7 +95,6 @@ export default abstract class Support {
 		return false;
 	}
 
-	// eslint-disable-next-line class-methods-use-this
 	getUpdateContext(component: Component, parent: UpdateContext): UpdateContext {
 		return {
 			time: parent.time,
@@ -100,7 +103,6 @@ export default abstract class Support {
 		};
 	}
 
-	// eslint-disable-next-line class-methods-use-this
 	getRenderContext(component: Component, parent: RenderContext): RenderContext {
 		const matrix = Transform.getMatrix(component);
 		const colorTransform = Transform.getColorTransform(component);
@@ -113,16 +115,17 @@ export default abstract class Support {
 		};
 	}
 
-	// eslint-disable-next-line class-methods-use-this
 	getPointerContext(component: Component, parent: PointerContext): PointerContext {
 		const matrix = Transform.getMatrix(component);
 		const transformedMatrix = Matrix.concat(parent.matrix, matrix);
 
 		return {
 			depth: parent.depth + 1,
+			type: parent.type,
 			support: parent.support,
+			global: parent.global,
 			matrix: transformedMatrix,
-			point: Matrix.transformInversePoint(transformedMatrix, parent.point),
+			local: Matrix.transformInversePoint(transformedMatrix, parent.global),
 		};
 	}
 }

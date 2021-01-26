@@ -4,7 +4,7 @@ export default class CanvasSupport extends Support {
 	readonly canvas: HTMLCanvasElement;
 	readonly context2d: CanvasRenderingContext2D;
 
-	get view(): HTMLElement {
+	get element(): HTMLElement {
 		return this.canvas;
 	}
 

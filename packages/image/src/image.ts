@@ -35,9 +35,9 @@ export namespace Image {
 }
 
 export function hitTest(image: Image, context: PointerContext): boolean {
-	const { point } = context;
+	const { local } = context;
 	const bounds = Image.getBounds(image, context);
-	return !!bounds && Rectangle.contains(bounds, point);
+	return !!bounds && Rectangle.contains(bounds, local);
 }
 
 export function applyImageExtension(support: Support) {

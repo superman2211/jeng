@@ -9,6 +9,9 @@ export * from './extensions/source';
 export * from './extensions/pivot';
 export * from './components/component';
 export * from './components/container';
+export * from './input/keyboard';
+export * from './input/mouse';
+export * from './input/touch';
 export * from './resources/resources';
 
 export {
