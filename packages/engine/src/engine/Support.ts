@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { ColorTransform, Matrix } from '@e2d/geom';
 import { Component } from '../components/component';
-import { Pointer, PointerEvent } from '../extensions/pointer';
+import { Pointer } from '../extensions/pointer';
 import { Transform } from '../extensions/transform';
 import { Resources } from '../resources/resources';
 import { UpdateContext, PointerContext, RenderContext } from './context';
@@ -80,16 +80,22 @@ export default abstract class Support {
 
 		const handler = this.hitTestHandlers.get(component.type);
 		if (handler) {
+			const { x, y } = context.local;
 			const result = handler(component, context);
 			if (result) {
-				const event: PointerEvent = {
-					type: context.type,
-					x: context.local.x,
-					y: context.local.y,
-				};
-				Pointer.runEvent(component, event);
-				return true;
+				Pointer.dispatchEvent(component, context.type, x, y, context.id);
 			}
+
+			if (context.type === 'pointerMove') {
+				if (result && !component.pointerOver) {
+					Pointer.dispatchEvent(component, 'pointerOver', x, y, context.id);
+				} else if (!result && component.pointerOver) {
+					Pointer.dispatchEvent(component, 'pointerOut', x, y, context.id);
+				}
+				component.pointerOver = result;
+			}
+
+			return result;
 		}
 
 		return false;

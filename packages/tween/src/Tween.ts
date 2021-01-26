@@ -6,7 +6,7 @@ import { easing, LINEAR } from './easing';
 export const TWEEN = 'tween';
 
 export interface TweenState {
-	[key: string]: number | string;
+	[key: string]: number;
 }
 
 export interface TweenPhase {
@@ -15,7 +15,7 @@ export interface TweenPhase {
 	easing?: string;
 	from?: TweenState;
 	to: TweenState;
-	values?: number[] | string[];
+	values?: number[];
 	onStart?: () => void;
 	onFinish?: () => void;
 }

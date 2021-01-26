@@ -42,8 +42,14 @@ export default function main(): Main {
 				y: 450,
 				scaleX: 0.2,
 				scaleY: 0.2,
-				alpha: 0.8,
+				alpha: 0.5,
 				src: 'test.canvas',
+				onPointerOver() {
+					this.alpha = 1;
+				},
+				onPointerOut() {
+					this.alpha = 0.5;
+				},
 			},
 			abilityFox: {
 				type: 'image',
