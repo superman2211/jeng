@@ -1,9 +1,9 @@
+/* eslint-disable no-console */
 export default class Debug {
 	static errors = new Map<string, number>();
 	static warnings = new Map<string, number>();
 
 	static log(...args: any[]) {
-		// eslint-disable-next-line no-console
 		console.log(...args);
 	}
 
@@ -12,7 +12,6 @@ export default class Debug {
 		let count = this.errors.get(id);
 		if (!count) {
 			count = 0;
-			// eslint-disable-next-line no-console
 			console.error(...args);
 		}
 		count++;
@@ -24,7 +23,6 @@ export default class Debug {
 		let count = this.warnings.get(id);
 		if (!count) {
 			count = 0;
-			// eslint-disable-next-line no-console
 			console.warn(...args);
 		}
 		count++;
