@@ -1,23 +1,34 @@
 import { Matrix } from '@e2d/geom';
 import {
+	BitmapFill,
 	CapsStyle,
+	FillStyle,
+	GradientFill,
 	GradientType,
-	GraphicsData,
-	GraphicsFill,
-	GraphicsStroke,
 	InterpolationMethod,
 	JointStyle,
 	LineScaleMode,
+	SolidFill,
 	SpreadMethod,
-} from './data/data';
-import { PathCommand } from './data/path';
+	StrokeStyle,
+} from './data/style';
+import {
+	CubicCurveTo,
+	CurveTo, LineTo, MoveTo, PathCommand,
+} from './data/path';
 import { Shape } from './shape';
+import {
+	EllipseData,
+	GraphicsData,
+	PathData,
+	RectangleData,
+} from './data/data';
 
 export default class Graphics {
 	shape: Shape;
 
-	private fill?: GraphicsFill;
-	private stroke?: GraphicsStroke;
+	private fill?: FillStyle;
+	private stroke?: StrokeStyle;
 
 	constructor(shape: Shape) {
 		this.shape = shape;
@@ -28,7 +39,7 @@ export default class Graphics {
 			type: 'solid',
 			color,
 			alpha,
-		};
+		} as SolidFill;
 	}
 
 	beginBitmapFill(
@@ -43,7 +54,7 @@ export default class Graphics {
 			matrix,
 			repeat,
 			smooth,
-		};
+		} as BitmapFill;
 	}
 
 	beginGradientFill(
@@ -65,7 +76,7 @@ export default class Graphics {
 			spread,
 			interpolation,
 			focalPointRatio,
-		};
+		} as GradientFill;
 	}
 
 	lineStyle(
@@ -89,7 +100,7 @@ export default class Graphics {
 				type: 'solid',
 				color,
 				alpha,
-			},
+			} as SolidFill,
 		};
 	}
 
@@ -115,7 +126,7 @@ export default class Graphics {
 			spread,
 			interpolation,
 			focalPointRatio,
-		};
+		} as GradientFill;
 	}
 
 	lineBitmapStyle(
@@ -133,12 +144,12 @@ export default class Graphics {
 			matrix,
 			repeat,
 			smooth,
-		};
+		} as BitmapFill;
 	}
 
 	moveTo(x: number, y: number) {
 		const path = this.beginPath();
-		path.push({ type: 'moveTo', x, y });
+		path.push({ type: 'moveTo', x, y } as MoveTo);
 	}
 
 	lineTo(x: number, y: number) {
@@ -146,30 +157,34 @@ export default class Graphics {
 		if (!path) {
 			return;
 		}
-		path.push({ type: 'lineTo', x, y });
+		path.push({ type: 'lineTo', x, y } as LineTo);
 	}
 
 	curveTo(
-		controlX: number, controlY: number,
-		anchorX: number, anchorY: number,
+		cx: number, cy: number,
+		x: number, y: number,
 	) {
 		const path = this.getPath();
 		if (!path) {
 			return;
 		}
-		path.push({ type: 'curveTo', data: [controlX, controlY, anchorX, anchorY] });
+		path.push({
+			type: 'curveTo', cx, cy, x, y,
+		} as CurveTo);
 	}
 
 	cubicCurveTo(
-		controlX1: number, controlY1: number,
-		controlX2: number, controlY2: number,
-		anchorX: number, anchorY: number,
+		cx: number, cy: number,
+		sx: number, sy: number,
+		x: number, y: number,
 	) {
 		const path = this.getPath();
 		if (!path) {
 			return;
 		}
-		path.push({ type: 'curveTo', data: [controlX1, controlY1, controlX2, controlY2, anchorX, anchorY] });
+		path.push({
+			type: 'curveTo', cx, cy, sx, sy, x, y,
+		} as CubicCurveTo);
 	}
 
 	drawRoundRect(
@@ -196,46 +211,95 @@ export default class Graphics {
 		const dx: number = width - w;
 		const dy: number = height - h;
 
-		path.push({ type: 'moveTo', x, y: ym });
-		path.push({ type: 'cubicCurveTo', data: [x, ym - oy, xm - ox, y, xm, y] });
-		path.push({ type: 'lineTo', x: xm + dx, y });
-		path.push({ type: 'cubicCurveTo', data: [xm + ox + dx, y, xe + dx, ym - oy, xe + dx, ym] });
-		path.push({ type: 'lineTo', x: xe + dx, y: ym + dy });
-		path.push({ type: 'cubicCurveTo', data: [xe + dx, ym + oy + dy, xm + ox + dx, ye + dy, xm + dx, ye + dy] });
-		path.push({ type: 'lineTo', x: xm, y: ye + dy });
-		path.push({ type: 'cubicCurveTo', data: [xm - ox, ye + dy, x, ym + oy + dy, x, ym + dy] });
+		path.push({
+			type: 'moveTo',
+			x,
+			y: ym,
+		} as MoveTo);
+
+		path.push({
+			type: 'cubicCurveTo',
+			cx: x,
+			cy: ym - oy,
+			sx: xm - ox,
+			sy: y,
+			x: xm,
+			y,
+		} as CubicCurveTo);
+
+		path.push({
+			type: 'lineTo',
+			x: xm + dx,
+			y,
+		} as LineTo);
+
+		path.push({
+			type: 'cubicCurveTo',
+			cx: xm + ox + dx,
+			cy: y,
+			sx: xe + dx,
+			sy: ym - oy,
+			x: xe + dx,
+			y: ym,
+		} as CubicCurveTo);
+
+		path.push({
+			type: 'lineTo',
+			x: xe + dx,
+			y: ym + dy,
+		} as LineTo);
+
+		path.push({
+			type: 'cubicCurveTo',
+			cx: xe + dx,
+			cy: ym + oy + dy,
+			sx: xm + ox + dx,
+			sy: ye + dy,
+			x: xm + dx,
+			y: ye + dy,
+		} as CubicCurveTo);
+
+		path.push({
+			type: 'lineTo',
+			x: xm,
+			y: ye + dy,
+		} as LineTo);
+
+		path.push({
+			type: 'cubicCurveTo',
+			cx: xm - ox,
+			cy: ye + dy,
+			sx: x,
+			sy: ym + oy + dy,
+			x,
+			y: ym + dy,
+		} as CubicCurveTo);
 	}
 
 	drawRect(x: number, y: number, width: number, height: number) {
-		const data = this.createData();
-		data.path = {
-			type: 'rectangle',
-			x,
-			y,
-			width,
-			height,
-		};
+		const data = this.createData() as RectangleData;
+		data.type = 'rectangle';
+		data.x = x;
+		data.y = y;
+		data.width = width;
+		data.height = height;
 	}
 
 	drawCircle(x: number, y: number, radius: number) {
-		const data = this.createData();
-		data.path = {
-			type: 'circle',
-			x,
-			y,
-			radius,
-		};
+		const data = this.createData() as EllipseData;
+		data.type = 'ellipse';
+		data.x = x;
+		data.y = y;
+		data.radius = radius;
 	}
 
 	drawEllipse(x: number, y: number, width: number, height: number) {
-		const data = this.createData();
-		data.path = {
-			type: 'circle',
-			x,
-			y,
-			width,
-			height,
-		};
+		const data = this.createData() as EllipseData;
+		data.type = 'ellipse';
+		data.radiusX = width / 2;
+		data.radiusY = height / 2;
+		data.x = x - data.radiusX;
+		data.y = y - data.radiusY;
 	}
 
 	clear() {
@@ -253,15 +317,15 @@ export default class Graphics {
 			shape.data = [];
 		}
 
-		const graphicsData: GraphicsData = { fill, stroke };
+		const graphicsData: GraphicsData = { type: 'path', fill, stroke };
 		shape.data.push(graphicsData);
 		return graphicsData;
 	}
 
 	private beginPath(): PathCommand[] {
-		const data = this.createData();
-		data.path = [];
-		return data.path;
+		const data: PathData = this.createData() as PathData;
+		data.data = [];
+		return data.data;
 	}
 
 	private getPath(): PathCommand[] | undefined {
@@ -269,10 +333,10 @@ export default class Graphics {
 		if (!Array.isArray(shape.data) || !shape.data.length) {
 			return undefined;
 		}
-		const data = shape.data[shape.data.length - 1];
-		if (!Array.isArray(data.path)) {
+		const data = shape.data[shape.data.length - 1] as PathData;
+		if (!Array.isArray(data.data)) {
 			return undefined;
 		}
-		return data.path;
+		return data.data;
 	}
 }

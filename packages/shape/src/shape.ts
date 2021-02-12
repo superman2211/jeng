@@ -55,7 +55,7 @@ export function hitTest(shape: Shape, context: PointerContext): boolean {
 	return !!bounds && Rectangle.contains(bounds, local);
 }
 
-export function applyImageExtension(support: Support) {
+export function applyShapeExtension(support: Support) {
 	support.hitTestHandlers.set(SHAPE, hitTest);
 	support.resources.resolvers.add(resolveImage);
 }
