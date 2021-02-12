@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { Debug } from '@e2d/engine';
-import { ImageResource, resolveImage } from '@e2d/image';
+import { ImageResource, resolveImage } from '@e2d/resources';
 
 export default class CustomResourceManager {
 	readonly aliases = new Map<string, string>();

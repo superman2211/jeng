@@ -2,7 +2,7 @@ import {
 	Source, Component, Context, Support, PointerContext, Pivot,
 } from '@e2d/engine';
 import { Rectangle } from '@e2d/geom';
-import { ImageResource, resolveImage } from './resources';
+import { ImageResource, resolveImage } from '@e2d/resources';
 
 export const IMAGE = 'image';
 

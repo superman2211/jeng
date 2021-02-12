@@ -9,7 +9,7 @@ export function renderShape(shape: Shape, context: RenderContext): void {
 	
 }
 
-export function applyCanvasImageExtension(support: Support) {
+export function applyCanvasShapeExtension(support: Support) {
 	applyShapeExtension(support);
 	support.renderHandlers.set(SHAPE, renderShape);
 }

@@ -35,7 +35,8 @@
   "dependencies": {
 	  "@e2d/engine": "0.1.0",
 	  "@e2d/canvas-support": "0.1.0",
-	  "@e2d/geom": "0.1.0"
+	  "@e2d/geom": "0.1.0",
+	  "@e2d/resources": "0.1.0"
   },
   "devDependencies": {
 	"@babel/core": "^7.10.3",

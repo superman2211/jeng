@@ -3,7 +3,7 @@ import {
 } from '@e2d/engine';
 import { CanvasSupport } from '@e2d/canvas-support';
 import { ColorTransform, Matrix, Rectangle } from '@e2d/geom';
-import { ImageResource } from './resources';
+import { ImageResource } from '@e2d/resources';
 import { applyImageExtension, IMAGE, Image } from './image';
 
 let tempContext: CanvasRenderingContext2D;

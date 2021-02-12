@@ -2,8 +2,9 @@
 import { CanvasSupport } from '@e2d/canvas-support';
 import { Pivot, RenderContext, Support } from '@e2d/engine';
 import {
-	applyImageExtension, IMAGE, Image, ImageResource,
+	applyImageExtension, IMAGE, Image,
 } from '@e2d/image';
+import { ImageResource } from '@e2d/resources';
 
 function renderImage(image: Image, context: RenderContext): void {
 	if (!image.src) {

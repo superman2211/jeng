@@ -2,6 +2,7 @@ import {
 	Component, Support, PointerContext, Pivot,
 } from '@e2d/engine';
 import { Bounds, Rectangle } from '@e2d/geom';
+import { resolveImage } from '@e2d/resources';
 import { GraphicsData } from './data/data';
 import Graphics from './graphics';
 

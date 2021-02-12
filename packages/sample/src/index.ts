@@ -1,8 +1,10 @@
 import { Component, Engine, applyMouseSupportExtension } from '@e2d/engine';
 import { applyTweenExtension } from '@e2d/tween';
 import { applyCanvasTextExtension } from '@e2d/text';
-import { applyCanvasImageExtension, ImageResource } from '@e2d/image';
+import { applyCanvasImageColorExtension } from '@e2d/image';
+import { applyCanvasShapeExtension } from '@e2d/shape';
 import { CanvasSupport } from '@e2d/canvas-support';
+import { ImageResource } from '@e2d/resources';
 import CustomResourceManager from './engine/resources';
 import main from './main';
 import CustomSupport from './engine/support';
@@ -16,8 +18,9 @@ app.start();
 
 // basic engine
 const engine = new Engine(new CanvasSupport());
-applyCanvasImageExtension(engine.support, { colorTransform: true });
+applyCanvasImageColorExtension(engine.support);
 applyCanvasTextExtension(engine.support);
+applyCanvasShapeExtension(engine.support);
 applyTweenExtension(engine.support);
 applyMouseSupportExtension(engine);
 engine.root = app as any as Component;

@@ -2,7 +2,7 @@ import {
 	Pivot, RenderContext, Source, Support,
 } from '@e2d/engine';
 import { CanvasSupport } from '@e2d/canvas-support';
-import { ImageResource } from './resources';
+import { ImageResource } from '@e2d/resources';
 import { applyImageExtension, IMAGE, Image } from './image';
 
 export function renderCanvas(image: Image, context: RenderContext): void {
