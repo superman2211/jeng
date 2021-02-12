@@ -27,15 +27,46 @@ export default function main(): Main {
 			figure: {
 				type: 'shape',
 				data: {
+					type: 'rect',
+					x: 0,
+					y: 0,
+					width: 100,
+					height: 100,
 					fill: 0xff00ff,
 					stroke: {
 						thickness: 2,
 						fill: 0x00ff00,
 					},
-					path: {
-						type: 'rect', x: 0, y: 0, width: 100, height: 100,
-					},
 				},
+			},
+			shapes: {
+				type: 'shape',
+				data: [
+					{
+						type: 'circle',
+						x: 100,
+						y: 100,
+						radius: 50,
+						fill: { type: 'solid', color: 0xffff00, alpha: 0.5 },
+					},
+					{
+						type: 'path',
+						data: 'M 10 10 H 90 V 90 H 10 Z',
+						fill: 0xff00ff,
+					},
+					{
+						type: 'path',
+						data: [
+							{ type: 'moveTo', x: 0, y: 0 },
+							{ type: 'lineTo', x: 100, y: 0 },
+							{ type: 'lineTo', x: 100, y: 100 },
+							{ type: 'lineTo', x: 0, y: 100 },
+							{ type: 'lineTo', x: 0, y: 0 },
+						],
+						fill: 0xff00ff,
+						stroke: 0x000000,
+					},
+				],
 			},
 			units: {
 				type: 'container',

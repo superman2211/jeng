@@ -10,7 +10,7 @@ import {
 	LineScaleMode,
 	SpreadMethod,
 } from './data/data';
-import { GraphicsPath } from './data/path';
+import { PathCommand } from './data/path';
 import { Shape } from './shape';
 
 export default class Graphics {
@@ -258,13 +258,13 @@ export default class Graphics {
 		return graphicsData;
 	}
 
-	private beginPath(): GraphicsPath[] {
+	private beginPath(): PathCommand[] {
 		const data = this.createData();
 		data.path = [];
 		return data.path;
 	}
 
-	private getPath(): GraphicsPath[] | undefined {
+	private getPath(): PathCommand[] | undefined {
 		const { shape } = this;
 		if (!Array.isArray(shape.data) || !shape.data.length) {
 			return undefined;
