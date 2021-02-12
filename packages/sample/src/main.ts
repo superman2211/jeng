@@ -12,7 +12,8 @@ interface Main {
 
 export default function main(): Main {
 	function onUnitClick(data: UnitProperties) {
-		console.log('onUnitClick', data.title);
+		data.health = Math.random();
+		console.log('onUnitClick', data.name);
 	}
 
 	return {
@@ -71,8 +72,12 @@ export default function main(): Main {
 			units: {
 				type: 'container',
 				children: [
-					unit({ title: 'Archer!\nHealth: 100%', image: ARCHER, onClick: onUnitClick }),
-					unit({ title: 'Animalist!\nHealth: 100%', image: ANIMALIST, onClick: onUnitClick }),
+					unit({
+						name: 'Archer', health: 1, image: ARCHER, onClick: onUnitClick,
+					}),
+					unit({
+						name: 'Animalist', health: 1, image: ANIMALIST, onClick: onUnitClick,
+					}),
 				],
 			},
 			artifact: {

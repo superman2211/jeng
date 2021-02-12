@@ -5,18 +5,23 @@ interface Unit {
 }
 
 export interface UnitProperties {
-	title: string,
+	name: string,
+	health: number,
 	image: string,
 	onClick: (data: UnitProperties) => void;
 }
 
 export function unit(props: UnitProperties): Unit {
+	function getTitle() {
+		return `${props.name}: ${Math.round(props.health * 100)}%`;
+	}
+
 	return {
 		type: 'container',
 		x: 50 + Math.random() * 400,
 		y: 200,
 		rotation: 0,
-		onUpdate(time: number) {
+		updateMove(time: number) {
 			this.x += this.children.image.scaleX * time * SPEED;
 			if (this.x < 50) {
 				this.children.image.scaleX = 1;
@@ -24,10 +29,13 @@ export function unit(props: UnitProperties): Unit {
 				this.children.image.scaleX = -1;
 			}
 		},
+		onUpdate(time: number) {
+			this.updateMove(time);
+		},
 		children: {
 			text: {
 				type: 'text',
-				text: props.title,
+				text: getTitle(),
 				textFormat: {
 					size: 15,
 					color: 0xffdddd,
@@ -40,6 +48,9 @@ export function unit(props: UnitProperties): Unit {
 				pivotX: 0.5,
 				onPointerDown: () => {
 					props.onClick(props);
+				},
+				onUpdate() {
+					this.text = getTitle();
 				},
 			},
 			image: {

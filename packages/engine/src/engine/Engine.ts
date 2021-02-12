@@ -2,7 +2,7 @@
 import { ColorTransform, Matrix } from '@e2d/geom';
 import { Component } from '../components/component';
 import { applyContainerExtension } from '../components/container';
-import { PointerEvent } from '../extensions/pointer';
+import { PointerEvent } from '../interfaces/pointer';
 import { PointerContext, RenderContext, UpdateContext } from './context';
 import Support from './support';
 

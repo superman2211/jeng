@@ -1,5 +1,5 @@
 import { Context } from '../engine/context';
-import { Resource } from '../resources/resources';
+import { Resource } from '../engine/resources';
 
 export interface Source {
 	src?: string;

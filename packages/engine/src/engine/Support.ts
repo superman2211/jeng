@@ -1,9 +1,9 @@
 /* eslint-disable class-methods-use-this */
 import { ColorTransform, Matrix } from '@e2d/geom';
 import { Component } from '../components/component';
-import { Pointer } from '../extensions/pointer';
-import { Transform } from '../extensions/transform';
-import { Resources } from '../resources/resources';
+import { Pointer } from '../interfaces/pointer';
+import { Transform } from '../interfaces/transform';
+import { Resources } from './resources';
 import { UpdateContext, PointerContext, RenderContext } from './context';
 
 type UpdateHandler = (component: Component, context: UpdateContext) => void;

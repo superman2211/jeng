@@ -1,5 +1,5 @@
 import { ColorTransform, Matrix, Point } from '@e2d/geom';
-import { PointerEventType } from '../extensions/pointer';
+import { PointerEventType } from '../interfaces/pointer';
 import Support from './support';
 
 export interface Context {

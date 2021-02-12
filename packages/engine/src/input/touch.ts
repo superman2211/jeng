@@ -1,5 +1,5 @@
 import Engine from '../engine/engine';
-import { PointerEventType } from '../extensions/pointer';
+import { PointerEventType } from '../interfaces/pointer';
 
 function dispatchEvent(engine: Engine, event: TouchEvent, type: PointerEventType) {
 	const { element } = engine.support;
