@@ -13,7 +13,7 @@ export interface UnitProperties {
 
 export function unit(props: UnitProperties): Unit {
 	function getTitle() {
-		return `${props.name}: ${Math.round(props.health * 100)}%`;
+		return `${props.name}\n${Math.round(props.health * 100)}%`;
 	}
 
 	return {
