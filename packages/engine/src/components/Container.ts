@@ -7,41 +7,28 @@ type ComponentsMap = { [key: string]: Component };
 export const CONTAINER = 'container';
 
 export interface Container extends Component {
-	child?: Component;
-	children?: Component[] | ComponentsMap;
+	children?: Component | Component[] | ComponentsMap;
 }
 
 export namespace Container {
 	export function numChildren(container: Container): number {
-		const { child, children } = container;
-
-		let count = 0;
-
-		if (child) {
-			count++;
-		}
-
+		const { children } = container;
 		if (children) {
 			if (Array.isArray(children)) {
-				count += children.length;
-			} else {
-				const keys = Object.keys(children);
-				count += keys.length;
+				return children.length;
+			} if (children.type) {
+				return 1;
 			}
+			const keys = Object.keys(children);
+			return keys.length;
 		}
-
-		return count;
+		return 0;
 	}
 }
 
 export function render(container: Container, context: RenderContext): void {
-	const { child, children } = container;
+	const { children } = container;
 	const { support } = context;
-
-	if (child) {
-		const childContext = support.getRenderContext(child, context);
-		support.render(child, childContext);
-	}
 
 	if (children) {
 		if (Array.isArray(children)) {
@@ -50,10 +37,15 @@ export function render(container: Container, context: RenderContext): void {
 				const componentContext = support.getRenderContext(component, context);
 				support.render(component, componentContext);
 			}
+		} else if (children.type) {
+			const component = children as Container;
+			const childContext = support.getRenderContext(component, context);
+			support.render(component, childContext);
 		} else {
-			const keys = Object.keys(children);
+			const componentsMap = children as ComponentsMap;
+			const keys = Object.keys(componentsMap);
 			for (let i = 0; i < keys.length; i++) {
-				const component = children[keys[i]];
+				const component = componentsMap[keys[i]];
 				const componentContext = support.getRenderContext(component, context);
 				support.render(component, componentContext);
 			}
@@ -62,13 +54,8 @@ export function render(container: Container, context: RenderContext): void {
 }
 
 export function update(container: Container, context: UpdateContext): void {
-	const { child, children } = container;
+	const { children } = container;
 	const { support } = context;
-
-	if (child) {
-		const childContext = support.getUpdateContext(child, context);
-		support.update(child, childContext);
-	}
 
 	if (children) {
 		if (Array.isArray(children)) {
@@ -77,10 +64,15 @@ export function update(container: Container, context: UpdateContext): void {
 				const componentContext = support.getUpdateContext(component, context);
 				support.update(component, componentContext);
 			}
+		} else if (children.type) {
+			const component = children as Container;
+			const childContext = support.getUpdateContext(component, context);
+			support.update(component, childContext);
 		} else {
-			const keys = Object.keys(children);
+			const componentsMap = children as ComponentsMap;
+			const keys = Object.keys(componentsMap);
 			for (let i = 0; i < keys.length; i++) {
-				const component = children[keys[i]];
+				const component = componentsMap[keys[i]];
 				const componentContext = support.getUpdateContext(component, context);
 				support.update(component, componentContext);
 			}
@@ -89,7 +81,7 @@ export function update(container: Container, context: UpdateContext): void {
 }
 
 export function hitTest(container: Container, context: PointerContext): boolean {
-	const { child, children } = container;
+	const { children } = container;
 	const { support } = context;
 
 	if (children) {
@@ -102,10 +94,18 @@ export function hitTest(container: Container, context: PointerContext): boolean 
 					return true;
 				}
 			}
+		} else if (children.type) {
+			const component = children as Container;
+			const childContext = support.getPointerContext(component, context);
+			const result = support.hitTest(component, childContext);
+			if (result) {
+				return true;
+			}
 		} else {
-			const keys = Object.keys(children);
+			const componentsMap = children as ComponentsMap;
+			const keys = Object.keys(componentsMap);
 			for (let i = keys.length - 1; i >= 0; i--) {
-				const component = children[keys[i]];
+				const component = componentsMap[keys[i]];
 				const componentContext = support.getPointerContext(component, context);
 				const result = support.hitTest(component, componentContext);
 				if (result) {
@@ -114,15 +114,6 @@ export function hitTest(container: Container, context: PointerContext): boolean 
 			}
 		}
 	}
-
-	if (child) {
-		const childContext = support.getPointerContext(child, context);
-		const result = support.hitTest(child, childContext);
-		if (result) {
-			return true;
-		}
-	}
-
 	return false;
 }
 

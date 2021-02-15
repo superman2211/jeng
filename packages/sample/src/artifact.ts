@@ -3,7 +3,7 @@ import { ABILITY_WOLF } from './assets';
 export default function recursive() {
 	const container = {
 		type: 'container',
-		child: {
+		children: {
 			type: 'container',
 			x: 30,
 			y: 30,
@@ -22,7 +22,7 @@ export default function recursive() {
 		},
 	};
 
-	container.child.children.push(container as never);
+	container.children.children.push(container as never);
 
 	return container;
 }

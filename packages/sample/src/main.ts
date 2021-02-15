@@ -135,7 +135,7 @@ export default function main(): Main {
 				type: 'container',
 				x: 350,
 				y: 400,
-				child: {
+				children: {
 					type: 'image',
 					src: ABILITY_WOLF,
 					scale: 0.5,
