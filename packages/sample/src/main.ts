@@ -110,14 +110,24 @@ export default function main(): Main {
 				tint: {
 					color: 0x00ff00,
 					value: 1,
-				},
+				} as any,
 				onUpdate(time: number) {
-					this.tint.value += time;
-					if (this.tint.value >= 1) {
-						this.tint.value = 0;
+					if (this.tint) {
+						this.tint.value += time;
+						if (this.tint.value >= 1) {
+							this.tint.value = 0;
+						}
 					}
 				},
 				onPointerDown(e: any) {
+					if (this.tint) {
+						this.tint = null;
+					} else {
+						this.tint = {
+							color: 0x00ff00,
+							value: 1,
+						};
+					}
 					console.log('fox', e);
 				},
 			},
