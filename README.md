@@ -25,5 +25,8 @@ Linting all packages <br/>
 Clean all packages <br/>
 `yarn clean`
 
+## Other
+- [Test](https://antonovsergey2211.github.io/e2d/packages/sample/build/test.html)
+
 ## Build
 [![e2d](https://circleci.com/gh/AntonovSergey2211/e2d.svg?style=shield)](https://app.circleci.com/pipelines/github/AntonovSergey2211/e2d)
