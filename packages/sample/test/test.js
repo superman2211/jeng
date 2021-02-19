@@ -43,6 +43,57 @@ class MapEngine {
 	}
 }
 
+class StructureEngine {
+	constructor() {
+		this.map = new Map();
+	}
+
+	getName() {
+		return 'Structure';
+	}
+
+	getStructure(name) {
+		let structure = this.map.get(name);
+		if (!structure) {
+			structure = new Map();
+			this.map.set(name, structure);
+		}
+		return structure;
+	}
+
+	setComponentUpdate(type, value) {
+		this.getStructure('components').set(type, value);
+	}
+
+	getComponentUpdate(type) {
+		return this.getStructure('components').get(type);
+	}
+
+	setTaskUpdate(type, value) {
+		this.getStructure('task.update').set(type, value);
+	}
+
+	getTaskUpdate(type) {
+		return this.getStructure('task.update').get(type);
+	}
+
+	setAsset(type, value) {
+		this.getStructure('resources.assets').set(type, value);
+	}
+
+	getAsset(type) {
+		return this.getStructure('resources.assets').get(type);
+	}
+
+	setResolver(type, value) {
+		this.getStructure('resources.resolvers').set(type, value);
+	}
+
+	getResolver(type) {
+		return getStructure('resources.resolvers').get(type);
+	}
+}
+
 class PropertyEngine {
 	constructor() {
 		// nothing
@@ -113,6 +164,7 @@ function getEngines() {
 	return [
 		new MapEngine(),
 		new PropertyEngine(),
+		new StructureEngine(),
 	];
 }
 
@@ -212,7 +264,7 @@ async function main() {
 	for (const engine of engines) {
 		// eslint-disable-next-line no-await-in-loop
 		await timeout(1000);
-		testEngine(engine, types, incorrectTypes, 100000);
+		testEngine(engine, types, incorrectTypes, 10000);
 	}
 }
 
