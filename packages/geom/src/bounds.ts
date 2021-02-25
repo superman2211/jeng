@@ -19,25 +19,21 @@ export namespace Bounds {
 	}
 
 	export function isEmpty(bounds: Bounds): boolean {
-		const {
-			minX, minY, maxX, maxY,
-		} = bounds;
-		return minX === Number.MAX_VALUE
-			&& minY === Number.MAX_VALUE
-			&& maxX === Number.MIN_VALUE
-			&& maxY === Number.MIN_VALUE;
+		return bounds.minX === Number.MAX_VALUE
+			&& bounds.minY === Number.MAX_VALUE
+			&& bounds.maxX === Number.MIN_VALUE
+			&& bounds.maxY === Number.MIN_VALUE;
 	}
 
-	export function toRectangle(bounds: Bounds): Rectangle {
+	export function toRectangle(bounds: Bounds, rectangle: Rectangle) {
 		const {
 			minX, minY, maxX, maxY,
 		} = bounds;
-		return {
-			x: minX,
-			y: minY,
-			width: maxX - minX,
-			height: maxY - minY,
-		};
+
+		rectangle.x = minX;
+		rectangle.y = minY;
+		rectangle.width = maxX - minX;
+		rectangle.height = maxY - minY;
 	}
 
 	export function testX(bounds: Bounds, x: number) {

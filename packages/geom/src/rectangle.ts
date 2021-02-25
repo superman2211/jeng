@@ -16,6 +16,6 @@ export namespace Rectangle {
 	}
 
 	export function isEmpty(rectangle: Rectangle): boolean {
-		return !rectangle.width || !rectangle.height;
+		return rectangle.width === 0 || rectangle.height === 0;
 	}
 }

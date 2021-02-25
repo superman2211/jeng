@@ -22,80 +22,98 @@ export namespace Matrix {
 		};
 	}
 
-	export function concat(matrix0: Matrix, matrix1: Matrix): Matrix {
-		return {
-			a: matrix1.a * matrix0.a + matrix1.b * matrix0.c,
-			b: matrix1.a * matrix0.b + matrix1.b * matrix0.d,
-			c: matrix1.c * matrix0.a + matrix1.d * matrix0.c,
-			d: matrix1.c * matrix0.b + matrix1.d * matrix0.d,
-			tx: matrix1.tx * matrix0.a + matrix1.ty * matrix0.c + matrix0.tx,
-			ty: matrix1.tx * matrix0.b + matrix1.ty * matrix0.d + matrix0.ty,
-		};
+	export function isEmpty(matrix: Matrix): boolean {
+		return matrix.a === 1
+			&& matrix.b === 0
+			&& matrix.c === 0
+			&& matrix.d === 1
+			&& matrix.tx === 0
+			&& matrix.ty === 0;
+	}
+
+	export function setEmpty(matrix: Matrix) {
+		matrix.a = 1;
+		matrix.b = 0;
+		matrix.c = 0;
+		matrix.d = 1;
+		matrix.tx = 0;
+		matrix.ty = 0;
+	}
+
+	export function copy(from: Matrix, to: Matrix) {
+		to.a = from.a;
+		to.b = from.b;
+		to.c = from.c;
+		to.d = from.d;
+		to.tx = from.tx;
+		to.ty = from.ty;
+	}
+
+	export function concat(matrix0: Matrix, matrix1: Matrix, result: Matrix) {
+		const a = matrix1.a * matrix0.a + matrix1.b * matrix0.c;
+		const b = matrix1.a * matrix0.b + matrix1.b * matrix0.d;
+		const c = matrix1.c * matrix0.a + matrix1.d * matrix0.c;
+		const d = matrix1.c * matrix0.b + matrix1.d * matrix0.d;
+		const tx = matrix1.tx * matrix0.a + matrix1.ty * matrix0.c + matrix0.tx;
+		const ty = matrix1.tx * matrix0.b + matrix1.ty * matrix0.d + matrix0.ty;
+
+		result.a = a;
+		result.b = b;
+		result.c = c;
+		result.d = d;
+		result.tx = tx;
+		result.ty = ty;
 	}
 
 	export function getDeterminant(matrix: Matrix): number {
 		return matrix.a * matrix.d - matrix.b * matrix.c;
 	}
 
-	export function invert(matrix: Matrix) {
+	export function invert(matrix: Matrix, result: Matrix) {
 		let determinant = getDeterminant(matrix);
 
 		if (determinant === 0) {
-			matrix.a = 0;
-			matrix.b = 0;
-			matrix.c = 0;
-			matrix.d = 0;
-			matrix.tx = -matrix.tx;
-			matrix.ty = -matrix.ty;
+			result.a = 0;
+			result.b = 0;
+			result.c = 0;
+			result.d = 0;
+			result.tx = -matrix.tx;
+			result.ty = -matrix.ty;
 		} else {
 			determinant = 1.0 / determinant;
 
-			const d = matrix.d * determinant;
-			const a = matrix.a * determinant;
-
-			matrix.a = d;
-			matrix.b *= -determinant;
-			matrix.c *= -determinant;
-			matrix.d = a;
-
-			const tx = -matrix.a * matrix.tx - matrix.c * matrix.ty;
-			const ty = -matrix.b * matrix.tx - matrix.d * matrix.ty;
-
-			matrix.tx = tx;
-			matrix.ty = ty;
+			result.a = matrix.a * determinant;
+			result.b = -matrix.b * determinant;
+			result.c = -matrix.c * determinant;
+			result.d = matrix.d * determinant;
+			result.tx = -result.a * matrix.tx - result.c * matrix.ty;
+			result.ty = -result.b * matrix.tx - result.d * matrix.ty;
 		}
 	}
 
-	export function transformPoint(matrix: Matrix, point: Point): Point {
+	export function transformPoint(matrix: Matrix, point: Point, result: Point) {
 		const { x, y } = point;
-
-		return {
-			x: x * matrix.a + y * matrix.c + matrix.tx,
-			y: x * matrix.b + y * matrix.d + matrix.ty,
-		};
+		result.x = x * matrix.a + y * matrix.c + matrix.tx;
+		result.y = x * matrix.b + y * matrix.d + matrix.ty;
 	}
 
-	export function transformInversePoint(matrix: Matrix, point: Point): Point {
+	export function transformInversePoint(matrix: Matrix, point: Point, result: Point) {
 		let determinant = getDeterminant(matrix);
 
 		if (determinant === 0) {
-			return {
-				x: -matrix.tx,
-				y: -matrix.ty,
-			};
+			result.x = -matrix.tx;
+			result.y = -matrix.ty;
+		} else {
+			determinant = 1 / determinant;
+
+			const { x, y } = point;
+
+			result.x = determinant * (matrix.c * (matrix.ty - y) + matrix.d * (x - matrix.tx));
+			result.y = determinant * (matrix.a * (y - matrix.ty) + matrix.b * (matrix.tx - x));
 		}
-
-		determinant = 1 / determinant;
-
-		const { x, y } = point;
-
-		return {
-			x: determinant * (matrix.c * (matrix.ty - y) + matrix.d * (x - matrix.tx)),
-			y: determinant * (matrix.a * (y - matrix.ty) + matrix.b * (matrix.tx - x)),
-		};
 	}
 
-	export function transformBounds(matrix: Matrix, bounds: Rectangle): Rectangle {
+	export function transformBounds(matrix: Matrix, bounds: Rectangle, result: Rectangle) {
 		const {
 			a, b, c, d, tx, ty,
 		} = matrix;
@@ -158,11 +176,9 @@ export namespace Matrix {
 			bottom = ny4;
 		}
 
-		return {
-			x: left,
-			y: top,
-			width: right - left,
-			height: bottom - top,
-		};
+		result.x = left;
+		result.y = top;
+		result.width = right - left;
+		result.height = bottom - top;
 	}
 }
