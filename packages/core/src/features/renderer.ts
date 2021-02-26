@@ -1,6 +1,8 @@
 import { ColorTransform, Matrix } from '@e2d/geom';
 import { Component } from '../components/component';
 import { Engine } from '../core/engine';
+import { Display } from '../interfaces/display';
+import { Transform } from '../interfaces/transform';
 
 export type RenderComponentHandler = (component: Component, engine: Engine) => void;
 
@@ -29,6 +31,26 @@ export class Renderer {
 	render() {
 	}
 
-	renderComponent(component: Component) {
+	renderComponent(component: Component, parent: RenderContext) {
+		if (this.depth > this.engine.depth) {
+			return;
+		}
+
+		if (!Display.isVisible(component)) {
+			return;
+		}
+
+		const context = this.getContext();
+
+		Transform.getMatrix(component, context.matrix);
+		Transform.getColorTransform(component, context.colorTransform);
+
+		Matrix.concat(parent.matrix, context.matrix, context.matrix);
+		ColorTransform.concat(parent.colorTransform, context.colorTransform, context.colorTransform);
+
+		const handler = this.components.get(component.type);
+		if (handler) {
+			handler(component, this.engine);
+		}
 	}
 }

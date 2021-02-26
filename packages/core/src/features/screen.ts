@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { Matrix, Rectangle } from '@e2d/geom';
 
 export class Screen {

@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { Engine } from '../core/engine';
 
 export class Platform {

@@ -31,25 +31,27 @@ export namespace ContainerExtension {
 		const { renderer } = engine;
 
 		if (children) {
+			const context = renderer.getContext();
+			renderer.depth++;
+
 			if (Array.isArray(children)) {
 				for (let i = 0; i < children.length; i++) {
 					const component = children[i];
-					const componentContext = support.getRenderContext(component, engine);
-					support.render(component, componentContext);
+					renderer.renderComponent(component, context);
 				}
 			} else if (children.type) {
 				const component = children as Container;
-				const childContext = support.getRenderContext(component, engine);
-				support.render(component, childContext);
+				renderer.renderComponent(component, context);
 			} else {
 				const componentsMap = children as ComponentsMap;
 				const keys = Object.keys(componentsMap);
 				for (let i = 0; i < keys.length; i++) {
 					const component = componentsMap[keys[i]];
-					const componentContext = support.getRenderContext(component, engine);
-					support.render(component, componentContext);
+					renderer.renderComponent(component, context);
 				}
 			}
+
+			renderer.depth++;
 		}
 	}
 

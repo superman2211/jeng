@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { Component } from '../components/component';
 import { Renderer } from '../features/renderer';
 import { Updater } from '../features/updater';

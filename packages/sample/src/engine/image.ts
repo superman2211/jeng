@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { CanvasSupport } from '@e2d/canvas-support';
 import { Pivot, RenderContext, Support } from '@e2d/engine';
 import {

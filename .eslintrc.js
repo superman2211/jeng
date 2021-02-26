@@ -32,6 +32,7 @@ module.exports = {
 		'lines-between-class-members': 'off',
 		'no-nested-ternary': 'off',
 		'import/extensions': 'off',
+		'import/prefer-default-export': 'off',
 		indent: [
 			'error',
 			'tab', {

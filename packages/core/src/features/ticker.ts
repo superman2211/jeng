@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-import { Component } from '../components/component';
 import { Engine } from '../core/engine';
 
 export class Ticker {

@@ -1,20 +1,9 @@
+import { Display } from '../interfaces/display';
 import { Pointer } from '../interfaces/pointer';
 import { Transform } from '../interfaces/transform';
+import { Update } from '../interfaces/update';
 
-export interface Component extends Transform, Pointer {
+export interface Component extends Transform, Pointer, Display, Update {
 	type: string;
 	id?: string;
-	enabled?: boolean;
-	visible?: boolean;
-	onUpdate?: (time: number) => void;
-}
-
-export namespace Component {
-	export function isEnabled(component: Component) {
-		return component.enabled ?? true;
-	}
-
-	export function isVisible(component: Component) {
-		return component.visible ?? true;
-	}
 }

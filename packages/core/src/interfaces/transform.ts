@@ -19,63 +19,55 @@ export interface Transform {
 }
 
 export namespace Transform {
-	export function getMatrix(transform: Transform): Matrix {
+	export function getMatrix(transform: Transform, result: Matrix) {
 		const { matrix } = transform;
 		if (matrix) {
-			return {
-				a: matrix.a ?? 1,
-				b: matrix.b ?? 0,
-				c: matrix.c ?? 0,
-				d: matrix.d ?? 1,
-				tx: matrix.tx ?? 0,
-				ty: matrix.ty ?? 0,
-			};
+			result.a = matrix.a ?? 1;
+			result.b = matrix.b ?? 0;
+			result.c = matrix.c ?? 0;
+			result.d = matrix.d ?? 1;
+			result.tx = matrix.tx ?? 0;
+			result.ty = matrix.ty ?? 0;
+			return;
 		}
 
 		const { rotation } = transform;
 		const scaleX = transform.scaleX ?? transform.scale ?? 1;
 		const scaleY = transform.scaleY ?? transform.scale ?? 1;
-		const tx = transform.x ?? 0;
-		const ty = transform.y ?? 0;
+
+		result.tx = transform.x ?? 0;
+		result.ty = transform.y ?? 0;
 
 		if (rotation) {
 			const cos = Math.cos(rotation);
 			const sin = Math.sin(rotation);
 
-			return {
-				a: cos * scaleX,
-				b: sin * scaleX,
-				c: -sin * scaleY,
-				d: cos * scaleY,
-				tx,
-				ty,
-			};
+			result.a = cos * scaleX;
+			result.b = sin * scaleX;
+			result.c = -sin * scaleY;
+			result.d = cos * scaleY;
+			return;
 		}
 
-		return {
-			a: scaleX,
-			b: 0,
-			c: 0,
-			d: scaleY,
-			tx,
-			ty,
-		};
+		result.a = scaleX;
+		result.b = 0;
+		result.c = 0;
+		result.d = scaleY;
 	}
 
-	export function getColorTransform(transform: Transform): ColorTransform {
+	export function getColorTransform(transform: Transform, result: ColorTransform) {
 		const { colorTransform } = transform;
 		if (colorTransform) {
-			return {
-				alphaMultiplier: colorTransform.alphaMultiplier ?? 1,
-				redMultiplier: colorTransform.redMultiplier ?? 1,
-				greenMultiplier: colorTransform.greenMultiplier ?? 1,
-				blueMultiplier: colorTransform.blueMultiplier ?? 1,
+			result.alphaMultiplier = colorTransform.alphaMultiplier ?? 1;
+			result.redMultiplier = colorTransform.redMultiplier ?? 1;
+			result.greenMultiplier = colorTransform.greenMultiplier ?? 1;
+			result.blueMultiplier = colorTransform.blueMultiplier ?? 1;
 
-				alphaOffset: colorTransform.alphaOffset ?? 0,
-				redOffset: colorTransform.redOffset ?? 0,
-				greenOffset: colorTransform.greenOffset ?? 0,
-				blueOffset: colorTransform.blueOffset ?? 0,
-			};
+			result.alphaOffset = colorTransform.alphaOffset ?? 0;
+			result.redOffset = colorTransform.redOffset ?? 0;
+			result.greenOffset = colorTransform.greenOffset ?? 0;
+			result.blueOffset = colorTransform.blueOffset ?? 0;
+			return;
 		}
 
 		const { tint } = transform;
@@ -88,29 +80,26 @@ export namespace Transform {
 			const g = (color >> 8) & 0xff;
 			const b = color & 0xff;
 
-			return {
-				alphaMultiplier: transform.alpha ?? 1,
-				redMultiplier: valueInverted,
-				greenMultiplier: valueInverted,
-				blueMultiplier: valueInverted,
+			result.alphaMultiplier = transform.alpha ?? 1;
+			result.redMultiplier = valueInverted;
+			result.greenMultiplier = valueInverted;
+			result.blueMultiplier = valueInverted;
 
-				alphaOffset: 0,
-				redOffset: r * value,
-				greenOffset: g * value,
-				blueOffset: b * value,
-			};
+			result.alphaOffset = 0;
+			result.redOffset = r * value;
+			result.greenOffset = g * value;
+			result.blueOffset = b * value;
+			return;
 		}
 
-		return {
-			alphaMultiplier: transform.alpha ?? 1,
-			redMultiplier: 1,
-			greenMultiplier: 1,
-			blueMultiplier: 1,
+		result.alphaMultiplier = transform.alpha ?? 1;
+		result.redMultiplier = 1;
+		result.greenMultiplier = 1;
+		result.blueMultiplier = 1;
 
-			alphaOffset: 0,
-			redOffset: 0,
-			greenOffset: 0,
-			blueOffset: 0,
-		};
+		result.alphaOffset = 0;
+		result.redOffset = 0;
+		result.greenOffset = 0;
+		result.blueOffset = 0;
 	}
 }
