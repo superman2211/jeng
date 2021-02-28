@@ -8,12 +8,14 @@ import { Platform } from '../features/platform';
 import { ContainerExtension } from '../components/container';
 import { Debug } from '../features/debug';
 import { Resources } from '../features/resources';
+import { Components } from '../features/components';
 
 export class Engine {
 	root?: Component;
 
 	depth = 32;
 
+	components: Components;
 	screen: Screen;
 	platform: Platform;
 	updater: Updater;
@@ -24,6 +26,7 @@ export class Engine {
 	resources: Resources;
 
 	constructor() {
+		this.components = new Components();
 		this.screen = new Screen();
 		this.platform = new Platform(this);
 		this.updater = new Updater(this);

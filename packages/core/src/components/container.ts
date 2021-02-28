@@ -123,8 +123,8 @@ export namespace ContainerExtension {
 	}
 
 	export function init(engine: Engine) {
-		engine.updater.components.set(CONTAINER, update);
-		engine.renderer.components.set(CONTAINER, render);
-		engine.pointerEvents.components.set(CONTAINER, hitTest);
+		engine.components.update.set(CONTAINER, update);
+		engine.components.render.set(CONTAINER, render);
+		engine.components.hitTest.set(CONTAINER, hitTest);
 	}
 }

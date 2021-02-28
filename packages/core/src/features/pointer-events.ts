@@ -1,32 +1,22 @@
 import { Matrix, Point } from '@e2d/geom';
 import { Component } from '../components/component';
-import { Engine } from '../core/engine';
 import { Display } from '../interfaces/display';
 import { Pointer, PointerEventType } from '../interfaces/pointer';
 import { Transform } from '../interfaces/transform';
-
-export type PointerComponentHandler = (component: Component, engine: Engine) => boolean;
+import { Feature } from './feature';
 
 export interface PointerContext {
 	matrix: Matrix;
 }
 
-export class PointerEvents {
-	readonly engine: Engine;
-	readonly components = new Map<string, PointerComponentHandler>();
-
+export class PointerEvents extends Feature {
 	depth = 0;
-	enabled = true;
 
 	private global = Point.empty();
 	private local = Point.empty();
 	private pointerId = 0;
 	private pointerType: PointerEventType = 'pointerDown';
 	private contexts: PointerContext[] = [];
-
-	constructor(engine: Engine) {
-		this.engine = engine;
-	}
 
 	getContext(): PointerContext {
 		let context = this.contexts[this.depth];
@@ -80,7 +70,7 @@ export class PointerEvents {
 			return false;
 		}
 
-		const handler = this.components.get(component.type);
+		const handler = this.engine.components.hitTest.get(component.type);
 		if (handler) {
 			const context = this.getContext();
 			Transform.getMatrix(component, context.matrix);

@@ -1,21 +1,10 @@
 import { Component } from '../components/component';
-import { Engine } from '../core/engine';
 import { Update } from '../interfaces/update';
+import { Feature } from './feature';
 
-export type UpdateComponentHandler = (component: Component, engine: Engine) => void;
-
-export class Updater {
-	readonly engine: Engine;
-	readonly components = new Map<string, UpdateComponentHandler>();
-	readonly properties = new Map<string, UpdateComponentHandler>();
-
+export class Updater extends Feature {
 	depth = 0;
 	time = 0;
-	enabled = true;
-
-	constructor(engine: Engine) {
-		this.engine = engine;
-	}
 
 	update(time: number) {
 		if (!this.enabled) {
@@ -46,14 +35,14 @@ export class Updater {
 
 		Update.update(component, this.time);
 
-		const handler = this.components.get(component.type);
+		const handler = this.engine.components.update.get(component.type);
 		if (handler) {
 			handler(component, this.engine);
 		}
 	}
 
 	updateProperties(component: Component) {
-		this.properties.forEach((handler, property) => {
+		this.engine.components.properties.forEach((handler, property) => {
 			if ((component as any)[property]) {
 				handler(component, this.engine);
 			}

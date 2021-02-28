@@ -1,14 +1,8 @@
 /* eslint-disable class-methods-use-this */
-import { Engine } from '../core/engine';
+import { Feature } from './feature';
 
-export class Platform {
-	readonly engine: Engine;
-	readonly view: HTMLElement;
-
-	constructor(engine: Engine) {
-		this.engine = engine;
-		this.view = document.createElement('div');
-	}
+export class Platform extends Feature {
+	readonly view: HTMLElement = document.createElement('div');
 
 	updateSize(): void {
 	}
