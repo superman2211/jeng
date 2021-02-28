@@ -24,8 +24,8 @@
   "homepage": "https://github.com/AntonovSergey2211/e2d#readme",
   "dependencies": {
     "@e2d/tween": "^0.1.0",
-    "@e2d/canvas-support": "^0.1.0",
-    "@e2d/engine": "^0.1.0",
+    "@e2d/canvas-engine": "^0.1.0",
+    "@e2d/core": "^0.1.0",
     "@e2d/image": "^0.1.0",
     "@e2d/text": "^0.1.0",
     "@e2d/shape": "^0.1.0",

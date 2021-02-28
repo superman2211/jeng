@@ -10,11 +10,15 @@ export class Screen {
 	private matrix = Matrix.empty();
 
 	getMatrix() {
-		const pixelRatio = window.devicePixelRatio ?? this.pixelRatio;
+		const pixelRatio = this.getPixelRatio();
 
 		this.matrix.a = pixelRatio;
 		this.matrix.d = pixelRatio;
 
 		return this.matrix;
+	}
+
+	getPixelRatio() {
+		return window.devicePixelRatio ?? this.pixelRatio;
 	}
 }

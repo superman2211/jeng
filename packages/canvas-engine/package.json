@@ -1,5 +1,5 @@
 {
-  "name": "@e2d/engine",
+  "name": "@e2d/canvas-engine",
   "version": "0.1.0",
   "description": "canvas engine",
   "main": "dist/index.js",
@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/AntonovSergey2211/e2d#readme",
   "dependencies": {
+	  "@e2d/core": "0.1.0",
 	  "@e2d/geom": "0.1.0"
   },
   "devDependencies": {

@@ -4,9 +4,6 @@ import { Feature } from './feature';
 export class Platform extends Feature {
 	readonly view: HTMLElement = document.createElement('div');
 
-	updateSize(): void {
-	}
-
 	begin(): void {
 	}
 
