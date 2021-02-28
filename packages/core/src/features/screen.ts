@@ -7,12 +7,14 @@ export class Screen {
 	fullscreen = false;
 	view?: Rectangle;
 
-	readonly matrix = Matrix.empty();
+	private matrix = Matrix.empty();
 
-	updateMatrix() {
+	getMatrix() {
 		const pixelRatio = window.devicePixelRatio ?? this.pixelRatio;
 
 		this.matrix.a = pixelRatio;
 		this.matrix.d = pixelRatio;
+
+		return this.matrix;
 	}
 }

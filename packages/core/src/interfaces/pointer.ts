@@ -1,5 +1,3 @@
-import Debug from '../utils/debug';
-
 export type PointerEventType = 'pointerDown' | 'pointerUp' | 'pointerMove' | 'pointerOver' | 'pointerOut';
 
 export interface PointerEvent {
@@ -30,15 +28,11 @@ export namespace Pointer {
 
 	export function dispatchEvent(pointer: Pointer, type: PointerEventType, x: number, y: number, id?: number) {
 		const handlerName = `on${type.charAt(0).toUpperCase()}${type.slice(1)}`;
-		if (handlerName) {
-			if ((pointer as any)[handlerName]) {
-				const event: PointerEvent = {
-					type, x, y, id,
-				};
-				(pointer as any)[handlerName](event);
-			}
-		} else {
-			Debug.warning(`Pointer event with type: ${type} not found`);
+		if ((pointer as any)[handlerName]) {
+			const event: PointerEvent = {
+				type, x, y, id,
+			};
+			(pointer as any)[handlerName](event);
 		}
 	}
 }

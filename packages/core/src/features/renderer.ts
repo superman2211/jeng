@@ -25,10 +25,15 @@ export class Renderer {
 	}
 
 	getContext(): RenderContext {
-		return this.contexts[this.depth];
-	}
-
-	render() {
+		let context = this.contexts[this.depth];
+		if (!context) {
+			context = {
+				matrix: Matrix.empty(),
+				colorTransform: ColorTransform.empty(),
+			};
+			this.contexts[this.depth] = context;
+		}
+		return context;
 	}
 
 	renderComponent(component: Component, parent: RenderContext) {
@@ -52,5 +57,30 @@ export class Renderer {
 		if (handler) {
 			handler(component, this.engine);
 		}
+	}
+
+	render() {
+		if (!this.enabled) {
+			return;
+		}
+
+		const { root } = this.engine;
+		if (!root) {
+			return;
+		}
+
+		this.engine.platform.begin();
+
+		this.depth = 0;
+		const base = this.getContext();
+
+		this.depth++;
+
+		Matrix.copy(this.engine.screen.getMatrix(), base.matrix);
+		ColorTransform.setEmpty(base.colorTransform);
+
+		this.renderComponent(root, base);
+
+		this.engine.platform.end();
 	}
 }

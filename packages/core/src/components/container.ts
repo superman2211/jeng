@@ -51,55 +51,57 @@ export namespace ContainerExtension {
 				}
 			}
 
-			renderer.depth++;
+			renderer.depth--;
 		}
 	}
 
 	export function update(container: Container, engine: Engine): void {
 		const { children } = container;
-		const { support } = engine;
+		const { updater } = engine;
 
 		if (children) {
+			updater.depth++;
+
 			if (Array.isArray(children)) {
 				for (let i = 0; i < children.length; i++) {
 					const component = children[i];
-					const componentContext = support.getUpdateContext(component, engine);
-					support.update(component, componentContext);
+					updater.updateComponent(component);
 				}
 			} else if (children.type) {
 				const component = children as Container;
-				const childContext = support.getUpdateContext(component, engine);
-				support.update(component, childContext);
+				updater.updateComponent(component);
 			} else {
 				const componentsMap = children as ComponentsMap;
 				const keys = Object.keys(componentsMap);
 				for (let i = 0; i < keys.length; i++) {
 					const component = componentsMap[keys[i]];
-					const componentContext = support.getUpdateContext(component, engine);
-					support.update(component, componentContext);
+					updater.updateComponent(component);
 				}
 			}
+
+			updater.depth--;
 		}
 	}
 
 	export function hitTest(container: Container, engine: Engine): boolean {
 		const { children } = container;
-		const { support } = engine;
+		const { pointerEvents } = engine;
 
 		if (children) {
+			const context = pointerEvents.getContext();
+			pointerEvents.depth++;
+
 			if (Array.isArray(children)) {
 				for (let i = children.length - 1; i >= 0; i--) {
 					const component = children[i];
-					const componentContext = support.getPointerContext(component, engine);
-					const result = support.hitTest(component, componentContext);
+					const result = pointerEvents.dispatchComponent(component, context);
 					if (result) {
 						return true;
 					}
 				}
 			} else if (children.type) {
 				const component = children as Container;
-				const childContext = support.getPointerContext(component, engine);
-				const result = support.hitTest(component, childContext);
+				const result = pointerEvents.dispatchComponent(component, context);
 				if (result) {
 					return true;
 				}
@@ -108,13 +110,14 @@ export namespace ContainerExtension {
 				const keys = Object.keys(componentsMap);
 				for (let i = keys.length - 1; i >= 0; i--) {
 					const component = componentsMap[keys[i]];
-					const componentContext = support.getPointerContext(component, engine);
-					const result = support.hitTest(component, componentContext);
+					const result = pointerEvents.dispatchComponent(component, context);
 					if (result) {
 						return true;
 					}
 				}
 			}
+
+			pointerEvents.depth--;
 		}
 		return false;
 	}
@@ -122,6 +125,6 @@ export namespace ContainerExtension {
 	export function init(engine: Engine) {
 		engine.updater.components.set(CONTAINER, update);
 		engine.renderer.components.set(CONTAINER, render);
-		engine.pointer.components.set(CONTAINER, hitTest);
+		engine.pointerEvents.components.set(CONTAINER, hitTest);
 	}
 }

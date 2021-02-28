@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import { Engine } from '../core/engine';
 
 export class Platform {
@@ -12,6 +13,9 @@ export class Platform {
 	updateSize(): void {
 	}
 
-	clear(): void {
+	begin(): void {
+	}
+
+	end(): void {
 	}
 }
