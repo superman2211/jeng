@@ -18,6 +18,13 @@ export namespace Bounds {
 		};
 	}
 
+	export function setEmpty(bounds: Bounds) {
+		bounds.minX = Number.MAX_VALUE;
+		bounds.minY = Number.MAX_VALUE;
+		bounds.maxX = Number.MIN_VALUE;
+		bounds.maxY = Number.MIN_VALUE;
+	}
+
 	export function isEmpty(bounds: Bounds): boolean {
 		return bounds.minX === Number.MAX_VALUE
 			&& bounds.minY === Number.MAX_VALUE

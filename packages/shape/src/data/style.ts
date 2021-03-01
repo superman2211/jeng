@@ -1,4 +1,4 @@
-import { Source } from '@e2d/engine';
+import { Source } from '@e2d/core';
 import { Matrix } from '@e2d/geom';
 
 export type FillType = 'solid' | 'radial' | 'linear' | 'bitmap';
