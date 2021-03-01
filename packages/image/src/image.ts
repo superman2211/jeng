@@ -10,35 +10,40 @@ export interface Image extends Component, Source, Pivot {
 }
 
 export namespace Image {
-	export function getBounds(image: Image, engine: Engine): Rectangle | undefined {
+	export function calculateBounds(image: Image, bounds: Rectangle, engine: Engine) {
 		const { src } = image;
 		if (!src) {
-			return undefined;
+			Rectangle.setEmpty(bounds);
+			return;
 		}
 
 		const resource = engine.resources.get(src) as ImageResource | null;
 
 		if (!resource?.loaded || !resource?.image) {
-			return undefined;
+			Rectangle.setEmpty(bounds);
+			return;
 		}
 
 		const { width, height } = resource.image;
 		const x = Pivot.getX(image, width);
 		const y = Pivot.getY(image, height);
 
-		return {
-			x, y, width, height,
-		};
+		bounds.x = x;
+		bounds.y = y;
+		bounds.width = width;
+		bounds.height = height;
 	}
 }
 
-export function hitTest(image: Image, engine: Engine): boolean {
-	const { local } = engine.pointerEvents;
-	const bounds = Image.getBounds(image, engine);
-	return !!bounds && Rectangle.contains(bounds, local);
-}
+const bounds = Rectangle.empty();
 
 export namespace ImageExtension {
+	export function hitTest(image: Image, engine: Engine): boolean {
+		const { local } = engine.pointerEvents;
+		Image.calculateBounds(image, bounds, engine);
+		return Rectangle.contains(bounds, local);
+	}
+
 	export function init(engine: Engine) {
 		engine.components.hitTest.set(IMAGE, hitTest);
 		ImageResource.init(engine);

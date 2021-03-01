@@ -1,15 +1,15 @@
-import {
-	Component, Pivot, PointerContext, Support,
-} from '@e2d/engine';
+import { Component, Engine, Pivot } from '@e2d/core';
 import { Rectangle } from '@e2d/geom';
-import { TextFromat, getValidTextFormat } from './format';
-import { getFont, getTextWidth, getTextHeight } from './font';
+import { TextFormat } from './format';
+import { Font } from './font';
 
 export const TEXT = 'text';
 
+const validTextFormat: TextFormat = {};
+
 export interface Text extends Component, Pivot {
 	text?: string;
-	textFormat?: TextFromat;
+	textFormat?: TextFormat;
 	width?: number;
 	height?: number;
 	border?: number;
@@ -17,41 +17,47 @@ export interface Text extends Component, Pivot {
 }
 
 export namespace Text {
-	export function getBounds(component: Text): Rectangle | undefined {
+	export function calculateBounds(component: Text, bounds: Rectangle) {
 		const { text } = component;
 		if (!text) {
-			return undefined;
+			Rectangle.setEmpty(bounds);
+			return;
 		}
 
 		const lines = text.split('\n');
 		let { width, height } = component;
 		const { textFormat } = component;
-		const format = getValidTextFormat(textFormat);
+		TextFormat.getValidTextFormat(textFormat, validTextFormat);
 
 		if (!width) {
-			const font = getFont(format.font!);
-			width = getTextWidth(font, format, lines);
+			const font = Font.getFont(validTextFormat.font!);
+			width = Font.getTextWidth(font, validTextFormat, lines);
 		}
 
 		if (!height) {
-			height = getTextHeight(format, lines);
+			height = Font.getTextHeight(validTextFormat, lines);
 		}
 
 		const x = Pivot.getX(component, width);
 		const y = Pivot.getY(component, height);
 
-		return {
-			x, y, width, height,
-		};
+		bounds.x = x;
+		bounds.y = y;
+		bounds.width = width;
+		bounds.height = height;
 	}
 }
 
-export function hitTest(text: Text, context: PointerContext): boolean {
-	const { local } = context;
-	const bounds = Text.getBounds(text);
-	return !!bounds && Rectangle.contains(bounds, local);
-}
+const bounds = Rectangle.empty();
 
-export function applyTextExtension(support: Support) {
-	support.hitTestHandlers.set(TEXT, hitTest);
+export namespace TextExtension {
+	export function hitTest(text: Text, engine: Engine): boolean {
+		const { local } = engine.pointerEvents;
+		Text.calculateBounds(text, bounds);
+		return Rectangle.contains(bounds, local);
+	}
+
+	export function init(engine: Engine) {
+		engine.components.hitTest.set(TEXT, hitTest);
+	}
 }
