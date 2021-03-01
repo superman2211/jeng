@@ -36,6 +36,16 @@ export namespace ColorTransform {
 			&& ct.alphaOffset === 0;
 	}
 
+	export function isEmptyWithAlpha(ct: ColorTransform): boolean {
+		return ct.redMultiplier === 1
+			&& ct.greenMultiplier === 1
+			&& ct.blueMultiplier === 1
+			&& ct.redOffset === 0
+			&& ct.greenOffset === 0
+			&& ct.blueOffset === 0
+			&& ct.alphaOffset === 0;
+	}
+
 	export function setEmpty(ct: ColorTransform) {
 		ct.redMultiplier = 1;
 		ct.greenMultiplier = 1;

@@ -1,11 +1,14 @@
+import { Engine } from '../core/engine';
+import { Feature } from './feature';
+
 export interface Resource {
 	asset: string;
 	loaded: boolean;
 }
 
-export type ResourceResolver = (asset: string) => Resource | null;
+export type ResourceResolver = (asset: string, engine: Engine) => Resource | null;
 
-export class Resources {
+export class Resources extends Feature {
 	readonly resources = new Map<any, any>();
 	readonly resolvers = new Set<ResourceResolver>();
 
@@ -26,12 +29,12 @@ export class Resources {
 	private resolve(asset: string): Resource | null {
 		// eslint-disable-next-line no-restricted-syntax
 		for (const resolver of this.resolvers) {
-			const resource = resolver(asset);
+			const resource = resolver(asset, this.engine);
 			if (resource) {
 				return resource;
 			}
 		}
-		// Debug.warning(`Resource not resolved: ${asset}`);
+		this.engine.debug.warning(`Resource not resolved: ${asset}`);
 		return null;
 	}
 }

@@ -12,10 +12,11 @@ export interface PointerContext {
 export class PointerEvents extends Feature {
 	depth = 0;
 
-	private global = Point.empty();
-	private local = Point.empty();
-	private pointerId = 0;
-	private pointerType: PointerEventType = 'pointerDown';
+	readonly global = Point.empty();
+	readonly local = Point.empty();
+	pointerId = 0;
+	pointerType: PointerEventType = 'pointerDown';
+
 	private contexts: PointerContext[] = [];
 
 	getContext(): PointerContext {

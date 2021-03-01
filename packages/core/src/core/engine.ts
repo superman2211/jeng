@@ -34,7 +34,7 @@ export class Engine {
 		this.pointerEvents = new PointerEvents(this);
 		this.ticker = new Ticker(this);
 		this.debug = new Debug();
-		this.resources = new Resources();
+		this.resources = new Resources(this);
 
 		ContainerExtension.init(this);
 	}
