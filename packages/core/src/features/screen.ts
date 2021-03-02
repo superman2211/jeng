@@ -18,7 +18,15 @@ export class Screen {
 		return this.matrix;
 	}
 
+	getWidth() {
+		return this.fullscreen ? window.innerWidth : this.width;
+	}
+
+	getHeight() {
+		return this.fullscreen ? window.innerHeight : this.height;
+	}
+
 	getPixelRatio() {
-		return window.devicePixelRatio ?? this.pixelRatio;
+		return this.pixelRatio > 0 ? this.pixelRatio : window.devicePixelRatio ?? 1;
 	}
 }

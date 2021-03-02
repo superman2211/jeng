@@ -11,6 +11,7 @@ export * from './features/resources';
 export * from './features/screen';
 export * from './features/ticker';
 export * from './features/updater';
+export * from './input/mouse';
 export * from './interfaces/display';
 export * from './interfaces/pivot';
 export * from './interfaces/source';

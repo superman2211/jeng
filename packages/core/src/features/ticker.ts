@@ -5,7 +5,7 @@ export class Ticker {
 
 	frameRate = 0;
 
-	private paused = false;
+	private paused = true;
 	private time = 0;
 
 	constructor(engine: Engine) {

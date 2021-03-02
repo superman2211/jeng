@@ -30,11 +30,13 @@ export class CanvasPlatform extends Platform {
 			context = canvas.getContext('2d') as CanvasRenderingContext2D;
 		}
 
-		if (context.canvas.width !== this.view.width) {
-			context.canvas.width = this.view.width;
+		const { width, height } = this.view;
+
+		if (context.canvas.width !== width) {
+			context.canvas.width = width;
 		}
-		if (context.canvas.height !== this.view.height) {
-			context.canvas.height = this.view.height;
+		if (context.canvas.height !== height) {
+			context.canvas.height = height;
 		}
 		return context;
 	}
@@ -56,7 +58,8 @@ export class CanvasPlatform extends Platform {
 	}
 
 	updateSize() {
-		const { width, height } = this.engine.screen;
+		const width = this.engine.screen.getWidth();
+		const height = this.engine.screen.getHeight();
 		const pixelRatio = this.engine.screen.getPixelRatio();
 
 		const viewWidth = Math.floor(width * pixelRatio);

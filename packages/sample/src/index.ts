@@ -1,66 +1,67 @@
-import { Component, Engine, applyMouseSupportExtension } from '@e2d/engine';
-import { applyTweenExtension } from '@e2d/tween';
-import { applyCanvasTextExtension } from '@e2d/text';
-import { applyCanvasImageColorExtension } from '@e2d/image';
-import { applyCanvasShapeExtension } from '@e2d/shape';
-import { CanvasSupport } from '@e2d/canvas-support';
+import { Component, MouseExtension } from '@e2d/core';
+import { TweenExtension } from '@e2d/tween';
+import { CanvasTextExtension } from '@e2d/text';
+import { CanvasImageColorExtension } from '@e2d/image';
+import { CanvasShapeExtension } from '@e2d/shape';
+import { CanvasEngine } from '@e2d/canvas-engine';
 import { ImageResource } from '@e2d/resources';
 import CustomResourceManager from './engine/resources';
+import CustomEngine from './engine/engine';
 import main from './main';
-import CustomSupport from './engine/support';
 import {
 	ANIMALIST, ANIMALIST_IMAGE, ARCHER, ARCHER_IMAGE, TEST_CANVAS,
 } from './assets';
+
+// page
+document.body.style.margin = '0';
+document.body.style.padding = '0';
 
 // application
 const app = main();
 app.start();
 
 // basic engine
-const engine = new Engine(new CanvasSupport());
-applyCanvasImageColorExtension(engine.support);
-applyCanvasTextExtension(engine.support);
-applyCanvasShapeExtension(engine.support);
-applyTweenExtension(engine.support);
-applyMouseSupportExtension(engine);
+const engine = new CanvasEngine();
+CanvasImageColorExtension.init(engine);
+CanvasTextExtension.init(engine);
+CanvasShapeExtension.init(engine);
+TweenExtension.init(engine);
+MouseExtension.init(engine);
 engine.root = app as any as Component;
-engine.play();
-document.body.appendChild(engine.support.element);
-
-// custom engine
-const customEngine = new Engine(new CustomSupport());
-customEngine.fullscreen = false;
-customEngine.height = 600;
-customEngine.updateEnabled = false;
-customEngine.root = engine.root;
-customEngine.play();
-customEngine.support.element.style.position = 'absolute';
-customEngine.support.element.style.top = '0px';
-customEngine.support.element.style.left = '600px';
-document.body.appendChild(customEngine.support.element);
-
-// page
-document.body.style.margin = '0';
-document.body.style.padding = '0';
+engine.screen.fullscreen = true;
+engine.ticker.play();
+document.body.appendChild(engine.platform.view);
 
 // test pause
-setTimeout(() => engine.pause(), 5000);
-setTimeout(() => engine.play(), 10000);
+setTimeout(() => engine.ticker.pause(), 5000);
+setTimeout(() => engine.ticker.play(), 10000);
 
-// set custom resource
-engine.support.resources.add(
+// custom engine
+const customEngine = new CustomEngine();
+customEngine.screen.fullscreen = false;
+customEngine.screen.height = 600;
+customEngine.updater.enabled = false;
+customEngine.root = engine.root;
+customEngine.ticker.play();
+customEngine.platform.view.style.position = 'absolute';
+customEngine.platform.view.style.top = '0px';
+customEngine.platform.view.style.left = '600px';
+document.body.appendChild(customEngine.platform.view);
+
+// // set custom resource
+engine.resources.resources.set(
 	TEST_CANVAS,
 	{
 		asset: TEST_CANVAS,
-		image: customEngine.support.element,
+		image: customEngine.platform.view,
 		loaded: true,
 	} as ImageResource,
 );
-customEngine.support.resources.add(
+customEngine.resources.resources.set(
 	TEST_CANVAS,
 	{
 		asset: TEST_CANVAS,
-		image: engine.support.element,
+		image: engine.platform.view,
 		loaded: true,
 	} as ImageResource,
 );
@@ -69,5 +70,5 @@ customEngine.support.resources.add(
 const resourceManager = new CustomResourceManager();
 resourceManager.aliases.set(ARCHER.replace('id:', ''), ARCHER_IMAGE);
 resourceManager.aliases.set(ANIMALIST.replace('id:', ''), ANIMALIST_IMAGE);
-engine.support.resources.resolvers.add(resourceManager.resolve);
-customEngine.support.resources.resolvers.add(resourceManager.resolve);
+resourceManager.init(engine);
+resourceManager.init(customEngine);
