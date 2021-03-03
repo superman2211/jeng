@@ -11,6 +11,7 @@ export interface RenderContext {
 
 export class Renderer extends Feature {
 	depth = 0;
+	elapsedTime = 0;
 
 	private contexts: RenderContext[] = [];
 
@@ -59,6 +60,8 @@ export class Renderer extends Feature {
 			return;
 		}
 
+		const startTime = performance.now();
+
 		this.engine.platform.begin();
 
 		this.depth = 0;
@@ -72,5 +75,7 @@ export class Renderer extends Feature {
 		this.renderComponent(root, base);
 
 		this.engine.platform.end();
+
+		this.elapsedTime = performance.now() - startTime;
 	}
 }

@@ -3,7 +3,7 @@ import {
 	ABILITY_FOX, ABILITY_WOLF, ANIMALIST, ARCHER, BACKGROUND,
 } from './assets';
 import artifact from './artifact';
-import fps from './fps';
+import { fps, Statistics } from './fps';
 import { unit, UnitProperties } from './unit';
 
 interface Main {
@@ -11,7 +11,7 @@ interface Main {
 	[key: string]: any;
 }
 
-export default function main(): Main {
+export default function main(statistics: Statistics): Main {
 	function onUnitClick(data: UnitProperties) {
 		data.health = Math.random();
 		console.log('onUnitClick', data.name);
@@ -166,7 +166,7 @@ export default function main(): Main {
 					},
 				},
 			},
-			fps: fps(),
+			fps: fps(statistics),
 		},
 		start() {
 			console.log('start');

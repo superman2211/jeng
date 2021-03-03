@@ -16,10 +16,6 @@ import {
 document.body.style.margin = '0';
 document.body.style.padding = '0';
 
-// application
-const app = main();
-app.start();
-
 // basic engine
 const engine = new CanvasEngine();
 CanvasImageColorExtension.init(engine);
@@ -27,10 +23,23 @@ CanvasTextExtension.init(engine);
 CanvasShapeExtension.init(engine);
 TweenExtension.init(engine);
 MouseExtension.init(engine);
-engine.root = app as any as Component;
 engine.screen.fullscreen = true;
 engine.ticker.play();
 document.body.appendChild(engine.platform.view);
+
+const statistics = {
+	getUpdateTime() {
+		return engine.updater.elapsedTime;
+	},
+	getRenderTime() {
+		return engine.renderer.elapsedTime;
+	},
+};
+
+// application
+const app = main(statistics);
+app.start();
+engine.root = app as any as Component;
 
 // test pause
 setTimeout(() => engine.ticker.pause(), 5000);

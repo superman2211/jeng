@@ -5,6 +5,7 @@ import { Feature } from './feature';
 export class Updater extends Feature {
 	depth = 0;
 	time = 0;
+	elapsedTime = 0;
 
 	update(time: number) {
 		if (!this.enabled) {
@@ -19,7 +20,9 @@ export class Updater extends Feature {
 		this.depth = 0;
 		this.time = time;
 
+		const startTime = performance.now();
 		this.updateComponent(root);
+		this.elapsedTime = performance.now() - startTime;
 	}
 
 	updateComponent(component: Component) {
