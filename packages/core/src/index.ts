@@ -3,7 +3,7 @@ export * from './components/container';
 export * from './core/engine';
 export * from './features/components';
 export * from './features/debug';
-export * from './features/feature';
+export * from './core/feature';
 export * from './features/platform';
 export * from './features/pointer-events';
 export * from './features/renderer';

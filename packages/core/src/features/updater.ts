@@ -1,11 +1,12 @@
 import { Component } from '../components/component';
 import { Update } from '../interfaces/update';
-import { Feature } from './feature';
+import { EngineFeature } from '../core/feature';
 
-export class Updater extends Feature {
+export class Updater extends EngineFeature {
 	depth = 0;
 	time = 0;
 	elapsedTime = 0;
+	enabled = true;
 
 	update(time: number) {
 		if (!this.enabled) {

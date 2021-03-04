@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
-import { Feature } from './feature';
+import { EngineFeature } from '../core/feature';
 
-export class Platform extends Feature {
+export class Platform extends EngineFeature {
 	readonly view: HTMLElement = document.createElement('div');
 
 	begin(): void {

@@ -1,5 +1,5 @@
 import { Engine } from '../core/engine';
-import { Feature } from './feature';
+import { EngineFeature } from '../core/feature';
 
 export interface Resource {
 	asset: string;
@@ -8,7 +8,7 @@ export interface Resource {
 
 export type ResourceResolver = (asset: string, engine: Engine) => Resource | null;
 
-export class Resources extends Feature {
+export class Resources extends EngineFeature {
 	readonly resources = new Map<any, any>();
 	readonly resolvers = new Set<ResourceResolver>();
 

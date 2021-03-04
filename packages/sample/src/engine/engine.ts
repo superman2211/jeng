@@ -1,12 +1,19 @@
 import { CanvasEngine } from '@e2d/canvas-engine';
+import { EngineModule } from '@e2d/core';
 import { CanvasTextExtension } from '@e2d/text';
 import { CustomImageExtension } from './image';
 import CustomPlatform from './platform';
 
 export default class CustomEngine extends CanvasEngine {
-	constructor() {
-		super();
-		this.platform = new CustomPlatform(this);
+	constructor(module?: EngineModule) {
+		if (!module) {
+			module = {};
+		}
+
+		module.Platform = module.Platform ?? CustomPlatform;
+
+		super(module);
+
 		CanvasTextExtension.init(this);
 		CustomImageExtension.init(this);
 	}

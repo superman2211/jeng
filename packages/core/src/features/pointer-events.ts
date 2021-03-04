@@ -3,14 +3,15 @@ import { Component } from '../components/component';
 import { Display } from '../interfaces/display';
 import { Pointer, PointerEventType } from '../interfaces/pointer';
 import { Transform } from '../interfaces/transform';
-import { Feature } from './feature';
+import { EngineFeature } from '../core/feature';
 
 export interface PointerContext {
 	matrix: Matrix;
 }
 
-export class PointerEvents extends Feature {
+export class PointerEvents extends EngineFeature {
 	depth = 0;
+	enabled = true;
 
 	readonly global = Point.empty();
 	readonly local = Point.empty();

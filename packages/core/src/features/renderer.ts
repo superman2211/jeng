@@ -2,16 +2,17 @@ import { ColorTransform, Matrix } from '@e2d/geom';
 import { Component } from '../components/component';
 import { Display } from '../interfaces/display';
 import { Transform } from '../interfaces/transform';
-import { Feature } from './feature';
+import { EngineFeature } from '../core/feature';
 
 export interface RenderContext {
 	matrix: Matrix;
 	colorTransform: ColorTransform;
 }
 
-export class Renderer extends Feature {
+export class Renderer extends EngineFeature {
 	depth = 0;
 	elapsedTime = 0;
+	enabled = true;
 
 	private contexts: RenderContext[] = [];
 

@@ -1,9 +1,14 @@
-import { Engine } from '@e2d/core';
+import { Engine, EngineModule } from '@e2d/core';
 import { CanvasPlatform } from './platform';
 
 export class CanvasEngine extends Engine {
-	constructor() {
-		super();
-		this.platform = new CanvasPlatform(this);
+	constructor(module?: EngineModule) {
+		if (!module) {
+			module = {};
+		}
+
+		module.Platform = module.Platform ?? CanvasPlatform;
+
+		super(module);
 	}
 }

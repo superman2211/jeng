@@ -40,6 +40,8 @@ const statistics = {
 const app = main(statistics);
 app.start();
 engine.root = app as any as Component;
+// eslint-disable-next-line no-console
+console.log(app);
 
 // test pause
 setTimeout(() => engine.ticker.pause(), 5000);
