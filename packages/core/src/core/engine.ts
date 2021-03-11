@@ -37,11 +37,7 @@ export class Engine {
 	debug: Debug;
 	resources: Resources;
 
-	constructor(module?: EngineModule) {
-		if (!module) {
-			module = {};
-		}
-
+	constructor(module: EngineModule = {}) {
 		module.Components = module.Components ?? Components;
 		module.Screen = module.Screen ?? Screen;
 		module.Platform = module.Platform ?? Platform;

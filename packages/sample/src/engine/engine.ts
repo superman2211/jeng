@@ -5,11 +5,7 @@ import { CustomImageExtension } from './image';
 import CustomPlatform from './platform';
 
 export default class CustomEngine extends CanvasEngine {
-	constructor(module?: EngineModule) {
-		if (!module) {
-			module = {};
-		}
-
+	constructor(module: EngineModule = {}) {
 		module.Platform = module.Platform ?? CustomPlatform;
 
 		super(module);
