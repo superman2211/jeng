@@ -27,6 +27,8 @@ module.exports = {
 		'no-underscore-dangle': 'off',
 		'no-case-declarations': 'off',
 		'no-unused-vars': 'off',
+		'no-redeclare': 'off',
+		'@typescript-eslint/no-redeclare': ['error', { ignoreDeclarationMerge: true }],
 		'@typescript-eslint/no-unused-vars': ['error'],
 		'no-mixed-operators': 'off',
 		'lines-between-class-members': 'off',
