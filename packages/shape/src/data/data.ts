@@ -42,11 +42,11 @@ export namespace EllipseData {
 	export function calculateBounds(data: EllipseData, bounds: Bounds) {
 		const {
 			x = 0, y = 0,
-			radius, radiusX = 0, radiusY = 0,
+			radius = 0, radiusX, radiusY,
 		} = data;
 
-		const rx = radius ?? radiusX;
-		const ry = radius ?? radiusY;
+		const rx = radiusX ?? radius;
+		const ry = radiusY ?? radius;
 		Bounds.test(bounds, x - rx, y - ry);
 		Bounds.test(bounds, x + rx, y + ry);
 	}

@@ -97,6 +97,12 @@ export namespace Matrix {
 		result.y = x * matrix.b + y * matrix.d + matrix.ty;
 	}
 
+	export function transformPointLocal(matrix: Matrix, point: Point, result: Point) {
+		const { x, y } = point;
+		result.x = x * matrix.a + y * matrix.c;
+		result.y = x * matrix.b + y * matrix.d;
+	}
+
 	export function transformInversePoint(matrix: Matrix, point: Point, result: Point) {
 		let determinant = getDeterminant(matrix);
 

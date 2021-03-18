@@ -20,9 +20,9 @@ export interface SolidFill extends FillStyle {
 }
 
 export interface GradientFill extends FillStyle {
-	color?: number[];
-	alpha?: number[];
-	ratio?: number[];
+	colors?: number[];
+	alphas?: number[];
+	ratios?: number[];
 	matrix?: Matrix;
 	spread?: SpreadMethod;
 	interpolation?: InterpolationMethod;

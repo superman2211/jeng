@@ -4,4 +4,4 @@ export * from './data/string';
 export * from './data/style';
 export * from './graphics';
 export * from './shape';
-export * from './canvas-shape';
+export * from './canvas/shape';

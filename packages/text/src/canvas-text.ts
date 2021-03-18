@@ -67,6 +67,7 @@ export namespace CanvasTextExtension {
 			context2d.fillStyle = CanvasPatterns.colorPattern(background!, 1, colorTransform);
 			context2d.beginPath();
 			context2d.rect(offsetX, offsetY, realWidth, realHeight);
+			context2d.closePath();
 			context2d.fill();
 		}
 
@@ -75,6 +76,7 @@ export namespace CanvasTextExtension {
 			context2d.fillStyle = '';
 			context2d.beginPath();
 			context2d.rect(offsetX, offsetY, realWidth, realHeight);
+			context2d.closePath();
 			context2d.stroke();
 		}
 

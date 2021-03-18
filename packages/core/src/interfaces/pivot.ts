@@ -19,4 +19,9 @@ export namespace Pivot {
 		}
 		return 0;
 	}
+
+	export function hasValues(pivot: Pivot): boolean {
+		const { pivotX, pivotY } = pivot;
+		return !!pivotX || !!pivotY;
+	}
 }
