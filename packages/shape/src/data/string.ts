@@ -12,38 +12,44 @@ type StringCommand =
 	'C' | 'c' |
 	'S' | 's' |
 	'Q' | 'q' |
-	'T' | 't' |
-	'Z' | 'z'
-;
+	'T' | 't'
+	;
 
-const TEST_COMMAND = /[MmLlHhVvCcSsQqTtAaZz]/;
-const TEST_SPACE = /[\s,]/;
-const TEST_NUMBER = /[-+.\d]/;
+const NUMBERS_COUNT = {
+	M: 2,
+	m: 2,
+	L: 2,
+	l: 2,
+	H: 1,
+	h: 1,
+	V: 1,
+	v: 1,
+	C: 6,
+	c: 6,
+	S: 4,
+	s: 4,
+	Q: 4,
+	q: 4,
+	T: 2,
+	t: 2,
+};
 
 // https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths
 
 export class GraphicsStringStream {
 	private path = '';
-	private position = 0;
 	private command: StringCommand | null = null;
-	private buffer: number[] = [];
-	private size: number = 0;
+	private readonly buffer = [0, 0, 0, 0, 0, 0];
+	private readonly commandRegex = /[MmLlHhVvCcSsQqTt]/g;
+	private readonly numberRegex = /[-+\d.]+/g;
 
 	setPath(path: string) {
 		this.path = path;
-		this.position = 0;
-	}
-
-	hasData(): boolean {
-		return this.position < this.path.length;
+		this.commandRegex.lastIndex = 0;
 	}
 
 	getCommand(): StringCommand | null {
 		return this.command;
-	}
-
-	getSize(): number {
-		return this.size;
 	}
 
 	getBuffer(): number[] {
@@ -51,38 +57,21 @@ export class GraphicsStringStream {
 	}
 
 	readNext() {
-		this.readCommand();
-		this.readNumbers();
-	}
-
-	private readCommand() {
-		this.command = null;
-		while (this.position < this.path.length) {
-			const command = this.path[this.position];
-			if (TEST_COMMAND.test(command)) {
-				this.command = command as StringCommand;
+		const commandMatch = this.commandRegex.exec(this.path);
+		if (commandMatch) {
+			this.command = commandMatch[0] as StringCommand;
+			const count = NUMBERS_COUNT[this.command];
+			this.numberRegex.lastIndex = commandMatch.index;
+			for (let i = 0; i < count; i++) {
+				const numberMatch = this.numberRegex.exec(this.path);
+				if (numberMatch) {
+					this.buffer[i] = parseFloat(numberMatch[0]);
+				} else {
+					break;
+				}
 			}
-			this.position++;
-		}
-	}
-
-	private readNumbers() {
-		this.size = 0;
-		let number = '';
-		while (this.position < this.path.length) {
-			const char = this.path[this.position];
-			if (TEST_NUMBER.test(char)) {
-				number += char;
-			} else if (TEST_SPACE.test(char)) {
-				this.buffer[this.size++] = parseFloat(number);
-				number = '';
-			} else if (TEST_COMMAND.test(char)) {
-				break;
-			}
-			this.position++;
-		}
-		if (number) {
-			this.buffer[this.size++] = parseFloat(number);
+		} else {
+			this.command = null;
 		}
 	}
 }
@@ -101,24 +90,19 @@ export class GraphicsStringReader {
 		this.commandExists = false;
 	}
 
-	hasData() {
-		return this.stream.hasData();
-	}
-
 	getCommand(): PathCommand | null {
 		return this.commandExists ? this.command : null;
 	}
 
-	readNext() {
+	readNext(): boolean {
 		this.stream.readNext();
 		this.parse();
+		return this.commandExists;
 	}
 
 	private parse() {
 		const command = this.stream.getCommand();
-
 		this.commandExists = !!command;
-
 		if (!this.commandExists) {
 			return;
 		}
@@ -126,9 +110,9 @@ export class GraphicsStringReader {
 		const buffer = this.stream.getBuffer();
 
 		const [
-			x0, y0,
-			x1, y1,
-			x2, y2,
+			e0, e1,
+			e2, e3,
+			e4, e5,
 		] = buffer;
 
 		let cx = 0;
@@ -138,8 +122,8 @@ export class GraphicsStringReader {
 			case 'M': {
 				this.command.type = 'moveTo';
 				const moveTo = this.command as MoveTo;
-				moveTo.x = x0;
-				moveTo.y = y0;
+				moveTo.x = e0;
+				moveTo.y = e1;
 				this.lastX = moveTo.x;
 				this.lastY = moveTo.y;
 			} break;
@@ -147,8 +131,8 @@ export class GraphicsStringReader {
 			case 'm': {
 				this.command.type = 'moveTo';
 				const moveTo = this.command as MoveTo;
-				moveTo.x = x0 + this.lastX;
-				moveTo.y = y0 + this.lastY;
+				moveTo.x = e0 + this.lastX;
+				moveTo.y = e1 + this.lastY;
 				this.lastX = moveTo.x;
 				this.lastY = moveTo.y;
 			} break;
@@ -156,8 +140,8 @@ export class GraphicsStringReader {
 			case 'L': {
 				this.command.type = 'lineTo';
 				const lineTo = this.command as LineTo;
-				lineTo.x = x0;
-				lineTo.y = y0;
+				lineTo.x = e0;
+				lineTo.y = e1;
 				this.lastX = lineTo.x;
 				this.lastY = lineTo.y;
 			} break;
@@ -165,8 +149,8 @@ export class GraphicsStringReader {
 			case 'l': {
 				this.command.type = 'lineTo';
 				const lineTo = this.command as LineTo;
-				lineTo.x = x0 + this.lastX;
-				lineTo.y = y0 + this.lastY;
+				lineTo.x = e0 + this.lastX;
+				lineTo.y = e1 + this.lastY;
 				this.lastX = lineTo.x;
 				this.lastY = lineTo.y;
 			} break;
@@ -174,7 +158,7 @@ export class GraphicsStringReader {
 			case 'H': {
 				this.command.type = 'lineTo';
 				const lineTo = this.command as LineTo;
-				lineTo.x = x0;
+				lineTo.x = e0;
 				lineTo.y = this.lastY;
 				this.lastX = lineTo.x;
 			} break;
@@ -182,7 +166,7 @@ export class GraphicsStringReader {
 			case 'h': {
 				this.command.type = 'lineTo';
 				const lineTo = this.command as LineTo;
-				lineTo.x = x0 + this.lastX;
+				lineTo.x = e0 + this.lastX;
 				lineTo.y = this.lastY;
 				this.lastX = lineTo.x;
 			} break;
@@ -191,7 +175,7 @@ export class GraphicsStringReader {
 				this.command.type = 'lineTo';
 				const lineTo = this.command as LineTo;
 				lineTo.x = this.lastX;
-				lineTo.y = x0;
+				lineTo.y = e0;
 				this.lastY = lineTo.y;
 			} break;
 
@@ -199,7 +183,7 @@ export class GraphicsStringReader {
 				this.command.type = 'lineTo';
 				const lineTo = this.command as LineTo;
 				lineTo.x = this.lastX;
-				lineTo.y = x0 + this.lastY;
+				lineTo.y = e0 + this.lastY;
 				this.lastY = lineTo.y;
 			} break;
 
@@ -207,12 +191,12 @@ export class GraphicsStringReader {
 				this.command.type = 'cubicCurveTo';
 				const cubicCurveTo = this.command as CubicCurveTo;
 
-				cubicCurveTo.cx = x0;
-				cubicCurveTo.cy = y0;
-				cubicCurveTo.sx = x1;
-				cubicCurveTo.sy = y1;
-				cubicCurveTo.x = x2;
-				cubicCurveTo.y = y2;
+				cubicCurveTo.cx = e0;
+				cubicCurveTo.cy = e1;
+				cubicCurveTo.sx = e2;
+				cubicCurveTo.sy = e3;
+				cubicCurveTo.x = e4;
+				cubicCurveTo.y = e5;
 
 				cx = cubicCurveTo.x - (cubicCurveTo.sx - cubicCurveTo.x);
 				cy = cubicCurveTo.y - (cubicCurveTo.sy - cubicCurveTo.y);
@@ -224,12 +208,12 @@ export class GraphicsStringReader {
 				this.command.type = 'cubicCurveTo';
 				const cubicCurveTo = this.command as CubicCurveTo;
 
-				cubicCurveTo.cx = x0 + this.lastX;
-				cubicCurveTo.cy = y0 + this.lastY;
-				cubicCurveTo.sx = x1 + this.lastX;
-				cubicCurveTo.sy = y1 + this.lastY;
-				cubicCurveTo.x = x2 + this.lastX;
-				cubicCurveTo.y = y2 + this.lastY;
+				cubicCurveTo.cx = e0 + this.lastX;
+				cubicCurveTo.cy = e1 + this.lastY;
+				cubicCurveTo.sx = e2 + this.lastX;
+				cubicCurveTo.sy = e3 + this.lastY;
+				cubicCurveTo.x = e4 + this.lastX;
+				cubicCurveTo.y = e5 + this.lastY;
 
 				cx = cubicCurveTo.x - (cubicCurveTo.sx - cubicCurveTo.x);
 				cy = cubicCurveTo.y - (cubicCurveTo.sy - cubicCurveTo.y);
@@ -243,10 +227,10 @@ export class GraphicsStringReader {
 
 				cubicCurveTo.cx = cx;
 				cubicCurveTo.cy = cy;
-				cubicCurveTo.sx = x0;
-				cubicCurveTo.sy = y0;
-				cubicCurveTo.x = x1;
-				cubicCurveTo.y = y1;
+				cubicCurveTo.sx = e0;
+				cubicCurveTo.sy = e1;
+				cubicCurveTo.x = e2;
+				cubicCurveTo.y = e3;
 
 				cx = cubicCurveTo.x - (cubicCurveTo.sx - cubicCurveTo.x);
 				cy = cubicCurveTo.y - (cubicCurveTo.sy - cubicCurveTo.y);
@@ -260,10 +244,10 @@ export class GraphicsStringReader {
 
 				cubicCurveTo.cx = cx;
 				cubicCurveTo.cy = cy;
-				cubicCurveTo.sx = x0 + this.lastX;
-				cubicCurveTo.sy = y0 + this.lastY;
-				cubicCurveTo.x = x1 + this.lastX;
-				cubicCurveTo.y = y1 + this.lastY;
+				cubicCurveTo.sx = e0 + this.lastX;
+				cubicCurveTo.sy = e1 + this.lastY;
+				cubicCurveTo.x = e2 + this.lastX;
+				cubicCurveTo.y = e3 + this.lastY;
 
 				cx = cubicCurveTo.x - (cubicCurveTo.sx - cubicCurveTo.x);
 				cy = cubicCurveTo.y - (cubicCurveTo.sy - cubicCurveTo.y);
@@ -275,10 +259,10 @@ export class GraphicsStringReader {
 				this.command.type = 'curveTo';
 				const curveTo = this.command as CurveTo;
 
-				curveTo.cx = x0;
-				curveTo.cy = y0;
-				curveTo.x = x1;
-				curveTo.y = y1;
+				curveTo.cx = e0;
+				curveTo.cy = e1;
+				curveTo.x = e2;
+				curveTo.y = e3;
 
 				cx = curveTo.x - (curveTo.cx - curveTo.x);
 				cy = curveTo.y - (curveTo.cy - curveTo.y);
@@ -290,10 +274,10 @@ export class GraphicsStringReader {
 				this.command.type = 'curveTo';
 				const curveTo = this.command as CurveTo;
 
-				curveTo.cx = x0 + this.lastX;
-				curveTo.cy = y0 + this.lastY;
-				curveTo.x = x1 + this.lastX;
-				curveTo.y = y1 + this.lastY;
+				curveTo.cx = e0 + this.lastX;
+				curveTo.cy = e1 + this.lastY;
+				curveTo.x = e2 + this.lastX;
+				curveTo.y = e3 + this.lastY;
 
 				cx = curveTo.x - (curveTo.cx - curveTo.x);
 				cy = curveTo.y - (curveTo.cy - curveTo.y);
@@ -307,8 +291,8 @@ export class GraphicsStringReader {
 
 				curveTo.cx = cx;
 				curveTo.cy = cy;
-				curveTo.x = x0;
-				curveTo.y = y0;
+				curveTo.x = e0;
+				curveTo.y = e1;
 
 				cx = curveTo.x - (curveTo.cx - curveTo.x);
 				cy = curveTo.y - (curveTo.cy - curveTo.y);
@@ -322,8 +306,8 @@ export class GraphicsStringReader {
 
 				curveTo.cx = cx;
 				curveTo.cy = cy;
-				curveTo.x = x0 + this.lastX;
-				curveTo.y = y0 + this.lastY;
+				curveTo.x = e0 + this.lastX;
+				curveTo.y = e1 + this.lastY;
 
 				cx = curveTo.x - (curveTo.cx - curveTo.x);
 				cy = curveTo.y - (curveTo.cy - curveTo.y);
@@ -342,8 +326,7 @@ const reader = new GraphicsStringReader();
 export namespace GraphicsString {
 	export function calculateBounds(path: string, bounds: Bounds) {
 		reader.setPath(path);
-		while (reader.hasData()) {
-			reader.readNext();
+		while (reader.readNext()) {
 			const command = reader.getCommand();
 			if (command) {
 				PathCommand.calculateBounds(command, bounds);

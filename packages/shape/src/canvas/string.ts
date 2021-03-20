@@ -4,16 +4,11 @@ import { applyCommand } from './path';
 const reader = new GraphicsStringReader();
 
 export function applyString(data: string, context: CanvasRenderingContext2D): boolean {
-	context.beginPath();
-
 	reader.setPath(data);
 
-	if (!reader.hasData()) {
-		return false;
-	}
+	context.beginPath();
 
-	while (reader.hasData()) {
-		reader.readNext();
+	while (reader.readNext()) {
 		const command = reader.getCommand();
 		if (command) {
 			applyCommand(command, context);

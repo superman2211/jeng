@@ -70,9 +70,9 @@ export function setFillStyle(fill: number | FillStyle, colorTransform: ColorTran
 
 export function setStrokeStyle(stroke: number | StrokeStyle, colorTransform: ColorTransform, context: CanvasRenderingContext2D, engine: CanvasEngine) {
 	if (typeof stroke === 'number') {
-		context.fillStyle = CanvasPatterns.colorPattern(stroke, 1, colorTransform);
+		context.strokeStyle = CanvasPatterns.colorPattern(stroke, 1, colorTransform);
 		context.lineWidth = 1;
 	} else if (typeof stroke === 'object' && stroke.fill) {
-		context.fillStyle = getCanvasPattern(stroke.fill, colorTransform, context, engine);
+		context.strokeStyle = getCanvasPattern(stroke.fill, colorTransform, context, engine);
 	}
 }

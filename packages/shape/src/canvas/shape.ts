@@ -3,7 +3,9 @@ import { Pivot } from '@e2d/core';
 import {
 	ColorTransform, Matrix, Point, Rectangle,
 } from '@e2d/geom';
-import { EllipseData, GraphicsData, RectangleData } from '../data/data';
+import {
+	EllipseData, GraphicsData, PathData, RectangleData,
+} from '../data/data';
 import { ShapeExtension, SHAPE, Shape } from '../shape';
 import { applyRectangle } from './rectangle';
 import { applyEllipse } from './ellipse';
@@ -15,7 +17,12 @@ const bounds = Rectangle.empty();
 const offset = Point.empty();
 
 function renderGraphics(data: GraphicsData, colorTransform: ColorTransform, context: CanvasRenderingContext2D, engine: CanvasEngine) {
-	if (!data.fill || !data.stroke) {
+	const { fill, stroke } = data;
+
+	const hasFill: boolean = !!fill || fill === 0;
+	const hasStroke: boolean = !!stroke || stroke === 0;
+
+	if (!hasFill && !hasStroke) {
 		return;
 	}
 
@@ -30,10 +37,11 @@ function renderGraphics(data: GraphicsData, colorTransform: ColorTransform, cont
 			exist = applyEllipse(data as EllipseData, context);
 			break;
 		case 'path':
-			if (typeof data === 'string') {
-				exist = applyString(data, context);
-			} else if (Array.isArray(data)) {
-				exist = applyPath(data, context);
+			const path = data as PathData;
+			if (typeof path.data === 'string' && path.data.length) {
+				exist = applyString(path.data, context);
+			} else if (Array.isArray(path.data) && path.data.length) {
+				exist = applyPath(path.data, context);
 			} else {
 				exist = false;
 			}
@@ -46,13 +54,13 @@ function renderGraphics(data: GraphicsData, colorTransform: ColorTransform, cont
 		return;
 	}
 
-	if (data.fill) {
-		setFillStyle(data.fill, colorTransform, context, engine);
+	if (hasFill) {
+		setFillStyle(fill!, colorTransform, context, engine);
 		context.fill();
 	}
 
-	if (data.stroke) {
-		setStrokeStyle(data.stroke, colorTransform, context, engine);
+	if (hasStroke) {
+		setStrokeStyle(stroke!, colorTransform, context, engine);
 		context.stroke();
 	}
 }

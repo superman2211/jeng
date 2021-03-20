@@ -12,7 +12,7 @@ export function applyCommand(command: PathCommand, context: CanvasRenderingConte
 
 		case 'lineTo':
 			const lineTo = command as LineTo;
-			context.moveTo(lineTo.x ?? 0, lineTo.y ?? 0);
+			context.lineTo(lineTo.x ?? 0, lineTo.y ?? 0);
 			break;
 
 		case 'curveTo':

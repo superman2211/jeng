@@ -29,23 +29,20 @@ export default function main(statistics: Statistics): Main {
 			figure: {
 				type: 'shape',
 				data: {
-					type: 'rect',
-					x: 0,
-					y: 0,
+					type: 'rectangle',
+					x: 20,
+					y: 20,
 					width: 100,
-					height: 100,
+					height: 50,
 					fill: 0xff00ff,
-					stroke: {
-						thickness: 2,
-						fill: 0x00ff00,
-					},
+					stroke: 0x0000ff,
 				},
 			},
 			shapes: {
 				type: 'shape',
 				data: [
 					{
-						type: 'circle',
+						type: 'ellipse',
 						x: 100,
 						y: 100,
 						radius: 50,
@@ -53,7 +50,7 @@ export default function main(statistics: Statistics): Main {
 					},
 					{
 						type: 'path',
-						data: 'M 10 10 H 90 V 90 H 10 Z',
+						data: 'M 110, 110 H 190 V 190 H 110 Z',
 						fill: 0xff00ff,
 					},
 					{
@@ -65,7 +62,7 @@ export default function main(statistics: Statistics): Main {
 							{ type: 'lineTo', x: 0, y: 100 },
 							{ type: 'lineTo', x: 0, y: 0 },
 						],
-						fill: 0xff00ff,
+						fill: { color: 0x999999, alpha: 0.5 },
 						stroke: 0x000000,
 					},
 				],

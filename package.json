@@ -5,9 +5,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "yarn wsrun --stages build",
-    "test": "yarn wsrun test",
-    "lint": "yarn wsrun lint",
+    "build": "yarn wsrun --stages --exclude-missing build",
+    "test": "yarn wsrun --exclude-missing test",
+    "lint": "yarn wsrun --exclude-missing lint",
     "clean": "yarn wsrun clean && rimraf node_modules"
   },
   "workspaces": [
