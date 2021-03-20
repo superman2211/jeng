@@ -5,18 +5,16 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "node scripts/build.js",
-    "test": "yarn workspaces run test",
-    "lint": "yarn workspaces run lint",
-    "clean": "yarn workspaces run clean && rimraf node_modules"
+    "build": "yarn wsrun --stages build",
+    "test": "yarn wsrun test",
+    "lint": "yarn wsrun lint",
+    "clean": "yarn wsrun clean && rimraf node_modules"
   },
   "workspaces": [
     "packages/*"
   ],
-  "dependencies": {
-    "shelljs": "^0.8.4"
-  },
   "devDependencies": {
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+	"wsrun": "^5.2.4"
   }
 }

@@ -16,7 +16,7 @@
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "lint": "eslint './src/**' --fix",
-    "test": "echo skip",
+    "test": "jest --coverage",
     "clean": "rimraf dist && rimraf coverage && rimraf node_modules"
   },
   "files": [
