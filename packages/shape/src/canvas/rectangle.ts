@@ -10,6 +10,8 @@ export function applyRectangle(data: RectangleData, context: CanvasRenderingCont
 		return false;
 	}
 
+	context.beginPath();
 	context.rect(x, y, width, height);
+	context.closePath();
 	return true;
 }

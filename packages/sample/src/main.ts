@@ -46,12 +46,12 @@ export default function main(statistics: Statistics): Main {
 						x: 100,
 						y: 100,
 						radius: 50,
-						fill: { type: 'solid', color: 0xffff00, alpha: 0.5 },
+						fill: { type: 'solid', color: 0xffff00, alpha: 1 },
 					},
 					{
 						type: 'path',
 						data: 'M 110, 110 H 190 V 190 H 110 Z',
-						fill: 0xff00ff,
+						fill: 0x990000,
 					},
 					{
 						type: 'path',
@@ -62,7 +62,7 @@ export default function main(statistics: Statistics): Main {
 							{ type: 'lineTo', x: 0, y: 100 },
 							{ type: 'lineTo', x: 0, y: 0 },
 						],
-						fill: { color: 0x999999, alpha: 0.5 },
+						fill: { type: 'solid', color: 0x999999, alpha: 0.6 },
 						stroke: 0x000000,
 					},
 				],

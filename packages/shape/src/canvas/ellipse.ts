@@ -15,6 +15,8 @@ export function applyEllipse(data: EllipseData, context: CanvasRenderingContext2
 		return false;
 	}
 
+	context.beginPath();
 	context.ellipse(x, y, rx, ry, 0, 0, PI_2);
+	context.closePath();
 	return true;
 }

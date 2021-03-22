@@ -43,13 +43,10 @@ export function applyPath(data: PathCommand[], context: CanvasRenderingContext2D
 	}
 
 	context.beginPath();
-
 	for (let i = 0; i < data.length; i++) {
 		const command = data[i];
 		applyCommand(command, context);
 	}
-
 	context.closePath();
-
 	return true;
 }

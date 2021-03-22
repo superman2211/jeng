@@ -38,9 +38,9 @@ function renderGraphics(data: GraphicsData, colorTransform: ColorTransform, cont
 			break;
 		case 'path':
 			const path = data as PathData;
-			if (typeof path.data === 'string' && path.data.length) {
+			if (typeof path.data === 'string') {
 				exist = applyString(path.data, context);
-			} else if (Array.isArray(path.data) && path.data.length) {
+			} else if (Array.isArray(path.data)) {
 				exist = applyPath(path.data, context);
 			} else {
 				exist = false;
