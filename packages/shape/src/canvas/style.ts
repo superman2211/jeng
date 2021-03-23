@@ -72,7 +72,14 @@ export function setStrokeStyle(stroke: number | StrokeStyle, colorTransform: Col
 	if (typeof stroke === 'number') {
 		context.strokeStyle = CanvasPatterns.colorPattern(stroke, 1, colorTransform);
 		context.lineWidth = 1;
-	} else if (typeof stroke === 'object' && stroke.fill) {
+		context.lineCap = 'round';
+		context.lineJoin = 'round';
+		context.miterLimit = 10;
+	} else if (typeof stroke === 'object' && stroke.fill !== undefined) {
 		context.strokeStyle = getCanvasPattern(stroke.fill, colorTransform, context, engine);
+		context.lineWidth = stroke.thickness ?? 1;
+		context.lineCap = stroke.caps ?? 'round';
+		context.lineJoin = stroke.joints ?? 'round';
+		context.miterLimit = stroke.miterLimit ?? 10;
 	}
 }

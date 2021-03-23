@@ -47,6 +47,7 @@ export default function main(statistics: Statistics): Main {
 						y: 100,
 						radius: 50,
 						fill: { type: 'solid', color: 0xffff00, alpha: 1 },
+						stroke: { fill: 0x0000ff, thickness: 10 },
 					},
 					{
 						type: 'path',
