@@ -146,4 +146,94 @@ describe('rectangle shape', () => {
 
 		expect(reader.readNext()).toBeFalsy();
 	});
+
+	it('should read quadratic curve', () => {
+		reader.setPath('M 10 80 Q 95 10 180 80');
+
+		expect(reader.readNext()).toBeTruthy();
+		expect(reader.getCommand()).toMatchObject({ type: 'moveTo', x: 10, y: 80 });
+
+		expect(reader.readNext()).toBeTruthy();
+		expect(reader.getCommand()).toMatchObject({
+			type: 'curveTo',
+			cx: 95,
+			cy: 10,
+			x: 180,
+			y: 80,
+		});
+
+		expect(reader.readNext()).toBeFalsy();
+	});
+
+	it('should read relative quadratic curve', () => {
+		reader.setPath('m 10 80 q 85 -70 170 0');
+
+		expect(reader.readNext()).toBeTruthy();
+		expect(reader.getCommand()).toMatchObject({ type: 'moveTo', x: 10, y: 80 });
+
+		expect(reader.readNext()).toBeTruthy();
+		expect(reader.getCommand()).toMatchObject({
+			type: 'curveTo',
+			cx: 95,
+			cy: 10,
+			x: 180,
+			y: 80,
+		});
+
+		expect(reader.readNext()).toBeFalsy();
+	});
+
+	it('should read quadratic short curve', () => {
+		reader.setPath('M 10 80 Q 52.5 10, 95 80 T 180 80');
+
+		expect(reader.readNext()).toBeTruthy();
+		expect(reader.getCommand()).toMatchObject({ type: 'moveTo', x: 10, y: 80 });
+
+		expect(reader.readNext()).toBeTruthy();
+		expect(reader.getCommand()).toMatchObject({
+			type: 'curveTo',
+			cx: 52.5,
+			cy: 10,
+			x: 95,
+			y: 80,
+		});
+
+		expect(reader.readNext()).toBeTruthy();
+		expect(reader.getCommand()).toMatchObject({
+			type: 'curveTo',
+			cx: 137.5,
+			cy: 150,
+			x: 180,
+			y: 80,
+		});
+
+		expect(reader.readNext()).toBeFalsy();
+	});
+
+	it('should read relative quadratic short curve', () => {
+		reader.setPath('m 10 80 q 42.5 -70, 85 0 t 95 80');
+
+		expect(reader.readNext()).toBeTruthy();
+		expect(reader.getCommand()).toMatchObject({ type: 'moveTo', x: 10, y: 80 });
+
+		expect(reader.readNext()).toBeTruthy();
+		expect(reader.getCommand()).toMatchObject({
+			type: 'curveTo',
+			cx: 52.5,
+			cy: 10,
+			x: 95,
+			y: 80,
+		});
+
+		expect(reader.readNext()).toBeTruthy();
+		expect(reader.getCommand()).toMatchObject({
+			type: 'curveTo',
+			cx: 137.5,
+			cy: 150,
+			x: 190,
+			y: 160,
+		});
+
+		expect(reader.readNext()).toBeFalsy();
+	});
 });
