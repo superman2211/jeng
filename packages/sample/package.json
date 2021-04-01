@@ -12,7 +12,7 @@
 	"watch": "webpack --config webpack.config.js --mode=development --watch",
     "release": "webpack --config webpack.config.js --mode=production",
     "lint": "eslint './src/**' --fix",
-    "clean": "rimraf build && rimraf coverage && rimraf node_modules"
+    "clean": "rimraf build && rimraf node_modules"
   },
   "repository": {
     "type": "git",

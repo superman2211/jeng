@@ -1,28 +1,15 @@
 {
+	"extends": "../../tsconfig.json",
 	"compilerOptions": {
-		"moduleResolution": "node",
-		"module": "esnext",
-		"target": "esnext",
-		"esModuleInterop": true,
-		"noImplicitAny": true,
-		"removeComments": true,
-		"preserveConstEnums": true,
-		"outDir": "./dist",
 		"sourceMap": true,
 		"strict": true,
-		"allowSyntheticDefaultImports": true,
-		"lib": [
-			"dom",
-			"esnext"
-		]
+		"allowSyntheticDefaultImports": true
 	},
 	"include": [
 		"src/**/*",
 		"node_modules/"
 	],
 	"exclude": [
-		"dist",
-		"node_modules",
-		"**/*.spec.ts"
+		"build"
 	]
 }

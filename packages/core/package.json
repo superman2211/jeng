@@ -14,7 +14,7 @@
   "engine"
  ],
  "scripts": {
-  "build": "tsc --project tsconfig.json",
+  "build": "tsc",
   "lint": "eslint './src/**' --fix",
   "clean": "rimraf dist && rimraf coverage && rimraf node_modules"
  },
