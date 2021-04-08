@@ -41,7 +41,7 @@ export class GraphicsStringStream {
 	private command: StringCommand | null = null;
 	private readonly buffer = [0, 0, 0, 0, 0, 0];
 	private readonly commandRegex = /[MmLlHhVvCcSsQqTt]/g;
-	private readonly numberRegex = /[-+\d.]+/g;
+	private readonly numberRegex = /[-+]?[\d.]+/g;
 
 	setPath(path: string) {
 		this.path = path;

@@ -236,4 +236,24 @@ describe('rectangle shape', () => {
 
 		expect(reader.readNext()).toBeFalsy();
 	});
+
+	it('should read compact string', () => {
+		reader.setPath('M36 18C0-9.94-8.06-18-18-18');
+
+		expect(reader.readNext()).toBeTruthy();
+		expect(reader.getCommand()).toMatchObject({ type: 'moveTo', x: 36, y: 18 });
+
+		expect(reader.readNext()).toBeTruthy();
+		expect(reader.getCommand()).toMatchObject({
+			type: 'cubicCurveTo',
+			cx: 0,
+			cy: -9.94,
+			sx: -8.06,
+			sy: -18,
+			x: -18,
+			y: -18,
+		});
+
+		expect(reader.readNext()).toBeFalsy();
+	});
 });
