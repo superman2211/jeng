@@ -5,7 +5,7 @@ export type PropertyHandler = (component: Component, engine: Engine) => void;
 export type RenderHandler = (component: Component, engine: Engine) => void;
 export type UpdateHandler = (component: Component, engine: Engine) => void;
 export type HitTestHandler = (component: Component, engine: Engine) => boolean;
-export type LoadedHandler = (component: Component, engine: Engine) => boolean;
+export type LoadedHandler = (component: Component, engine: Engine) => void;
 
 export class Components {
 	properties = new Map<string, PropertyHandler>();

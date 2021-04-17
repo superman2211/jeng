@@ -27,17 +27,23 @@ engine.screen.fullscreen = true;
 engine.ticker.play();
 document.body.appendChild(engine.platform.view);
 
-const statistics = {
+const parameters = {
 	getUpdateTime() {
 		return engine.updater.elapsedTime;
 	},
 	getRenderTime() {
 		return engine.renderer.elapsedTime;
 	},
+	getCanvasWidth(): number {
+		return engine.screen.getWidth();
+	},
+	getCanvasHeight(): number {
+		return engine.screen.getHeight();
+	},
 };
 
 // application
-const app = main(statistics);
+const app = main(parameters);
 app.start();
 engine.root = app as any as Component;
 // eslint-disable-next-line no-console

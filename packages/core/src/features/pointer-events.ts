@@ -1,8 +1,8 @@
 import { Matrix, Point } from '@e2d/geom';
 import { Component } from '../components/component';
-import { Display } from '../interfaces/display';
-import { Pointer, PointerEventType } from '../interfaces/pointer';
-import { Transform } from '../interfaces/transform';
+import { Display } from '../extensions/display';
+import { Pointer, PointerEventType } from '../extensions/pointer';
+import { Transform } from '../extensions/transform';
 import { EngineFeature } from '../core/feature';
 
 export interface PointerContext {

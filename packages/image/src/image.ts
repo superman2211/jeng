@@ -18,8 +18,7 @@ export namespace Image {
 		}
 
 		const resource = engine.resources.get(src) as ImageResource | null;
-
-		if (!resource?.loaded || !resource?.image) {
+		if (!resource?.image) {
 			Rectangle.setEmpty(bounds);
 			return;
 		}
@@ -44,8 +43,29 @@ export namespace ImageExtension {
 		return Rectangle.contains(bounds, local);
 	}
 
+	export function loaded(image: Image, engine: Engine): void {
+		const context = engine.loading.getContext();
+
+		const { src } = image;
+		if (!src) {
+			context.progress = 1;
+			context.loaded = true;
+			return;
+		}
+
+		const resource = engine.resources.get(src) as ImageResource;
+		if (!resource?.loaded || !resource?.image) {
+			context.progress = 0;
+			context.loaded = false;
+		} else {
+			context.progress = 1;
+			context.loaded = true;
+		}
+	}
+
 	export function init(engine: Engine) {
 		engine.components.hitTest.set(IMAGE, hitTest);
+		engine.components.loaded.set(IMAGE, loaded);
 		ImageResource.init(engine);
 	}
 }

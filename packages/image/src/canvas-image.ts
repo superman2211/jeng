@@ -1,12 +1,17 @@
-import { Pivot, Source } from '@e2d/core';
+import { Pivot } from '@e2d/core';
 import { CanvasEngine, CanvasPlatform } from '@e2d/canvas-engine';
 import { ImageResource } from '@e2d/resources';
 import { ImageExtension, IMAGE, Image } from './image';
 
 export namespace CanvasImageExtension {
 	export function render(image: Image, engine: CanvasEngine): void {
-		const resource = Source.getResource(image, engine) as ImageResource;
-		if (!resource?.loaded || !resource?.image) {
+		const { src } = image;
+		if (!src) {
+			return;
+		}
+
+		const resource = engine.resources.get(src) as ImageResource;
+		if (!resource?.image) {
 			return;
 		}
 

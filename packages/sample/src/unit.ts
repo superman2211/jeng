@@ -11,12 +11,38 @@ export interface UnitProperties {
 	onClick: (data: UnitProperties) => void;
 }
 
+function onPropsUpdate(props: any, callback: (time: number) => void) {
+	const copy = { ...props };
+	return (time: number) => {
+		// const keys = Object.keys(props);
+		let changed = false;
+		// eslint-disable-next-line no-restricted-syntax
+		for (const key in props) {
+			// eslint-disable-next-line no-prototype-builtins
+			if (props.hasOwnProperty(key)) {
+				if (copy[key] !== props[key]) {
+					copy[key] = props[key];
+					changed = true;
+				}
+			}
+		}
+
+		if (changed) {
+			callback(time);
+		}
+	};
+}
+
+function runOnPropsUpdate(props: any, component: any) {
+	component.onUpdate = onPropsUpdate(props, component.onUpdate.bind(component));
+}
+
 export function unit(props: UnitProperties): Unit {
 	function getTitle() {
 		return `${props.name}\n${Math.round(props.health * 100)}%`;
 	}
 
-	return {
+	const unitView = {
 		type: 'container',
 		x: 50 + Math.random() * 400,
 		y: 200,
@@ -64,4 +90,8 @@ export function unit(props: UnitProperties): Unit {
 			},
 		},
 	};
+
+	runOnPropsUpdate(props, unitView.children.text);
+
+	return unitView;
 }

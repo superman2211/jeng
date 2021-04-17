@@ -1,5 +1,4 @@
 import { CanvasEngine, CanvasPatterns } from '@e2d/canvas-engine';
-import { Source } from '@e2d/core';
 import { ColorTransform, Matrix } from '@e2d/geom';
 import { ImageResource } from '@e2d/resources';
 import {
@@ -49,8 +48,13 @@ function getCanvasPattern(fill: number | FillStyle, colorTransform: ColorTransfo
 				);
 
 			case 'bitmap':
-				const { repeat = true } = fill as BitmapFill;
-				const resource = Source.getResource(fill as BitmapFill, engine) as ImageResource;
+				const bitmapFill = fill as BitmapFill;
+				const { repeat = true, src } = bitmapFill;
+				if (!src) {
+					return '';
+				}
+
+				const resource = engine.resources.get(src) as ImageResource;
 				if (resource?.image) {
 					return CanvasPatterns.bitmapPattern(resource.image, repeat, context);
 				}

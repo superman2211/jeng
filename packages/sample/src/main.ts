@@ -1,24 +1,38 @@
 /* eslint-disable no-console */
+import { Loader } from '@e2d/core';
 import {
 	ABILITY_FOX, ABILITY_WOLF, ANIMALIST, ARCHER, BACKGROUND,
 } from './assets';
 import artifact from './artifact';
 import { fps, Statistics } from './fps';
 import { unit, UnitProperties } from './unit';
+import { preloader, PreloaderInfo } from './preloader';
 
 interface Main {
 	start(): void;
 	[key: string]: any;
 }
 
-export default function main(statistics: Statistics): Main {
+interface MainProperties extends Statistics {
+	getCanvasWidth(): number;
+	getCanvasHeight(): number;
+}
+
+export default function main(parameters: MainProperties): Main {
 	function onUnitClick(data: UnitProperties) {
 		data.health = Math.random();
 		console.log('onUnitClick', data.name);
 	}
 
-	return {
-		type: 'container',
+	const content = {
+		type: 'loader',
+		visible: false,
+		enabled: false,
+		onLoaded() {
+			console.log('background loaded');
+			this.visible = true;
+			this.enabled = true;
+		},
 		children: {
 			background: {
 				type: 'image',
@@ -83,7 +97,7 @@ export default function main(statistics: Statistics): Main {
 				type: 'container',
 				x: 300,
 				y: 350,
-				children: [artifact()],
+				children: artifact(),
 			},
 			map: {
 				type: 'image',
@@ -164,7 +178,28 @@ export default function main(statistics: Statistics): Main {
 					},
 				},
 			},
-			fps: fps(statistics),
+			fps: fps(parameters),
+		},
+	};
+
+	const preloaderInfo: PreloaderInfo = {
+		getWidth: parameters.getCanvasWidth,
+		getHeight: parameters.getCanvasHeight,
+		getProgress() {
+			return Loader.getLoadingProgress(content);
+		},
+	};
+
+	return {
+		type: 'container',
+		children: {
+			content,
+			preloader: preloader(preloaderInfo),
+		},
+		onUpdate() {
+			const isLoaded = !this.children.content.visible;
+			this.children.preloader.visible = isLoaded;
+			this.children.preloader.enabled = isLoaded;
 		},
 		start() {
 			console.log('start');

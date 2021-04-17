@@ -34,6 +34,7 @@ export class Ticker {
 		}
 
 		this.engine.updater.update(time);
+		this.engine.loading.update();
 		this.engine.renderer.render();
 	}
 

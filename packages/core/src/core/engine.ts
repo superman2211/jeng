@@ -1,6 +1,7 @@
 import { Component } from '../components/component';
 import { Renderer } from '../features/renderer';
 import { Updater } from '../features/updater';
+import { Loading } from '../features/loading';
 import { Screen } from '../features/screen';
 import { PointerEvents } from '../features/pointer-events';
 import { Ticker } from '../features/ticker';
@@ -9,12 +10,14 @@ import { ContainerExtension } from '../components/container';
 import { Debug } from '../features/debug';
 import { Resources } from '../features/resources';
 import { Components } from '../features/components';
+import { LoaderExtension } from '../components/loader';
 
 export interface EngineModule {
 	Components?: typeof Components;
 	Screen?: typeof Screen;
 	Platform?: typeof Platform;
 	Updater?: typeof Updater;
+	Loading?: typeof Loading;
 	Renderer?: typeof Renderer;
 	PointerEvents?: typeof PointerEvents;
 	Ticker?: typeof Ticker;
@@ -31,6 +34,7 @@ export class Engine {
 	screen: Screen;
 	platform: Platform;
 	updater: Updater;
+	loading: Loading;
 	renderer: Renderer;
 	pointerEvents: PointerEvents;
 	ticker: Ticker;
@@ -42,6 +46,7 @@ export class Engine {
 		module.Screen = module.Screen ?? Screen;
 		module.Platform = module.Platform ?? Platform;
 		module.Updater = module.Updater ?? Updater;
+		module.Loading = module.Loading ?? Loading;
 		module.Renderer = module.Renderer ?? Renderer;
 		module.PointerEvents = module.PointerEvents ?? PointerEvents;
 		module.Ticker = module.Ticker ?? Ticker;
@@ -52,6 +57,7 @@ export class Engine {
 		this.screen = new module.Screen();
 		this.platform = new module.Platform(this);
 		this.updater = new module.Updater(this);
+		this.loading = new module.Loading(this);
 		this.renderer = new module.Renderer(this);
 		this.pointerEvents = new module.PointerEvents(this);
 		this.ticker = new module.Ticker(this);
@@ -59,5 +65,6 @@ export class Engine {
 		this.resources = new module.Resources(this);
 
 		ContainerExtension.init(this);
+		LoaderExtension.init(this);
 	}
 }

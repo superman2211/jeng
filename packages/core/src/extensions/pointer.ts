@@ -1,5 +1,13 @@
 export type PointerEventType = 'pointerDown' | 'pointerUp' | 'pointerMove' | 'pointerOver' | 'pointerOut';
 
+const handlersMap = {
+	pointerDown: 'onPointerDown',
+	pointerUp: 'onPointerUp',
+	pointerMove: 'onPointerMove',
+	pointerOver: 'onPointerOver',
+	pointerOut: 'onPointerOut',
+};
+
 export interface PointerEvent {
 	type: PointerEventType;
 	x: number;
@@ -27,8 +35,8 @@ export namespace Pointer {
 	}
 
 	export function dispatchEvent(pointer: Pointer, type: PointerEventType, x: number, y: number, id?: number) {
-		const handlerName = `on${type.charAt(0).toUpperCase()}${type.slice(1)}`;
-		if ((pointer as any)[handlerName]) {
+		const handlerName = handlersMap[type];
+		if (handlerName && (pointer as any)[handlerName]) {
 			const event: PointerEvent = {
 				type, x, y, id,
 			};

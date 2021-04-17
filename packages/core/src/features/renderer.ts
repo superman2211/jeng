@@ -1,7 +1,7 @@
 import { ColorTransform, Matrix } from '@e2d/geom';
 import { Component } from '../components/component';
-import { Display } from '../interfaces/display';
-import { Transform } from '../interfaces/transform';
+import { Display } from '../extensions/display';
+import { Transform } from '../extensions/transform';
 import { EngineFeature } from '../core/feature';
 
 export interface RenderContext {

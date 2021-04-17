@@ -1,7 +1,7 @@
 import { Engine } from '../core/engine';
 import { Component } from './component';
 
-type ComponentsMap = { [key: string]: Component };
+export type ComponentsMap = { [key: string]: Component };
 
 export const CONTAINER = 'container';
 
@@ -122,9 +122,67 @@ export namespace ContainerExtension {
 		return false;
 	}
 
+	export function loaded(container: Container, engine: Engine): void {
+		const { children } = container;
+		const { loading } = engine;
+
+		if (children) {
+			const context = loading.getContext();
+			loading.depth++;
+
+			if (Array.isArray(children)) {
+				if (children.length) {
+					context.progress = 0;
+					context.loaded = true;
+					for (let i = 0; i < children.length; i++) {
+						const component = children[i];
+						loading.updateComponent(component);
+						const componentContext = loading.getContext();
+						context.progress += componentContext.progress;
+						if (!componentContext.loaded) {
+							context.loaded = false;
+						}
+					}
+					context.progress /= children.length;
+				} else {
+					context.progress = 1;
+				}
+			} else if (children.type) {
+				const component = children as Container;
+				loading.updateComponent(component);
+				const componentContext = loading.getContext();
+				context.progress = componentContext.progress;
+				context.loaded = componentContext.loaded;
+			} else {
+				const componentsMap = children as ComponentsMap;
+				const keys = Object.keys(componentsMap);
+				if (keys.length) {
+					context.progress = 0;
+					context.loaded = true;
+					for (let i = 0; i < keys.length; i++) {
+						const component = componentsMap[keys[i]];
+						loading.updateComponent(component);
+						const componentContext = loading.getContext();
+						context.progress += componentContext.progress;
+						if (!componentContext.loaded) {
+							context.loaded = false;
+						}
+					}
+					context.progress /= keys.length;
+				} else {
+					context.progress = 1;
+					context.loaded = true;
+				}
+			}
+
+			loading.depth--;
+		}
+	}
+
 	export function init(engine: Engine) {
 		engine.components.update.set(CONTAINER, update);
 		engine.components.render.set(CONTAINER, render);
 		engine.components.hitTest.set(CONTAINER, hitTest);
+		engine.components.loaded.set(CONTAINER, loaded);
 	}
 }

@@ -1,5 +1,5 @@
 import { Component } from '../components/component';
-import { Update } from '../interfaces/update';
+import { Update } from '../extensions/update';
 import { EngineFeature } from '../core/feature';
 
 export class Updater extends EngineFeature {

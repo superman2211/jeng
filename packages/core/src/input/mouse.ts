@@ -1,5 +1,5 @@
 import { Engine } from '../core/engine';
-import { PointerEventType } from '../interfaces/pointer';
+import { PointerEventType } from '../extensions/pointer';
 
 function dispatchEvent(engine: Engine, event: MouseEvent, type: PointerEventType) {
 	const { view } = engine.platform;
