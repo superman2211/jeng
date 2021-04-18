@@ -3,13 +3,16 @@
 	"compilerOptions": {
 		"sourceMap": true,
 		"strict": true,
-		"allowSyntheticDefaultImports": true
+		"allowSyntheticDefaultImports": true,
+		"declarationDir": "dist",
+		"outDir": "dist",
 	},
 	"include": [
 		"src/**/*",
 		"node_modules/"
 	],
 	"exclude": [
-		"build"
+		"build",
+		"dist"
 	]
 }
