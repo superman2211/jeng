@@ -2,7 +2,7 @@
 import { Engine, Resource } from '@e2d/core';
 
 export interface ImageResource extends Resource {
-	image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | null;
+	image?: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement;
 }
 
 export namespace ImageResource {
@@ -11,10 +11,12 @@ export namespace ImageResource {
 		switch (extension) {
 			case 'png':
 			case 'jpg':
+			case 'webp':
 				const resource: ImageResource = {
 					asset,
 					loaded: false,
-					image: null,
+					bytesLoaded: 0,
+					bytesTotal: 0,
 				};
 
 				const image = document.createElement('img') as HTMLImageElement;

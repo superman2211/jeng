@@ -195,6 +195,7 @@ export default function main(parameters: MainProperties): Main {
 		children: {
 			content,
 			preloader: preloader(preloaderInfo),
+			scene: { type: 'scene', src: 'assets/scene.json' },
 		},
 		onUpdate() {
 			const isLoaded = !this.children.content.visible;

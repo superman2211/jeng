@@ -4,6 +4,23 @@ import { EngineFeature } from '../core/feature';
 export interface Resource {
 	asset: string;
 	loaded: boolean;
+	bytesTotal: number;
+	bytesLoaded: number;
+}
+
+export namespace Resource {
+	export function getProgress(resource: Resource) {
+		if (!resource) {
+			return 0;
+		}
+		if (resource.loaded) {
+			return 1;
+		}
+		if (resource.bytesTotal > 0) {
+			return resource.bytesLoaded / resource.bytesTotal;
+		}
+		return 0;
+	}
 }
 
 export type ResourceResolver = (asset: string, engine: Engine) => Resource | null;

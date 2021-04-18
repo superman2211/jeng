@@ -1,5 +1,5 @@
 import {
-	Source, Component, Pivot, Engine,
+	Source, Component, Pivot, Engine, Resource,
 } from '@e2d/core';
 import { Rectangle } from '@e2d/geom';
 import { ImageResource } from '@e2d/resources';
@@ -54,13 +54,8 @@ export namespace ImageExtension {
 		}
 
 		const resource = engine.resources.get(src) as ImageResource;
-		if (!resource?.loaded || !resource?.image) {
-			context.progress = 0;
-			context.loaded = false;
-		} else {
-			context.progress = 1;
-			context.loaded = true;
-		}
+		context.progress = Resource.getProgress(resource);
+		context.loaded = !!resource?.loaded && !!resource?.image;
 	}
 
 	export function init(engine: Engine) {

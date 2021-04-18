@@ -29,7 +29,8 @@
     "@e2d/resources": "^0.1.0",
     "@e2d/shape": "^0.1.0",
     "@e2d/text": "^0.1.0",
-    "@e2d/tween": "^0.1.0"
+    "@e2d/tween": "^0.1.0",
+    "@e2d/scene": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",

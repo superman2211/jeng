@@ -1,0 +1,17 @@
+{
+	"type": "container",
+	"children": [
+		{ 
+			"type": "image", 
+			"src": "assets/AnimalistFox1_image.png" 
+		},
+		{
+			"type": "text",
+			"text": "Test Title",
+			"textFormat": {
+				"size": 15,
+				"color": 0
+			}
+		}
+	]
+}
