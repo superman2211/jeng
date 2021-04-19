@@ -11,7 +11,8 @@
     "clean": "yarn wsrun clean && rimraf node_modules"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "samples/*"
   ],
   "devDependencies": {
     "rimraf": "^3.0.2",

@@ -3,7 +3,7 @@ import { Renderer } from '../features/renderer';
 import { Updater } from '../features/updater';
 import { Loading } from '../features/loading';
 import { Screen } from '../features/screen';
-import { PointerEvents } from '../features/pointer-events';
+import { Pointers } from '../features/pointers';
 import { Ticker } from '../features/ticker';
 import { Platform } from '../features/platform';
 import { ContainerExtension } from '../components/container';
@@ -19,7 +19,7 @@ export interface EngineModule {
 	Updater?: typeof Updater;
 	Loading?: typeof Loading;
 	Renderer?: typeof Renderer;
-	PointerEvents?: typeof PointerEvents;
+	Pointers?: typeof Pointers;
 	Ticker?: typeof Ticker;
 	Debug?: typeof Debug;
 	Resources?: typeof Resources;
@@ -36,7 +36,7 @@ export class Engine {
 	updater: Updater;
 	loading: Loading;
 	renderer: Renderer;
-	pointerEvents: PointerEvents;
+	pointers: Pointers;
 	ticker: Ticker;
 	debug: Debug;
 	resources: Resources;
@@ -48,7 +48,7 @@ export class Engine {
 		module.Updater = module.Updater ?? Updater;
 		module.Loading = module.Loading ?? Loading;
 		module.Renderer = module.Renderer ?? Renderer;
-		module.PointerEvents = module.PointerEvents ?? PointerEvents;
+		module.Pointers = module.Pointers ?? Pointers;
 		module.Ticker = module.Ticker ?? Ticker;
 		module.Debug = module.Debug ?? Debug;
 		module.Resources = module.Resources ?? Resources;
@@ -59,7 +59,7 @@ export class Engine {
 		this.updater = new module.Updater(this);
 		this.loading = new module.Loading(this);
 		this.renderer = new module.Renderer(this);
-		this.pointerEvents = new module.PointerEvents(this);
+		this.pointers = new module.Pointers(this);
 		this.ticker = new module.Ticker(this);
 		this.debug = new module.Debug();
 		this.resources = new module.Resources(this);

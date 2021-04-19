@@ -52,7 +52,7 @@ const bounds = Rectangle.empty();
 
 export namespace TextExtension {
 	export function hitTest(text: Text, engine: Engine): boolean {
-		const { local } = engine.pointerEvents;
+		const { local } = engine.pointers;
 		Text.calculateBounds(text, bounds);
 		return Rectangle.contains(bounds, local);
 	}

@@ -6,7 +6,7 @@ function dispatchEvent(engine: Engine, event: MouseEvent, type: PointerEventType
 	const clientRect = view.getBoundingClientRect();
 	const x = event.clientX - clientRect.left - view.clientLeft;
 	const y = event.clientY - clientRect.top - view.clientTop;
-	engine.pointerEvents.dispatch(type, x, y, 0);
+	engine.pointers.dispatch(type, x, y, 0);
 	event.preventDefault();
 }
 

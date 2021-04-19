@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { Loader } from '@e2d/core';
 import {
-	ABILITY_FOX, ABILITY_WOLF, ANIMALIST, ARCHER, BACKGROUND,
+	ABILITY_FOX, ABILITY_WOLF, ANIMALIST, ARCHER, BACKGROUND, SCENE,
 } from './assets';
 import artifact from './artifact';
 import { fps, Statistics } from './fps';
@@ -195,7 +195,9 @@ export default function main(parameters: MainProperties): Main {
 		children: {
 			content,
 			preloader: preloader(preloaderInfo),
-			scene: { type: 'scene', src: 'assets/scene.json' },
+			scene: {
+				type: 'scene', x: 300, src: SCENE,
+			},
 		},
 		onUpdate() {
 			const isLoaded = !this.children.content.visible;

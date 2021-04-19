@@ -85,7 +85,7 @@ export namespace ContainerExtension {
 
 	export function hitTest(container: Container, engine: Engine): boolean {
 		const { children } = container;
-		const { pointerEvents } = engine;
+		const { pointers: pointerEvents } = engine;
 
 		if (children) {
 			const context = pointerEvents.getContext();

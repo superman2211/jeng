@@ -6,7 +6,7 @@ export * from './features/components';
 export * from './features/debug';
 export * from './core/feature';
 export * from './features/platform';
-export * from './features/pointer-events';
+export * from './features/pointers';
 export * from './features/renderer';
 export * from './features/resources';
 export * from './features/screen';

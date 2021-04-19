@@ -9,7 +9,7 @@ export interface PointerContext {
 	matrix: Matrix;
 }
 
-export class PointerEvents extends EngineFeature {
+export class Pointers extends EngineFeature {
 	depth = 0;
 	enabled = true;
 

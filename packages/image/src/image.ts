@@ -38,7 +38,7 @@ const bounds = Rectangle.empty();
 
 export namespace ImageExtension {
 	export function hitTest(image: Image, engine: Engine): boolean {
-		const { local } = engine.pointerEvents;
+		const { local } = engine.pointers;
 		Image.calculateBounds(image, bounds, engine);
 		return Rectangle.contains(bounds, local);
 	}

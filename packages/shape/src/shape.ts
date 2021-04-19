@@ -58,7 +58,7 @@ const rectangle = Rectangle.empty();
 
 export namespace ShapeExtension {
 	export function hitTest(shape: Shape, engine: Engine): boolean {
-		const { local } = engine.pointerEvents;
+		const { local } = engine.pointers;
 		Shape.calculateBounds(shape, rectangle);
 		return Rectangle.contains(rectangle, local);
 	}
