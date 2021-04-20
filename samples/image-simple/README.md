@@ -1,4 +1,4 @@
-# Hello World sample
+# Simple Image sample
 
 ## Sample
 [Code](src/index.ts)
