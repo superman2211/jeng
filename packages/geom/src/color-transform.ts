@@ -68,15 +68,15 @@ export namespace ColorTransform {
 		to.blueOffset = from.blueOffset;
 	}
 
-	export function concat(ct1: ColorTransform, ct0: ColorTransform, result: ColorTransform) {
+	export function concat(ct0: ColorTransform, ct1: ColorTransform, result: ColorTransform) {
 		const alphaMultiplier = ct1.alphaMultiplier * ct0.alphaMultiplier;
 		const redMultiplier = ct1.redMultiplier * ct0.redMultiplier;
 		const greenMultiplier = ct1.greenMultiplier * ct0.greenMultiplier;
 		const blueMultiplier = ct1.blueMultiplier * ct0.blueMultiplier;
-		const alphaOffset = ct1.alphaMultiplier * ct0.alphaOffset + ct0.alphaOffset;
-		const redOffset = ct1.redMultiplier * ct0.redOffset + ct0.redOffset;
-		const greenOffset = ct1.greenMultiplier * ct0.greenOffset + ct0.greenOffset;
-		const blueOffset = ct1.blueMultiplier * ct0.blueOffset + ct0.blueOffset;
+		const alphaOffset = ct1.alphaMultiplier * ct0.alphaOffset + ct1.alphaOffset;
+		const redOffset = ct1.redMultiplier * ct0.redOffset + ct1.redOffset;
+		const greenOffset = ct1.greenMultiplier * ct0.greenOffset + ct1.greenOffset;
+		const blueOffset = ct1.blueMultiplier * ct0.blueOffset + ct1.blueOffset;
 
 		result.alphaMultiplier = alphaMultiplier;
 		result.redMultiplier = redMultiplier;
