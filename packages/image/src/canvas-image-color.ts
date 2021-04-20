@@ -59,6 +59,7 @@ export namespace CanvasImageColorExtension {
 				return;
 			}
 
+			customContext.setTransform();
 			customContext.clearRect(bounds.x, bounds.y, bounds.width, bounds.height);
 			customContext.setTransform(
 				matrix.a,

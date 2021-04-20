@@ -21,6 +21,7 @@ const ring = {
 	type: 'image',
 	src: 'assets/Rings_promo_mythic.png',
 	scale: 0.4,
+	// tint: { color: 0x00ff00, value: 0.5 },
 } as Image;
 
 // create container with image
