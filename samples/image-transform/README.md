@@ -1,4 +1,4 @@
-# Simple Image sample
+# Image Transform sample
 
 ## Sample
 [Code](src/index.ts)

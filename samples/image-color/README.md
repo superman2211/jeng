@@ -10,13 +10,9 @@ Setup
 ```shell
 yarn
 ```
-Debug build
+Build
 ```shell
 yarn build
-```
-Release build
-```shell
-yarn release
 ```
 Watch
 ```shell

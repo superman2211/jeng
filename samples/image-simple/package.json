@@ -8,9 +8,8 @@
   "sideEffects": false,
   "author": "Sergey Antonov",
   "scripts": {
-    "build": "webpack --config webpack.config.js --mode=development",
+    "build": "webpack --config webpack.config.js --mode=production",
 	"watch": "webpack --config webpack.config.js --mode=development --watch",
-    "release": "webpack --config webpack.config.js --mode=production",
     "lint": "eslint './src/**' --fix",
     "clean": "rimraf build && rimraf node_modules"
   },

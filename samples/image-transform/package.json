@@ -1,7 +1,7 @@
 {
-  "name": "hello-world",
+  "name": "image-transform",
   "version": "0.1.0",
-  "description": "hello world sample",
+  "description": "image transform sample",
   "main": "src/index.ts",
   "license": "MIT",
   "private": true,
@@ -23,7 +23,8 @@
   "homepage": "https://github.com/AntonovSergey2211/e2d#readme",
   "dependencies": {
     "@e2d/canvas-engine": "^0.1.0",
-    "@e2d/text": "^0.1.0"
+    "@e2d/image": "^0.1.0",
+    "@e2d/core": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",
@@ -33,6 +34,7 @@
     "@typescript-eslint/eslint-plugin": "^4.17.0",
     "@typescript-eslint/parser": "^4.17.0",
     "babel-loader": "^8.1.0",
+	"copy-webpack-plugin": "^8.0.0",
     "eslint": "^7.2.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.21.2",
