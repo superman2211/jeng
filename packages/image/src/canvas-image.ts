@@ -1,6 +1,6 @@
-import { Pivot } from '@e2d/core';
-import { CanvasEngine, CanvasPlatform } from '@e2d/canvas-engine';
-import { ImageResource } from '@e2d/resources';
+import { Pivot } from '@jeng/core';
+import { CanvasEngine, CanvasPlatform } from '@jeng/canvas-engine';
+import { ImageResource } from '@jeng/resources';
 import { ImageExtension, IMAGE, Image } from './image';
 
 export namespace CanvasImageExtension {

@@ -1,4 +1,4 @@
-import { ColorTransform, Matrix } from '@e2d/geom';
+import { ColorTransform, Matrix } from '@jeng/geom';
 import { Component } from '../components/component';
 import { Display } from '../extensions/display';
 import { Transform } from '../extensions/transform';

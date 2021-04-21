@@ -1,5 +1,5 @@
-import { Engine } from '@e2d/core';
-import { ImageResource } from '@e2d/resources';
+import { Engine } from '@jeng/core';
+import { ImageResource } from '@jeng/resources';
 
 export default class CustomResourceManager {
 	readonly aliases = new Map<string, string>();

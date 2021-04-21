@@ -1,4 +1,4 @@
-import { Bounds } from '@e2d/geom';
+import { Bounds } from '@jeng/geom';
 import { PathCommand } from './path';
 import { GraphicsString } from './string';
 import { FillStyle, StrokeStyle } from './style';

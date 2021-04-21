@@ -1,7 +1,7 @@
 import {
 	Source, Engine, Resource, Container, ContainerExtension,
-} from '@e2d/core';
-import { StringResource } from '@e2d/resources';
+} from '@jeng/core';
+import { StringResource } from '@jeng/resources';
 
 export const SCENE = 'scene';
 

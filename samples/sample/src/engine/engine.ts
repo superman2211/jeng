@@ -1,6 +1,6 @@
-import { CanvasEngine } from '@e2d/canvas-engine';
-import { EngineModule } from '@e2d/core';
-import { CanvasTextExtension } from '@e2d/text';
+import { CanvasEngine } from '@jeng/canvas-engine';
+import { EngineModule } from '@jeng/core';
+import { CanvasTextExtension } from '@jeng/text';
 import { CustomImageExtension } from './image';
 import CustomPlatform from './platform';
 

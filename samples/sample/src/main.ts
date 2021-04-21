@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { Loader } from '@e2d/core';
+import { Loader } from '@jeng/core';
 import {
 	ABILITY_FOX, ABILITY_WOLF, ANIMALIST, ARCHER, BACKGROUND, SCENE,
 } from './assets';

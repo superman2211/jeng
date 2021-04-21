@@ -1,4 +1,4 @@
-import { Matrix, Rectangle } from '@e2d/geom';
+import { Matrix, Rectangle } from '@jeng/geom';
 
 export class Screen {
 	width = 400;

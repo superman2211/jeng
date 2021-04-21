@@ -1,7 +1,7 @@
-import { CanvasEngine, CanvasPlatform } from '@e2d/canvas-engine';
-import { Pivot } from '@e2d/core';
-import { ColorTransform, Matrix, Rectangle } from '@e2d/geom';
-import { ImageResource } from '@e2d/resources';
+import { CanvasEngine, CanvasPlatform } from '@jeng/canvas-engine';
+import { Pivot } from '@jeng/core';
+import { ColorTransform, Matrix, Rectangle } from '@jeng/geom';
+import { ImageResource } from '@jeng/resources';
 import { ImageExtension, IMAGE, Image } from './image';
 
 const bounds = Rectangle.empty();

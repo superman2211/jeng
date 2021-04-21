@@ -16,21 +16,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AntonovSergey2211/e2d.git"
+    "url": "git+https://github.com/AntonovSergey2211/jeng.git"
   },
   "bugs": {
-    "url": "https://github.com/AntonovSergey2211/e2d/issues"
+    "url": "https://github.com/AntonovSergey2211/jeng/issues"
   },
-  "homepage": "https://github.com/AntonovSergey2211/e2d#readme",
+  "homepage": "https://github.com/AntonovSergey2211/jeng#readme",
   "dependencies": {
-    "@e2d/canvas-engine": "^0.1.0",
-    "@e2d/core": "^0.1.0",
-    "@e2d/image": "^0.1.0",
-    "@e2d/resources": "^0.1.0",
-    "@e2d/shape": "^0.1.0",
-    "@e2d/text": "^0.1.0",
-    "@e2d/tween": "^0.1.0",
-    "@e2d/scene": "^0.1.0"
+    "@jeng/canvas-engine": "^0.1.0",
+    "@jeng/core": "^0.1.0",
+    "@jeng/image": "^0.1.0",
+    "@jeng/resources": "^0.1.0",
+    "@jeng/shape": "^0.1.0",
+    "@jeng/text": "^0.1.0",
+    "@jeng/tween": "^0.1.0",
+    "@jeng/scene": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",

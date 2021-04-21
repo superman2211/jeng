@@ -1,5 +1,5 @@
-import { Component, Engine, Pivot } from '@e2d/core';
-import { Rectangle } from '@e2d/geom';
+import { Component, Engine, Pivot } from '@jeng/core';
+import { Rectangle } from '@jeng/geom';
 import { TextFormat } from './format';
 import { Font } from './font';
 

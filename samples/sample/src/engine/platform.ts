@@ -1,4 +1,4 @@
-import { CanvasPlatform } from '@e2d/canvas-engine';
+import { CanvasPlatform } from '@jeng/canvas-engine';
 
 export default class CustomPlatform extends CanvasPlatform {
 	clear() {

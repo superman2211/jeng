@@ -1,5 +1,5 @@
-import { Pivot } from '@e2d/core';
-import { CanvasEngine, CanvasPlatform, CanvasPatterns } from '@e2d/canvas-engine';
+import { Pivot } from '@jeng/core';
+import { CanvasEngine, CanvasPlatform, CanvasPatterns } from '@jeng/canvas-engine';
 import { Font } from './font';
 import { TextExtension, TEXT, Text } from './text';
 import { TextFormat } from './format';

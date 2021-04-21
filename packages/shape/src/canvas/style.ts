@@ -1,6 +1,6 @@
-import { CanvasEngine, CanvasPatterns } from '@e2d/canvas-engine';
-import { ColorTransform, Matrix } from '@e2d/geom';
-import { ImageResource } from '@e2d/resources';
+import { CanvasEngine, CanvasPatterns } from '@jeng/canvas-engine';
+import { ColorTransform, Matrix } from '@jeng/geom';
+import { ImageResource } from '@jeng/resources';
 import {
 	BitmapFill, FillStyle, GradientFill, SolidFill, StrokeStyle,
 } from '../data/style';

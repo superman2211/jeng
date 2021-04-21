@@ -1,4 +1,4 @@
-import { Platform } from '@e2d/core';
+import { Platform } from '@jeng/core';
 
 export class CanvasPlatform extends Platform {
 	readonly view: HTMLCanvasElement = document.createElement('canvas');

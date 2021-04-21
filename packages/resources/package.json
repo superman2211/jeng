@@ -1,5 +1,5 @@
 {
- "name": "@e2d/resources",
+ "name": "@jeng/resources",
  "version": "0.1.0",
  "description": "engine resources",
  "main": "dist/index.js",
@@ -32,7 +32,7 @@
  },
  "homepage": "https://github.com/AntonovSergey2211/e2d#readme",
  "dependencies": {
-  "@e2d/core": "0.1.0"
+  "@jeng/core": "0.1.0"
  },
  "devDependencies": {
   "@babel/core": "^7.10.3",

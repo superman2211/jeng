@@ -1,4 +1,4 @@
-import { Shape } from '@e2d/shape';
+import { Shape } from '@jeng/shape';
 
 export interface PreloaderInfo {
 	getProgress(): number;

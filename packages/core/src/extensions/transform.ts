@@ -1,4 +1,4 @@
-import { ColorTransform, Matrix } from '@e2d/geom';
+import { ColorTransform, Matrix } from '@jeng/geom';
 
 export interface TintColor {
 	color?: number;

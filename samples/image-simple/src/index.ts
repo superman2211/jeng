@@ -1,6 +1,6 @@
-import { CanvasImageExtension, Image } from '@e2d/image';
-import { CanvasEngine } from '@e2d/canvas-engine';
-import { Container } from '@e2d/core';
+import { CanvasImageExtension, Image } from '@jeng/image';
+import { CanvasEngine } from '@jeng/canvas-engine';
+import { Container } from '@jeng/core';
 
 // create engine
 const engine = new CanvasEngine();

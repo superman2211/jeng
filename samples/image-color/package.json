@@ -22,9 +22,9 @@
   },
   "homepage": "https://github.com/AntonovSergey2211/e2d#readme",
   "dependencies": {
-    "@e2d/canvas-engine": "^0.1.0",
-    "@e2d/image": "^0.1.0",
-    "@e2d/core": "^0.1.0"
+    "@jeng/canvas-engine": "^0.1.0",
+    "@jeng/image": "^0.1.0",
+    "@jeng/core": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",

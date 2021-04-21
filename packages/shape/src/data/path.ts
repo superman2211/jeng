@@ -1,4 +1,4 @@
-import { Bounds } from '@e2d/geom';
+import { Bounds } from '@jeng/geom';
 
 export type PathCommandType = 'moveTo' | 'lineTo' | 'curveTo' | 'cubicCurveTo';
 

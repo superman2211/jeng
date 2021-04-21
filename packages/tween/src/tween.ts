@@ -1,4 +1,4 @@
-import { Component, Engine } from '@e2d/core';
+import { Component, Engine } from '@jeng/core';
 import { easing, LINEAR } from './easing';
 
 export const TWEEN = 'tween';

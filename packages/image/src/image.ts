@@ -1,8 +1,8 @@
 import {
 	Source, Component, Pivot, Engine, Resource,
-} from '@e2d/core';
-import { Rectangle } from '@e2d/geom';
-import { ImageResource } from '@e2d/resources';
+} from '@jeng/core';
+import { Rectangle } from '@jeng/geom';
+import { ImageResource } from '@jeng/resources';
 
 export const IMAGE = 'image';
 

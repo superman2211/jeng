@@ -1,5 +1,5 @@
-import { CanvasTextExtension, Text } from '@e2d/text';
-import { CanvasEngine } from '@e2d/canvas-engine';
+import { CanvasTextExtension, Text } from '@jeng/text';
+import { CanvasEngine } from '@jeng/canvas-engine';
 
 // create engine
 const engine = new CanvasEngine();

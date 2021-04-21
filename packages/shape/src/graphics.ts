@@ -1,4 +1,4 @@
-import { Matrix } from '@e2d/geom';
+import { Matrix } from '@jeng/geom';
 import {
 	BitmapFill,
 	CapsStyle,

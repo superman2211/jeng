@@ -1,5 +1,5 @@
-import { Source } from '@e2d/core';
-import { Matrix } from '@e2d/geom';
+import { Source } from '@jeng/core';
+import { Matrix } from '@jeng/geom';
 
 export type FillType = 'solid' | 'radial' | 'linear' | 'bitmap';
 export type CapsStyle = 'butt' | 'round' | 'square';

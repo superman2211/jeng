@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import { Bounds } from '@e2d/geom';
+import { Bounds } from '@jeng/geom';
 import {
 	CubicCurveTo, CurveTo, LineTo, MoveTo, PathCommand,
 } from './path';

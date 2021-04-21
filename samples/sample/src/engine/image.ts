@@ -1,7 +1,7 @@
-import { CanvasEngine, CanvasPlatform } from '@e2d/canvas-engine';
-import { Pivot } from '@e2d/core';
-import { ImageExtension, IMAGE, Image } from '@e2d/image';
-import { ImageResource } from '@e2d/resources';
+import { CanvasEngine, CanvasPlatform } from '@jeng/canvas-engine';
+import { Pivot } from '@jeng/core';
+import { ImageExtension, IMAGE, Image } from '@jeng/image';
+import { ImageResource } from '@jeng/resources';
 
 export namespace CustomImageExtension {
 	export function render(image: Image, engine: CanvasEngine): void {

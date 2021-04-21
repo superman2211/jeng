@@ -1,4 +1,4 @@
-import { ColorTransform, Matrix, Point } from '@e2d/geom';
+import { ColorTransform, Matrix, Point } from '@jeng/geom';
 
 const point1 = Point.empty();
 const point2 = Point.empty();

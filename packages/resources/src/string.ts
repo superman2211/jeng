@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { Engine, Resource } from '@e2d/core';
+import { Engine, Resource } from '@jeng/core';
 
 export interface StringResource extends Resource {
 	data?: string;

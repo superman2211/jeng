@@ -1,5 +1,5 @@
 {
-  "name": "@e2d/geom",
+  "name": "@jeng/geom",
   "version": "0.1.0",
   "description": "geom library",
   "main": "dist/index.js",
@@ -26,12 +26,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AntonovSergey2211/e2d.git"
+    "url": "git+https://github.com/AntonovSergey2211/jeng.git"
   },
   "bugs": {
-    "url": "https://github.com/AntonovSergey2211/e2d/issues"
+    "url": "https://github.com/AntonovSergey2211/jeng/issues"
   },
-  "homepage": "https://github.com/AntonovSergey2211/e2d#readme",
+  "homepage": "https://github.com/AntonovSergey2211/jeng#readme",
   "devDependencies": {
     "@babel/core": "^7.10.3",
     "@babel/plugin-proposal-decorators": "^7.10.3",

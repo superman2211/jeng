@@ -1,4 +1,4 @@
-import { Engine, EngineModule } from '@e2d/core';
+import { Engine, EngineModule } from '@jeng/core';
 import { CanvasPlatform } from './platform';
 
 export class CanvasEngine extends Engine {

@@ -1,8 +1,8 @@
-import { CanvasEngine, CanvasPlatform } from '@e2d/canvas-engine';
-import { Pivot } from '@e2d/core';
+import { CanvasEngine, CanvasPlatform } from '@jeng/canvas-engine';
+import { Pivot } from '@jeng/core';
 import {
 	ColorTransform, Matrix, Point, Rectangle,
-} from '@e2d/geom';
+} from '@jeng/geom';
 import {
 	EllipseData, GraphicsData, PathData, RectangleData,
 } from '../data/data';

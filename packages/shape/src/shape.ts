@@ -1,6 +1,6 @@
-import { Component, Engine, Pivot } from '@e2d/core';
-import { Bounds, Rectangle } from '@e2d/geom';
-import { ImageResource } from '@e2d/resources';
+import { Component, Engine, Pivot } from '@jeng/core';
+import { Bounds, Rectangle } from '@jeng/geom';
+import { ImageResource } from '@jeng/resources';
 import { GraphicsData } from './data/data';
 import Graphics from './graphics';
 
