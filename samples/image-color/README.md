@@ -1,4 +1,4 @@
-# Simple Image sample
+# Image Color sample
 
 ## Sample
 [Code](src/index.ts)
