@@ -1,0 +1,22 @@
+{
+	"type": "container",
+	"children": [
+		{ 
+			"type": "image", 
+			"src": "assets/Artifacts_ball_epic.png" ,
+			"scaleX": 0.5,
+			"scaleY": 0.5,
+			"pivotX": 0.5
+		},
+		{
+			"type": "text",
+			"text": "Artifact Ball",
+			"y": 100,
+			"pivotX": 0.5,
+			"textFormat": {
+				"size": 15,
+				"color": 16000000
+			}
+		}
+	]
+}

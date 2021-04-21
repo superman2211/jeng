@@ -1,22 +1,8 @@
 {
+	"extends": "../../tsconfig.json",
 	"compilerOptions": {
-		"moduleResolution": "node",
-		"module": "esnext",
-		"target": "esnext",
-		"esModuleInterop": true,
-		"noImplicitAny": true,
-		"removeComments": true,
-		"preserveConstEnums": true,
-		"declaration": true,
-		"declarationMap": true,
 		"declarationDir": "dist",
 		"outDir": "dist",
-		"inlineSourceMap": true,
-		"strict": true,
-		"lib": [
-			"dom",
-			"esnext"
-		]
 	},
 	"include": [
 		"src/**/*"

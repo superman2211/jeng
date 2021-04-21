@@ -1,4 +1,4 @@
-# Fast mini 2d engine
+# jEngine
 
 ## Sample
 - [Sample code](https://github.com/AntonovSergey2211/e2d/blob/master/packages/sample/src/index.ts) 

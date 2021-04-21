@@ -1,22 +1,21 @@
 {
   "description": "fast mini 2d engine",
-  "repository": "https://github.com/AntonovSergey2211/e2d.git",
+  "repository": "https://github.com/AntonovSergey2211/jeng.git",
   "author": "Sergey Antonov",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "node scripts/build.js",
-    "test": "yarn workspaces run test",
-    "lint": "yarn workspaces run lint",
-    "clean": "yarn workspaces run clean && rimraf node_modules"
+    "build": "yarn wsrun --stages --exclude-missing build",
+    "test": "yarn wsrun --exclude-missing test",
+    "lint": "yarn wsrun --exclude-missing lint",
+    "clean": "yarn wsrun clean && rimraf node_modules"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "samples/*"
   ],
-  "dependencies": {
-    "shelljs": "^0.8.4"
-  },
   "devDependencies": {
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+	"wsrun": "^5.2.4"
   }
 }

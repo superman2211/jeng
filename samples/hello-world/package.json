@@ -1,0 +1,46 @@
+{
+  "name": "hello-world",
+  "version": "0.1.0",
+  "description": "hello world sample",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "private": true,
+  "sideEffects": false,
+  "author": "Sergey Antonov",
+  "scripts": {
+    "build": "webpack --config webpack.config.js --mode=production",
+	"watch": "webpack --config webpack.config.js --mode=development --watch",
+    "lint": "eslint './src/**' --fix",
+    "clean": "rimraf build && rimraf node_modules"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonovSergey2211/jeng.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AntonovSergey2211/jeng/issues"
+  },
+  "homepage": "https://github.com/AntonovSergey2211/jeng#readme",
+  "dependencies": {
+    "@jeng/canvas-engine": "^0.1.0",
+    "@jeng/text": "^0.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.3",
+    "@babel/plugin-proposal-decorators": "^7.10.3",
+    "@babel/preset-env": "^7.10.3",
+    "@babel/preset-typescript": "^7.10.1",
+    "@typescript-eslint/eslint-plugin": "^4.17.0",
+    "@typescript-eslint/parser": "^4.17.0",
+    "babel-loader": "^8.1.0",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.21.2",
+    "html-webpack-plugin": "^5.3.1",
+    "rimraf": "^3.0.2",
+    "ts-loader": "^8.0.18",
+    "typescript": "^4.2.3",
+    "webpack": "^5.9.0",
+    "webpack-cli": "^4.5.0"
+  }
+}
