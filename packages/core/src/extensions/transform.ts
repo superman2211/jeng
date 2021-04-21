@@ -15,6 +15,7 @@ export interface Transform {
 	matrix?: Matrix;
 	alpha?: number;
 	tint?: TintColor,
+	brightness?: number,
 	colorTransform?: ColorTransform;
 }
 
@@ -70,6 +71,8 @@ export namespace Transform {
 			return;
 		}
 
+		const alpha = transform.alpha ?? 1;
+
 		const { tint } = transform;
 		if (tint) {
 			const { color = 0, value = 1 } = tint;
@@ -80,7 +83,7 @@ export namespace Transform {
 			const g = (color >> 8) & 0xff;
 			const b = color & 0xff;
 
-			result.alphaMultiplier = transform.alpha ?? 1;
+			result.alphaMultiplier = alpha;
 			result.redMultiplier = valueInverted;
 			result.greenMultiplier = valueInverted;
 			result.blueMultiplier = valueInverted;
@@ -92,7 +95,33 @@ export namespace Transform {
 			return;
 		}
 
-		result.alphaMultiplier = transform.alpha ?? 1;
+		let { brightness } = transform;
+		if (brightness !== undefined) {
+			if (brightness > 1) {
+				brightness = 1;
+			} else if (brightness < -1) {
+				brightness = -1;
+			}
+
+			const percent: number = 1 - Math.abs(brightness);
+			let offset: number = 0;
+			if (brightness > 0) {
+				offset = brightness * 255;
+			}
+
+			result.alphaMultiplier = alpha;
+			result.redMultiplier = percent;
+			result.greenMultiplier = percent;
+			result.blueMultiplier = percent;
+
+			result.alphaOffset = 0;
+			result.redOffset = offset;
+			result.greenOffset = offset;
+			result.blueOffset = offset;
+			return;
+		}
+
+		result.alphaMultiplier = alpha;
 		result.redMultiplier = 1;
 		result.greenMultiplier = 1;
 		result.blueMultiplier = 1;
