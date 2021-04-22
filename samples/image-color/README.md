@@ -3,7 +3,7 @@
 ## Sample
 [Code](src/index.ts)
 
-[Build](build)
+[Build](https://antonovsergey2211.github.io/jeng/samples/image-color/build/)
 
 ## Development
 Setup
