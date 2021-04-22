@@ -50,7 +50,7 @@ yarn build
 
 Test all packages
 ```shell
-yarn test`
+yarn test
 ```
 
 Lint all packages
