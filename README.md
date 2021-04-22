@@ -1,32 +1,34 @@
-# jEngine
+# JENG Engine
+Flexible graphics engine written on TypeScript.
 
-## Sample
-- [Sample code](https://github.com/AntonovSergey2211/e2d/blob/master/packages/sample/src/index.ts) 
-- [Sample build](https://antonovsergey2211.github.io/e2d/packages/sample/build/)
+## Samples
+- Hello World [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/hello-world/src/index.ts) [Build](https://antonovsergey2211.github.io/jeng/samples/hello-world/build/)
 
-## Scripts
+- Image simple [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/image-simple/src/index.ts) [Build](https://antonovsergey2211.github.io/jeng/samples/image-simple/build/)
+
+- Image color sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/image-color/src/index.ts) [Build](https://antonovsergey2211.github.io/jeng/samples/image-color/build/)
+
+- Image transform sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/image-transform/src/index.ts) [Build](https://antonovsergey2211.github.io/jeng/samples/image-transform/build/)
+
+## Usage
+
+## Development
 
 ### [build]
-Build all <br/>
+Build all packages <br/>
 `yarn build`
-
-Build few packages <br/>
-`yarn build geom events sample`
 
 ### [test]
 Test all packages <br/>
 `yarn test`
 
 ### [lint]
-Linting all packages <br/>
+Lint all packages <br/>
 `yarn lint`
 
 ### [clean]
 Clean all packages <br/>
 `yarn clean`
 
-## Other
-- [Test](https://antonovsergey2211.github.io/e2d/packages/sample/test)
-
 ## Build
-[![e2d](https://circleci.com/gh/AntonovSergey2211/e2d.svg?style=shield)](https://app.circleci.com/pipelines/github/AntonovSergey2211/e2d)
+[![jeng](https://circleci.com/gh/AntonovSergey2211/jeng.svg?style=shield)](https://app.circleci.com/pipelines/github/AntonovSergey2211/jeng)
