@@ -1,7 +1,7 @@
 {
  "name": "@jeng/core",
  "version": "0.1.0",
- "description": "canvas engine",
+ "description": "core engine library",
  "main": "dist/index.js",
  "types": "dist/index.d.ts",
  "moduleResolution": "node",

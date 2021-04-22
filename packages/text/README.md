@@ -1,1 +1,1 @@
-# Geom library
+# Text component extension

@@ -10,10 +10,7 @@ CanvasImageColorExtension.init(engine);
 engine.screen.fullscreen = true;
 // start update loop
 engine.ticker.play();
-
-// setup page
-document.body.style.margin = '0';
-document.body.style.padding = '0';
+// set background color
 document.body.style.backgroundColor = 'grey';
 // add engine view to page
 document.body.appendChild(engine.platform.view);

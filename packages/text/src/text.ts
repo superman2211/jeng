@@ -14,9 +14,14 @@ export interface Text extends Component, Pivot {
 	height?: number;
 	border?: number;
 	background?: number;
+	wordWrap?: boolean;
 }
 
 export namespace Text {
+	export function isWordWrap(component: Text): boolean {
+		return component.wordWrap ?? true;
+	}
+
 	export function calculateBounds(component: Text, bounds: Rectangle) {
 		const { text } = component;
 		if (!text) {
@@ -24,13 +29,14 @@ export namespace Text {
 			return;
 		}
 
-		const lines = text.split('\n');
 		let { width, height } = component;
 		const { textFormat } = component;
 		TextFormat.getValidTextFormat(textFormat, validTextFormat);
 
+		const font = Font.getFont(validTextFormat.font!);
+		const lines = Font.getLines(font, validTextFormat, text, isWordWrap(component), width);
+
 		if (!width) {
-			const font = Font.getFont(validTextFormat.font!);
 			width = Font.getTextWidth(font, validTextFormat, lines);
 		}
 

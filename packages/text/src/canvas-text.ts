@@ -19,18 +19,18 @@ export namespace CanvasTextExtension {
 			return;
 		}
 
-		const lines = text.split('\n');
 		const {
 			width, height, textFormat, border, background,
 		} = component;
 
 		TextFormat.getValidTextFormat(textFormat, validTextFormat);
+		const font = Font.getFont(validTextFormat.font!);
+		const lines = Font.getLines(font, validTextFormat, text, Text.isWordWrap(component), width);
 
 		const formatSize = validTextFormat.size!;
 		const formatLetterSpacing = validTextFormat.letterSpacing!;
 		const formatLeading = validTextFormat.leading!;
 
-		const font = Font.getFont(validTextFormat.font!);
 		const context2d = (engine.platform as CanvasPlatform).getContext();
 
 		const textWidth = Font.getTextWidth(font, validTextFormat, lines);

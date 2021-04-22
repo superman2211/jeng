@@ -1,7 +1,7 @@
 {
  "name": "@jeng/text",
  "version": "0.1.0",
- "description": "canvas engine",
+ "description": "text component extension",
  "main": "dist/index.js",
  "types": "dist/index.d.ts",
  "moduleResolution": "node",
@@ -10,8 +10,10 @@
  "keywords": [
   "javascript",
   "typescript",
-  "core",
-  "engine"
+  "component",
+  "engine",
+  "text",
+  "extension"
  ],
  "scripts": {
   "build": "tsc",

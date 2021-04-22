@@ -1,9 +1,9 @@
-# Image Transform sample
+# Test simple sample
 
 ## Sample
 [Code](src/index.ts)
 
-[Build](https://antonovsergey2211.github.io/jeng/samples/image-transform/build/)
+[Build](https://antonovsergey2211.github.io/jeng/samples/text-simple/build/)
 
 ## Development
 Setup

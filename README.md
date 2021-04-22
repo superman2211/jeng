@@ -10,6 +10,8 @@ Flexible graphics engine written on TypeScript.
 
 - Image transform sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/image-transform/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/image-transform/build/)
 
+- Simple text sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/text-simple/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/text-simple/build/)
+
 ## Usage
 Install
 ```shell
@@ -30,10 +32,6 @@ CanvasTextExtension.init(engine);
 engine.screen.fullscreen = true;
 // start update loop
 engine.ticker.play();
-
-// setup page
-document.body.style.margin = '0';
-document.body.style.padding = '0';
 // add engine view to page
 document.body.appendChild(engine.platform.view);
 ```

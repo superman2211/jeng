@@ -1,7 +1,7 @@
 {
  "name": "@jeng/scene",
  "version": "0.1.0",
- "description": "scene",
+ "description": "scene component extension",
  "main": "dist/index.js",
  "types": "dist/index.d.ts",
  "moduleResolution": "node",
@@ -10,8 +10,10 @@
  "keywords": [
   "javascript",
   "typescript",
-  "core",
-  "engine"
+  "scene",
+  "engine",
+  "component",
+  "extension"
  ],
  "scripts": {
   "build": "tsc",
