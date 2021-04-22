@@ -1,1 +1,1 @@
-# Geom library
+# Scene component extension

@@ -1,1 +1,1 @@
-# Geom library
+# Image component extension

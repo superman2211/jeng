@@ -30,7 +30,9 @@ module.exports = {
 		extensions: ['.tsx', '.ts', '.js'],
 	},
 	plugins: [
-		new HtmlWebpackPlugin(),
+		new HtmlWebpackPlugin({
+			template: '../../templates/index.html',
+		}),
 		new CopyPlugin({
 			patterns: [
 				{ from: 'assets', to: './assets' },

@@ -1,1 +1,1 @@
-# Shape library
+# Shape component extension

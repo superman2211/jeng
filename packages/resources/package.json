@@ -1,7 +1,7 @@
 {
  "name": "@jeng/resources",
  "version": "0.1.0",
- "description": "engine resources",
+ "description": "resources library",
  "main": "dist/index.js",
  "types": "dist/index.d.ts",
  "moduleResolution": "node",
@@ -10,7 +10,8 @@
  "keywords": [
   "javascript",
   "typescript",
-  "core",
+  "resources",
+  "library",
   "engine"
  ],
  "scripts": {

@@ -67,6 +67,78 @@ export namespace Font {
 		return font;
 	}
 
+	export function getLines(font: Font, format: TextFormat, text: string, wordWrap: boolean, width?: number): string[] {
+		if (width) {
+			const { length } = text;
+			const lines: string[] = [];
+			let line = '';
+			let lineWidth = 0;
+			let word = '';
+			let wordWidth = 0;
+			if (wordWrap) {
+				for (let i = 0; i < length; i++) {
+					const first = text.charAt(i);
+					if (first === '\n') {
+						line += word;
+						lines.push(line);
+						line = '';
+						lineWidth = 0;
+						word = '';
+						wordWidth = 0;
+					} else {
+						const second = text.charAt(i + 1);
+						const advance = getAdvance(font, format.size!, first, second);
+						wordWidth += advance;
+						if (lineWidth + wordWidth > width) {
+							lines.push(line);
+							line = '';
+							lineWidth = 0;
+						} else {
+							word += first;
+							if (/\s/.test(first)) {
+								line += word;
+								lineWidth += wordWidth;
+								word = '';
+								wordWidth = 0;
+							}
+						}
+					}
+				}
+				if (word) {
+					line += word;
+				}
+				if (line) {
+					lines.push(line);
+				}
+			} else {
+				for (let i = 0; i < length; i++) {
+					const first = text.charAt(i);
+					if (first === '\n') {
+						lines.push(line);
+						line = '';
+						lineWidth = 0;
+					} else {
+						const second = text.charAt(i + 1);
+						const advance = getAdvance(font, format.size!, first, second);
+						if (lineWidth + advance > width) {
+							lines.push(line);
+							line = first;
+							lineWidth = 0;
+						} else {
+							lineWidth += advance;
+							line += first;
+						}
+					}
+				}
+				if (line) {
+					lines.push(line);
+				}
+			}
+			return lines;
+		}
+		return text.split('\n');
+	}
+
 	export function getLineWidth(font: Font, format: TextFormat, line: string): number {
 		let width = 0;
 		for (let i = 0; i < line.length; i++) {

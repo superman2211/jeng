@@ -1,1 +1,1 @@
-# Geom library
+# Core library

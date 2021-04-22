@@ -1,7 +1,7 @@
 {
  "name": "@jeng/shape",
  "version": "0.1.0",
- "description": "canvas engine",
+ "description": "shape component extension",
  "main": "dist/index.js",
  "types": "dist/index.d.ts",
  "moduleResolution": "node",
@@ -10,8 +10,10 @@
  "keywords": [
   "javascript",
   "typescript",
-  "core",
-  "engine"
+  "engine",
+  "shape",
+  "component",
+  "extension"
  ],
  "scripts": {
   "build": "tsc",
