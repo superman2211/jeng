@@ -14,7 +14,7 @@ engine.ticker.play();
 document.body.appendChild(engine.platform.view);
 
 const longText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet ultricies nibh, at mattis sem volutpat et. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.';
-const multilineText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nPhasellus imperdiet ultricies nibh, at mattis sem volutpat et.\nOrci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.';
+const multilineText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nPhasellus imperdiet ultricies nibh, at mattis sem volutpat et.';
 
 // create simple app
 engine.root = {
@@ -26,6 +26,7 @@ engine.root = {
 			textFormat: {
 				size: 15,
 				color: 0x229933,
+				leading: 5,
 			},
 			border: 0x223399,
 			x: 20,
@@ -37,8 +38,9 @@ engine.root = {
 			type: TEXT,
 			text: longText,
 			textFormat: {
-				size: 15,
+				size: 17,
 				color: 0x223399,
+				letterSpacing: 1,
 				align: 'center',
 				verticalAlign: 'middle',
 			},
@@ -52,7 +54,7 @@ engine.root = {
 			type: TEXT,
 			text: longText,
 			textFormat: {
-				size: 15,
+				size: 11,
 				color: 0x993322,
 				align: 'right',
 				verticalAlign: 'bottom',
@@ -67,7 +69,7 @@ engine.root = {
 			type: TEXT,
 			text: longText,
 			textFormat: {
-				size: 15,
+				size: 13,
 				color: 0,
 				verticalAlign: 'middle',
 			},

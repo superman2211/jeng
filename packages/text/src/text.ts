@@ -1,7 +1,7 @@
 import { Component, Engine, Pivot } from '@jeng/core';
 import { Rectangle } from '@jeng/geom';
 import { TextFormat } from './format';
-import { Font } from './font';
+import { TextMetrics } from './metrics';
 
 export const TEXT = 'text';
 
@@ -15,6 +15,7 @@ export interface Text extends Component, Pivot {
 	border?: number;
 	background?: number;
 	wordWrap?: boolean;
+	metrics?: TextMetrics;
 }
 
 export namespace Text {
@@ -23,25 +24,22 @@ export namespace Text {
 	}
 
 	export function calculateBounds(component: Text, bounds: Rectangle) {
-		const { text } = component;
-		if (!text) {
+		TextMetrics.update(component);
+		const { metrics } = component;
+		if (!metrics) {
 			Rectangle.setEmpty(bounds);
 			return;
 		}
 
 		let { width, height } = component;
-		const { textFormat } = component;
-		TextFormat.getValidTextFormat(textFormat, validTextFormat);
-
-		const font = Font.getFont(validTextFormat.font!);
-		const lines = Font.getLines(font, validTextFormat, text, isWordWrap(component), width);
 
 		if (!width) {
-			width = Font.getTextWidth(font, validTextFormat, lines);
+			width = metrics.width;
 		}
 
 		if (!height) {
-			height = Font.getTextHeight(validTextFormat, lines);
+			TextFormat.getValidTextFormat(component.textFormat, validTextFormat);
+			height = TextMetrics.getHeight(metrics, validTextFormat);
 		}
 
 		const x = Pivot.getX(component, width);
