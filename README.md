@@ -1,4 +1,5 @@
-# jeng (JavaScript Graphics Engine)
+# jeng 
+## JavaScript Graphics Engine
 Flexible graphics engine written on TypeScript.
 
 ## Samples
@@ -10,7 +11,9 @@ Flexible graphics engine written on TypeScript.
 
 - Image transform sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/image-transform/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/image-transform/build/)
 
-- Simple text sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/text-simple/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/text-simple/build/)
+- Simple text sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/text-simple/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/text-advanced/build/)
+
+- Sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/sample/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/sample/build/)
 
 ## Usage
 Install

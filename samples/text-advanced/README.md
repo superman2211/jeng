@@ -3,7 +3,7 @@
 ## Sample
 [Code](src/index.ts)
 
-[Build](https://antonovsergey2211.github.io/jeng/samples/text-simple/build/)
+[Build](https://antonovsergey2211.github.io/jeng/samples/text-advanced/build/)
 
 ## Development
 Setup

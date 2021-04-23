@@ -58,8 +58,8 @@ export namespace TextFormat {
 		target.verticalAlign = source.verticalAlign;
 	}
 
-	export function getAlignValue(format: TextFormat): number {
-		switch (format.align) {
+	export function getAlignValue(format: TextFormat | undefined): number {
+		switch (format?.align) {
 			case 'left': return 0;
 			case 'center': return 0.5;
 			case 'right': return 1;
@@ -67,8 +67,8 @@ export namespace TextFormat {
 		}
 	}
 
-	export function getVerticalAlignValue(format: TextFormat): number {
-		switch (format.verticalAlign) {
+	export function getVerticalAlignValue(format: TextFormat | undefined): number {
+		switch (format?.verticalAlign) {
 			case 'top': return 0;
 			case 'middle': return 0.5;
 			case 'bottom': return 1;

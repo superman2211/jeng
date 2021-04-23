@@ -10,16 +10,17 @@ export interface TextSymbol {
 	format: TextFormat;
 }
 
-export interface TextLine {
-	symbols: TextSymbol[];
+export interface TextSize {
 	width: number;
 	height: number;
 }
 
-export interface TextMetrics {
+export interface TextLine extends TextSize {
+	symbols: TextSymbol[];
+}
+
+export interface TextMetrics extends TextSize {
 	lines: TextLine[];
-	width: number;
-	height: number;
 }
 
 export namespace TextLine {
@@ -244,5 +245,36 @@ export namespace TextMetrics {
 		}
 
 		return metrics;
+	}
+
+	export function getSimpleMetrics(component: Text): TextSize | undefined {
+		const { text } = component;
+		if (typeof text !== 'string') {
+			return undefined;
+		}
+
+		TextFormat.combine(component.format, TextFormat.defaultTextFormat, defaultTextFormat);
+		const { size, letterSpacing, leading } = defaultTextFormat;
+		const font = Font.getFont(defaultTextFormat.font!);
+
+		let width = 0;
+		let height = size!;
+
+		for (let i = 0; i < text.length; i++) {
+			const symbol = text[i];
+			if (symbol === '\n') {
+				height += size! + leading!;
+				width = 0;
+			} else {
+				const symbolNext = text[i + 1];
+				const advance = Font.getAdvance(font, size!, symbol, symbolNext) + letterSpacing!;
+				width += advance;
+			}
+		}
+
+		return {
+			width,
+			height,
+		};
 	}
 }

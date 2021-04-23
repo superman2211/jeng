@@ -62,7 +62,7 @@ export function unit(props: UnitProperties): Unit {
 			text: {
 				type: 'text',
 				text: getTitle(),
-				textFormat: {
+				format: {
 					size: 15,
 					color: 0xffdddd,
 					align: 'center',

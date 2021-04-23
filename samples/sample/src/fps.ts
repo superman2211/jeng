@@ -11,7 +11,7 @@ export function fps(statistics: Statistics) {
 		frameTime: 0,
 		updateTime: 0,
 		renderTime: 0,
-		textFormat: {
+		format: {
 			size: 20,
 			color: 0xffffff,
 		},

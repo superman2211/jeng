@@ -5,6 +5,7 @@ import { ImageResource } from '@jeng/resources';
 import { ImageExtension, IMAGE, Image } from './image';
 
 const bounds = Rectangle.empty();
+const screenBounds = Rectangle.empty();
 
 export namespace CanvasImageColorExtension {
 	export function render(image: Image, engine: CanvasEngine) {
@@ -58,6 +59,17 @@ export namespace CanvasImageColorExtension {
 			if (Rectangle.isEmpty(bounds)) {
 				return;
 			}
+
+			screenBounds.width = customContext.canvas.width;
+			screenBounds.height = customContext.canvas.height;
+
+			Rectangle.intersection(bounds, screenBounds, bounds);
+
+			if (Rectangle.isEmpty(bounds)) {
+				return;
+			}
+
+			Rectangle.round(bounds);
 
 			customContext.setTransform();
 			customContext.clearRect(bounds.x, bounds.y, bounds.width, bounds.height);

@@ -1,7 +1,7 @@
 import { Component, Engine, Pivot } from '@jeng/core';
 import { Rectangle } from '@jeng/geom';
 import { TextFormat } from './data/format';
-import { TextMetrics } from './data/metrics';
+import { TextMetrics, TextSize } from './data/metrics';
 
 export const TEXT = 'text';
 
@@ -51,6 +51,12 @@ export namespace Text {
 		return !component.width && !component.height;
 	}
 
+	export function isSimple(component: Text): boolean {
+		return typeof component.text === 'string'
+			&& isAutoSize(component)
+			&& TextFormat.getAlignValue(component.format) === 0;
+	}
+
 	export function isWordWrap(component: Text): boolean {
 		return component.wordWrap ?? true;
 	}
@@ -60,7 +66,13 @@ export namespace Text {
 	}
 
 	export function calculateBounds(component: Text, bounds: Rectangle) {
-		const metrics = TextMetrics.getMetrics(component);
+		let metrics: TextSize | undefined;
+		if (Text.isSimple(component)) {
+			metrics = TextMetrics.getSimpleMetrics(component);
+		} else {
+			metrics = TextMetrics.getMetrics(component);
+		}
+
 		if (!metrics) {
 			Rectangle.setEmpty(bounds);
 			return;

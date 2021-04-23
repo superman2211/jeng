@@ -13,7 +13,7 @@
 			"text": "Artifact Ball",
 			"y": 100,
 			"pivotX": 0.5,
-			"textFormat": {
+			"format": {
 				"size": 15,
 				"color": 16000000
 			}

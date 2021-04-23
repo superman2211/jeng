@@ -99,12 +99,11 @@ const app: Container = {
 		} as Text,
 		{
 			type: TEXT,
-			text: ['AUTO SIZE\n', multilineText],
+			text: `AUTO SIZE\n${multilineText}`,
 			format: {
 				size: 15,
 				color: 0x0000ff,
 			},
-			wordWrap: false,
 			border: 0x0000ff,
 		} as Text,
 	]),
