@@ -44,7 +44,9 @@ describe('rectangle shape', () => {
 
 		expect(reader.readNext()).toBeFalsy();
 	});
+});
 
+describe('cubic curve', () => {
 	it('should read cubic curve', () => {
 		reader.setPath('M 10 10 C 20 20, 40 20, 50 10');
 
@@ -146,7 +148,9 @@ describe('rectangle shape', () => {
 
 		expect(reader.readNext()).toBeFalsy();
 	});
+});
 
+describe('quadratic curve', () => {
 	it('should read quadratic curve', () => {
 		reader.setPath('M 10 80 Q 95 10 180 80');
 
@@ -236,7 +240,9 @@ describe('rectangle shape', () => {
 
 		expect(reader.readNext()).toBeFalsy();
 	});
+});
 
+describe('another cases', () => {
 	it('should read compact string', () => {
 		reader.setPath('M36 18C0-9.94-8.06-18-18-18');
 

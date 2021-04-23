@@ -16,59 +16,77 @@ document.body.appendChild(engine.platform.view);
 const longText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet ultricies nibh, at mattis sem volutpat et. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.';
 const multilineText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nPhasellus imperdiet ultricies nibh, at mattis sem volutpat et.';
 
+// positioning texts
+function positionTexts(texts: Array<Text>) {
+	const x = 20;
+	let y = 20;
+	texts.forEach((text) => {
+		text.x = x;
+		text.y = y;
+		y += 10 + (text.height ?? 0);
+	});
+	return texts;
+}
+
 // create simple app
-engine.root = {
+const app: Container = {
 	type: CONTAINER,
-	children: [
+	children: positionTexts([
 		{
 			type: TEXT,
-			text: longText,
-			textFormat: {
+			text: [
+				{
+					text: 'Big text. ', size: 25, color: 0xff0000, verticalAlign: 'bottom',
+				},
+				{ text: 'Middle text. ', verticalAlign: 'bottom' },
+				{
+					text: 'Little text.', size: 10, verticalAlign: 'bottom', color: 0x0000ff,
+				},
+				'\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit.',
+			],
+			format: {
 				size: 15,
 				color: 0x229933,
 				leading: 5,
 			},
 			border: 0x223399,
-			x: 20,
-			y: 20,
 			width: 300,
-			height: 150,
+			height: 100,
 		} as Text,
 		{
 			type: TEXT,
-			text: longText,
-			textFormat: {
-				size: 17,
+			text: [
+				{ text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. LEFT\n\n', align: 'left' },
+				{ text: 'Phasellus imperdiet ultricies nibh, at mattis sem volutpat et. CENTER\n\n', align: 'center' },
+				{ text: 'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. RIGHT', align: 'right' },
+			],
+			format: {
+				size: 13,
 				color: 0x223399,
 				letterSpacing: 1,
-				align: 'center',
 				verticalAlign: 'middle',
 			},
 			border: 0x993322,
-			x: 20,
-			y: 180,
 			width: 300,
 			height: 150,
 		} as Text,
 		{
 			type: TEXT,
 			text: longText,
-			textFormat: {
+			format: {
 				size: 11,
 				color: 0x993322,
 				align: 'right',
 				verticalAlign: 'bottom',
 			},
 			border: 0x229933,
-			x: 20,
-			y: 340,
 			width: 300,
-			height: 150,
+			height: 70,
 		} as Text,
 		{
 			type: TEXT,
 			text: longText,
-			textFormat: {
+			format: {
 				size: 13,
 				color: 0,
 				verticalAlign: 'middle',
@@ -76,22 +94,21 @@ engine.root = {
 			wordWrap: false,
 			border: 0x229933,
 			background: 0xffddbb,
-			x: 20,
-			y: 500,
 			width: 300,
-			height: 150,
+			height: 100,
 		} as Text,
 		{
 			type: TEXT,
-			text: multilineText,
-			textFormat: {
+			text: ['AUTO SIZE\n', multilineText],
+			format: {
 				size: 15,
 				color: 0x0000ff,
 			},
 			wordWrap: false,
 			border: 0x0000ff,
-			x: 20,
-			y: 660,
 		} as Text,
-	],
-} as Container;
+	]),
+};
+
+// add app graph to engine
+engine.root = app;

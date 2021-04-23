@@ -1,31 +1,66 @@
 import { Component, Engine, Pivot } from '@jeng/core';
 import { Rectangle } from '@jeng/geom';
-import { TextFormat } from './format';
-import { TextMetrics } from './metrics';
+import { TextFormat } from './data/format';
+import { TextMetrics } from './data/metrics';
 
 export const TEXT = 'text';
 
-const validTextFormat: TextFormat = {};
+export interface TextBlock extends TextFormat {
+	text: string;
+}
 
 export interface Text extends Component, Pivot {
-	text?: string;
-	textFormat?: TextFormat;
+	text?: string | Array<TextBlock | string>;
+	format?: TextFormat;
 	width?: number;
 	height?: number;
 	border?: number;
 	background?: number;
 	wordWrap?: boolean;
-	metrics?: TextMetrics;
+	multiline?: boolean;
 }
 
 export namespace Text {
+	export function getText(component: Text): string {
+		const { text } = component;
+		if (!text) {
+			return '';
+		}
+
+		if (typeof text === 'string') {
+			return text;
+		}
+
+		if (Array.isArray(text)) {
+			let result = '';
+			for (let i = 0; i < text.length; i++) {
+				const block = text[i];
+				if (typeof block === 'string') {
+					result += block;
+				} else {
+					result += block.text;
+				}
+			}
+			return result;
+		}
+
+		return '';
+	}
+
+	export function isAutoSize(component: Text): boolean {
+		return !component.width && !component.height;
+	}
+
 	export function isWordWrap(component: Text): boolean {
 		return component.wordWrap ?? true;
 	}
 
+	export function isMultiline(component: Text): boolean {
+		return component.multiline ?? true;
+	}
+
 	export function calculateBounds(component: Text, bounds: Rectangle) {
-		TextMetrics.update(component);
-		const { metrics } = component;
+		const metrics = TextMetrics.getMetrics(component);
 		if (!metrics) {
 			Rectangle.setEmpty(bounds);
 			return;
@@ -38,8 +73,7 @@ export namespace Text {
 		}
 
 		if (!height) {
-			TextFormat.getValidTextFormat(component.textFormat, validTextFormat);
-			height = TextMetrics.getHeight(metrics, validTextFormat);
+			height = metrics.height;
 		}
 
 		const x = Pivot.getX(component, width);
