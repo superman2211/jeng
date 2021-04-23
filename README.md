@@ -1,4 +1,4 @@
-# JENG Engine
+# jeng (JavaScript Graphics Engine)
 Flexible graphics engine written on TypeScript.
 
 ## Samples
@@ -44,6 +44,11 @@ engine.root = { type: 'text', text: 'Hello World!' } as Text;
 Build all packages
 ```shell
 yarn build
+```
+
+Build only engine packages
+```shell
+yarn build-engine
 ```
 
 Test all packages

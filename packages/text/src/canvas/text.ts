@@ -1,18 +1,17 @@
 import { Pivot } from '@jeng/core';
 import { CanvasEngine, CanvasPlatform, CanvasPatterns } from '@jeng/canvas-engine';
-import { Font } from './font';
-import { TextExtension, TEXT, Text } from './text';
-import { TextFormat } from './format';
-import { TextMetrics } from './metrics';
+import { Font } from '../data/font';
+import { TextExtension, TEXT, Text } from '../text';
+import { TextFormat } from '../data/format';
+import { TextMetrics } from '../data/metrics';
 
-const validTextFormat: TextFormat = {};
+const defaultTextFormat: TextFormat = {};
 
-const CORRECTION: number = 0.15;
+const CORRECTION: number = 0.85;
 
 export namespace CanvasTextExtension {
 	export function render(component: Text, engine: CanvasEngine): void {
-		TextMetrics.update(component);
-		const { metrics } = component;
+		const metrics = TextMetrics.getMetrics(component);
 		if (!metrics) {
 			return;
 		}
@@ -24,20 +23,13 @@ export namespace CanvasTextExtension {
 		}
 
 		const {
-			width, height, textFormat, border, background,
+			width, height, format, border, background,
 		} = component;
 
-		TextFormat.getValidTextFormat(textFormat, validTextFormat);
+		TextFormat.combine(format, TextFormat.defaultTextFormat, defaultTextFormat);
 
-		const {
-			size, leading, font, color, alpha,
-		} = validTextFormat;
-
-		const textWidth = metrics.width;
-		const textHeight = TextMetrics.getHeight(metrics, validTextFormat);
-
-		const realWidth = width ?? textWidth;
-		const realHeight = height ?? textHeight;
+		const realWidth = width ?? metrics.width;
+		const realHeight = height ?? metrics.height;
 
 		const offsetX = Pivot.getX(component, realWidth);
 		const offsetY = Pivot.getY(component, realHeight);
@@ -46,13 +38,13 @@ export namespace CanvasTextExtension {
 
 		let y = 0;
 		if (height) {
-			const alignVerticalValue = TextFormat.getVerticalAlignValue(validTextFormat);
-			y = (height - textHeight) * alignVerticalValue;
+			const alignVerticalValue = TextFormat.getVerticalAlignValue(defaultTextFormat);
+			y = (height - metrics.height) * alignVerticalValue;
 			if (y < 0) {
 				y = 0;
 			}
 		}
-		y += offsetY - CORRECTION * size!;
+		y += offsetY;
 
 		const context2d = (engine.platform as CanvasPlatform).getContext();
 
@@ -85,27 +77,41 @@ export namespace CanvasTextExtension {
 			context2d.stroke();
 		}
 
-		context2d.font = Font.getStyleFont(font!, size!);
 		context2d.textBaseline = 'alphabetic';
 		context2d.strokeStyle = '';
-		context2d.fillStyle = CanvasPatterns.colorPattern(color!, alpha!, colorTransform);
 
 		for (let i = 0; i < lines.length; i++) {
 			const line = lines[i];
-			const alignValue = TextFormat.getAlignValue(validTextFormat);
-			let x = (realWidth - line.width) * alignValue;
-			if (x < 0) {
-				x = 0;
+			if (line.symbols.length) {
+				const first = line.symbols[0];
+				const alignValue = TextFormat.getAlignValue(first.format);
+				let x = (realWidth - line.width) * alignValue;
+				if (x < 0) {
+					x = 0;
+				}
+				x += offsetX;
+				const { symbols } = line;
+				const lineHeight = line.height * CORRECTION;
+				for (let j = 0; j < symbols.length; j++) {
+					const symbol = symbols[j];
+					const size = symbol.format.size!;
+					const alignSymbolValue = TextFormat.getVerticalAlignValue(symbol.format);
+					const symbolSize = size * CORRECTION;
+					context2d.font = Font.getStyleFont(symbol.format.font!, size!);
+					context2d.fillStyle = CanvasPatterns.colorPattern(
+						symbol.format.color!,
+						symbol.format.alpha!,
+						colorTransform,
+					);
+					context2d.fillText(
+						symbol.symbol,
+						x,
+						y + symbolSize + alignSymbolValue * (lineHeight - symbolSize),
+					);
+					x += symbol.advance;
+				}
 			}
-			x += offsetX;
-			const { symbols, advance } = line;
-			for (let j = 0; j < symbols.length; j++) {
-				const symbol = symbols[j];
-				const symbolAdvance = advance[j];
-				context2d.fillText(symbol, x, y + size!);
-				x += symbolAdvance;
-			}
-			y += size! + leading!;
+			y += line.height;
 		}
 	}
 

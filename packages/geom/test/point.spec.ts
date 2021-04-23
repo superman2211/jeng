@@ -2,7 +2,7 @@ import { Point } from '../src/point';
 
 const PRECISION = 5;
 
-describe('point get length', () => {
+describe('length', () => {
 	it('should calculate empty point length', () => {
 		expect(Point.length(Point.empty())).toBe(0);
 	});
@@ -11,7 +11,7 @@ describe('point get length', () => {
 	});
 });
 
-describe('point get angle', () => {
+describe('angle', () => {
 	it('should calculate empty point angle', () => {
 		expect(Point.angle(Point.empty())).toBe(0);
 	});
@@ -20,7 +20,7 @@ describe('point get angle', () => {
 	});
 });
 
-describe('point equals', () => {
+describe('equals', () => {
 	it('should equal of two points', () => {
 		expect(Point.equals({ x: 1, y: 2 }, { x: 1, y: 2 })).toBeTruthy();
 	});
@@ -47,15 +47,12 @@ describe('point equals', () => {
 	});
 });
 
-describe('point set empty', () => {
+describe('empty', () => {
 	it('should set point empty', () => {
 		const p: Point = { x: 123, y: 456 };
 		Point.setEmpty(p);
 		expect(p).toEqual(Point.empty());
 	});
-});
-
-describe('point is empty', () => {
 	it('point should be empty', () => {
 		expect(Point.isEmpty(Point.empty())).toBeTruthy();
 	});
@@ -64,7 +61,7 @@ describe('point is empty', () => {
 	});
 });
 
-describe('point copy', () => {
+describe('copy', () => {
 	it('should copy values from point', () => {
 		const p: Point = { x: 1, y: 2 };
 		Point.copy({ x: 3, y: 4 }, p);
@@ -77,7 +74,7 @@ describe('point copy', () => {
 	});
 });
 
-describe('point normalize', () => {
+describe('normalize', () => {
 	it('should normalize empty point', () => {
 		const p = Point.empty();
 		Point.normalize(p, 1);
@@ -95,7 +92,7 @@ describe('point normalize', () => {
 	});
 });
 
-describe('point distance', () => {
+describe('distance', () => {
 	it('should get distance between two equal points', () => {
 		expect(Point.distance({ x: 1, y: 2 }, { x: 1, y: 2 })).toBe(0);
 	});
@@ -117,7 +114,7 @@ describe('point distance', () => {
 	});
 });
 
-describe('point interpolate', () => {
+describe('interpolate', () => {
 	it('should interpolate center point', () => {
 		const p = Point.empty();
 		Point.interpolate({ x: 1, y: 2 }, { x: 3, y: 4 }, 0.5, p);
@@ -145,7 +142,7 @@ describe('point interpolate', () => {
 	});
 });
 
-describe('point polar', () => {
+describe('polar', () => {
 	it('should create horizontal point', () => {
 		const p = Point.empty();
 		Point.polar(p, 10, 0);
