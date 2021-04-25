@@ -2,7 +2,7 @@ import { EllipseData } from '../data/data';
 
 const PI_2 = Math.PI * 2;
 
-export function applyEllipse(data: EllipseData, context: CanvasRenderingContext2D): boolean {
+export function applyEllipse(data: EllipseData, hasFill: boolean, context: CanvasRenderingContext2D): boolean {
 	const {
 		x = 0, y = 0,
 		radius = 0, radiusX, radiusY,
@@ -16,7 +16,11 @@ export function applyEllipse(data: EllipseData, context: CanvasRenderingContext2
 	}
 
 	context.beginPath();
+
 	context.ellipse(x, y, rx, ry, 0, 0, PI_2);
-	context.closePath();
+
+	if (hasFill) {
+		context.closePath();
+	}
 	return true;
 }

@@ -1,6 +1,6 @@
 import { RectangleData } from '../data/data';
 
-export function applyRectangle(data: RectangleData, context: CanvasRenderingContext2D): boolean {
+export function applyRectangle(data: RectangleData, hasFill: boolean, context: CanvasRenderingContext2D): boolean {
 	const {
 		x = 0, y = 0,
 		width = 0, height = 0,
@@ -11,7 +11,11 @@ export function applyRectangle(data: RectangleData, context: CanvasRenderingCont
 	}
 
 	context.beginPath();
+
 	context.rect(x, y, width, height);
-	context.closePath();
+
+	if (hasFill) {
+		context.closePath();
+	}
 	return true;
 }

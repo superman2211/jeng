@@ -34,18 +34,20 @@ const NUMBERS_COUNT = {
 	t: 2,
 };
 
+const COMMAND_REGEX = /[MmLlHhVvCcSsQqTt]/;
+const NUMBER_REGEX = /[-+]?[\d.]+/;
+
 // https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths
 
 export class GraphicsStringStream {
 	private path = '';
 	private command: StringCommand | null = null;
 	private readonly buffer = [0, 0, 0, 0, 0, 0];
-	private readonly commandRegex = /[MmLlHhVvCcSsQqTt]/g;
-	private readonly numberRegex = /[-+]?[\d.]+/g;
+	private readonly symbolRegex = /[MmLlHhVvCcSsQqTt]|[-+]?[\d.]+/g;
 
 	setPath(path: string) {
 		this.path = path;
-		this.commandRegex.lastIndex = 0;
+		this.symbolRegex.lastIndex = 0;
 	}
 
 	getCommand(): StringCommand | null {
@@ -57,21 +59,34 @@ export class GraphicsStringStream {
 	}
 
 	readNext() {
-		const commandMatch = this.commandRegex.exec(this.path);
-		if (commandMatch) {
-			this.command = commandMatch[0] as StringCommand;
-			const count = NUMBERS_COUNT[this.command];
-			this.numberRegex.lastIndex = commandMatch.index;
-			for (let i = 0; i < count; i++) {
-				const numberMatch = this.numberRegex.exec(this.path);
-				if (numberMatch) {
-					this.buffer[i] = parseFloat(numberMatch[0]);
-				} else {
-					break;
-				}
-			}
+		const { lastIndex } = this.symbolRegex;
+		const symbolMatch = this.symbolRegex.exec(this.path);
+		if (!symbolMatch) {
+			this.command = null;
+			return;
+		}
+		const symbol = symbolMatch[0];
+
+		if (COMMAND_REGEX.test(symbol)) {
+			this.command = symbol as StringCommand;
+		} else if (NUMBER_REGEX.test(symbol)) {
+			this.symbolRegex.lastIndex = lastIndex;
 		} else {
 			this.command = null;
+		}
+
+		if (!this.command) {
+			return;
+		}
+
+		const count = NUMBERS_COUNT[this.command];
+		for (let i = 0; i < count; i++) {
+			const numberMatch = this.symbolRegex.exec(this.path);
+			if (numberMatch && NUMBER_REGEX.test(numberMatch[0])) {
+				this.buffer[i] = parseFloat(numberMatch[0]);
+			} else {
+				break;
+			}
 		}
 	}
 }

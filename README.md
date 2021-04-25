@@ -1,5 +1,4 @@
-# jeng 
-## JavaScript Graphics Engine
+# jeng (JavaScript Graphics Engine)
 Flexible graphics engine written on TypeScript.
 
 ## Samples
@@ -11,11 +10,13 @@ Flexible graphics engine written on TypeScript.
 
 - Image transform sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/image-transform/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/image-transform/build/)
 
-- Simple text sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/text-simple/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/text-advanced/build/)
+- Advanced text sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/text-simple/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/text-advanced/build/)
 
-- Sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/sample/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/sample/build/)
+- Simple shape sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/shape-simple/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/shape-simple/build/)
 
-## Usage
+- Complex sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/sample/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/sample/build/)
+
+## Get Started
 Install
 ```shell
 npm i @jeng/canvas-engine @jeng/text
@@ -42,6 +43,10 @@ Create application
 ```typescript
 engine.root = { type: 'text', text: 'Hello World!' } as Text;
 ```
+
+## Architecture
+
+## Components & Extensions
 
 ## Development
 Build all packages

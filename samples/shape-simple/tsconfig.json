@@ -1,0 +1,18 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"sourceMap": true,
+		"strict": true,
+		"allowSyntheticDefaultImports": true,
+		"declarationDir": "dist",
+		"outDir": "dist",
+	},
+	"include": [
+		"src/**/*",
+		"node_modules/"
+	],
+	"exclude": [
+		"build",
+		"dist"
+	]
+}

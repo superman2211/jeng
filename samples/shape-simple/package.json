@@ -1,7 +1,7 @@
 {
-  "name": "text-advanced",
+  "name": "shape-simple",
   "version": "0.1.0",
-  "description": "advanced text sample",
+  "description": "simple shape sample",
   "main": "src/index.ts",
   "license": "MIT",
   "private": true,
@@ -24,7 +24,7 @@
   "dependencies": {
     "@jeng/canvas-engine": "^0.1.0",
     "@jeng/core": "^0.1.0",
-    "@jeng/text": "^0.1.0"
+    "@jeng/shape": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",
