@@ -31,17 +31,17 @@ function renderGraphics(data: GraphicsData, colorTransform: ColorTransform, cont
 	const { type } = data;
 	switch (type) {
 		case 'rectangle':
-			exist = applyRectangle(data as RectangleData, context);
+			exist = applyRectangle(data as RectangleData, hasFill, context);
 			break;
 		case 'ellipse':
-			exist = applyEllipse(data as EllipseData, context);
+			exist = applyEllipse(data as EllipseData, hasFill, context);
 			break;
 		case 'path':
 			const path = data as PathData;
 			if (typeof path.data === 'string') {
-				exist = applyString(path.data, context);
+				exist = applyString(path.data, hasFill, context);
 			} else if (Array.isArray(path.data)) {
-				exist = applyPath(path.data, context);
+				exist = applyPath(path.data, hasFill, context);
 			} else {
 				exist = false;
 			}

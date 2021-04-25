@@ -1,9 +1,9 @@
-# Advanced text sample
+# Simple shape sample
 
 ## Sample
 [Code](src/index.ts)
 
-[Build](https://antonovsergey2211.github.io/jeng/samples/text-advanced/build/)
+[Build](https://antonovsergey2211.github.io/jeng/samples/shape-simple/build/)
 
 ## Development
 Setup

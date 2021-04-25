@@ -37,16 +37,20 @@ export function applyCommand(command: PathCommand, context: CanvasRenderingConte
 	}
 }
 
-export function applyPath(data: PathCommand[], context: CanvasRenderingContext2D): boolean {
+export function applyPath(data: PathCommand[], hasFill: boolean, context: CanvasRenderingContext2D): boolean {
 	if (!data.length) {
 		return false;
 	}
 
 	context.beginPath();
+
 	for (let i = 0; i < data.length; i++) {
 		const command = data[i];
 		applyCommand(command, context);
 	}
-	context.closePath();
+
+	if (hasFill) {
+		context.closePath();
+	}
 	return true;
 }

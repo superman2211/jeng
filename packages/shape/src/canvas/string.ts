@@ -3,12 +3,13 @@ import { applyCommand } from './path';
 
 const reader = new GraphicsStringReader();
 
-export function applyString(data: string, context: CanvasRenderingContext2D): boolean {
+export function applyString(data: string, hasFill: boolean, context: CanvasRenderingContext2D): boolean {
 	if (!data.length) {
 		return false;
 	}
 
 	context.beginPath();
+
 	reader.setPath(data);
 	while (reader.readNext()) {
 		const command = reader.getCommand();
@@ -16,6 +17,9 @@ export function applyString(data: string, context: CanvasRenderingContext2D): bo
 			applyCommand(command, context);
 		}
 	}
-	context.closePath();
+
+	if (hasFill) {
+		context.closePath();
+	}
 	return true;
 }

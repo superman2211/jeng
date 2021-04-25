@@ -262,4 +262,35 @@ describe('another cases', () => {
 
 		expect(reader.readNext()).toBeFalsy();
 	});
+
+	it('should read command groups', () => {
+		reader.setPath('M 65,29 C 59,19 49,12 37,12 20,12 7,25 7,42');
+
+		expect(reader.readNext()).toBeTruthy();
+		expect(reader.getCommand()).toMatchObject({ type: 'moveTo', x: 65, y: 29 });
+
+		expect(reader.readNext()).toBeTruthy();
+		expect(reader.getCommand()).toMatchObject({
+			type: 'cubicCurveTo',
+			cx: 59,
+			cy: 19,
+			sx: 49,
+			sy: 12,
+			x: 37,
+			y: 12,
+		});
+
+		expect(reader.readNext()).toBeTruthy();
+		expect(reader.getCommand()).toMatchObject({
+			type: 'cubicCurveTo',
+			cx: 20,
+			cy: 12,
+			sx: 7,
+			sy: 25,
+			x: 7,
+			y: 42,
+		});
+
+		expect(reader.readNext()).toBeFalsy();
+	});
 });
