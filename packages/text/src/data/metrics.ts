@@ -87,7 +87,7 @@ export namespace TextMetrics {
 		if (typeof text === 'string') {
 			const symbolFormat: TextFormat = {};
 			TextFormat.copy(defaultTextFormat, symbolFormat);
-			const symbolFont = Font.getFont(symbolFormat.font!);
+			const symbolFont = Font.getFont(symbolFormat);
 			for (let i = 0; i < text.length; i++) {
 				const symbol = text[i];
 				const symbolNext = text[i + 1];
@@ -104,7 +104,7 @@ export namespace TextMetrics {
 				if (typeof block === 'string') {
 					const symbolFormat: TextFormat = {};
 					TextFormat.copy(defaultTextFormat, symbolFormat);
-					const symbolFont = Font.getFont(symbolFormat.font!);
+					const symbolFont = Font.getFont(symbolFormat);
 					for (let j = 0; j < block.length; j++) {
 						const symbol = block[j];
 						const symbolNext = block[j + 1];
@@ -118,7 +118,7 @@ export namespace TextMetrics {
 				} else {
 					const symbolFormat: TextFormat = {};
 					TextFormat.combine(block, defaultTextFormat, symbolFormat);
-					const symbolFont = Font.getFont(symbolFormat.font!);
+					const symbolFont = Font.getFont(symbolFormat);
 					for (let j = 0; j < block.text.length; j++) {
 						const symbol = block.text[j];
 						const symbolNext = block.text[j + 1];
@@ -142,8 +142,7 @@ export namespace TextMetrics {
 			return undefined;
 		}
 
-		const { width } = component;
-		const wordWrap = Text.isWordWrap(component);
+		const { width, wordWrap = false } = component;
 		const multiline = Text.isMultiline(component);
 
 		const lines: TextLine[] = [];
@@ -255,26 +254,54 @@ export namespace TextMetrics {
 
 		TextFormat.combine(component.format, TextFormat.defaultTextFormat, defaultTextFormat);
 		const { size, letterSpacing, leading } = defaultTextFormat;
-		const font = Font.getFont(defaultTextFormat.font!);
+		const font = Font.getFont(defaultTextFormat);
 
 		let width = 0;
 		let height = size!;
+		let lineWidth = 0;
 
 		for (let i = 0; i < text.length; i++) {
 			const symbol = text[i];
 			if (symbol === '\n') {
 				height += size! + leading!;
-				width = 0;
+				width = Math.max(width, lineWidth);
+				lineWidth = 0;
 			} else {
 				const symbolNext = text[i + 1];
 				const advance = Font.getAdvance(font, size!, symbol, symbolNext) + letterSpacing!;
-				width += advance;
+				lineWidth += advance;
 			}
 		}
+
+		width = Math.max(width, lineWidth);
 
 		return {
 			width,
 			height,
 		};
+	}
+
+	export function getSimpleWidth(format: TextFormat, text: string, index: number): number {
+		if (index >= text.length) {
+			return 0;
+		}
+
+		const { size, letterSpacing } = defaultTextFormat;
+		const font = Font.getFont(defaultTextFormat);
+
+		let width = 0;
+
+		for (let i = index; i < text.length; i++) {
+			const symbol = text[i];
+			if (symbol === '\n') {
+				return width;
+			}
+
+			const symbolNext = text[i + 1];
+			const advance = Font.getAdvance(font, size!, symbol, symbolNext) + letterSpacing!;
+			width += advance;
+		}
+
+		return width;
 	}
 }

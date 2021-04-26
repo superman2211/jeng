@@ -89,20 +89,21 @@ export namespace CanvasTextExtension {
 			const text = component.text! as string;
 
 			const {
-				font, size, color, alpha, leading, letterSpacing,
+				size, color, alpha, leading, letterSpacing,
 			} = defaultTextFormat;
 
-			const defaultFont = Font.getFont(font!);
+			const defaultFont = Font.getFont(defaultTextFormat);
 			const symbolSize = size! * CORRECTION;
+			const alignValue = TextFormat.getAlignValue(defaultTextFormat);
 
-			context2d.font = Font.getStyleFont(font!, size!);
+			context2d.font = Font.getStyle(defaultFont, size!);
 			context2d.fillStyle = CanvasPatterns.colorPattern(color!, alpha!, colorTransform);
 
-			let x = offsetX;
+			let x = offsetX + alignValue ? alignValue * (realWidth - TextMetrics.getSimpleWidth(defaultTextFormat, text, 0)) : 0;
 			for (let i = 0; i < text.length; i++) {
 				const symbol = text[i];
 				if (symbol === '\n') {
-					x = offsetX;
+					x = alignValue ? alignValue * (realWidth - TextMetrics.getSimpleWidth(defaultTextFormat, text, i + 1)) : 0;
 					y += size! + leading!;
 				} else {
 					const symbolNext = text[i + 1];
@@ -112,6 +113,7 @@ export namespace CanvasTextExtension {
 				}
 			}
 		} else {
+			engine.debug.warning('rich text');
 			const { lines } = metrics as TextMetrics;
 			for (let i = 0; i < lines.length; i++) {
 				const line = lines[i];
@@ -130,7 +132,8 @@ export namespace CanvasTextExtension {
 						const size = symbol.format.size!;
 						const alignSymbolValue = TextFormat.getVerticalAlignValue(symbol.format);
 						const symbolSize = size * CORRECTION;
-						context2d.font = Font.getStyleFont(symbol.format.font!, size!);
+						const symbolFont = Font.getFont(symbol.format);
+						context2d.font = Font.getStyle(symbolFont, size!);
 						context2d.fillStyle = CanvasPatterns.colorPattern(
 							symbol.format.color!,
 							symbol.format.alpha!,

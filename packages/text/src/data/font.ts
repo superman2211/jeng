@@ -1,3 +1,5 @@
+import { TextFormat } from './format';
+
 const canvas = document.createElement('canvas');
 const context = canvas.getContext('2d')!;
 
@@ -12,19 +14,19 @@ export interface Font {
 const fonts = new Map<string, Font>();
 
 export namespace Font {
-	export function getStyleFont(font: string, size: number): string {
-		return `${size}px ${font}`;
+	export function getStyle(font: Font, size: number): string {
+		return font.name.replace('%', size.toString());
 	}
 
-	export function measureText(font: string, size: number, text: string): number {
-		context.font = getStyleFont(font, size);
+	export function measureText(font: Font, size: number, text: string): number {
+		context.font = getStyle(font, size);
 		return context.measureText(text).width;
 	}
 
 	export function getCharWidth(font: Font, char: string): number {
 		let width = font.widths.get(char);
 		if (!width) {
-			width = measureText(font.name, EM, char);
+			width = measureText(font, EM, char);
 			font.widths.set(char, width);
 		}
 		return width;
@@ -35,7 +37,7 @@ export namespace Font {
 		let kerning = font.kernings.get(pair);
 		if (!kerning) {
 			const widthSecond = getCharWidth(font, second);
-			const widthTotal = measureText(font.name, EM, first + second);
+			const widthTotal = measureText(font, EM, first + second);
 			kerning = widthTotal - widthSecond;
 			font.kernings.set(pair, kerning);
 		}
@@ -52,7 +54,15 @@ export namespace Font {
 		return kerning * scale;
 	}
 
-	export function getFont(name: string): Font {
+	export function getFont(format: TextFormat): Font {
+		let name = '';
+		if (format.bold) {
+			name += 'bold ';
+		}
+		if (format.italic) {
+			name += 'italic ';
+		}
+		name += `%px ${format.font}`;
 		let font = fonts.get(name);
 		if (!font) {
 			font = {

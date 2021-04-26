@@ -52,13 +52,7 @@ export namespace Text {
 	}
 
 	export function isSimple(component: Text): boolean {
-		return typeof component.text === 'string'
-			&& isAutoSize(component)
-			&& TextFormat.getAlignValue(component.format) === 0;
-	}
-
-	export function isWordWrap(component: Text): boolean {
-		return component.wordWrap ?? true;
+		return typeof component.text === 'string' && isAutoSize(component);
 	}
 
 	export function isMultiline(component: Text): boolean {
