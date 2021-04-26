@@ -10,7 +10,9 @@ Flexible graphics engine written on TypeScript.
 
 - Image transform sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/image-transform/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/image-transform/build/)
 
-- Advanced text sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/text-simple/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/text-advanced/build/)
+- Simple text sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/text-simple/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/text-simple/build/)
+
+- Advanced text sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/text-advanced/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/text-advanced/build/)
 
 - Simple shape sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/shape-simple/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/shape-simple/build/)
 
@@ -57,6 +59,11 @@ yarn build
 Build only engine packages
 ```shell
 yarn build-engine
+```
+
+Build only changed engine packages
+```shell
+yarn build-dev
 ```
 
 Test all packages
