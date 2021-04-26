@@ -43,6 +43,8 @@ const transforms: Array<Transform> = [
 	},
 ];
 
+const countInLine = 2;
+
 // create container with images
 engine.root = {
 	type: 'container',
@@ -51,7 +53,7 @@ engine.root = {
 		...transform,
 		type: 'container',
 		children: ring,
-		x: 20 + 150 * (index % 3),
-		y: 20 + 120 * ((index / 3) | 0),
+		x: 20 + 150 * (index % countInLine),
+		y: 20 + 120 * ((index / countInLine) | 0),
 	} as Container)),
 } as Container;
