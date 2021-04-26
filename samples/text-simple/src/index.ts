@@ -1,5 +1,5 @@
 import {
-	CanvasTextExtension, Text, TextMetrics, TEXT,
+	CanvasTextExtension, Text, TEXT,
 } from '@jeng/text';
 import { CanvasEngine } from '@jeng/canvas-engine';
 import { Container, CONTAINER } from '@jeng/core';
