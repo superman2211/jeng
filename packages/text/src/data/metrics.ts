@@ -286,6 +286,7 @@ export namespace TextMetrics {
 			return 0;
 		}
 
+		TextFormat.combine(format, TextFormat.defaultTextFormat, defaultTextFormat);
 		const { size, letterSpacing } = defaultTextFormat;
 		const font = Font.getFont(defaultTextFormat);
 

@@ -22,7 +22,8 @@ function positionTexts(texts: Array<Text>) {
 	texts.forEach((text) => {
 		text.x = x;
 		text.y = y;
-		const height = text.height ?? TextMetrics.getMetrics(text)?.height ?? 0;
+		Text.updateMetrics(text);
+		const height = text.height ?? text.metrics?.height ?? 0;
 		y += 10 + height;
 	});
 	return texts;
@@ -102,6 +103,7 @@ const app: Container = {
 		{
 			type: TEXT,
 			text,
+			updateMetrics: false, // disable auto update metrics
 			format: {
 				font: 'arial',
 				size: 20,
@@ -111,6 +113,12 @@ const app: Container = {
 				leading: 1,
 			},
 			border: 0x993322,
+			onUpdate() {
+				// update metrics once
+				if (!this.metrics) {
+					Text.updateMetrics(this);
+				}
+			},
 		} as Text,
 	]),
 };

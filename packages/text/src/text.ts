@@ -18,6 +18,8 @@ export interface Text extends Component, Pivot {
 	background?: number;
 	wordWrap?: boolean;
 	multiline?: boolean;
+	metrics?: TextSize | TextMetrics;
+	updateMetrics?: boolean;
 }
 
 export namespace Text {
@@ -47,6 +49,10 @@ export namespace Text {
 		return '';
 	}
 
+	export function isUpdateMetrics(component: Text): boolean {
+		return component.updateMetrics ?? true;
+	}
+
 	export function isAutoSize(component: Text): boolean {
 		return !component.width && !component.height;
 	}
@@ -59,13 +65,20 @@ export namespace Text {
 		return component.multiline ?? true;
 	}
 
-	export function calculateBounds(component: Text, bounds: Rectangle) {
-		let metrics: TextSize | undefined;
-		if (Text.isSimple(component)) {
-			metrics = TextMetrics.getSimpleMetrics(component);
+	export function updateMetrics(component: Text) {
+		if (isSimple(component)) {
+			component.metrics = TextMetrics.getSimpleMetrics(component);
 		} else {
-			metrics = TextMetrics.getMetrics(component);
+			component.metrics = TextMetrics.getMetrics(component);
 		}
+	}
+
+	export function calculateBounds(component: Text, bounds: Rectangle) {
+		if (isUpdateMetrics(component)) {
+			updateMetrics(component);
+		}
+
+		const { metrics } = component;
 
 		if (!metrics) {
 			Rectangle.setEmpty(bounds);

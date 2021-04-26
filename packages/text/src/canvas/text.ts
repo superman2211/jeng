@@ -3,7 +3,7 @@ import { CanvasEngine, CanvasPlatform, CanvasPatterns } from '@jeng/canvas-engin
 import { Font } from '../data/font';
 import { TextExtension, TEXT, Text } from '../text';
 import { TextFormat } from '../data/format';
-import { TextMetrics, TextSize } from '../data/metrics';
+import { TextMetrics } from '../data/metrics';
 
 const defaultTextFormat: TextFormat = {};
 
@@ -17,13 +17,11 @@ export namespace CanvasTextExtension {
 			return;
 		}
 
-		let metrics: TextSize | undefined;
-		const simple = Text.isSimple(component);
-		if (simple) {
-			metrics = TextMetrics.getSimpleMetrics(component);
-		} else {
-			metrics = TextMetrics.getMetrics(component);
+		if (Text.isUpdateMetrics(component)) {
+			Text.updateMetrics(component);
 		}
+
+		const { metrics } = component;
 
 		if (!metrics) {
 			return;
@@ -40,16 +38,6 @@ export namespace CanvasTextExtension {
 
 		const offsetX = Pivot.getX(component, realWidth);
 		const offsetY = Pivot.getY(component, realHeight);
-
-		let y = 0;
-		if (height) {
-			const alignVerticalValue = TextFormat.getVerticalAlignValue(defaultTextFormat);
-			y = (height - metrics.height) * alignVerticalValue;
-			if (y < 0) {
-				y = 0;
-			}
-		}
-		y += offsetY;
 
 		const context2d = (engine.platform as CanvasPlatform).getContext();
 
@@ -85,6 +73,8 @@ export namespace CanvasTextExtension {
 		context2d.textBaseline = 'alphabetic';
 		context2d.strokeStyle = '';
 
+		const simple = Text.isSimple(component);
+
 		if (simple) {
 			const text = component.text! as string;
 
@@ -100,6 +90,8 @@ export namespace CanvasTextExtension {
 			context2d.fillStyle = CanvasPatterns.colorPattern(color!, alpha!, colorTransform);
 
 			let x = offsetX + alignValue ? alignValue * (realWidth - TextMetrics.getSimpleWidth(defaultTextFormat, text, 0)) : 0;
+			let y = 0;
+
 			for (let i = 0; i < text.length; i++) {
 				const symbol = text[i];
 				if (symbol === '\n') {
@@ -113,7 +105,16 @@ export namespace CanvasTextExtension {
 				}
 			}
 		} else {
-			engine.debug.warning('rich text');
+			let y = 0;
+			if (height) {
+				const alignVerticalValue = TextFormat.getVerticalAlignValue(defaultTextFormat);
+				y = (height - metrics.height) * alignVerticalValue;
+				if (y < 0) {
+					y = 0;
+				}
+			}
+			y += offsetY;
+
 			const { lines } = metrics as TextMetrics;
 			for (let i = 0; i < lines.length; i++) {
 				const line = lines[i];
