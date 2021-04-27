@@ -2,11 +2,11 @@ import { CanvasEngine, CanvasPatterns } from '@jeng/canvas-engine';
 import { ColorTransform, Matrix } from '@jeng/geom';
 import { ImageResource } from '@jeng/resources';
 import {
-	BitmapFill, FillStyle, GradientFill, SolidFill, StrokeStyle,
+	BitmapFill, FillStyle, GradientFill, SolidFill, StrokeStyle, RadialGradientFill,
 } from '../data/style';
 
-const emptyMatrix = Matrix.empty();
 const emptyArray: number[] = [];
+const emptyMatrix = Matrix.empty();
 
 function getCanvasPattern(fill: number | FillStyle, colorTransform: ColorTransform, context: CanvasRenderingContext2D, engine: CanvasEngine): string | CanvasGradient | CanvasPattern {
 	if (typeof fill === 'number') {
@@ -20,43 +20,46 @@ function getCanvasPattern(fill: number | FillStyle, colorTransform: ColorTransfo
 				return CanvasPatterns.colorPattern(solid.color ?? 0, solid.alpha ?? 1, colorTransform);
 
 			case 'linear':
-				const {
-					matrix: ml = emptyMatrix,
-					colors: cl = emptyArray,
-					alphas: al = emptyArray,
-					ratios: rl = emptyArray,
-				} = fill as GradientFill;
-
+				const linear: GradientFill = fill;
 				return CanvasPatterns.linearGradientPattern(
-					ml, cl, al, rl,
+					linear.beginX ?? 0,
+					linear.beginY ?? 0,
+					linear.endX ?? 0,
+					linear.endY ?? 0,
+					linear.colors ?? emptyArray,
+					linear.alphas ?? emptyArray,
+					linear.ratios ?? emptyArray,
 					colorTransform,
 					context,
 				);
 
 			case 'radial':
-				const {
-					matrix: mr = emptyMatrix,
-					colors: cr = emptyArray,
-					alphas: ar = emptyArray,
-					ratios: rr = emptyArray,
-				} = fill as GradientFill;
-
+				const radial: RadialGradientFill = fill;
 				return CanvasPatterns.radialGradientPattern(
-					mr, cr, ar, rr,
+					radial.beginX ?? 0,
+					radial.beginY ?? 0,
+					radial.beginRadius ?? 0,
+					radial.endX ?? radial.beginX ?? 0,
+					radial.endY ?? radial.beginY ?? 0,
+					radial.endRadius ?? 0,
+					radial.colors ?? emptyArray,
+					radial.alphas ?? emptyArray,
+					radial.ratios ?? emptyArray,
 					colorTransform,
 					context,
 				);
 
 			case 'bitmap':
 				const bitmapFill = fill as BitmapFill;
-				const { repeat = true, src } = bitmapFill;
+				const { repeat = true, src, matrix = emptyMatrix } = bitmapFill;
 				if (!src) {
 					return '';
 				}
 
 				const resource = engine.resources.get(src) as ImageResource;
 				if (resource?.image) {
-					return CanvasPatterns.bitmapPattern(resource.image, repeat, context);
+					const pattern = CanvasPatterns.bitmapPattern(resource.image, repeat, matrix, context);
+					return pattern;
 				}
 				return '';
 

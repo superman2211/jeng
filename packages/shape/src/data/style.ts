@@ -4,11 +4,8 @@ import { Matrix } from '@jeng/geom';
 export type FillType = 'solid' | 'radial' | 'linear' | 'bitmap';
 export type CapsStyle = 'butt' | 'round' | 'square';
 export type JointStyle = 'bevel' | 'miter' | 'round';
-export type PathWinding = 'evenOdd' | 'nonZero';
-export type GradientType = 'linear' | 'radial';
-export type InterpolationMethod = 'linearRgb' | 'rgb';
-export type SpreadMethod = 'pad' | 'reflect' | 'repeat';
 export type LineScaleMode = 'normal' | 'none' | 'vertical' | 'horizontal';
+export type GradientType = 'radial' | 'linear';
 
 export interface FillStyle {
 	type: FillType;
@@ -23,10 +20,15 @@ export interface GradientFill extends FillStyle {
 	colors?: number[];
 	alphas?: number[];
 	ratios?: number[];
-	matrix?: Matrix;
-	spread?: SpreadMethod;
-	interpolation?: InterpolationMethod;
-	focalPointRatio?: number;
+	beginX?: number;
+	beginY?: number;
+	endX?: number;
+	endY?: number;
+}
+
+export interface RadialGradientFill extends GradientFill {
+	beginRadius?: number;
+	endRadius?: number;
 }
 
 export interface BitmapFill extends FillStyle, Source {

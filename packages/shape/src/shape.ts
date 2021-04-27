@@ -2,7 +2,6 @@ import { Component, Engine, Pivot } from '@jeng/core';
 import { Bounds, Rectangle } from '@jeng/geom';
 import { ImageResource } from '@jeng/resources';
 import { GraphicsData } from './data/data';
-import Graphics from './graphics';
 
 export const SHAPE = 'shape';
 
@@ -13,10 +12,6 @@ export interface Shape extends Component, Pivot {
 const bounds = Bounds.empty();
 
 export namespace Shape {
-	export function getGraphics(shape: Shape): Graphics {
-		return new Graphics(shape);
-	}
-
 	export function calculateBounds(shape: Shape, result: Rectangle) {
 		const { data } = shape;
 		if (!data) {
