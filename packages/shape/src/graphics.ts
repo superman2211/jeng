@@ -1,15 +1,14 @@
-import { Matrix } from '@jeng/geom';
+import { Matrix, Point } from '@jeng/geom';
 import {
 	BitmapFill,
 	CapsStyle,
 	FillStyle,
 	GradientFill,
 	GradientType,
-	InterpolationMethod,
 	JointStyle,
 	LineScaleMode,
+	RadialGradientFill,
 	SolidFill,
-	SpreadMethod,
 	StrokeStyle,
 } from './data/style';
 import {
@@ -23,6 +22,10 @@ import {
 	PathData,
 	RectangleData,
 } from './data/data';
+
+const tempPoint0 = Point.empty();
+const tempPoint1 = Point.empty();
+const emptyMatrix = Matrix.empty();
 
 export default class Graphics {
 	shape: Shape;
@@ -63,20 +66,43 @@ export default class Graphics {
 		alpha: number[],
 		ratio: number[],
 		matrix: Matrix,
-		spread: SpreadMethod = 'repeat',
-		interpolation: InterpolationMethod = 'rgb',
-		focalPointRatio: number = 0,
 	) {
-		this.fill = {
-			type,
-			color,
-			alpha,
-			ratio,
-			matrix,
-			spread,
-			interpolation,
-			focalPointRatio,
-		} as GradientFill;
+		if (type === 'linear') {
+			tempPoint0.x = -819.2;
+			tempPoint0.y = 0;
+			tempPoint1.x = 819.2;
+			tempPoint1.y = 0;
+			Matrix.transformPoint(matrix, tempPoint0, tempPoint0);
+			Matrix.transformPoint(matrix, tempPoint1, tempPoint1);
+
+			this.fill = {
+				type,
+				color,
+				alpha,
+				ratio,
+				beginX: tempPoint0.x,
+				beginY: tempPoint0.y,
+				endX: tempPoint1.x,
+				endY: tempPoint1.y,
+			} as GradientFill;
+		} else {
+			tempPoint0.x = 1638.4;
+			tempPoint0.y = 0;
+			Matrix.transformPoint(matrix, tempPoint0, tempPoint0);
+
+			this.fill = {
+				type,
+				color,
+				alpha,
+				ratio,
+				beginX: tempPoint0.x,
+				beginY: tempPoint0.y,
+				beginRadius: 0,
+				endX: tempPoint0.x,
+				endY: tempPoint0.y,
+				endRadius: Math.abs((tempPoint0.x - matrix.tx) / 2),
+			} as RadialGradientFill;
+		}
 	}
 
 	lineStyle(
@@ -109,24 +135,48 @@ export default class Graphics {
 		color?: number[],
 		alpha?: number[],
 		ratio?: number[],
-		matrix?: Matrix,
-		spread: SpreadMethod = 'repeat',
-		interpolation: InterpolationMethod = 'rgb',
-		focalPointRatio: number = 0,
+		matrix: Matrix = emptyMatrix,
 	) {
 		if (!this.stroke) {
 			return;
 		}
-		this.stroke.fill = {
-			type,
-			color,
-			alpha,
-			ratio,
-			matrix,
-			spread,
-			interpolation,
-			focalPointRatio,
-		} as GradientFill;
+
+		if (type === 'linear') {
+			tempPoint0.x = -819.2;
+			tempPoint0.y = 0;
+			tempPoint1.x = 819.2;
+			tempPoint1.y = 0;
+			Matrix.transformPoint(matrix, tempPoint0, tempPoint0);
+			Matrix.transformPoint(matrix, tempPoint1, tempPoint1);
+
+			this.stroke.fill = {
+				type,
+				color,
+				alpha,
+				ratio,
+				beginX: tempPoint0.x,
+				beginY: tempPoint0.y,
+				endX: tempPoint1.x,
+				endY: tempPoint1.y,
+			} as GradientFill;
+		} else {
+			tempPoint0.x = 1638.4;
+			tempPoint0.y = 0;
+			Matrix.transformPoint(matrix, tempPoint0, tempPoint0);
+
+			this.stroke.fill = {
+				type,
+				color,
+				alpha,
+				ratio,
+				beginX: tempPoint0.x,
+				beginY: tempPoint0.y,
+				beginRadius: 0,
+				endX: tempPoint0.x,
+				endY: tempPoint0.y,
+				endRadius: Math.abs((tempPoint0.x - matrix.tx) / 2),
+			} as RadialGradientFill;
+		}
 	}
 
 	lineBitmapStyle(

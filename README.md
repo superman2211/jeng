@@ -16,6 +16,8 @@ Flexible graphics engine written on TypeScript.
 
 - Simple shape sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/shape-simple/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/shape-simple/build/)
 
+- Advanced shape sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/shape-advanced/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/shape-advanced/build/)
+
 - Complex sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/sample/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/sample/build/)
 
 ## Get Started
