@@ -10,24 +10,23 @@ import {
 	RadialGradientFill,
 	SolidFill,
 	StrokeStyle,
-} from './data/style';
-import {
+	Shape,
 	CubicCurveTo,
-	CurveTo, LineTo, MoveTo, PathCommand,
-} from './data/path';
-import { Shape } from './shape';
-import {
+	CurveTo,
+	LineTo,
+	MoveTo,
+	PathCommand,
 	EllipseData,
 	GraphicsData,
 	PathData,
 	RectangleData,
-} from './data/data';
+} from '@jeng/shape';
 
 const tempPoint0 = Point.empty();
 const tempPoint1 = Point.empty();
 const emptyMatrix = Matrix.empty();
 
-export default class Graphics {
+export class Graphics {
 	shape: Shape;
 
 	private fill?: FillStyle;
@@ -233,7 +232,7 @@ export default class Graphics {
 			return;
 		}
 		path.push({
-			type: 'curveTo', cx, cy, sx, sy, x, y,
+			type: 'cubicCurveTo', cx, cy, sx, sy, x, y,
 		} as CubicCurveTo);
 	}
 

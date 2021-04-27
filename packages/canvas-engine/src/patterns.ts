@@ -1,4 +1,4 @@
-import { ColorTransform } from '@jeng/geom';
+import { ColorTransform, Matrix } from '@jeng/geom';
 
 export namespace CanvasPatterns {
 	export function colorPattern(color: number, alpha: number, ct: ColorTransform): string {
@@ -90,10 +90,19 @@ export namespace CanvasPatterns {
 	export function bitmapPattern(
 		image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement,
 		repeat: boolean,
+		matrix: Matrix,
 		context: CanvasRenderingContext2D,
 	): CanvasPattern | '' {
 		const pattern = context.createPattern(image, repeat ? 'repeat' : 'none');
 		if (pattern) {
+			const domMatrix = new DOMMatrix();
+			domMatrix.a = matrix.a ?? 1;
+			domMatrix.b = matrix.b ?? 0;
+			domMatrix.c = matrix.c ?? 0;
+			domMatrix.d = matrix.d ?? 1;
+			domMatrix.e = matrix.tx ?? 0;
+			domMatrix.f = matrix.ty ?? 0;
+			pattern.setTransform(domMatrix);
 			return pattern;
 		}
 		return '';

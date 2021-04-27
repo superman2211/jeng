@@ -1,12 +1,12 @@
 import { CanvasEngine, CanvasPatterns } from '@jeng/canvas-engine';
-import { ColorTransform } from '@jeng/geom';
+import { ColorTransform, Matrix } from '@jeng/geom';
 import { ImageResource } from '@jeng/resources';
 import {
 	BitmapFill, FillStyle, GradientFill, SolidFill, StrokeStyle, RadialGradientFill,
 } from '../data/style';
 
 const emptyArray: number[] = [];
-const domMatrix = new DOMMatrix();
+const emptyMatrix = Matrix.empty();
 
 function getCanvasPattern(fill: number | FillStyle, colorTransform: ColorTransform, context: CanvasRenderingContext2D, engine: CanvasEngine): string | CanvasGradient | CanvasPattern {
 	if (typeof fill === 'number') {
@@ -51,23 +51,14 @@ function getCanvasPattern(fill: number | FillStyle, colorTransform: ColorTransfo
 
 			case 'bitmap':
 				const bitmapFill = fill as BitmapFill;
-				const { repeat = true, src, matrix } = bitmapFill;
+				const { repeat = true, src, matrix = emptyMatrix } = bitmapFill;
 				if (!src) {
 					return '';
 				}
 
 				const resource = engine.resources.get(src) as ImageResource;
 				if (resource?.image) {
-					const pattern = CanvasPatterns.bitmapPattern(resource.image, repeat, context);
-					if (pattern && matrix) {
-						domMatrix.a = matrix.a ?? 1;
-						domMatrix.b = matrix.b ?? 0;
-						domMatrix.c = matrix.c ?? 0;
-						domMatrix.d = matrix.d ?? 1;
-						domMatrix.e = matrix.tx ?? 0;
-						domMatrix.f = matrix.ty ?? 0;
-						pattern.setTransform(domMatrix);
-					}
+					const pattern = CanvasPatterns.bitmapPattern(resource.image, repeat, matrix, context);
 					return pattern;
 				}
 				return '';
