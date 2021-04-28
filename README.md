@@ -52,7 +52,59 @@ engine.root = { type: 'text', text: 'Hello World!' } as Text;
 
 ## Architecture
 
-## Components & Extensions
+### Graph
+The engine is based on JSON graph. The graph consists of components and their properties, as well as event handlers.
+The graph can be described both declaratively and imperatively. It can also be loaded like a regular JSON.
+You can change the graph as you want. The graph is abstract and does not depend on the specific implementation of the engine. For example:
+```json
+{
+	"type": "container",
+	"children": [
+		{ "type": "image", "src": "image.jpg" },
+		{ "type": "text", "text": "Simple text" }
+	]
+}
+```
+
+### Engine
+The engine consists of main features and extensions. It can be constructed from different components and extensions.
+You can overload main features and add your own extensions. Engine updates, renders graph and proesses events.
+At any time you can change the engine or change its components extensions. 
+Each engine uses one of the rendering backends - canvas, webgl, etc.
+
+### Components
+There are two kind of components - native and high-level. Native components written on TypeScript as engine extensions. 
+For example: [image](packages/image), [text](packages/text) or [shape](packages/shape).
+High-level components consists of native components and described via functions. For example:
+```javascript
+import { Shape } from '@jeng/shape';
+
+export interface PreloaderInfo {
+	getProgress(): number;
+	getWidth(): number;
+	getHeight(): number;
+}
+
+export function preloader(info: PreloaderInfo) {
+	const height = 20;
+	return {
+		type: 'shape',
+		scaleX: 1,
+		y: info.getHeight() - height,
+		data: {
+			type: 'rectangle',
+			width: 1,
+			height,
+			fill: 0xff0000,
+		},
+		onUpdate() {
+			this.scaleX! += (info.getWidth() * info.getProgress() - this.scaleX!) / 2;
+		},
+	} as Shape;
+}
+```
+
+## Features
 
 ## Development
 Build all packages
