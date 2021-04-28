@@ -1,5 +1,6 @@
-import { SHAPE, Shape, PathData } from '@jeng/shape';
-import { Graphics } from '../../src/graphics';
+import { SHAPE, Shape } from '../src/shape';
+import { PathData } from '../src/data/data';
+import { Graphics } from '../src/graphics';
 
 describe('rectangle', () => {
 	it('should make rectangle shape', () => {

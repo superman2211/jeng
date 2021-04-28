@@ -1,5 +1,18 @@
 import { Matrix, Point } from '@jeng/geom';
 import {
+	EllipseData,
+	GraphicsData,
+	PathData,
+	RectangleData,
+} from './data/data';
+import {
+	CubicCurveTo,
+	CurveTo,
+	LineTo,
+	MoveTo,
+	PathCommand,
+} from './data/path';
+import {
 	BitmapFill,
 	CapsStyle,
 	FillStyle,
@@ -10,17 +23,8 @@ import {
 	RadialGradientFill,
 	SolidFill,
 	StrokeStyle,
-	Shape,
-	CubicCurveTo,
-	CurveTo,
-	LineTo,
-	MoveTo,
-	PathCommand,
-	EllipseData,
-	GraphicsData,
-	PathData,
-	RectangleData,
-} from '@jeng/shape';
+} from './data/style';
+import { Shape } from './shape';
 
 const tempPoint0 = Point.empty();
 const tempPoint1 = Point.empty();
@@ -372,7 +376,7 @@ export class Graphics {
 	}
 
 	private beginPath(): PathCommand[] {
-		const data: PathData = this.createData() as PathData;
+		const data = this.createData() as PathData;
 		data.data = [];
 		return data.data;
 	}

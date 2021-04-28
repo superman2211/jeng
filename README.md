@@ -22,7 +22,7 @@ Flexible graphics engine written on TypeScript.
 
 - Complex sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/sample/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/sample/build/)
 
-## Get Started
+## Getting started
 Install
 ```shell
 npm i @jeng/canvas-engine @jeng/text
@@ -32,7 +32,7 @@ Import
 import { CanvasTextExtension, Text } from '@jeng/text';
 import { CanvasEngine } from '@jeng/canvas-engine';
 ```
-Init engine
+Construct engine
 ```typescript
 // create engine
 const engine = new CanvasEngine();
@@ -45,14 +45,109 @@ engine.ticker.play();
 // add engine view to page
 document.body.appendChild(engine.platform.view);
 ```
-Create application
+Create application graph
 ```typescript
 engine.root = { type: 'text', text: 'Hello World!' } as Text;
 ```
 
 ## Architecture
 
-## Components & Extensions
+### Graph
+The engine is based on JSON graph. The graph consists of components and properties, as well as event handlers.
+It can be described both declaratively and imperatively. Also graph can be loaded like a regular JSON.
+You can change the graph as you want. The graph is abstract and does not depend on the specific implementation of the engine. For example:
+```json
+{
+	"type": "container",
+	"children": [
+		{ "type": "image", "src": "image.jpg" },
+		{ "type": "text", "text": "Simple text" }
+	]
+}
+```
+
+### Engine
+The engine consists of main features and extensions. It can be constructed from different components and extensions.
+You can overload main features and add your own extensions. Engine updates, renders graph and proesses events.
+At any time you can change the engine or change its components or extensions. 
+Each engine uses one of the rendering backends - canvas, webgl, etc.
+
+![Engine architecture](docs/images/engine-architecture.png)
+
+### Components
+There are two kind of components - native and high-level. Native components written on TypeScript as engine extensions. 
+For example: [image](packages/image), [text](packages/text) or [shape](packages/shape).
+High-level components consists of native components and described via functions. For example:
+```javascript
+import { Shape } from '@jeng/shape';
+
+export interface PreloaderInfo {
+	getProgress(): number;
+	getWidth(): number;
+	getHeight(): number;
+}
+
+export function preloader(info: PreloaderInfo) {
+	const height = 20;
+	return {
+		type: 'shape',
+		scaleX: 1,
+		y: info.getHeight() - height,
+		data: {
+			type: 'rectangle',
+			width: 1,
+			height,
+			fill: 0xff0000,
+		},
+		onUpdate() {
+			this.scaleX! += (info.getWidth() * info.getProgress() - this.scaleX!) / 2;
+		},
+	} as Shape;
+}
+```
+
+### Resources
+All resources are resolved and loaded automatically. You can add your own resolver or resources manager.
+If you want to control loading process you can use [loader](packages/core/src/components/loader.ts) component.
+```typescript
+const app = {
+	type: 'loader',
+	visible: false,
+	enabled: false,
+	onLoaded() {
+		console.log('background loaded');
+		this.visible = true;
+		this.enabled = true;
+	},
+	children: {
+		background: {
+			type: 'image',
+			src: BACKGROUND,
+			scaleX: 1,
+			scaleY: 1,
+		},
+	},
+};
+``` 
+
+## Features
+
+| Feature | Canvas | WebGL |
+|---------|--------|-------|
+| Image  | **Released** | Coming soon |
+| Image atlas  | Coming soon | Coming soon |
+| Text | **Released** | Coming soon |
+| Web fonts | Coming soon | Coming soon |
+| Bitmap fonts | Coming soon | Coming soon |
+| Shape | **Released** | Coming soon |
+| Tween | **Released** | **Released** |
+| Loader | **Released** | **Released** |
+| Mask | Coming soon | Coming soon |
+| Timeline | Coming soon | Coming soon |
+| UI library | Coming soon | Coming soon |
+| Spine | Coming soon | Coming soon |
+| Box2D | Coming soon | Coming soon |
+| ThreeJS | Coming soon | Coming soon |
 
 ## Development
 Build all packages
