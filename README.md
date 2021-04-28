@@ -130,6 +130,16 @@ const app = {
 
 ## Features
 
+| Feature | Canvas | WebGL |
+|---------|--------|-------|
+| Image  | Released | Comming soon |
+| Text | Released | Comming soon |
+| Shape | Released | Comming soon |
+| Tween | Released | Released |
+| Timeline | Comming soon | Comming soon |
+| Web fonts | Comming soon | Comming soon |
+| Bitmap fonts | Comming soon | Comming soon |
+
 ## Development
 Build all packages
 ```shell
