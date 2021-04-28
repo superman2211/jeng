@@ -22,7 +22,7 @@ Flexible graphics engine written on TypeScript.
 
 - Complex sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/sample/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/sample/build/)
 
-## Get Started
+## Getting started
 Install
 ```shell
 npm i @jeng/canvas-engine @jeng/text
@@ -32,7 +32,7 @@ Import
 import { CanvasTextExtension, Text } from '@jeng/text';
 import { CanvasEngine } from '@jeng/canvas-engine';
 ```
-Init engine
+Construct engine
 ```typescript
 // create engine
 const engine = new CanvasEngine();
@@ -45,7 +45,7 @@ engine.ticker.play();
 // add engine view to page
 document.body.appendChild(engine.platform.view);
 ```
-Create application
+Create application graph
 ```typescript
 engine.root = { type: 'text', text: 'Hello World!' } as Text;
 ```
@@ -53,8 +53,8 @@ engine.root = { type: 'text', text: 'Hello World!' } as Text;
 ## Architecture
 
 ### Graph
-The engine is based on JSON graph. The graph consists of components and their properties, as well as event handlers.
-The graph can be described both declaratively and imperatively. It can also be loaded like a regular JSON.
+The engine is based on JSON graph. The graph consists of components and properties, as well as event handlers.
+It can be described both declaratively and imperatively. Also graph can be loaded like a regular JSON.
 You can change the graph as you want. The graph is abstract and does not depend on the specific implementation of the engine. For example:
 ```json
 {
@@ -69,7 +69,7 @@ You can change the graph as you want. The graph is abstract and does not depend 
 ### Engine
 The engine consists of main features and extensions. It can be constructed from different components and extensions.
 You can overload main features and add your own extensions. Engine updates, renders graph and proesses events.
-At any time you can change the engine or change its components extensions. 
+At any time you can change the engine or change its components or extensions. 
 Each engine uses one of the rendering backends - canvas, webgl, etc.
 
 ### Components
@@ -103,6 +103,30 @@ export function preloader(info: PreloaderInfo) {
 	} as Shape;
 }
 ```
+
+### Resources
+All resources are resolved and loaded automatically. You can add your own resolver or resources manager.
+If you want to control loading process you can use [loader](packages/core/src/components/loader.ts) component.
+```typescript
+const app = {
+	type: 'loader',
+	visible: false,
+	enabled: false,
+	onLoaded() {
+		console.log('background loaded');
+		this.visible = true;
+		this.enabled = true;
+	},
+	children: {
+		background: {
+			type: 'image',
+			src: BACKGROUND,
+			scaleX: 1,
+			scaleY: 1,
+		},
+	},
+};
+``` 
 
 ## Features
 
