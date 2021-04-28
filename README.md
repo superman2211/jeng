@@ -72,6 +72,8 @@ You can overload main features and add your own extensions. Engine updates, rend
 At any time you can change the engine or change its components or extensions. 
 Each engine uses one of the rendering backends - canvas, webgl, etc.
 
+![Engine architecture](docs/images/engine-architecture.png)
+
 ### Components
 There are two kind of components - native and high-level. Native components written on TypeScript as engine extensions. 
 For example: [image](packages/image), [text](packages/text) or [shape](packages/shape).
