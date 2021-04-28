@@ -23,8 +23,7 @@
   "homepage": "https://github.com/AntonovSergey2211/jeng#readme",
   "dependencies": {
     "@jeng/canvas-engine": "^0.1.0",
-    "@jeng/shape": "^0.1.0",
-    "@jeng/graphics": "^0.1.0"
+    "@jeng/shape": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",

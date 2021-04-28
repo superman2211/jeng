@@ -1,5 +1,6 @@
-import { CanvasShapeExtension, Shape, SHAPE } from '@jeng/shape';
-import { Graphics } from '@jeng/graphics';
+import {
+	CanvasShapeExtension, Shape, SHAPE, Graphics,
+} from '@jeng/shape';
 import { CanvasEngine } from '@jeng/canvas-engine';
 
 // create engine
