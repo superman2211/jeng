@@ -133,12 +133,17 @@ const app = {
 | Feature | Canvas | WebGL |
 |---------|--------|-------|
 | Image  | Released | Comming soon |
+| Image atlas  | Comming soon | Comming soon |
 | Text | Released | Comming soon |
+| Web fonts | Comming soon | Comming soon |
+| Bitmap fonts | Comming soon | Comming soon |
 | Shape | Released | Comming soon |
 | Tween | Released | Released |
 | Timeline | Comming soon | Comming soon |
-| Web fonts | Comming soon | Comming soon |
-| Bitmap fonts | Comming soon | Comming soon |
+| UI library | Comming soon | Comming soon |
+| Spine | Comming soon | Comming soon |
+| Box2D | Comming soon | Comming soon |
+| ThreeJS | Comming soon | Comming soon |
 
 ## Development
 Build all packages
