@@ -46,6 +46,7 @@ export class Graphics {
 			color,
 			alpha,
 		} as SolidFill;
+		return this;
 	}
 
 	beginBitmapFill(
@@ -61,6 +62,7 @@ export class Graphics {
 			repeat,
 			smooth,
 		} as BitmapFill;
+		return this;
 	}
 
 	beginGradientFill(
@@ -106,6 +108,7 @@ export class Graphics {
 				endRadius: Math.abs((tempPoint0.x - matrix.tx) / 2),
 			} as RadialGradientFill;
 		}
+		return this;
 	}
 
 	lineStyle(
@@ -131,6 +134,7 @@ export class Graphics {
 				alpha,
 			} as SolidFill,
 		};
+		return this;
 	}
 
 	lineGradientStyle(
@@ -141,7 +145,7 @@ export class Graphics {
 		matrix: Matrix = emptyMatrix,
 	) {
 		if (!this.stroke) {
-			return;
+			return this;
 		}
 
 		if (type === 'linear') {
@@ -180,6 +184,7 @@ export class Graphics {
 				endRadius: Math.abs((tempPoint0.x - matrix.tx) / 2),
 			} as RadialGradientFill;
 		}
+		return this;
 	}
 
 	lineBitmapStyle(
@@ -189,7 +194,7 @@ export class Graphics {
 		smooth: boolean = false,
 	) {
 		if (!this.stroke) {
-			return;
+			return this;
 		}
 		this.stroke.fill = {
 			type: 'bitmap',
@@ -198,19 +203,22 @@ export class Graphics {
 			repeat,
 			smooth,
 		} as BitmapFill;
+		return this;
 	}
 
 	moveTo(x: number, y: number) {
 		const path = this.beginPath();
 		path.push({ type: 'moveTo', x, y } as MoveTo);
+		return this;
 	}
 
 	lineTo(x: number, y: number) {
 		const path = this.getPath();
 		if (!path) {
-			return;
+			return this;
 		}
 		path.push({ type: 'lineTo', x, y } as LineTo);
+		return this;
 	}
 
 	curveTo(
@@ -219,11 +227,12 @@ export class Graphics {
 	) {
 		const path = this.getPath();
 		if (!path) {
-			return;
+			return this;
 		}
 		path.push({
 			type: 'curveTo', cx, cy, x, y,
 		} as CurveTo);
+		return this;
 	}
 
 	cubicCurveTo(
@@ -233,11 +242,12 @@ export class Graphics {
 	) {
 		const path = this.getPath();
 		if (!path) {
-			return;
+			return this;
 		}
 		path.push({
 			type: 'cubicCurveTo', cx, cy, sx, sy, x, y,
 		} as CubicCurveTo);
+		return this;
 	}
 
 	drawRoundRect(
@@ -327,6 +337,8 @@ export class Graphics {
 			x,
 			y: ym + dy,
 		} as CubicCurveTo);
+
+		return this;
 	}
 
 	drawRect(x: number, y: number, width: number, height: number) {
@@ -336,6 +348,7 @@ export class Graphics {
 		data.y = y;
 		data.width = width;
 		data.height = height;
+		return this;
 	}
 
 	drawCircle(x: number, y: number, radius: number) {
@@ -344,6 +357,7 @@ export class Graphics {
 		data.x = x;
 		data.y = y;
 		data.radius = radius;
+		return this;
 	}
 
 	drawEllipse(x: number, y: number, width: number, height: number) {
@@ -353,10 +367,12 @@ export class Graphics {
 		data.radiusY = height / 2;
 		data.x = x - data.radiusX;
 		data.y = y - data.radiusY;
+		return this;
 	}
 
 	clear() {
 		delete this.shape.data;
+		return this;
 	}
 
 	private createData(): GraphicsData {

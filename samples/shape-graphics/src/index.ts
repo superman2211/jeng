@@ -41,13 +41,14 @@ engine.root = {
 		const cos = Math.cos(value) * offset;
 		const sin = Math.sin(value) * offset;
 
-		graphics.clear();
-		graphics.beginFill(0xff0000);
-		graphics.lineStyle(4, 0x000099);
-		graphics.moveTo(-sizeX + cos, -sizeY + sin);
-		graphics.lineTo(sizeX + sin, -sizeY + cos);
-		graphics.lineTo(sizeX + cos, sizeY + sin);
-		graphics.lineTo(-sizeX + sin, sizeY + cos);
-		graphics.lineTo(-sizeX + cos, -sizeY + sin);
+		graphics
+			.clear()
+			.beginFill(0xff0000)
+			.lineStyle(4, 0x000099)
+			.moveTo(-sizeX + cos, -sizeY + sin)
+			.lineTo(sizeX + sin, -sizeY + cos)
+			.lineTo(sizeX + cos, sizeY + sin)
+			.lineTo(-sizeX + sin, sizeY + cos)
+			.lineTo(-sizeX + cos, -sizeY + sin);
 	},
 } as CustomShape;
