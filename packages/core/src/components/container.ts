@@ -91,33 +91,34 @@ export namespace ContainerExtension {
 			const context = pointerEvents.getContext();
 			pointerEvents.depth++;
 
+			let result = false;
+
 			if (Array.isArray(children)) {
 				for (let i = children.length - 1; i >= 0; i--) {
 					const component = children[i];
-					const result = pointerEvents.dispatchComponent(component, context);
-					if (result) {
-						return true;
+					if (pointerEvents.dispatchComponent(component, context, result)) {
+						result = true;
 					}
 				}
 			} else if (children.type) {
 				const component = children as Container;
-				const result = pointerEvents.dispatchComponent(component, context);
-				if (result) {
-					return true;
+				if (pointerEvents.dispatchComponent(component, context, result)) {
+					result = true;
 				}
 			} else {
 				const componentsMap = children as ComponentsMap;
 				const keys = Object.keys(componentsMap);
 				for (let i = keys.length - 1; i >= 0; i--) {
 					const component = componentsMap[keys[i]];
-					const result = pointerEvents.dispatchComponent(component, context);
-					if (result) {
-						return true;
+					if (pointerEvents.dispatchComponent(component, context, result)) {
+						result = true;
 					}
 				}
 			}
 
 			pointerEvents.depth--;
+
+			return result;
 		}
 		return false;
 	}

@@ -56,10 +56,17 @@ export class Pointers extends EngineFeature {
 
 		this.depth++;
 
-		this.dispatchComponent(root, base);
+		this.dispatchComponent(root, base, false);
 	}
 
-	dispatchComponent(component: Component, parent: PointerContext): boolean {
+	updateLocal(component: Component, parent: PointerContext) {
+		const context = this.getContext();
+		Transform.getMatrix(component, context.matrix);
+		Matrix.concat(parent.matrix, context.matrix, context.matrix);
+		Matrix.transformInversePoint(context.matrix, this.global, this.local);
+	}
+
+	dispatchComponent(component: Component, parent: PointerContext, parentResult: boolean): boolean {
 		if (this.depth > this.engine.depth) {
 			return false;
 		}
@@ -72,13 +79,19 @@ export class Pointers extends EngineFeature {
 			return false;
 		}
 
+		if (parentResult) {
+			if (component.pointerOver && this.pointerType === 'pointerMove') {
+				this.updateLocal(component, parent);
+				const { x, y } = this.local;
+				Pointer.dispatchEvent(component, 'pointerOut', x, y, this.pointerId);
+				component.pointerOver = false;
+			}
+			return false;
+		}
+
 		const handler = this.engine.components.hitTest.get(component.type);
 		if (handler) {
-			const context = this.getContext();
-			Transform.getMatrix(component, context.matrix);
-			Matrix.concat(parent.matrix, context.matrix, context.matrix);
-			Matrix.transformInversePoint(context.matrix, this.global, this.local);
-
+			this.updateLocal(component, parent);
 			const { x, y } = this.local;
 			const result = handler(component, this.engine);
 			if (result) {

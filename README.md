@@ -20,6 +20,8 @@ Flexible graphics engine written on TypeScript.
 
 - Graphics shape sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/shape-graphics/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/shape-graphics/build/)
 
+- Interactive mouse sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/interactive-mouse/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/interactive-mouse/build/)
+
 - Complex sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/sample/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/sample/build/)
 
 ## Getting started
@@ -136,12 +138,14 @@ const app = {
 |---------|--------|-------|
 | Image  | **Released** | Coming soon |
 | Image atlas  | Coming soon | Coming soon |
+| Image sprites  | Coming soon | Coming soon |
 | Text | **Released** | Coming soon |
 | Web fonts | Coming soon | Coming soon |
 | Bitmap fonts | Coming soon | Coming soon |
 | Shape | **Released** | Coming soon |
 | Tween | **Released** | **Released** |
 | Loader | **Released** | **Released** |
+| Stage | Coming soon | Coming soon |
 | Mask | Coming soon | Coming soon |
 | Timeline | Coming soon | Coming soon |
 | UI library | Coming soon | Coming soon |

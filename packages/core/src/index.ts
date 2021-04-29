@@ -12,7 +12,7 @@ export * from './features/resources';
 export * from './features/screen';
 export * from './features/ticker';
 export * from './features/updater';
-export * from './input/mouse';
+export * from './interactive/mouse';
 export * from './extensions/display';
 export * from './extensions/pivot';
 export * from './extensions/source';
