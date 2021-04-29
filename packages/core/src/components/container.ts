@@ -85,24 +85,24 @@ export namespace ContainerExtension {
 
 	export function hitTest(container: Container, engine: Engine): boolean {
 		const { children } = container;
-		const { pointers: pointerEvents } = engine;
+		const { pointers } = engine;
 
 		if (children) {
-			const context = pointerEvents.getContext();
-			pointerEvents.depth++;
+			const context = pointers.getContext();
+			pointers.depth++;
 
 			let result = false;
 
 			if (Array.isArray(children)) {
 				for (let i = children.length - 1; i >= 0; i--) {
 					const component = children[i];
-					if (pointerEvents.dispatchComponent(component, context, result)) {
+					if (pointers.dispatchComponent(component, context, result)) {
 						result = true;
 					}
 				}
 			} else if (children.type) {
 				const component = children as Container;
-				if (pointerEvents.dispatchComponent(component, context, result)) {
+				if (pointers.dispatchComponent(component, context, result)) {
 					result = true;
 				}
 			} else {
@@ -110,13 +110,13 @@ export namespace ContainerExtension {
 				const keys = Object.keys(componentsMap);
 				for (let i = keys.length - 1; i >= 0; i--) {
 					const component = componentsMap[keys[i]];
-					if (pointerEvents.dispatchComponent(component, context, result)) {
+					if (pointers.dispatchComponent(component, context, result)) {
 						result = true;
 					}
 				}
 			}
 
-			pointerEvents.depth--;
+			pointers.depth--;
 
 			return result;
 		}
