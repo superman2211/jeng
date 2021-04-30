@@ -185,6 +185,3 @@ Clean all packages
 ```shell
 yarn clean
 ```
-
-## CI / CD
-[![jeng](https://circleci.com/gh/AntonovSergey2211/jeng.svg?style=shield)](https://app.circleci.com/pipelines/github/AntonovSergey2211/jeng)
