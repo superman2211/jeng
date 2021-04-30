@@ -185,3 +185,6 @@ Clean all packages
 ```shell
 yarn clean
 ```
+
+## CI / CD
+![build](https://github.com/AntonovSergey2211/jeng/actions/workflows/main.yml/badge.svg)
