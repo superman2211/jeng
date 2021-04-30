@@ -25,5 +25,9 @@ export namespace MouseExtension {
 		view.addEventListener('mousemove', (event: MouseEvent) => {
 			dispatchEvent(engine, event, 'pointerMove');
 		});
+
+		view.addEventListener('mouseleave', (event: MouseEvent) => {
+			dispatchEvent(engine, event, 'pointerCancel');
+		});
 	}
 }

@@ -22,7 +22,6 @@ const images = [
 	'Artifacts3_doll_mythic.png',
 	'Artifacts3_mug_mythic.png',
 	'Artifacts3_rose_mythic.png',
-	'championItems_sword_rare.png',
 ];
 
 // create container with image
