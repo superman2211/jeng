@@ -83,7 +83,7 @@ export class Pointers extends EngineFeature {
 			if (component.pointerOver && this.pointerType === 'pointerMove') {
 				this.updateLocal(component, parent);
 				const { x, y } = this.local;
-				Pointer.dispatchEvent(component, 'pointerOut', x, y, this.pointerId);
+				Pointer.dispatchEvent(component, 'pointerOut', x, y, this.global.x, this.global.y, this.pointerId);
 				component.pointerOver = false;
 			}
 			return false;
@@ -95,14 +95,14 @@ export class Pointers extends EngineFeature {
 			const { x, y } = this.local;
 			const result = handler(component, this.engine);
 			if (result) {
-				Pointer.dispatchEvent(component, this.pointerType, x, y, this.pointerId);
+				Pointer.dispatchEvent(component, this.pointerType, x, y, this.global.x, this.global.y, this.pointerId);
 			}
 
 			if (this.pointerType === 'pointerMove') {
 				if (result && !component.pointerOver) {
-					Pointer.dispatchEvent(component, 'pointerOver', x, y, this.pointerId);
+					Pointer.dispatchEvent(component, 'pointerOver', x, y, this.global.x, this.global.y, this.pointerId);
 				} else if (!result && component.pointerOver) {
-					Pointer.dispatchEvent(component, 'pointerOut', x, y, this.pointerId);
+					Pointer.dispatchEvent(component, 'pointerOut', x, y, this.global.x, this.global.y, this.pointerId);
 				}
 				component.pointerOver = result;
 			}
