@@ -34,6 +34,7 @@ engine.root = {
 		y: 100 + 120 * (index / 2 | 0),
 		pivotX: 0.5,
 		pivotY: 0.5,
+		pointerTestShape: true,
 		onPointerOver() {
 			this.brightness = 0.5;
 		},
@@ -42,6 +43,7 @@ engine.root = {
 		},
 		onPointerDown() {
 			this.scale = 0.95;
+			this.pointerTestShape = !this.pointerTestShape;
 		},
 		onPointerUp() {
 			this.scale = 1;
