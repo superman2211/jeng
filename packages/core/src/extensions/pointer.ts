@@ -21,6 +21,7 @@ export interface PointerEvent {
 export interface Pointer {
 	pointerEnabled?: boolean;
 	pointerOver?: boolean;
+	pointerTestShape?: boolean;
 	onPointerDown?: (event: PointerEvent) => void;
 	onPointerUp?: (event: PointerEvent) => void;
 	onPointerMove?: (event: PointerEvent) => void;
@@ -30,10 +31,6 @@ export interface Pointer {
 }
 
 export namespace Pointer {
-	export function isPointerOver(pointer: Pointer): boolean {
-		return !!pointer.pointerOver;
-	}
-
 	export function isPointerEnabled(pointer: Pointer): boolean {
 		return pointer.pointerEnabled ?? true;
 	}

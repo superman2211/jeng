@@ -47,6 +47,7 @@ const imagesContainer: Container = {
 		pointerX: 0,
 		pointerY: 0,
 		pointerId: -1,
+		pointerTestShape: true,
 		onPointerDown(e) {
 			this.pointerX = e.globalX;
 			this.pointerY = e.globalY;
