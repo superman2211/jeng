@@ -123,6 +123,34 @@ export namespace ContainerExtension {
 		return false;
 	}
 
+	export function keyTest(container: Container, engine: Engine): void {
+		const { children } = container;
+		const { keyboard } = engine;
+
+		if (children) {
+			keyboard.depth++;
+
+			if (Array.isArray(children)) {
+				for (let i = 0; i < children.length; i++) {
+					const component = children[i];
+					keyboard.dispatchComponent(component);
+				}
+			} else if (children.type) {
+				const component = children as Container;
+				keyboard.dispatchComponent(component);
+			} else {
+				const componentsMap = children as ComponentsMap;
+				const keys = Object.keys(componentsMap);
+				for (let i = 0; i < keys.length; i++) {
+					const component = componentsMap[keys[i]];
+					keyboard.dispatchComponent(component);
+				}
+			}
+
+			keyboard.depth--;
+		}
+	}
+
 	export function loaded(container: Container, engine: Engine): void {
 		const { children } = container;
 		const { loading } = engine;
@@ -184,6 +212,7 @@ export namespace ContainerExtension {
 		engine.components.update.set(CONTAINER, update);
 		engine.components.render.set(CONTAINER, render);
 		engine.components.hitTest.set(CONTAINER, hitTest);
+		engine.components.keyTest.set(CONTAINER, keyTest);
 		engine.components.loaded.set(CONTAINER, loaded);
 	}
 }

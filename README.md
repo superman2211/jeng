@@ -24,6 +24,8 @@ Flexible graphics engine written on TypeScript.
 
 - Interactive touch sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/interactive-touch/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/interactive-touch/build/)
 
+- Interactive keyboard sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/interactive-keyboard/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/interactive-keyboard/build/)
+
 - Complex sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/sample/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/sample/build/)
 
 ## Getting started

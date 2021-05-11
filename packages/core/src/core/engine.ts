@@ -11,6 +11,7 @@ import { Debug } from '../features/debug';
 import { Resources } from '../features/resources';
 import { Components } from '../features/components';
 import { LoaderExtension } from '../components/loader';
+import { Keyboard } from '../features/keyboard';
 
 export interface EngineModule {
 	Components?: typeof Components;
@@ -20,6 +21,7 @@ export interface EngineModule {
 	Loading?: typeof Loading;
 	Renderer?: typeof Renderer;
 	Pointers?: typeof Pointers;
+	Keyboard?: typeof Keyboard;
 	Ticker?: typeof Ticker;
 	Debug?: typeof Debug;
 	Resources?: typeof Resources;
@@ -37,6 +39,7 @@ export class Engine {
 	loading: Loading;
 	renderer: Renderer;
 	pointers: Pointers;
+	keyboard: Keyboard;
 	ticker: Ticker;
 	debug: Debug;
 	resources: Resources;
@@ -49,6 +52,7 @@ export class Engine {
 		module.Loading = module.Loading ?? Loading;
 		module.Renderer = module.Renderer ?? Renderer;
 		module.Pointers = module.Pointers ?? Pointers;
+		module.Keyboard = module.Keyboard ?? Keyboard;
 		module.Ticker = module.Ticker ?? Ticker;
 		module.Debug = module.Debug ?? Debug;
 		module.Resources = module.Resources ?? Resources;
@@ -60,6 +64,7 @@ export class Engine {
 		this.loading = new module.Loading(this);
 		this.renderer = new module.Renderer(this);
 		this.pointers = new module.Pointers(this);
+		this.keyboard = new module.Keyboard(this);
 		this.ticker = new module.Ticker(this);
 		this.debug = new module.Debug();
 		this.resources = new module.Resources(this);

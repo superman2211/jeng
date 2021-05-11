@@ -34,14 +34,16 @@ const images = [
 	'voidFayball.png',
 ];
 
+const border = 100;
+
 // container width images
 const imagesContainer: Container = {
 	type: 'container',
 	children: images.map((image) => ({
 		type: 'image',
 		src: `assets/${image}`,
-		x: 100 + Math.random() * (engine.screen.width - 200),
-		y: 100 + Math.random() * (engine.screen.height - 200),
+		x: border + Math.random() * (engine.screen.getWidth() - border * 2),
+		y: border + Math.random() * (engine.screen.getHeight() - border * 2),
 		pivotX: 0.5,
 		pivotY: 0.5,
 		pointerX: 0,

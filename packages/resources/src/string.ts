@@ -26,7 +26,7 @@ export namespace StringResource {
 					resource.bytesTotal = e.total;
 				};
 				xhr.onload = () => {
-					console.log(`string loaded: ${asset}`);
+					engine.debug.log(`string loaded: ${asset}`);
 					resource.data = xhr.responseText;
 					resource.loaded = true;
 					resource.bytesLoaded = resource.bytesTotal;
