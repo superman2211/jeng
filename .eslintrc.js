@@ -28,6 +28,7 @@ module.exports = {
 		'no-case-declarations': 'off',
 		'no-unused-vars': 'off',
 		'no-redeclare': 'off',
+		'no-restricted-syntax': 'off',
 		'@typescript-eslint/no-redeclare': ['error', { ignoreDeclarationMerge: true }],
 		'@typescript-eslint/no-unused-vars': ['error'],
 		'no-mixed-operators': 'off',

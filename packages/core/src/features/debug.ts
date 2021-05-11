@@ -1,8 +1,8 @@
-/* eslint-disable class-methods-use-this */
 /* eslint-disable no-console */
 export class Debug {
-	errors = new Map<string, number>();
-	warnings = new Map<string, number>();
+	readonly infos = new Map<string, number>();
+	readonly errors = new Map<string, number>();
+	readonly warnings = new Map<string, number>();
 
 	enabled = true;
 
@@ -11,6 +11,21 @@ export class Debug {
 			return;
 		}
 		console.log(...args);
+	}
+
+	info(...args: any[]) {
+		if (!this.enabled) {
+			return;
+		}
+
+		const id = String(args);
+		let count = this.infos.get(id);
+		if (!count) {
+			count = 0;
+			console.info(...args);
+		}
+		count++;
+		this.infos.set(id, count);
 	}
 
 	error(...args: any[]) {

@@ -2,6 +2,7 @@ import { Platform } from '@jeng/core';
 
 export class CanvasPlatform extends Platform {
 	readonly view: HTMLCanvasElement = document.createElement('canvas');
+
 	private contexts: CanvasRenderingContext2D[] = [this.view.getContext('2d') as CanvasRenderingContext2D];
 	private customContexts: CanvasRenderingContext2D[] = [];
 

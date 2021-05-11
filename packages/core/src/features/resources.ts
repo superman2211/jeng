@@ -44,7 +44,6 @@ export class Resources extends EngineFeature {
 	}
 
 	private resolve(asset: string): Resource | null {
-		// eslint-disable-next-line no-restricted-syntax
 		for (const resolver of this.resolvers) {
 			const resource = resolver(asset, this.engine);
 			if (resource) {

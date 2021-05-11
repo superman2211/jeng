@@ -22,7 +22,7 @@ export namespace ImageResource {
 				const image = document.createElement('img') as HTMLImageElement;
 				image.src = asset;
 				image.onload = () => {
-					console.log(`image loaded: ${asset}`);
+					engine.debug.log(`image loaded: ${asset}`);
 					resource.image = image;
 					resource.loaded = true;
 				};
