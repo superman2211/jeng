@@ -5,6 +5,7 @@ export type PropertyHandler = (component: Component, engine: Engine) => void;
 export type RenderHandler = (component: Component, engine: Engine) => void;
 export type UpdateHandler = (component: Component, engine: Engine) => void;
 export type HitTestHandler = (component: Component, engine: Engine) => boolean;
+export type KeyTestHandler = (component: Component, engine: Engine) => void;
 export type LoadedHandler = (component: Component, engine: Engine) => void;
 
 export class Components {
@@ -12,5 +13,6 @@ export class Components {
 	render = new Map<string, RenderHandler>();
 	update = new Map<string, UpdateHandler>();
 	hitTest = new Map<string, HitTestHandler>();
+	keyTest = new Map<string, KeyTestHandler>();
 	loaded = new Map<string, LoadedHandler>();
 }
