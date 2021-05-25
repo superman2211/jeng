@@ -1,5 +1,5 @@
 import { CanvasEngine, CanvasPlatform } from '@jeng/canvas-engine';
-import { Pivot } from '@jeng/core';
+import { Engine, Pivot } from '@jeng/core';
 import { ColorTransform, Matrix, Rectangle } from '@jeng/geom';
 import { ImageResource } from '@jeng/resources';
 import { ImageExtension, IMAGE, Image } from './image';
@@ -8,7 +8,7 @@ const bounds = Rectangle.empty();
 const screenBounds = Rectangle.empty();
 
 export namespace CanvasImageColorExtension {
-	export function render(image: Image, engine: CanvasEngine) {
+	export function render(image: Image, engine: Engine) {
 		const { src } = image;
 		if (!src) {
 			return;

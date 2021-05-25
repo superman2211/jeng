@@ -1,5 +1,6 @@
 import { Component } from '../components/component';
 import { Engine } from '../core/engine';
+import { EngineFeature } from '../core/feature';
 
 export type PropertyHandler = (component: Component, engine: Engine) => void;
 export type RenderHandler = (component: Component, engine: Engine) => void;
@@ -8,7 +9,7 @@ export type HitTestHandler = (component: Component, engine: Engine) => boolean;
 export type KeyTestHandler = (component: Component, engine: Engine) => void;
 export type LoadedHandler = (component: Component, engine: Engine) => void;
 
-export class Components {
+export class Components extends EngineFeature {
 	properties = new Map<string, PropertyHandler>();
 	render = new Map<string, RenderHandler>();
 	update = new Map<string, UpdateHandler>();

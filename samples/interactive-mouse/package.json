@@ -24,7 +24,8 @@
   "dependencies": {
     "@jeng/canvas-engine": "^0.1.0",
     "@jeng/image": "^0.1.0",
-    "@jeng/core": "^0.1.0"
+    "@jeng/core": "^0.1.0",
+    "@jeng/web": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",

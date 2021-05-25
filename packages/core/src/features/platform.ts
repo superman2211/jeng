@@ -1,12 +1,8 @@
 /* eslint-disable class-methods-use-this */
 import { EngineFeature } from '../core/feature';
 
-export class Platform extends EngineFeature {
-	readonly view: HTMLElement = document.createElement('div');
+export abstract class Platform extends EngineFeature {
+	abstract begin(): void;
 
-	begin(): void {
-	}
-
-	end(): void {
-	}
+	abstract end(): void;
 }

@@ -13,28 +13,12 @@ import { Components } from '../features/components';
 import { LoaderExtension } from '../components/loader';
 import { Keyboard } from '../features/keyboard';
 
-export interface EngineModule {
-	Components?: typeof Components;
-	Screen?: typeof Screen;
-	Platform?: typeof Platform;
-	Updater?: typeof Updater;
-	Loading?: typeof Loading;
-	Renderer?: typeof Renderer;
-	Pointers?: typeof Pointers;
-	Keyboard?: typeof Keyboard;
-	Ticker?: typeof Ticker;
-	Debug?: typeof Debug;
-	Resources?: typeof Resources;
-}
-
-export class Engine {
+export abstract class Engine {
 	root?: Component;
 
 	depth = 32;
 
 	components: Components;
-	screen: Screen;
-	platform: Platform;
 	updater: Updater;
 	loading: Loading;
 	renderer: Renderer;
@@ -44,30 +28,19 @@ export class Engine {
 	debug: Debug;
 	resources: Resources;
 
-	constructor(module: EngineModule = {}) {
-		module.Components = module.Components ?? Components;
-		module.Screen = module.Screen ?? Screen;
-		module.Platform = module.Platform ?? Platform;
-		module.Updater = module.Updater ?? Updater;
-		module.Loading = module.Loading ?? Loading;
-		module.Renderer = module.Renderer ?? Renderer;
-		module.Pointers = module.Pointers ?? Pointers;
-		module.Keyboard = module.Keyboard ?? Keyboard;
-		module.Ticker = module.Ticker ?? Ticker;
-		module.Debug = module.Debug ?? Debug;
-		module.Resources = module.Resources ?? Resources;
+	abstract screen: Screen;
+	abstract platform: Platform;
 
-		this.components = new module.Components();
-		this.screen = new module.Screen();
-		this.platform = new module.Platform(this);
-		this.updater = new module.Updater(this);
-		this.loading = new module.Loading(this);
-		this.renderer = new module.Renderer(this);
-		this.pointers = new module.Pointers(this);
-		this.keyboard = new module.Keyboard(this);
-		this.ticker = new module.Ticker(this);
-		this.debug = new module.Debug();
-		this.resources = new module.Resources(this);
+	constructor() {
+		this.components = new Components(this);
+		this.updater = new Updater(this);
+		this.loading = new Loading(this);
+		this.renderer = new Renderer(this);
+		this.pointers = new Pointers(this);
+		this.keyboard = new Keyboard(this);
+		this.ticker = new Ticker(this);
+		this.debug = new Debug(this);
+		this.resources = new Resources(this);
 
 		ContainerExtension.init(this);
 		LoaderExtension.init(this);

@@ -1,8 +1,8 @@
-import { Engine } from '../core/engine';
-import { PointerEventType } from '../extensions/pointer';
+import { Engine, PointerEventType } from '@jeng/core';
+import { WebPlatform } from '../features/platform';
 
 function dispatchEvent(engine: Engine, event: MouseEvent, type: PointerEventType) {
-	const { view } = engine.platform;
+	const { view } = engine.platform as WebPlatform;
 	const clientRect = view.getBoundingClientRect();
 	const x = event.clientX - clientRect.left - view.clientLeft;
 	const y = event.clientY - clientRect.top - view.clientTop;
@@ -12,7 +12,7 @@ function dispatchEvent(engine: Engine, event: MouseEvent, type: PointerEventType
 
 export namespace MouseExtension {
 	export function init(engine: Engine) {
-		const { view } = engine.platform;
+		const { view } = engine.platform as WebPlatform;
 
 		view.addEventListener('mousedown', (event: MouseEvent) => {
 			dispatchEvent(engine, event, 'pointerDown');

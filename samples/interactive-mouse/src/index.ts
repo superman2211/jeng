@@ -1,6 +1,7 @@
 import { CanvasImageColorExtension, Image } from '@jeng/image';
 import { CanvasEngine } from '@jeng/canvas-engine';
-import { Container, MouseExtension } from '@jeng/core';
+import { Container } from '@jeng/core';
+import { MouseExtension } from '@jeng/web';
 
 // create engine
 const engine = new CanvasEngine();

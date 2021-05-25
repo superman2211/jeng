@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
-export class Debug {
+import { EngineFeature } from '../core/feature';
+
+export class Debug extends EngineFeature {
 	readonly infos = new Map<string, number>();
 	readonly errors = new Map<string, number>();
 	readonly warnings = new Map<string, number>();

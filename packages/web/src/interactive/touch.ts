@@ -1,8 +1,8 @@
-import { Engine } from '../core/engine';
-import { PointerEventType } from '../extensions/pointer';
+import { Engine, PointerEventType } from '@jeng/core';
+import { WebPlatform } from '../features/platform';
 
 function dispatchEvent(engine: Engine, event: TouchEvent, type: PointerEventType) {
-	const { view } = engine.platform;
+	const { view } = engine.platform as WebPlatform;
 	const clientRect = view.getBoundingClientRect();
 	for (let i = 0; i < event.changedTouches.length; i++) {
 		const touch = event.changedTouches[i];
@@ -15,7 +15,7 @@ function dispatchEvent(engine: Engine, event: TouchEvent, type: PointerEventType
 
 export namespace TouchExtension {
 	export function init(engine: Engine) {
-		const { view } = engine.platform;
+		const { view } = engine.platform as WebPlatform;
 
 		view.addEventListener('touchstart', (event: TouchEvent) => {
 			dispatchEvent(engine, event, 'pointerDown');

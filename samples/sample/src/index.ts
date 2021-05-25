@@ -1,4 +1,4 @@
-import { Component, MouseExtension } from '@jeng/core';
+import { Component } from '@jeng/core';
 import { TweenExtension } from '@jeng/tween';
 import { CanvasTextExtension } from '@jeng/text';
 import { CanvasImageColorExtension } from '@jeng/image';
@@ -6,6 +6,7 @@ import { CanvasShapeExtension } from '@jeng/shape';
 import { CanvasEngine } from '@jeng/canvas-engine';
 import { ImageResource } from '@jeng/resources';
 import { SceneExtension } from '@jeng/scene';
+import { MouseExtension } from '@jeng/web';
 import CustomResourceManager from './engine/resources';
 import CustomEngine from './engine/engine';
 import main from './main';

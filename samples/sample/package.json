@@ -30,7 +30,8 @@
     "@jeng/shape": "^0.1.0",
     "@jeng/text": "^0.1.0",
     "@jeng/tween": "^0.1.0",
-    "@jeng/scene": "^0.1.0"
+    "@jeng/scene": "^0.1.0",
+    "@jeng/web": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",

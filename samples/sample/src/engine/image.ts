@@ -1,10 +1,11 @@
-import { CanvasEngine, CanvasPlatform } from '@jeng/canvas-engine';
-import { Pivot } from '@jeng/core';
+import { CanvasPlatform } from '@jeng/canvas-engine';
+import { Engine, Pivot } from '@jeng/core';
 import { ImageExtension, IMAGE, Image } from '@jeng/image';
 import { ImageResource } from '@jeng/resources';
+import CustomEngine from './engine';
 
 export namespace CustomImageExtension {
-	export function render(image: Image, engine: CanvasEngine): void {
+	export function render(image: Image, engine: Engine): void {
 		if (!image.src) {
 			return;
 		}
@@ -42,7 +43,7 @@ export namespace CustomImageExtension {
 		context2d.strokeRect(x, y, width, height);
 	}
 
-	export function init(engine: CanvasEngine) {
+	export function init(engine: CustomEngine) {
 		ImageExtension.init(engine);
 		engine.components.render.set(IMAGE, render);
 	}
