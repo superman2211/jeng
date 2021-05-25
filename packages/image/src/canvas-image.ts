@@ -1,10 +1,10 @@
-import { Pivot } from '@jeng/core';
+import { Engine, Pivot } from '@jeng/core';
 import { CanvasEngine, CanvasPlatform } from '@jeng/canvas-engine';
 import { ImageResource } from '@jeng/resources';
 import { ImageExtension, IMAGE, Image } from './image';
 
 export namespace CanvasImageExtension {
-	export function render(image: Image, engine: CanvasEngine): void {
+	export function render(image: Image, engine: Engine): void {
 		const { src } = image;
 		if (!src) {
 			return;

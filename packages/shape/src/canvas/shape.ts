@@ -1,5 +1,5 @@
 import { CanvasEngine, CanvasPlatform } from '@jeng/canvas-engine';
-import { Pivot } from '@jeng/core';
+import { Engine, Pivot } from '@jeng/core';
 import {
 	ColorTransform, Matrix, Point, Rectangle,
 } from '@jeng/geom';
@@ -66,7 +66,7 @@ function renderGraphics(data: GraphicsData, colorTransform: ColorTransform, cont
 }
 
 export namespace CanvasShapeExtension {
-	export function render(shape: Shape, engine: CanvasEngine): void {
+	export function render(shape: Shape, engine: Engine): void {
 		const { data } = shape;
 		if (!data) {
 			return;
@@ -111,10 +111,10 @@ export namespace CanvasShapeExtension {
 
 		if (Array.isArray(data)) {
 			for (let i = 0; i < data.length; i++) {
-				renderGraphics(data[i], colorTransform, context2d, engine);
+				renderGraphics(data[i], colorTransform, context2d, engine as CanvasEngine);
 			}
 		} else if (typeof data === 'object') {
-			renderGraphics(data, colorTransform, context2d, engine);
+			renderGraphics(data, colorTransform, context2d, engine as CanvasEngine);
 		}
 	}
 

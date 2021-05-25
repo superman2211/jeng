@@ -1,6 +1,8 @@
+/* eslint-disable class-methods-use-this */
 import { Matrix, Rectangle } from '@jeng/geom';
+import { EngineFeature } from '../core/feature';
 
-export class Screen {
+export abstract class Screen extends EngineFeature {
 	width = 400;
 	height = 400;
 	pixelRatio = 0;
@@ -19,14 +21,20 @@ export class Screen {
 	}
 
 	getWidth() {
-		return this.fullscreen ? window.innerWidth : this.width;
+		return this.fullscreen ? this.getWindowWidth() : this.width;
 	}
 
 	getHeight() {
-		return this.fullscreen ? window.innerHeight : this.height;
+		return this.fullscreen ? this.getWindowHeight() : this.height;
 	}
 
 	getPixelRatio() {
-		return this.pixelRatio > 0 ? this.pixelRatio : window.devicePixelRatio ?? 1;
+		return this.pixelRatio > 0 ? this.pixelRatio : this.getWindowPixelRatio();
 	}
+
+	abstract getWindowWidth(): number;
+
+	abstract getWindowHeight(): number;
+
+	abstract getWindowPixelRatio(): number;
 }

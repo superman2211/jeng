@@ -1,7 +1,8 @@
 import { CanvasImageExtension, Image } from '@jeng/image';
 import { CanvasEngine } from '@jeng/canvas-engine';
-import { KeyEvent, Container, KeyboardExtension } from '@jeng/core';
+import { KeyEvent, Container } from '@jeng/core';
 import { Point } from '@jeng/geom';
+import { KeyboardExtension } from '@jeng/web';
 
 // create engine
 const engine = new CanvasEngine();

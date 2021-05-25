@@ -1,6 +1,7 @@
-import { Platform } from '@jeng/core';
+/* eslint-disable class-methods-use-this */
+import { WebPlatform } from '@jeng/web';
 
-export class CanvasPlatform extends Platform {
+export class CanvasPlatform extends WebPlatform {
 	readonly view: HTMLCanvasElement = document.createElement('canvas');
 
 	private contexts: CanvasRenderingContext2D[] = [this.view.getContext('2d') as CanvasRenderingContext2D];
@@ -49,6 +50,9 @@ export class CanvasPlatform extends Platform {
 	begin(): void {
 		this.clear();
 		this.updateSize();
+	}
+
+	end(): void {
 	}
 
 	clear(): void {

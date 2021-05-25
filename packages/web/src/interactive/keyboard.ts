@@ -1,5 +1,4 @@
-import { Engine } from '../core/engine';
-import { KeyEvent, KeyEventType } from '../extensions/key';
+import { Engine, KeyEvent, KeyEventType } from '@jeng/core';
 
 function dispatchEvent(engine: Engine, event: KeyboardEvent, type: KeyEventType) {
 	const keyEvent: KeyEvent = {

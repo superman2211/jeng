@@ -1,9 +1,13 @@
-import { Engine, EngineModule } from '@jeng/core';
+import { Engine } from '@jeng/core';
+import { WebScreen } from '@jeng/web';
 import { CanvasPlatform } from './platform';
 
 export class CanvasEngine extends Engine {
-	constructor(module: EngineModule = {}) {
-		module.Platform = module.Platform ?? CanvasPlatform;
-		super(module);
+	platform: CanvasPlatform;
+	screen: WebScreen;
+	constructor() {
+		super();
+		this.platform = new CanvasPlatform(this);
+		this.screen = new WebScreen(this);
 	}
 }

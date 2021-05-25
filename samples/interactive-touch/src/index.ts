@@ -1,8 +1,7 @@
 import { CanvasImageExtension, Image } from '@jeng/image';
 import { CanvasEngine } from '@jeng/canvas-engine';
-import {
-	Container, TouchExtension, PointerEvent, ComponentsMap,
-} from '@jeng/core';
+import { Container, PointerEvent, ComponentsMap } from '@jeng/core';
+import { TouchExtension } from '@jeng/web';
 
 // create engine
 const engine = new CanvasEngine();

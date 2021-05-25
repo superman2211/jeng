@@ -1,7 +1,7 @@
 {
- "name": "@jeng/canvas-engine",
+ "name": "@jeng/web",
  "version": "0.1.0",
- "description": "canvas engine",
+ "description": "web engine extensions",
  "main": "dist/index.js",
  "types": "dist/index.d.ts",
  "moduleResolution": "node",
@@ -10,8 +10,9 @@
  "keywords": [
   "javascript",
   "typescript",
-  "canvas",
-  "engine"
+  "web",
+  "engine",
+  "extensions"
  ],
  "scripts": {
   "build": "tsc",
@@ -33,8 +34,7 @@
  "homepage": "https://github.com/AntonovSergey2211/jeng#readme",
  "dependencies": {
   "@jeng/core": "0.1.0",
-  "@jeng/geom": "0.1.0",
-  "@jeng/web": "0.1.0"
+  "@jeng/geom": "0.1.0"
  },
  "devDependencies": {
   "@babel/core": "^7.10.3",

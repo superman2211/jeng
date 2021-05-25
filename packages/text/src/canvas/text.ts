@@ -1,4 +1,4 @@
-import { Pivot } from '@jeng/core';
+import { Engine, Pivot } from '@jeng/core';
 import { CanvasEngine, CanvasPlatform, CanvasPatterns } from '@jeng/canvas-engine';
 import { Font } from '../data/font';
 import { TextExtension, TEXT, Text } from '../text';
@@ -10,7 +10,7 @@ const defaultTextFormat: TextFormat = {};
 const CORRECTION: number = 0.85;
 
 export namespace CanvasTextExtension {
-	export function render(component: Text, engine: CanvasEngine): void {
+	export function render(component: Text, engine: Engine): void {
 		const { matrix, colorTransform } = engine.renderer.getContext();
 
 		if (colorTransform.alphaMultiplier <= 0) {
