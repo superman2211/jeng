@@ -35,6 +35,7 @@ export interface BitmapFill extends FillStyle, Source {
 	matrix?: Matrix;
 	repeat?: boolean;
 	smooth?: boolean;
+	fallback?: number | FillStyle;
 }
 
 export interface StrokeStyle {

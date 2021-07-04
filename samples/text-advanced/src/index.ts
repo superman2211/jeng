@@ -58,7 +58,7 @@ const app: Container = {
 			type: TEXT,
 			text: [
 				{ text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. LEFT\n\n', align: 'left' },
-				{ text: 'Phasellus imperdiet ultricies nibh, at mattis sem volutpat et. CENTER\n\n', align: 'center' },
+				{ text: 'Phasellus imperdiet ultricies nibh, at mattis sem volutpat et. CENTER\n\n', align: 'center', font: 'times new roman' },
 				{ text: 'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. RIGHT', align: 'right' },
 			],
 			format: {

@@ -51,20 +51,28 @@ function getCanvasPattern(fill: number | FillStyle, colorTransform: ColorTransfo
 
 			case 'bitmap':
 				const bitmapFill = fill as BitmapFill;
-				const { repeat = true, src, matrix = emptyMatrix } = bitmapFill;
+				const {
+					repeat = true, src, matrix = emptyMatrix, fallback,
+				} = bitmapFill;
 				if (!src) {
-					return '';
+					return 'transparent';
 				}
 
 				const resource = engine.resources.get(src) as ImageResource;
+
 				if (resource?.image) {
 					const pattern = CanvasPatterns.bitmapPattern(resource.image, repeat, matrix, context);
 					return pattern;
 				}
-				return '';
+
+				if (fallback) {
+					return getCanvasPattern(fallback, colorTransform, context, engine);
+				}
+
+				return 'transparent';
 
 			default:
-				return '';
+				return 'transparent';
 		}
 	}
 

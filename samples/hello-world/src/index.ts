@@ -13,4 +13,9 @@ engine.ticker.play();
 document.body.appendChild(engine.platform.view);
 
 // create simple app
-engine.root = { type: 'text', text: 'Hello World!' } as Text;
+engine.root = {
+	type: 'text',
+	text: 'Hello World!',
+	x: 30,
+	y: 30,
+} as Text;
