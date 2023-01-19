@@ -3,7 +3,7 @@
 ## Sample
 [Code](src/index.ts)
 
-[Build](https://antonovsergey2211.github.io/jeng/samples/interactive-mouse/build/)
+[Build](https://superman2211.github.io/jeng/samples/interactive-mouse/build/)
 
 ## Development
 Setup

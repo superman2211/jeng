@@ -26,12 +26,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AntonovSergey2211/jeng.git"
+    "url": "git+https://github.com/superman2211/jeng.git"
   },
   "bugs": {
-    "url": "https://github.com/AntonovSergey2211/jeng/issues"
+    "url": "https://github.com/superman2211/jeng/issues"
   },
-  "homepage": "https://github.com/AntonovSergey2211/jeng#readme",
+  "homepage": "https://github.com/superman2211/jeng#readme",
   "devDependencies": {
     "@babel/core": "^7.10.3",
     "@babel/plugin-proposal-decorators": "^7.10.3",

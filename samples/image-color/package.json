@@ -15,12 +15,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AntonovSergey2211/e2d.git"
+    "url": "git+https://github.com/superman2211/e2d.git"
   },
   "bugs": {
-    "url": "https://github.com/AntonovSergey2211/e2d/issues"
+    "url": "https://github.com/superman2211/e2d/issues"
   },
-  "homepage": "https://github.com/AntonovSergey2211/e2d#readme",
+  "homepage": "https://github.com/superman2211/e2d#readme",
   "dependencies": {
     "@jeng/canvas-engine": "^0.1.0",
     "@jeng/image": "^0.1.0",

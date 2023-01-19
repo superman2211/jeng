@@ -25,12 +25,12 @@
  ],
  "repository": {
   "type": "git",
-  "url": "git+https://github.com/AntonovSergey2211/jeng.git"
+  "url": "git+https://github.com/superman2211/jeng.git"
  },
  "bugs": {
-  "url": "https://github.com/AntonovSergey2211/jeng/issues"
+  "url": "https://github.com/superman2211/jeng/issues"
  },
- "homepage": "https://github.com/AntonovSergey2211/jeng#readme",
+ "homepage": "https://github.com/superman2211/jeng#readme",
  "dependencies": {
   "@jeng/geom": "0.1.0"
  },
