@@ -2,31 +2,31 @@
 Flexible graphics engine written on TypeScript.
 
 ## Samples
-- Hello World [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/hello-world/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/hello-world/build/)
+- Hello World [Code](https://github.com/superman2211/jeng/blob/master/samples/hello-world/src/index.ts) / [Build](https://superman2211.github.io/jeng/samples/hello-world/build/)
 
-- Image simple [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/image-simple/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/image-simple/build/)
+- Image simple [Code](https://github.com/superman2211/jeng/blob/master/samples/image-simple/src/index.ts) / [Build](https://superman2211.github.io/jeng/samples/image-simple/build/)
 
-- Image color sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/image-color/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/image-color/build/)
+- Image color sample [Code](https://github.com/superman2211/jeng/blob/master/samples/image-color/src/index.ts) / [Build](https://superman2211.github.io/jeng/samples/image-color/build/)
 
-- Image transform sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/image-transform/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/image-transform/build/)
+- Image transform sample [Code](https://github.com/superman2211/jeng/blob/master/samples/image-transform/src/index.ts) / [Build](https://superman2211.github.io/jeng/samples/image-transform/build/)
 
-- Simple text sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/text-simple/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/text-simple/build/)
+- Simple text sample [Code](https://github.com/superman2211/jeng/blob/master/samples/text-simple/src/index.ts) / [Build](https://superman2211.github.io/jeng/samples/text-simple/build/)
 
-- Advanced text sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/text-advanced/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/text-advanced/build/)
+- Advanced text sample [Code](https://github.com/superman2211/jeng/blob/master/samples/text-advanced/src/index.ts) / [Build](https://superman2211.github.io/jeng/samples/text-advanced/build/)
 
-- Simple shape sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/shape-simple/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/shape-simple/build/)
+- Simple shape sample [Code](https://github.com/superman2211/jeng/blob/master/samples/shape-simple/src/index.ts) / [Build](https://superman2211.github.io/jeng/samples/shape-simple/build/)
 
-- Advanced shape sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/shape-advanced/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/shape-advanced/build/)
+- Advanced shape sample [Code](https://github.com/superman2211/jeng/blob/master/samples/shape-advanced/src/index.ts) / [Build](https://superman2211.github.io/jeng/samples/shape-advanced/build/)
 
-- Graphics shape sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/shape-graphics/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/shape-graphics/build/)
+- Graphics shape sample [Code](https://github.com/superman2211/jeng/blob/master/samples/shape-graphics/src/index.ts) / [Build](https://superman2211.github.io/jeng/samples/shape-graphics/build/)
 
-- Interactive mouse sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/interactive-mouse/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/interactive-mouse/build/)
+- Interactive mouse sample [Code](https://github.com/superman2211/jeng/blob/master/samples/interactive-mouse/src/index.ts) / [Build](https://superman2211.github.io/jeng/samples/interactive-mouse/build/)
 
-- Interactive touch sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/interactive-touch/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/interactive-touch/build/)
+- Interactive touch sample [Code](https://github.com/superman2211/jeng/blob/master/samples/interactive-touch/src/index.ts) / [Build](https://superman2211.github.io/jeng/samples/interactive-touch/build/)
 
-- Interactive keyboard sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/interactive-keyboard/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/interactive-keyboard/build/)
+- Interactive keyboard sample [Code](https://github.com/superman2211/jeng/blob/master/samples/interactive-keyboard/src/index.ts) / [Build](https://superman2211.github.io/jeng/samples/interactive-keyboard/build/)
 
-- Complex sample [Code](https://github.com/AntonovSergey2211/jeng/blob/master/samples/sample/src/index.ts) / [Build](https://antonovsergey2211.github.io/jeng/samples/sample/build/)
+- Complex sample [Code](https://github.com/superman2211/jeng/blob/master/samples/sample/src/index.ts) / [Build](https://superman2211.github.io/jeng/samples/sample/build/)
 
 ## Getting started
 Install
@@ -189,4 +189,4 @@ yarn clean
 ```
 
 ## CI / CD
-![build](https://github.com/AntonovSergey2211/jeng/actions/workflows/main.yml/badge.svg)
+![build](https://github.com/superman2211/jeng/actions/workflows/main.yml/badge.svg)
