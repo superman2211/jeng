@@ -146,21 +146,21 @@ Additionally you can preload scenes excluded from graph via loader (TODO).
 | Feature | Canvas | WebGL | iOS | Android |
 |---------|--------|-------|-----|---------|
 | Image  | **Released** | TODO | TODO | TODO |
-| Image atlas  | TODO | TODO | TODO | TODO |
-| Image sprites  | TODO | TODO | TODO | TODO |
+| Textures  | TODO | TODO | TODO | TODO |
+| Sprites  | TODO | TODO | TODO | TODO |
 | Text | **Released** | TODO | TODO | TODO |
-| Web fonts | TODO | TODO | TODO | TODO |
-| Bitmap fonts | TODO | TODO | TODO | TODO |
+| Fonts | TODO | TODO | TODO | TODO |
 | Shape | **Released** | TODO | TODO | TODO |
 | Tween | **Released** | **Released** | TODO | TODO|
 | Loader | **Released** | **Released** | TODO | TODO |
 | Stage | TODO | TODO | TODO | TODO |
 | Mask | TODO | TODO | TODO | TODO |
 | Timeline | TODO | TODO | TODO | TODO |
-| UI library | TODO | TODO | TODO | TODO |
+| UI | TODO | TODO | TODO | TODO |
 | Spine | TODO | TODO | TODO | TODO |
-| Box2D | TODO | TODO | TODO | TODO |
-| ThreeJS | TODO | TODO | TODO | TODO |
+| Physics | TODO | TODO | TODO | TODO |
+| 3D Render | TODO | TODO | TODO | TODO |
+| Effects | TODO | TODO | TODO | TODO |
 
 ## Development
 Build all packages
