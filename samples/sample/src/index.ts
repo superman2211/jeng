@@ -68,7 +68,7 @@ customEngine.platform.view.style.top = '0px';
 customEngine.platform.view.style.left = '600px';
 document.body.appendChild(customEngine.platform.view);
 
-// // set custom resource
+// set custom resource
 engine.resources.resources.set(
 	TEST_CANVAS,
 	{
