@@ -1,5 +1,8 @@
 # jeng (JavaScript Graphics Engine)
-Flexible graphics engine written on TypeScript.
+
+![build](https://github.com/superman2211/jeng/actions/workflows/main.yml/badge.svg)
+
+Cross platform and flexible graphics engine.
 
 ## Samples
 - Hello World [Code](https://github.com/superman2211/jeng/blob/master/samples/hello-world/src/index.ts) / [Build](https://superman2211.github.io/jeng/samples/hello-world/build/)
@@ -76,7 +79,7 @@ You can change the graph as you want. The graph is abstract and does not depend 
 The engine consists of main features and extensions. It can be constructed from different components and extensions.
 You can overload main features and add your own extensions. Engine updates, renders graph and proesses events.
 At any time you can change the engine or change its components or extensions. 
-Each engine uses one of the rendering backends - canvas, webgl, etc.
+Each engine uses one of the rendering backends for different platforms - canvas, webgl, ios, android etc.
 
 ![Engine architecture](docs/images/engine-architecture.png)
 
@@ -113,7 +116,7 @@ export function preloader(info: PreloaderInfo) {
 ```
 
 ### Resources
-All resources are resolved and loaded automatically. You can add your own resolver or resources manager.
+All resources are resolved and loaded automatically. You can add your own resolver or resources manager. 
 If you want to control loading process you can use [loader](packages/core/src/components/loader.ts) component.
 ```typescript
 const app = {
@@ -129,33 +132,35 @@ const app = {
 		background: {
 			type: 'image',
 			src: BACKGROUND,
-			scaleX: 1,
-			scaleY: 1,
+			scaleX: 1.5,
+			scaleY: 2,
 		},
 	},
 };
 ``` 
+You can use [aliases for resources](https://github.com/superman2211/jeng/blob/master/samples/sample/src/index.ts#L72), for example for image you can use different formats for all platforms.
+Additionally you can preload scenes excluded from graph via loader (TODO).
 
 ## Features
 
-| Feature | Canvas | WebGL |
-|---------|--------|-------|
-| Image  | **Released** | Coming soon |
-| Image atlas  | Coming soon | Coming soon |
-| Image sprites  | Coming soon | Coming soon |
-| Text | **Released** | Coming soon |
-| Web fonts | Coming soon | Coming soon |
-| Bitmap fonts | Coming soon | Coming soon |
-| Shape | **Released** | Coming soon |
-| Tween | **Released** | **Released** |
-| Loader | **Released** | **Released** |
-| Stage | Coming soon | Coming soon |
-| Mask | Coming soon | Coming soon |
-| Timeline | Coming soon | Coming soon |
-| UI library | Coming soon | Coming soon |
-| Spine | Coming soon | Coming soon |
-| Box2D | Coming soon | Coming soon |
-| ThreeJS | Coming soon | Coming soon |
+| Feature | Canvas | WebGL | iOS | Android |
+|---------|--------|-------|-----|---------|
+| Image  | **Released** | TODO | TODO | TODO |
+| Textures  | TODO | TODO | TODO | TODO |
+| Sprites  | TODO | TODO | TODO | TODO |
+| Text | **Released** | TODO | TODO | TODO |
+| Fonts | TODO | TODO | TODO | TODO |
+| Shape | **Released** | TODO | TODO | TODO |
+| Tween | **Released** | **Released** | TODO | TODO|
+| Loader | **Released** | **Released** | TODO | TODO |
+| Stage | TODO | TODO | TODO | TODO |
+| Mask | TODO | TODO | TODO | TODO |
+| Timeline | TODO | TODO | TODO | TODO |
+| Layouts | TODO | TODO | TODO | TODO |
+| Spine | TODO | TODO | TODO | TODO |
+| Physics | TODO | TODO | TODO | TODO |
+| 3D Render | TODO | TODO | TODO | TODO |
+| Effects | TODO | TODO | TODO | TODO |
 
 ## Development
 Build all packages
@@ -187,6 +192,3 @@ Clean all packages
 ```shell
 yarn clean
 ```
-
-## CI / CD
-![build](https://github.com/superman2211/jeng/actions/workflows/main.yml/badge.svg)
